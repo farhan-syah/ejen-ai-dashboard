@@ -9,6 +9,32 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true
+	},
+	"paths": {
+		"$lib": [
+			"./src/lib"
+		],
+		"$lib/*": [
+			"./src/lib/*"
+		],
+		"$services": [
+			"./src/services"
+		],
+		"$services/*": [
+			"./src/services/*"
+		],
+		"$repositories": [
+			"./src/repositories"
+		],
+		"$repositories/*": [
+			"./src/repositories/*"
+		],
+		"$applications": [
+			"./src/applications"
+		],
+		"$applications/*": [
+			"./src/applications/*"
+		]
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	//
