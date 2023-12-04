@@ -11,6 +11,9 @@ const config = {
 			},
 			spacing: {
 				0.5: "0.125rem"
+			},
+			boxShadow: {
+				button: "0px 3px 3px -3px rgb(0 0 0 / 0.5)"
 			}
 		}
 	},

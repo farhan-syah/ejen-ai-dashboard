@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { atom, type WritableAtom } from "nanostores";
+import { atom, computed, type ReadableAtom, type WritableAtom } from "nanostores";
 
 export type Validator<T = any> = {
 	validator: (value: T, options?: any) => boolean;
@@ -9,31 +9,50 @@ export type Validator<T = any> = {
 
 export class FormControl<T = any> {
 	id: string;
+	name: string | undefined;
 	initialValue: T | undefined;
 	writableValue: WritableAtom<T | undefined>;
 	isFocused = atom(false);
 	errors = atom<string[]>([]);
 	hasError = atom(false);
 	validators: Validator<T>[];
+	valid: ReadableAtom<boolean>;
+	required: boolean;
+	touched = atom(false);
+	dirty = atom(false);
 	constructor({
 		id,
+		name,
 		value,
-		validators
+		validators,
+		required
 	}: {
 		id?: string;
+		name?: string;
 		value?: T;
 		validators?: Validator<T>[];
+		required?: boolean;
 	} = {}) {
-		this.id = id ?? nanoid(4);
+		this.id = id ?? nanoid(6);
+		this.name = name;
 		this.initialValue = value;
 		this.writableValue = atom(value);
 		this.validators = validators ?? [];
+		this.required = required ?? false;
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		this.writableValue.subscribe((value) => {
+		this.writableValue.listen(() => {
 			this.validate();
 		});
-		this.errors.subscribe((errors) => {
+		this.errors.listen((errors) => {
 			this.validateErrors([...errors]);
+		});
+
+		this.valid = computed([this.writableValue, this.hasError], (value, hasError) => {
+			if (!required) {
+				return !hasError;
+			} else {
+				return value != null && !hasError;
+			}
 		});
 	}
 
@@ -47,7 +66,12 @@ export class FormControl<T = any> {
 					errors.push(validator.errorMessage);
 				}
 			}
+		} else {
+			if (this.required && this.dirty.get() == true) {
+				errors.push("This field is required");
+			}
 		}
+
 		this.errors.set(errors);
 	}
 

@@ -11,7 +11,7 @@
 	}
 </script>
 
-<div on:click={handleClick} on:keydown={handleClick} role="link" tabindex="0">
+<div on:click={handleClick} on:keydown={handleClick} role="link" tabindex="-1">
 	{#if link}
 		{#if replaceState}
 			<a
@@ -25,9 +25,14 @@
 				><slot /></a
 			>
 		{:else}
-			<a href={link} {target} class="cursor-pointer hover:text-blue-500 {$$props.class ?? ''}"
-				><slot /></a
+			<a
+				href={link}
+				{target}
+				class="cursor-pointer hover:text-blue-500 {$$props.class ?? ''}"
+				tabindex="-1"
 			>
+				<slot />
+			</a>
 		{/if}
 	{:else}
 		<slot />

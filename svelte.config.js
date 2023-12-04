@@ -8,7 +8,8 @@ const config = {
 		alias: {
 			$services: "src/services",
 			$repositories: "src/repositories",
-			$applications: "src/applications"
+			$applications: "src/applications",
+			$api: "imports/api"
 		}
 	},
 	onwarn: (warning, handler) => {
