@@ -4,6 +4,7 @@ class _App {
 	width: Writable<number> = writable(0);
 	height: Writable<number> = writable(0);
 	loading: Writable<boolean> = writable(false);
+	error: Writable<any> = writable(undefined);
 }
 
 export const AppState = new _App();

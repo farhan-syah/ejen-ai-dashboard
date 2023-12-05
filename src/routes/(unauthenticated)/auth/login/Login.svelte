@@ -1,45 +1,73 @@
 <script lang="ts">
 	import type { LoginInput } from "$api/routes/auth/auth.schema";
-	import { Button, Link, TextField } from "$lib/components";
+	import { AppState } from "$applications";
+	import { Button, FormControl, Link, SelectField, TextField } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
-	import { FormControl } from "$lib/components/form/controller/form-control";
-	import { PublicSettingsRepository } from "$repositories/settings/public/public-settings.repository";
+	import { AuthService } from "$services/auth.service";
+	import type { FieldOption } from "$types";
 	import { computed } from "nanostores";
-	import { onMount } from "svelte";
 	import validator from "validator";
+
+	const userTypeOptions: FieldOption[] = [{ value: "Staff" }, { value: "Guest" }];
 
 	const emailController = new FormControl({
 		name: "email",
 		required: true,
+		value: "admin@admin.com",
 		validators: [{ validator: validator.isEmail, errorMessage: "Invalid email" }]
 	});
 	const passwordController = new FormControl({
 		name: "password",
 		required: true,
+		value: "12345678",
 		validators: []
 	});
 
+	const userTypeController = new FormControl<string>({
+		name: "userType",
+		required: true,
+		validators: [],
+		value: "Staff"
+	});
+
 	const formValid = computed(
-		[emailController.valid, passwordController.valid],
-		(emailValid, passwordValid) => {
-			return emailValid && passwordValid;
+		[emailController.valid, passwordController.valid, userTypeController.valid],
+		(emailValid, passwordValid, userTypeValid) => {
+			return emailValid && passwordValid && userTypeValid;
 		}
 	);
 
-	function handleSubmit() {
+	async function handleSubmit() {
+		const email = emailController.writableValue.get();
+		const password = passwordController.writableValue.get();
+		const userType = userTypeController.writableValue.get();
+		if (!email || !password || !userType) return;
 		const loginInput: LoginInput = {
-			email: "",
-			password: "",
-			userType: ""
+			email: email,
+			password: password,
+			userType: userType,
+			includeCookie: true
 		};
 
-		console.log(emailController.writableValue.get());
+		AppState.loading.set(true);
+
+		await AuthService.login(loginInput).catch((e) => {
+			e.message = "Unable to login. Please check if you are using the correct credential";
+			AppState.error.set(e);
+		});
+
+		AppState.loading.set(false);
 	}
 
-	onMount(() => {});
-	PublicSettingsRepository.get().then((e) => {
-		console.log(e);
-	});
+	async function handleRefresh() {
+		AppState.loading.set(true);
+
+		await AuthService.refresh().catch((e) => {
+			AppState.error.set(e);
+		});
+
+		AppState.loading.set(false);
+	}
 </script>
 
 <Card class="p-6 w-96">
@@ -52,6 +80,11 @@
 				</Link>
 			</div>
 		</TextField>
+
+		<SelectField controller={userTypeController} options={userTypeOptions} label="User Type" />
 		<Button class="w-32" valid={$formValid} onClick={handleSubmit} />
+		<Button label="RefreshToken" class="w-32" valid={$formValid} onClick={handleRefresh} />
 	</div>
+
+	<div />
 </Card>

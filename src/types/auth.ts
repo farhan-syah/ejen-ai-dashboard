@@ -3,6 +3,7 @@ export type Token = {
 	refreshToken: string;
 };
 
+export type ReceivedToken = Token & { permissions: string[]; cookie?: string[] };
 export type DecodedToken = {
 	sub: number;
 	email: string;

@@ -39,6 +39,12 @@
 			],
 			"$api/*": [
 				"./imports/api/*"
+			],
+			"$types": [
+				"./src/types"
+			],
+			"$types/*": [
+				"./src/types/*"
 			]
 		},
 	},

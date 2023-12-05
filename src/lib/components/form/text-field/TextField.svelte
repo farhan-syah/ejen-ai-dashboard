@@ -69,7 +69,7 @@
 <div class="text-gray-400 {$$props.class ?? ''}">
 	{#if label}
 		<div class="mb-1">
-			<label for={controller.id} class="flex{labelClass}">
+			<label for={controller.id} class="flex {labelClass}">
 				<div class="flex-grow">
 					{label}
 					{#if required}
@@ -83,7 +83,7 @@
 			</label>
 		</div>
 	{/if}
-	<div class="flex rounded outline {inputClass} ">
+	<div class="flex rounded outline {inputClass}">
 		<input
 			bind:this={input}
 			name={controller.name}

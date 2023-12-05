@@ -1,15 +1,14 @@
 import { persistentAtom } from "@nanostores/persistent";
-import { writable } from "svelte/store";
-import type { Token } from "../types";
+import { atom } from "nanostores";
 
 export interface User {}
 
 class _UserState {
-	user = writable<User | undefined>(undefined);
-	token = persistentAtom<Token | undefined>("tk", undefined, {
-		encode: JSON.stringify,
-		decode: JSON.parse
-	});
+	user = atom<User | undefined>(undefined);
+	accessToken = persistentAtom<string | undefined>("at", undefined);
+	refreshToken = persistentAtom<string | undefined>("rt", undefined);
+	permissions = atom<string[]>([]);
 }
 
 export const UserState = new _UserState();
+export type UserState = typeof UserState;
