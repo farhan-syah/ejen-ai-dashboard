@@ -3,6 +3,7 @@
 	import { AppState } from "$applications";
 	import { Button, FormControl, Link, SelectField, TextField } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
+	import { UserRepository } from "$repositories/user.repository";
 	import { AuthService } from "$services/auth.service";
 	import type { FieldOption } from "$types";
 	import { computed } from "nanostores";
@@ -61,11 +62,17 @@
 
 	async function handleRefresh() {
 		AppState.loading.set(true);
-
 		await AuthService.refresh().catch((e) => {
 			AppState.error.set(e);
 		});
+		AppState.loading.set(false);
+	}
 
+	async function handleCreateUser() {
+		AppState.loading.set(true);
+		await UserRepository.update("1", { data: {} }).catch((e) => {
+			AppState.error.set(e);
+		});
 		AppState.loading.set(false);
 	}
 </script>
@@ -84,6 +91,7 @@
 		<SelectField controller={userTypeController} options={userTypeOptions} label="User Type" />
 		<Button class="w-32" valid={$formValid} onClick={handleSubmit} />
 		<Button label="RefreshToken" class="w-32" valid={$formValid} onClick={handleRefresh} />
+		<Button label="Create User" class="w-32" valid={$formValid} onClick={handleCreateUser} />
 	</div>
 
 	<div />
