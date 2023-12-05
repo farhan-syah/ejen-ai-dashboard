@@ -1,7 +1,6 @@
+import type { User } from "$api/types/prisma-client";
 import { persistentAtom } from "@nanostores/persistent";
 import { atom } from "nanostores";
-
-export interface User {}
 
 class _UserState {
 	user = atom<User | undefined>(undefined);

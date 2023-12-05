@@ -2,28 +2,36 @@
 	import { browser } from "$app/environment";
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
-	import { UserState, type User } from "$applications";
+	import { UserState } from "$applications";
+	import { AuthService } from "$services";
 	import { onMount } from "svelte";
 	import "../app.postcss";
 	import App from "./app.svelte";
-	const user = UserState.user;
+
+	// Initialize browser stores
+	const token = UserState.accessToken;
+	if (token) {
+		AuthService;
+	}
+
 	let loading = true;
 	const reserved: string[] = ["/auth"];
 
 	onMount(() => {
-		user.subscribe(async (user) => {
+		token.subscribe(async (token) => {
 			if (!browser) {
 				loading = false;
 				return;
+			} else {
+				await redirect(token);
+				loading = false;
 			}
-			await redirect(user);
-			loading = false;
 		});
 	});
 
-	async function redirect(user?: User) {
+	async function redirect(token?: string) {
 		try {
-			if (!user) {
+			if (!token) {
 				if (reserved.includes($page.url.pathname)) {
 					return;
 				}

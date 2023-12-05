@@ -62,7 +62,7 @@
 
 	async function handleRefresh() {
 		AppState.loading.set(true);
-		await AuthService.refresh().catch((e) => {
+		await AuthService.refreshToken().catch((e) => {
 			AppState.error.set(e);
 		});
 		AppState.loading.set(false);

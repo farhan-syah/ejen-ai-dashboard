@@ -2,6 +2,7 @@ import type { LoginInput } from "$api/routes/auth/auth.schema";
 import { browser } from "$app/environment";
 import { UserState } from "$applications";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
+import { UserRepository } from "$repositories";
 import type { DecodedToken, ReceivedToken } from "$types";
 import { jwtDecode } from "jwt-decode";
 import { HttpService } from "./http.service";
@@ -9,8 +10,8 @@ import { HttpService } from "./http.service";
 class _AuthService {
 	path = PUBLIC_API_BASE_PATH + "/auth";
 
-	constructor(private userState: UserState) {
-		this.userState.accessToken.subscribe((token) => {
+	constructor() {
+		UserState.accessToken.subscribe((token) => {
 			if (browser) {
 				if (token) {
 					this.fetchUserFromLocalAccessToken(token);
@@ -37,41 +38,63 @@ class _AuthService {
 		this.saveToken(token);
 	}
 
-	async refresh() {
+	async refreshToken() {
 		const url = this.path + "/refresh";
 
-		const token = await HttpService.get<ReceivedToken>(url, {
-			auth: "refreshToken",
-			credentials: "include"
-		});
+		if (UserState.refreshToken.get()) {
+			const token = await HttpService.get<ReceivedToken>(url, {
+				auth: "refreshToken",
+				credentials: "include"
+			}).catch((e) => {
+				console.log(e);
+				this.logout();
+			});
 
-		this.saveToken(token);
+			if (token) this.saveToken(token);
+		} else {
+			if (UserState.user.get()) {
+				this.logout;
+			}
+		}
 	}
 
 	private saveToken(receivedToken: ReceivedToken) {
-		this.userState.accessToken.set(receivedToken.accessToken);
-		this.userState.refreshToken.set(receivedToken.refreshToken);
-		this.userState.permissions.set(receivedToken.permissions);
+		UserState.accessToken.set(receivedToken.accessToken);
+		UserState.refreshToken.set(receivedToken.refreshToken);
+		UserState.permissions.set(receivedToken.permissions);
+	}
+
+	private async clearToken() {
+		UserState.refreshToken.set(undefined);
+		UserState.accessToken.set(undefined);
+		UserState.permissions.set([]);
 	}
 
 	private validateAccessToken(accessToken: string) {
 		const decodedToken: DecodedToken = jwtDecode(accessToken);
 		const validExpiry = this.validateTokenExpiry(decodedToken);
-
-		if (validExpiry) {
-			//
-		} else {
-			//
-		}
+		return { validExpiry, decodedToken };
 	}
 
 	private validateTokenExpiry(token: DecodedToken): boolean {
-		return new Date() < new Date(token.exp * 1000);
+		return new Date() < new Date((token.exp - 60) * 1000);
 	}
 
-	private fetchUserFromLocalAccessToken(token: string) {
-		this.validateAccessToken(token);
+	private async fetchUserFromLocalAccessToken(token: string) {
+		const { validExpiry, decodedToken } = this.validateAccessToken(token);
+		if (validExpiry) {
+			const user = await UserRepository.get(decodedToken.sub);
+			UserState.user.set(user);
+		} else {
+			this.refreshToken();
+		}
+	}
+
+	async logout() {
+		await this.clearToken();
+		UserState.user.set(undefined);
 	}
 }
 
-export const AuthService = new _AuthService(UserState);
+export const AuthService = new _AuthService();
+export type AuthService = typeof AuthService;

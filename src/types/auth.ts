@@ -5,7 +5,7 @@ export type Token = {
 
 export type ReceivedToken = Token & { permissions: string[]; cookie?: string[] };
 export type DecodedToken = {
-	sub: number;
+	sub: string;
 	email: string;
 	exp: number;
 };
