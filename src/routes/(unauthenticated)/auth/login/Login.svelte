@@ -70,9 +70,10 @@
 
 	async function handleCreateUser() {
 		AppState.loading.set(true);
-		await UserRepository.update("1", { data: {} }).catch((e) => {
+		const result = await UserRepository.search({ where: {}, action: "search" }).catch((e) => {
 			AppState.error.set(e);
 		});
+		console.log(result);
 		AppState.loading.set(false);
 	}
 </script>

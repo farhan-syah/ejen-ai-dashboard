@@ -1,28 +1,28 @@
 import type {
-  UserDeleteMany,
-  UserSearch,
-  UserUncheckedCreateInput,
-  UserUncheckedUpdateInput,
-  UserUpdateMany
-} from "$api/routes/user/user.schema";
+  AddressDeleteMany,
+  AddressSearch,
+  AddressUncheckedCreateInput,
+  AddressUncheckedUpdateInput,
+  AddressUpdateMany
+} from "$api/routes/address/address.schema";
 import type * as Prisma from "$api/types/prisma-client";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
 import { HttpService } from "$services/http.service";
 
-class _UserRepository {
-  path = PUBLIC_API_BASE_PATH + "/user";
+class _AddressRepository {
+  path = PUBLIC_API_BASE_PATH + "/address";
 
-  async create(input: UserUncheckedCreateInput) {
+  async create(input: AddressUncheckedCreateInput) {
     const url = this.path;
-    return await HttpService.post<Prisma.User>(url, {
+    return await HttpService.post<Prisma.Address>(url, {
       body: JSON.stringify(input),
       auth: "accessToken",
     });
   }
 
-  async update(id: string, input: UserUncheckedUpdateInput) {
+  async update(id: string, input: AddressUncheckedUpdateInput) {
     const url = `${this.path}/${id}`;
-    return await HttpService.patch<Prisma.User>(url, {
+    return await HttpService.patch<Prisma.Address>(url, {
       body: JSON.stringify(input),
       auth: "accessToken",
     });
@@ -30,12 +30,12 @@ class _UserRepository {
 
   async get(id: string) {
     const url = `${this.path}/${id}`;
-    return await HttpService.get<Prisma.User>(url, {
+    return await HttpService.get<Prisma.Address>(url, {
       auth: "accessToken",
     });
   }
 
-  async updateMany(input: UserUpdateMany) {
+  async updateMany(input: AddressUpdateMany) {
     const url = this.path;
     return await HttpService.patch<Prisma.Prisma.BatchPayload>(url, {
       body: JSON.stringify(input),
@@ -45,12 +45,12 @@ class _UserRepository {
 
   async delete(id: string) {
     const url = `${this.path}/${id}`;
-    return await HttpService.delete<Prisma.User>(url, {
+    return await HttpService.delete<Prisma.Address>(url, {
       auth: "accessToken",
     });
   }
 
-  async deleteMany(input: UserDeleteMany) {
+  async deleteMany(input: AddressDeleteMany) {
     const url = this.path;
     return await HttpService.delete<Prisma.Prisma.BatchPayload>(url, {
       body: JSON.stringify(input),
@@ -58,13 +58,13 @@ class _UserRepository {
     });
   }
 
-  async search(input: UserSearch) {
+  async search(input: AddressSearch) {
     const url = `${this.path}/search`;
-    return await HttpService.post<Prisma.User[]>(url, {
+    return await HttpService.post<Prisma.Address[]>(url, {
       body: JSON.stringify(input),
       auth: "accessToken",
     });
   }
 }
 
-export const UserRepository = new _UserRepository();
+export const AddressRepository = new _AddressRepository();

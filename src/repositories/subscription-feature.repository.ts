@@ -1,0 +1,70 @@
+import type {
+  SubscriptionFeatureDeleteMany,
+  SubscriptionFeatureSearch,
+  SubscriptionFeatureUncheckedCreateInput,
+  SubscriptionFeatureUncheckedUpdateInput,
+  SubscriptionFeatureUpdateMany
+} from "$api/routes/subscription-feature/subscription-feature.schema";
+import type * as Prisma from "$api/types/prisma-client";
+import { PUBLIC_API_BASE_PATH } from "$env/static/public";
+import { HttpService } from "$services/http.service";
+
+class _SubscriptionFeatureRepository {
+  path = PUBLIC_API_BASE_PATH + "/subscription-feature";
+
+  async create(input: SubscriptionFeatureUncheckedCreateInput) {
+    const url = this.path;
+    return await HttpService.post<Prisma.SubscriptionFeature>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+
+  async update(id: string, input: SubscriptionFeatureUncheckedUpdateInput) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.patch<Prisma.SubscriptionFeature>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+
+  async get(id: string) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.get<Prisma.SubscriptionFeature>(url, {
+      auth: "accessToken",
+    });
+  }
+
+  async updateMany(input: SubscriptionFeatureUpdateMany) {
+    const url = this.path;
+    return await HttpService.patch<Prisma.Prisma.BatchPayload>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+
+  async delete(id: string) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.delete<Prisma.SubscriptionFeature>(url, {
+      auth: "accessToken",
+    });
+  }
+
+  async deleteMany(input: SubscriptionFeatureDeleteMany) {
+    const url = this.path;
+    return await HttpService.delete<Prisma.Prisma.BatchPayload>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+
+  async search(input: SubscriptionFeatureSearch) {
+    const url = `${this.path}/search`;
+    return await HttpService.post<Prisma.SubscriptionFeature[]>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+}
+
+export const SubscriptionFeatureRepository = new _SubscriptionFeatureRepository();

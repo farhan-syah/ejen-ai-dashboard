@@ -1,14 +1,70 @@
-// import { UserState } from "$applications";
-// import type { ReadableAtom } from "nanostores";
-// import type { Token } from "../types";
+import type {
+  UserTypeDeleteMany,
+  UserTypeSearch,
+  UserTypeUncheckedCreateInput,
+  UserTypeUncheckedUpdateInput,
+  UserTypeUpdateMany
+} from "$api/routes/user-type/user-type.schema";
+import type * as Prisma from "$api/types/prisma-client";
+import { PUBLIC_API_BASE_PATH } from "$env/static/public";
+import { HttpService } from "$services/http.service";
 
-// class _UserTypeRepository {
-// 	path = "user-type";
-// 	constructor(private token: ReadableAtom<Token | undefined>) {}
+class _UserTypeRepository {
+  path = PUBLIC_API_BASE_PATH + "/user-type";
 
-// 	search() {
-// 		console.log(this.token?.get()?.accessToken);
-// 	}
-// }
+  async create(input: UserTypeUncheckedCreateInput) {
+    const url = this.path;
+    return await HttpService.post<Prisma.UserType>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
 
-// export const UserTypeRepository = new _UserTypeRepository(UserState.accessToken);
+  async update(id: string, input: UserTypeUncheckedUpdateInput) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.patch<Prisma.UserType>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+
+  async get(id: string) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.get<Prisma.UserType>(url, {
+      auth: "accessToken",
+    });
+  }
+
+  async updateMany(input: UserTypeUpdateMany) {
+    const url = this.path;
+    return await HttpService.patch<Prisma.Prisma.BatchPayload>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+
+  async delete(id: string) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.delete<Prisma.UserType>(url, {
+      auth: "accessToken",
+    });
+  }
+
+  async deleteMany(input: UserTypeDeleteMany) {
+    const url = this.path;
+    return await HttpService.delete<Prisma.Prisma.BatchPayload>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+
+  async search(input: UserTypeSearch) {
+    const url = `${this.path}/search`;
+    return await HttpService.post<Prisma.UserType[]>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
+}
+
+export const UserTypeRepository = new _UserTypeRepository();
