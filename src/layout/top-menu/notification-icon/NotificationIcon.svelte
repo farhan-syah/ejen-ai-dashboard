@@ -4,14 +4,14 @@
 
 <div class="p-2 pointer flex items-center">
 	<div class="relative">
-		<Icon icon="bx:bell" class="text-lg text-black "></Icon>
+		<Icon icon="mingcute:notification-line" class="text-lg text-black "></Icon>
 		<div
-			class="absolute top-0 right-0 -m-2.5 bg-cyan-500 rounded-full w-[1.1rem] h-[1.1rem] text-white text-center animate-ping-sm opacity-40"
+			class="absolute top-0 right-0 -m-2.5 bg-cyan-400 rounded-full w-[1.1rem] h-[1.1rem] text-white text-center animate-ping-sm opacity-40"
 		></div>
 		<div
-			class="absolute top-0 right-0 -m-2.5 bg-cyan-500 rounded-full text-3xs w-[1.1rem] h-[1.1rem] text-white text-center"
+			class="absolute top-0 right-0 -m-2.5 bg-cyan-400 rounded-full text-3xs w-[1.1rem] h-[1.1rem] text-white text-center"
 		>
-			<div class=" my-0.75">5</div>
+			<div class=" my-0.75 font-medium">5</div>
 		</div>
 	</div>
 </div>

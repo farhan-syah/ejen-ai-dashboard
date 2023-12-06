@@ -12,7 +12,7 @@
 
 {#if $error}
 	<div
-		class="fixed bg-black/30 top-0 left-0 h-full flex w-full z-50"
+		class="fixed overlay top-0 left-0 h-full flex w-full z-50"
 		on:click|self={handleDismiss}
 		on:keypress={() => {}}
 		role="none"
@@ -44,3 +44,10 @@
 		</div>
 	</div>
 {/if}
+
+<style>
+	.overlay {
+		background-color: rgb(7, 7, 77);
+		opacity: 0.25;
+	}
+</style>

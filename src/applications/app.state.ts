@@ -8,6 +8,8 @@ class _App {
 	error: WritableAtom<any> = atom(undefined);
 	layout: WritableAtom<"mobile" | "tablet" | "desktop" | undefined> = atom(undefined);
 	fullScreenElement: WritableAtom<Element | null> = atom(null);
+	isSidebarOpen = atom(false);
+	showOverlay = atom(false);
 	constructor() {
 		this.width.subscribe((width) => {
 			if (width < Breakpoint.md) {
@@ -15,6 +17,7 @@ class _App {
 			} else if (width < Breakpoint.lg) {
 				this.layout.set("tablet");
 			} else {
+				this.isSidebarOpen = atom(true);
 				this.layout.set("desktop");
 			}
 		});

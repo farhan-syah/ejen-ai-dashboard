@@ -7,7 +7,7 @@
 	import ProfileMenuButton from "./ProfileMenuButton.svelte";
 	import type { ProfileMenuItem } from "./profile-menu";
 
-	const isOpen = atom(true);
+	const isOpen = atom(false);
 	const popperOptions: PopperOptions<any> = {
 		modifiers: [
 			{
@@ -30,8 +30,7 @@
 
 	const menu: ProfileMenuItem[] = [
 		{ label: "Profile", icon: "mingcute:user-4-line", link: "/profile" },
-		{ label: "Inbox", icon: "mingcute:inbox-2-line", link: "/inbox" },
-		{ label: "Task Manager", icon: "mingcute:task-line", link: "/profile" },
+		{ label: "Task", icon: "mingcute:task-line", link: "/profile" },
 		{ label: "Settings", icon: "mingcute:settings-6-line", link: "/profile" },
 		{ label: "Log Out", icon: "mingcute:exit-line", link: "/profile" }
 	];
