@@ -5,3 +5,4 @@ export * from "./link";
 export * from "./loader";
 export * from "./overlay";
 export * from "./popper";
+export * from "./profile-image";

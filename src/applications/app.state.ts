@@ -1,11 +1,24 @@
-import { writable, type Writable } from "svelte/store";
+import { atom, type WritableAtom } from "nanostores";
+import { Breakpoint } from "../variables";
 
 class _App {
-	constructor() {}
-	width: Writable<number> = writable(0);
-	height: Writable<number> = writable(0);
-	loading: Writable<boolean> = writable(false);
-	error: Writable<any> = writable(undefined);
+	width: WritableAtom<number> = atom(0);
+	height: WritableAtom<number> = atom(0);
+	loading: WritableAtom<boolean> = atom(false);
+	error: WritableAtom<any> = atom(undefined);
+	layout: WritableAtom<"mobile" | "tablet" | "desktop" | undefined> = atom(undefined);
+	fullScreenElement: WritableAtom<Element | null> = atom(null);
+	constructor() {
+		this.width.subscribe((width) => {
+			if (width < Breakpoint.md) {
+				this.layout.set("mobile");
+			} else if (width < Breakpoint.lg) {
+				this.layout.set("tablet");
+			} else {
+				this.layout.set("desktop");
+			}
+		});
+	}
 }
 
 export const AppState = new _App();

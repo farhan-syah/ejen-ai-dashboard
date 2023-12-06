@@ -3,6 +3,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+	.pointer {
+		@apply cursor-pointer;
+		@apply bg-blend-soft-light;
+		@apply hover:bg-blue-700/10;
+		@apply active:bg-blue-700/15;
+	}
+
+	.pointer-light {
+		@apply cursor-pointer;
+		@apply bg-blend-soft-light;
+		@apply hover:bg-white/30;
+		@apply active:bg-white/20;
+	}
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

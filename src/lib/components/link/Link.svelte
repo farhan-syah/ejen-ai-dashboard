@@ -28,7 +28,7 @@
 			<a
 				href={link}
 				{target}
-				class="cursor-pointer hover:text-blue-500 {$$props.class ?? ''}"
+				class="cursor-pointer hover:text-blue-600 {$$props.class ?? ''}"
 				tabindex="-1"
 			>
 				<slot />

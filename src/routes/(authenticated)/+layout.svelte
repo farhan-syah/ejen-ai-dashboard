@@ -1,10 +1,25 @@
 <script lang="ts">
-	import { UserState } from "$applications";
-
+	import { AppState, UserState } from "$applications";
+	import TopMenu from "../../layout/top-menu/TopMenu.svelte";
+	const layout = AppState.layout;
 	const user = UserState.user;
 </script>
 
 {#if $user}
-	Authenticated
-	<slot />
+	<div class="flex flex-col w-full overflow-hidden">
+		<TopMenu />
+		<div class="flex-grow overflow-auto main">
+			<slot />
+		</div>
+	</div>
 {/if}
+
+<style>
+	.main {
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+		scrollbar-width: none; /* Firefox */
+	}
+	.main::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+</style>
