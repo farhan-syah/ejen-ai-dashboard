@@ -26,7 +26,6 @@
 <svelte:window
 	on:resize={handleResize}
 	on:keydown={(e) => {
-		console.log(e.key);
 		if (e.key === "F11") {
 			e.preventDefault();
 		}

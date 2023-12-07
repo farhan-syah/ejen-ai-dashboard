@@ -2,7 +2,6 @@
 	import { AppState } from "$applications";
 
 	const showOverlay = AppState.showOverlay;
-	const device = AppState.layout;
 	const isSidebarOpen = AppState.isSidebarOpen;
 
 	function handleClick() {
@@ -12,7 +11,12 @@
 </script>
 
 {#if $showOverlay}
-	<div class="fixed overlay top-0 left-0 h-full flex w-full z-40" on:click|self={handleClick}>
+	<div
+		class="fixed overlay top-0 left-0 h-full flex w-full z-40"
+		on:click={handleClick}
+		on:keydown
+		role="none"
+	>
 		<div class="m-auto"></div>
 	</div>
 

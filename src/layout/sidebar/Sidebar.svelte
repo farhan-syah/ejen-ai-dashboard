@@ -21,10 +21,19 @@
 			}
 		} else {
 			showOverlay.set(false);
-			if ($isSidebarOpen) {
-				sidebarClass.set("w-52");
+
+			if ($lockedSidebarPosition == "close") {
+				if ($isSidebarOpen) {
+					sidebarClass.set("absolute w-52 sidemenu-shadow");
+				} else {
+					sidebarClass.set("w-8");
+				}
 			} else {
-				sidebarClass.set("w-8");
+				if ($isSidebarOpen) {
+					sidebarClass.set(" w-52");
+				} else {
+					sidebarClass.set("w-8");
+				}
 			}
 		}
 	}
