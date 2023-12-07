@@ -20,9 +20,10 @@ class _App {
 			} else if (width < Breakpoint.lg) {
 				this.layout.set("tablet");
 			} else {
+				this.showOverlay.set(false);
 				this.layout.set("desktop");
 				const lockedPosition = this.lockedSidebarPosition.get();
-				this.isSidebarOpen = atom(lockedPosition == "open" ? true : false);
+				this.isSidebarOpen.set(lockedPosition == "open" ? true : false);
 			}
 		});
 	}

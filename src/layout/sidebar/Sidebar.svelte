@@ -20,8 +20,6 @@
 				showOverlay.set(false);
 			}
 		} else {
-			showOverlay.set(false);
-
 			if ($lockedSidebarPosition == "close") {
 				if ($isSidebarOpen) {
 					sidebarClass.set("absolute w-52 sidemenu-shadow");
