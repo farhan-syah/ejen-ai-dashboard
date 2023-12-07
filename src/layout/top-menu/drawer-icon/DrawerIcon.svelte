@@ -4,8 +4,16 @@
 
 	const isSidebarOpen = AppState.isSidebarOpen;
 	const layout = AppState.layout;
+	const lockedSidebarPosition = AppState.lockedSidebarPosition;
 
 	function handleDrawerClick() {
+		if ($layout == "desktop") {
+			if ($isSidebarOpen) {
+				lockedSidebarPosition.set("close");
+			} else {
+				lockedSidebarPosition.set("open");
+			}
+		}
 		isSidebarOpen.set(!$isSidebarOpen);
 	}
 </script>

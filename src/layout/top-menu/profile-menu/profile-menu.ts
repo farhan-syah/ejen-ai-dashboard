@@ -3,4 +3,5 @@ export type ProfileMenuItem = {
 	label: string;
 	counter?: number | string;
 	link?: string;
+	onclick?: () => any;
 };

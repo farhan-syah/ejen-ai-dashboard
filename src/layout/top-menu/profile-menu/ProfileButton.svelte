@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { AppState } from "$applications";
 	import { ProfileImage } from "$lib/components";
 	import Popper from "$lib/components/popper/Popper.svelte";
+	import { AuthService } from "$services";
 	import type { ModifierPhases } from "@popperjs/core";
 	import { atom } from "nanostores";
 	import type { PopperOptions } from "svelte-popperjs";
@@ -30,9 +32,17 @@
 
 	const menu: ProfileMenuItem[] = [
 		{ label: "Profile", icon: "mingcute:user-4-line", link: "/profile" },
-		{ label: "Task", icon: "mingcute:task-line", link: "/profile" },
-		{ label: "Settings", icon: "mingcute:settings-6-line", link: "/profile" },
-		{ label: "Log Out", icon: "mingcute:exit-line", link: "/profile" }
+		{ label: "Task", icon: "mingcute:task-line", link: "/tasks" },
+		{ label: "Settings", icon: "mingcute:settings-6-line", link: "/settings" },
+		{
+			label: "Log Out",
+			icon: "mingcute:exit-line",
+			onclick: async () => {
+				AppState.loading.set(true);
+				await AuthService.logout();
+				AppState.loading.set(false);
+			}
+		}
 	];
 </script>
 

@@ -6,7 +6,7 @@
 	export let item: ProfileMenuItem;
 </script>
 
-<Link link={item.link} class="flex gap-2 px-1.5 py-2 pointer ">
+<Link link={item.link} class="flex gap-2 px-1.5 py-2 pointer " onClick={item.onclick}>
 	{#if item.icon}
 		<Icon icon={item.icon} class="text-lg flex items-center ml-1"></Icon>
 	{/if}

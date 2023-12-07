@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { AppState, UserState } from "$applications";
+	import { SidebarState } from "$applications/sidebar.state";
 	import { Overlay } from "$lib/components";
 	import Sidebar from "../../layout/sidebar/Sidebar.svelte";
 	import TopMenu from "../../layout/top-menu/TopMenu.svelte";
-	const layout = AppState.layout;
+	AppState;
 	const user = UserState.user;
+	SidebarState;
 </script>
 
 {#if $user}

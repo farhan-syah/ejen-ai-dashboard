@@ -31,9 +31,12 @@ export type AuthPayload = Static<typeof AuthPayloadSchema>;
 export declare const AuthResponseSchema: import("@sinclair/typebox").TObject<{
 	accessToken: import("@sinclair/typebox").TString;
 	refreshToken: import("@sinclair/typebox").TString;
-	permissions: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
 	cookie: import("@sinclair/typebox").TOptional<
 		import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>
 	>;
 }>;
 export type AuthResponse = Static<typeof AuthResponseSchema>;
+export declare const PermissionRequestSchema: import("@sinclair/typebox").TObject<{
+	id: import("@sinclair/typebox").TString;
+}>;
+export type PermissionRequest = Static<typeof PermissionRequestSchema>;

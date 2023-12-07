@@ -34,6 +34,10 @@
 				<slot />
 			</a>
 		{/if}
+	{:else if onClick}
+		<div class="flex pointer hover:text-blue-600 {$$props.class ?? ''}">
+			<slot />
+		</div>
 	{:else}
 		<slot />
 	{/if}

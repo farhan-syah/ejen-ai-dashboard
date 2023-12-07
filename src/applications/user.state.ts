@@ -7,6 +7,8 @@ class _UserState {
 	accessToken = persistentAtom<string | undefined>("at", undefined);
 	refreshToken = persistentAtom<string | undefined>("rt", undefined);
 	permissions = atom<string[]>([]);
+
+	constructor() {}
 }
 
 export const UserState = new _UserState();

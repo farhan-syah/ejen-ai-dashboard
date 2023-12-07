@@ -1,3 +1,4 @@
+import { persistentAtom } from "@nanostores/persistent";
 import { atom, type WritableAtom } from "nanostores";
 import { Breakpoint } from "../variables";
 
@@ -10,14 +11,17 @@ class _App {
 	fullScreenElement: WritableAtom<Element | null> = atom(null);
 	isSidebarOpen = atom(false);
 	showOverlay = atom(false);
+	lockedSidebarPosition: WritableAtom<string>;
 	constructor() {
+		this.lockedSidebarPosition = persistentAtom<string>("sb", "close");
 		this.width.subscribe((width) => {
 			if (width < Breakpoint.md) {
 				this.layout.set("mobile");
 			} else if (width < Breakpoint.lg) {
 				this.layout.set("tablet");
 			} else {
-				this.isSidebarOpen = atom(true);
+				const lockedPosition = this.lockedSidebarPosition.get();
+				this.isSidebarOpen = atom(lockedPosition == "open" ? true : false);
 				this.layout.set("desktop");
 			}
 		});
