@@ -92,8 +92,8 @@ class _AuthService {
 		const { validExpiry, decodedToken } = this.validateAccessToken(token);
 		if (validExpiry) {
 			const user = await UserRepository.get(decodedToken.sub);
-			const permissions = await this.getPermissions(user.id);
-			UserState.permissions.set(permissions);
+			// const permissions = await this.getPermissions(user.id);
+			// UserState.permissions.set(permissions);
 			UserState.user.set(user);
 		} else {
 			this.refreshToken();

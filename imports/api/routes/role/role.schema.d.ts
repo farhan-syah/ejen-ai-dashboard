@@ -18,10 +18,16 @@ export declare const RoleActionEnum: {
     search: string;
 };
 export type RoleActionEnum = (typeof RoleActionEnum)[keyof typeof RoleActionEnum];
-export declare const RoleSearchWhereSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const RoleSearchWhereSchema: import("@sinclair/typebox").TObject<{
+    userId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    organizationId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export declare const RoleSearchSchema: import("@sinclair/typebox").TObject<{
     action: import("@sinclair/typebox").TLiteral<string>;
-    where: import("@sinclair/typebox").TObject<{}>;
+    where: import("@sinclair/typebox").TObject<{
+        userId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        organizationId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -32,7 +38,10 @@ export declare const RoleSearchSchema: import("@sinclair/typebox").TObject<{
 export type RoleSearch = Static<typeof RoleSearchSchema>;
 export declare const RoleActionSchema: import("@sinclair/typebox").TObject<{
     action: import("@sinclair/typebox").TLiteral<string>;
-    where: import("@sinclair/typebox").TObject<{}>;
+    where: import("@sinclair/typebox").TObject<{
+        userId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        organizationId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;

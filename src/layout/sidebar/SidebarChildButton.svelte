@@ -10,18 +10,14 @@
 
 <a
 	href={sidebarItem.link}
-	class="group pointer-lighter text-xs w-full px-2 py-1.5 flex items-center gap-1.5 pl-4 hover:text-white {active
+	class="group pointer-lighter text-ss w-full px-2 py-1.5 flex items-center gap-1.5 pl-4 hover:text-white {active
 		? 'font-semibold text-white'
 		: ' text-white/80'}"
 >
-	{#if sidebarItem.icon}
-		<Icon
-			icon="bx:radio-circle"
-			class="mb-0.25 text-3xs group-hover:text-white  {active
-				? 'text-white/80'
-				: 'text-white/20 '} "
-		></Icon>
-	{/if}
+	<Icon
+		icon="bx:radio-circle"
+		class="mb-0.25 text-3xs group-hover:text-white  {active ? 'text-white/80' : 'text-white/20 '} "
+	></Icon>
 	<div class="">
 		{sidebarItem.title}
 	</div>

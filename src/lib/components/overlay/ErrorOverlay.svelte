@@ -17,7 +17,7 @@
 		on:keypress={() => {}}
 		role="none"
 	>
-		<div class="m-auto relative">
+		<div class="m-auto relative opacity-100">
 			<Card class="p-4 w-96 ">
 				<div class="flex gap-2 font-medium text-medium border-b-2 pb-1 border-red-100 text-red-500">
 					<div>ERROR</div>
@@ -47,7 +47,6 @@
 
 <style>
 	.overlay {
-		background-color: rgb(7, 7, 77);
-		opacity: 0.25;
+		background-color: rgb(7, 7, 77, 0.25);
 	}
 </style>

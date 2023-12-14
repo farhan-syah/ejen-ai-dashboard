@@ -9,7 +9,6 @@
 	const childItems = sidebarItem.items;
 	const pattern = new RegExp(`^${sidebarItem.link}`);
 	const active = pattern.test($page.url.pathname);
-	const activeClass = sidebarItem.isParent && active ? "bg-indigo-200/15" : "";
 	const isOpen = sidebarItem.isOpen;
 
 	if (isOpen && active) {
@@ -29,19 +28,21 @@
 {#if $layout === "desktop" && !$isSidebarOpen}
 	{#if sidebarItem.icon}
 		<div class=" px-2 py-1.5">
-			<Icon icon={sidebarItem.icon}></Icon>
+			<Icon icon={sidebarItem.icon} class="text-base"></Icon>
 		</div>
 	{/if}
 {:else if childItems && childItems.length > 0}
 	<div
-		class="pointer-lighter w-full px-2 py-1.5 flex items-center gap-1.5 {activeClass}"
+		class="pointer-lighter w-full px-2 py-1.5 flex items-center gap-1.5 hover:text-white {active
+			? 'text-white bg-indigo-200/10'
+			: ''}"
 		on:click={handleClick}
 		on:keydown={handleClick}
 		role="menu"
 		tabindex="-1"
 	>
 		{#if sidebarItem.icon}
-			<Icon icon={sidebarItem.icon} class=""></Icon>
+			<Icon icon={sidebarItem.icon} class="text-base {active ? 'text-white' : ''}"></Icon>
 		{/if}
 		<div class="pt-0.5 flex-grow">
 			{sidebarItem.title}
@@ -59,11 +60,16 @@
 {:else}
 	<a
 		href={sidebarItem.link}
-		class="pointer-lighter w-full px-2 py-1.5 flex items-center gap-1.5 {activeClass}"
+		class="pointer-lighter w-full px-2 py-1.5 flex items-center gap-1.5 hover:text-white {active
+			? 'text-white bg-indigo-200/10'
+			: 'text-white/80'}"
 		tabindex="-1"
 	>
 		{#if sidebarItem.icon}
-			<Icon icon={sidebarItem.icon} class=""></Icon>
+			<Icon
+				icon={sidebarItem.icon}
+				class="text-base group-hover:text-white {active ? 'text-white' : ''}"
+			></Icon>
 		{/if}
 		<div class="pt-0.5 flex-grow">
 			{sidebarItem.title}

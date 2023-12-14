@@ -5,6 +5,7 @@ const config = {
 	theme: {
 		extend: {
 			fontSize: {
+				ss: ["0.8rem", "0.95rem"],
 				"3xs": ["0.6rem", "0.7rem"],
 				"2xs": ["0.7rem", "0.85rem"],
 				"2.5xl": ["1.6rem", "2.0rem"],

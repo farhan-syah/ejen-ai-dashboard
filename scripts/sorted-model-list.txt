@@ -1,3 +1,4 @@
+Accounts
 Address
 Bank
 BankAccount
@@ -7,11 +8,14 @@ CartItem
 DamagedProduct
 Delivery
 DeliveryProduct
-GroupPermission
+Department
+Estimates
+Files
 Image
 IncomingDelivery
 IncomingDeliveryItem
 InventoryMovement
+Invoice
 Lead
 LeadAddress
 OpeningHours
@@ -19,6 +23,11 @@ Order
 OrderProduct
 OrderReview
 OrderService
+Organization
+OrganizationAddress
+OrganizationPermission
+OrganizationTag
+OrganizationType
 PaymentMethod
 Permission
 Product
@@ -31,6 +40,7 @@ PromotionBundleItem
 PromotionCondition
 PromotionFreeGift
 PromotionUsage
+PurchaseBill
 PurchaseOrder
 PurchaseOrderItem
 Region
@@ -46,6 +56,7 @@ ShopAddress
 Subscription
 SubscriptionFeature
 Supplier
+SupplierTag
 SystemSettings
 Task
 TaskReview
@@ -54,11 +65,9 @@ TieredPricing
 TimeInterval
 User
 UserAddress
-UserGroup
-UserGroupAddress
-UserGroupType
+UserSetting
 UserSubscription
-UserType
+UserTag
 Wallet
 WalletTopup
 WalletTransaction

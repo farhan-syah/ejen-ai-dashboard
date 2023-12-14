@@ -10,7 +10,6 @@
 
 <style>
 	.overlay {
-		background-color: rgb(7, 7, 77);
-		opacity: 0.25;
+		background-color: rgb(7, 7, 77, 0.25);
 	}
 </style>

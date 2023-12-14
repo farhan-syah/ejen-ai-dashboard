@@ -2,7 +2,9 @@
 	import { AppState } from "$applications";
 	import { SidebarState } from "$applications/sidebar.state";
 	import { atom } from "nanostores";
+	import RoleSelector from "./RoleSelector.svelte";
 	import SidebarButton from "./SidebarButton.svelte";
+	import { commonSidebarItems } from "./sidebar.config";
 
 	const isSidebarOpen = AppState.isSidebarOpen;
 	const layout = AppState.layout;
@@ -58,8 +60,16 @@
 	on:mouseleave={handleMouseLeave}
 	on:focus
 >
-	<div class=" bg-indigo-950 h-screen overflow-x-hidden sidebar z-60">
+	<div class=" bg-indigo-950 h-screen overflow-x-hidden sidebar z-60 text-white/80">
+		<RoleSelector />
 		{#each $sidebarItems as sidebarItem}
+			<SidebarButton {sidebarItem}></SidebarButton>
+		{/each}
+
+		<div class=" px-2">
+			<div class="my-2 w-full h-0.25 bg-white/20"></div>
+		</div>
+		{#each commonSidebarItems as sidebarItem}
 			<SidebarButton {sidebarItem}></SidebarButton>
 		{/each}
 	</div>
@@ -67,6 +77,10 @@
 
 <style>
 	/* Hiding scrollbar for Chrome, Safari and Opera */
+
+	.sidebar {
+		background-color: rgb(9, 0, 50);
+	}
 	.sidebar::-webkit-scrollbar {
 		display: none;
 	}
@@ -88,6 +102,6 @@
 		-ms-overflow-style: none;
 	}
 	.sidemenu-shadow {
-		box-shadow: 2px 0px 6px 0px rgba(30, 27, 75, 0.5);
+		box-shadow: 2px 0px 6px 0px rgba(40, 36, 88, 0.5);
 	}
 </style>

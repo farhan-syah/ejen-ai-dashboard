@@ -11,8 +11,12 @@
 
 	export let controller: FormControl<T> = new FormControl<T>();
 	export let label: string | undefined = undefined;
-	export let options: FieldOption<T>[] = [];
+	export let options: readonly FieldOption<T>[] = [];
 	export let placeholder: string = "Select";
+
+	export let valueTransform: (value?: T) => string | undefined = (value) => {
+		return value?.toString() ?? undefined;
+	};
 
 	let required = controller.required;
 	let inputClass = "";
@@ -159,7 +163,7 @@
 		<Popper bind:isOpen={$isOpen} {popperOptions}>
 			<!-- Main Component -->
 			<div slot="main" class="flex rounded outline p-2 cursor-pointer {inputClass}">
-				<div>{$value ?? placeholder}</div>
+				<div>{valueTransform($value) ?? placeholder}</div>
 			</div>
 			<!-- Popper Component -->
 
@@ -167,7 +171,7 @@
 				<div class=" shadow-lg border">
 					{#each options as option, i}
 						<div
-							class="flex px-2 py-1.5 w-full {$focusIndex === i
+							class="flex px-2 py-1.5 w-full items-center {$focusIndex === i
 								? 'outline outline-2 outline-blue-300 rounded bg-blue-50 text-blue-500'
 								: 'border-b outline-0 bg-white text-gray-400'} "
 							on:click={() => handleSelect(option)}

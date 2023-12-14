@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { LoginInput } from "$api/routes/auth/auth.schema";
 	import { AppState } from "$applications";
-	import { Button, FormControl, Link, SelectField, TextField } from "$lib/components";
+	import { Button, FormControl, Link, TextField } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { AuthService } from "$services/auth.service";
 	import type { FieldOption } from "$types";
@@ -23,29 +23,20 @@
 		validators: []
 	});
 
-	const userTypeController = new FormControl<string>({
-		name: "userType",
-		required: true,
-		validators: [],
-		value: "Staff"
-	});
-
 	const formValid = computed(
-		[emailController.valid, passwordController.valid, userTypeController.valid],
-		(emailValid, passwordValid, userTypeValid) => {
-			return emailValid && passwordValid && userTypeValid;
+		[emailController.valid, passwordController.valid],
+		(emailValid, passwordValid) => {
+			return emailValid && passwordValid;
 		}
 	);
 
 	async function handleSubmit() {
 		const email = emailController.writableValue.get();
 		const password = passwordController.writableValue.get();
-		const userType = userTypeController.writableValue.get();
-		if (!email || !password || !userType) return;
+		if (!email || !password) return;
 		const loginInput: LoginInput = {
 			email: email,
 			password: password,
-			userType: userType,
 			includeCookie: true
 		};
 
@@ -79,7 +70,6 @@
 			</div>
 		</TextField>
 
-		<SelectField controller={userTypeController} options={userTypeOptions} label="User Type" />
 		<Button class="w-32" valid={$formValid} onClick={handleSubmit} />
 	</div>
 

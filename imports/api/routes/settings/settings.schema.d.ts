@@ -4,3 +4,10 @@ export declare const BusinessSettingsSchema: import("@sinclair/typebox").TObject
     address: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;
 export type BusinessSettings = Static<typeof BusinessSettingsSchema>;
+export declare const PublicSettingsSchema: import("@sinclair/typebox").TObject<{
+    adminAccess: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TEnum<{
+        Staff: string;
+        Guest: string;
+    }>>>;
+}>;
+export type PublicSettings = Static<typeof PublicSettingsSchema>;
