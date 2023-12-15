@@ -1,8 +1,8 @@
 import type {
+  EstimatesCreate,
   EstimatesDeleteMany,
   EstimatesSearch,
-  EstimatesUncheckedCreateInput,
-  EstimatesUncheckedUpdateInput,
+  EstimatesUpdate,
   EstimatesUpdateMany
 } from "$api/routes/estimates/estimates.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _EstimatesRepository {
   path = PUBLIC_API_BASE_PATH + "/estimates";
 
-  async create(input: EstimatesUncheckedCreateInput) {
+  async create(input: EstimatesCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Estimates>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _EstimatesRepository {
     });
   }
 
-  async update(id: string, input: EstimatesUncheckedUpdateInput) {
+  async update(id: string, input: EstimatesUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Estimates>(url, {
       body: JSON.stringify(input),

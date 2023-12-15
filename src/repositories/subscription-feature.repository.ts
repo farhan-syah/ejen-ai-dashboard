@@ -1,8 +1,8 @@
 import type {
+  SubscriptionFeatureCreate,
   SubscriptionFeatureDeleteMany,
   SubscriptionFeatureSearch,
-  SubscriptionFeatureUncheckedCreateInput,
-  SubscriptionFeatureUncheckedUpdateInput,
+  SubscriptionFeatureUpdate,
   SubscriptionFeatureUpdateMany
 } from "$api/routes/subscription-feature/subscription-feature.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _SubscriptionFeatureRepository {
   path = PUBLIC_API_BASE_PATH + "/subscription-feature";
 
-  async create(input: SubscriptionFeatureUncheckedCreateInput) {
+  async create(input: SubscriptionFeatureCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.SubscriptionFeature>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _SubscriptionFeatureRepository {
     });
   }
 
-  async update(id: string, input: SubscriptionFeatureUncheckedUpdateInput) {
+  async update(id: string, input: SubscriptionFeatureUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.SubscriptionFeature>(url, {
       body: JSON.stringify(input),

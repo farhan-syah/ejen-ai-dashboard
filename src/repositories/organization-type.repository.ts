@@ -1,8 +1,8 @@
 import type {
+  OrganizationTypeCreate,
   OrganizationTypeDeleteMany,
   OrganizationTypeSearch,
-  OrganizationTypeUncheckedCreateInput,
-  OrganizationTypeUncheckedUpdateInput,
+  OrganizationTypeUpdate,
   OrganizationTypeUpdateMany
 } from "$api/routes/organization-type/organization-type.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _OrganizationTypeRepository {
   path = PUBLIC_API_BASE_PATH + "/organization-type";
 
-  async create(input: OrganizationTypeUncheckedCreateInput) {
+  async create(input: OrganizationTypeCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.OrganizationType>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _OrganizationTypeRepository {
     });
   }
 
-  async update(id: string, input: OrganizationTypeUncheckedUpdateInput) {
+  async update(id: string, input: OrganizationTypeUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.OrganizationType>(url, {
       body: JSON.stringify(input),

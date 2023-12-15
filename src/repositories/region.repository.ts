@@ -1,8 +1,8 @@
 import type {
+  RegionCreate,
   RegionDeleteMany,
   RegionSearch,
-  RegionUncheckedCreateInput,
-  RegionUncheckedUpdateInput,
+  RegionUpdate,
   RegionUpdateMany
 } from "$api/routes/region/region.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _RegionRepository {
   path = PUBLIC_API_BASE_PATH + "/region";
 
-  async create(input: RegionUncheckedCreateInput) {
+  async create(input: RegionCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Region>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _RegionRepository {
     });
   }
 
-  async update(id: string, input: RegionUncheckedUpdateInput) {
+  async update(id: string, input: RegionUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Region>(url, {
       body: JSON.stringify(input),

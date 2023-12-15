@@ -1,8 +1,8 @@
 import type {
+  LeadCreate,
   LeadDeleteMany,
   LeadSearch,
-  LeadUncheckedCreateInput,
-  LeadUncheckedUpdateInput,
+  LeadUpdate,
   LeadUpdateMany
 } from "$api/routes/lead/lead.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _LeadRepository {
   path = PUBLIC_API_BASE_PATH + "/lead";
 
-  async create(input: LeadUncheckedCreateInput) {
+  async create(input: LeadCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Lead>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _LeadRepository {
     });
   }
 
-  async update(id: string, input: LeadUncheckedUpdateInput) {
+  async update(id: string, input: LeadUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Lead>(url, {
       body: JSON.stringify(input),

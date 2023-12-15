@@ -1,8 +1,8 @@
 import type {
+  ShopCreate,
   ShopDeleteMany,
   ShopSearch,
-  ShopUncheckedCreateInput,
-  ShopUncheckedUpdateInput,
+  ShopUpdate,
   ShopUpdateMany
 } from "$api/routes/shop/shop.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ShopRepository {
   path = PUBLIC_API_BASE_PATH + "/shop";
 
-  async create(input: ShopUncheckedCreateInput) {
+  async create(input: ShopCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Shop>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ShopRepository {
     });
   }
 
-  async update(id: string, input: ShopUncheckedUpdateInput) {
+  async update(id: string, input: ShopUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Shop>(url, {
       body: JSON.stringify(input),

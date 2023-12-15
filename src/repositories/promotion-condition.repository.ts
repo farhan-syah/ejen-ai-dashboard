@@ -1,8 +1,8 @@
 import type {
+  PromotionConditionCreate,
   PromotionConditionDeleteMany,
   PromotionConditionSearch,
-  PromotionConditionUncheckedCreateInput,
-  PromotionConditionUncheckedUpdateInput,
+  PromotionConditionUpdate,
   PromotionConditionUpdateMany
 } from "$api/routes/promotion-condition/promotion-condition.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _PromotionConditionRepository {
   path = PUBLIC_API_BASE_PATH + "/promotion-condition";
 
-  async create(input: PromotionConditionUncheckedCreateInput) {
+  async create(input: PromotionConditionCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.PromotionCondition>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _PromotionConditionRepository {
     });
   }
 
-  async update(id: string, input: PromotionConditionUncheckedUpdateInput) {
+  async update(id: string, input: PromotionConditionUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.PromotionCondition>(url, {
       body: JSON.stringify(input),

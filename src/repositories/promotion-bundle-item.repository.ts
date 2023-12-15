@@ -1,8 +1,8 @@
 import type {
+  PromotionBundleItemCreate,
   PromotionBundleItemDeleteMany,
   PromotionBundleItemSearch,
-  PromotionBundleItemUncheckedCreateInput,
-  PromotionBundleItemUncheckedUpdateInput,
+  PromotionBundleItemUpdate,
   PromotionBundleItemUpdateMany
 } from "$api/routes/promotion-bundle-item/promotion-bundle-item.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _PromotionBundleItemRepository {
   path = PUBLIC_API_BASE_PATH + "/promotion-bundle-item";
 
-  async create(input: PromotionBundleItemUncheckedCreateInput) {
+  async create(input: PromotionBundleItemCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.PromotionBundleItem>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _PromotionBundleItemRepository {
     });
   }
 
-  async update(id: string, input: PromotionBundleItemUncheckedUpdateInput) {
+  async update(id: string, input: PromotionBundleItemUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.PromotionBundleItem>(url, {
       body: JSON.stringify(input),

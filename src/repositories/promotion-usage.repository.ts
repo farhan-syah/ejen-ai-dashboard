@@ -1,8 +1,8 @@
 import type {
+  PromotionUsageCreate,
   PromotionUsageDeleteMany,
   PromotionUsageSearch,
-  PromotionUsageUncheckedCreateInput,
-  PromotionUsageUncheckedUpdateInput,
+  PromotionUsageUpdate,
   PromotionUsageUpdateMany
 } from "$api/routes/promotion-usage/promotion-usage.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _PromotionUsageRepository {
   path = PUBLIC_API_BASE_PATH + "/promotion-usage";
 
-  async create(input: PromotionUsageUncheckedCreateInput) {
+  async create(input: PromotionUsageCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.PromotionUsage>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _PromotionUsageRepository {
     });
   }
 
-  async update(id: string, input: PromotionUsageUncheckedUpdateInput) {
+  async update(id: string, input: PromotionUsageUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.PromotionUsage>(url, {
       body: JSON.stringify(input),

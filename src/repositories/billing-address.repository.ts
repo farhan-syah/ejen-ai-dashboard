@@ -1,8 +1,8 @@
 import type {
+  BillingAddressCreate,
   BillingAddressDeleteMany,
   BillingAddressSearch,
-  BillingAddressUncheckedCreateInput,
-  BillingAddressUncheckedUpdateInput,
+  BillingAddressUpdate,
   BillingAddressUpdateMany
 } from "$api/routes/billing-address/billing-address.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _BillingAddressRepository {
   path = PUBLIC_API_BASE_PATH + "/billing-address";
 
-  async create(input: BillingAddressUncheckedCreateInput) {
+  async create(input: BillingAddressCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.BillingAddress>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _BillingAddressRepository {
     });
   }
 
-  async update(id: string, input: BillingAddressUncheckedUpdateInput) {
+  async update(id: string, input: BillingAddressUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.BillingAddress>(url, {
       body: JSON.stringify(input),

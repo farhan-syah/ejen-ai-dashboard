@@ -1,8 +1,8 @@
 import type {
+  TaxConfigurationCreate,
   TaxConfigurationDeleteMany,
   TaxConfigurationSearch,
-  TaxConfigurationUncheckedCreateInput,
-  TaxConfigurationUncheckedUpdateInput,
+  TaxConfigurationUpdate,
   TaxConfigurationUpdateMany
 } from "$api/routes/tax-configuration/tax-configuration.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _TaxConfigurationRepository {
   path = PUBLIC_API_BASE_PATH + "/tax-configuration";
 
-  async create(input: TaxConfigurationUncheckedCreateInput) {
+  async create(input: TaxConfigurationCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.TaxConfiguration>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _TaxConfigurationRepository {
     });
   }
 
-  async update(id: string, input: TaxConfigurationUncheckedUpdateInput) {
+  async update(id: string, input: TaxConfigurationUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.TaxConfiguration>(url, {
       body: JSON.stringify(input),

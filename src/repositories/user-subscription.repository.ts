@@ -1,8 +1,8 @@
 import type {
+  UserSubscriptionCreate,
   UserSubscriptionDeleteMany,
   UserSubscriptionSearch,
-  UserSubscriptionUncheckedCreateInput,
-  UserSubscriptionUncheckedUpdateInput,
+  UserSubscriptionUpdate,
   UserSubscriptionUpdateMany
 } from "$api/routes/user-subscription/user-subscription.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _UserSubscriptionRepository {
   path = PUBLIC_API_BASE_PATH + "/user-subscription";
 
-  async create(input: UserSubscriptionUncheckedCreateInput) {
+  async create(input: UserSubscriptionCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.UserSubscription>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _UserSubscriptionRepository {
     });
   }
 
-  async update(id: string, input: UserSubscriptionUncheckedUpdateInput) {
+  async update(id: string, input: UserSubscriptionUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.UserSubscription>(url, {
       body: JSON.stringify(input),

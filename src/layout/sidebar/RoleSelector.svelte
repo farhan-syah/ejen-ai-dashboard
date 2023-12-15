@@ -3,7 +3,8 @@
 	import { AppState, UserState } from "$applications";
 	import { FormControl } from "$lib/components";
 	import SelectField from "$lib/components/form/select-field/SelectField.svelte";
-	import { RoleRepository } from "$repositories";
+	import { RoleRepository, UserSettingRepository } from "$repositories";
+	import { AuthService } from "$services";
 	import type { FieldOption } from "$types";
 	import { atom, type WritableAtom } from "nanostores";
 	import { onMount } from "svelte";
@@ -11,6 +12,7 @@
 	const roleOptions: WritableAtom<FieldOption<Prisma.Role>[]> = atom([]);
 	const roleController = new FormControl<Prisma.Role>();
 	const isSidebarOpen = AppState.isSidebarOpen;
+	const userSetting = UserState.setting;
 
 	onMount(() => {
 		fetchRoles();
@@ -28,8 +30,25 @@
 		});
 
 		roleOptions.set(options);
-		roleController.writableValue.set(options[0].value);
+
+		const defaultUserRole = $userSetting?.defaultUserRole;
+		const initialRole =
+			options.find((option) => {
+				return option.value.id === defaultUserRole;
+			})?.value ?? options.at(0)?.value;
+
+		roleController.writableValue.set(initialRole);
 	}
+
+	roleController.writableValue.listen(async (value) => {
+		const currentUser = UserState.user.get();
+
+		if (value && currentUser && $userSetting?.defaultUserRole != value.id) {
+			await UserSettingRepository.update(currentUser.id, { data: { defaultUserRole: value.id } });
+		}
+
+		AuthService.refreshUser();
+	});
 </script>
 
 {#if $isSidebarOpen}

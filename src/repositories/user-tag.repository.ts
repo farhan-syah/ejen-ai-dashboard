@@ -1,8 +1,8 @@
 import type {
+  UserTagCreate,
   UserTagDeleteMany,
   UserTagSearch,
-  UserTagUncheckedCreateInput,
-  UserTagUncheckedUpdateInput,
+  UserTagUpdate,
   UserTagUpdateMany
 } from "$api/routes/user-tag/user-tag.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _UserTagRepository {
   path = PUBLIC_API_BASE_PATH + "/user-tag";
 
-  async create(input: UserTagUncheckedCreateInput) {
+  async create(input: UserTagCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.UserTag>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _UserTagRepository {
     });
   }
 
-  async update(id: string, input: UserTagUncheckedUpdateInput) {
+  async update(id: string, input: UserTagUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.UserTag>(url, {
       body: JSON.stringify(input),

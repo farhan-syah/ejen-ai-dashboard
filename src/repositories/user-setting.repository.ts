@@ -1,8 +1,8 @@
 import type {
+  UserSettingCreate,
   UserSettingDeleteMany,
   UserSettingSearch,
-  UserSettingUncheckedCreateInput,
-  UserSettingUncheckedUpdateInput,
+  UserSettingUpdate,
   UserSettingUpdateMany
 } from "$api/routes/user-setting/user-setting.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _UserSettingRepository {
   path = PUBLIC_API_BASE_PATH + "/user-setting";
 
-  async create(input: UserSettingUncheckedCreateInput) {
+  async create(input: UserSettingCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.UserSetting>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _UserSettingRepository {
     });
   }
 
-  async update(id: string, input: UserSettingUncheckedUpdateInput) {
+  async update(id: string, input: UserSettingUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.UserSetting>(url, {
       body: JSON.stringify(input),

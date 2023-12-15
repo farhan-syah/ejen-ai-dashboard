@@ -1,8 +1,8 @@
 import type {
+  SupplierCreate,
   SupplierDeleteMany,
   SupplierSearch,
-  SupplierUncheckedCreateInput,
-  SupplierUncheckedUpdateInput,
+  SupplierUpdate,
   SupplierUpdateMany
 } from "$api/routes/supplier/supplier.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _SupplierRepository {
   path = PUBLIC_API_BASE_PATH + "/supplier";
 
-  async create(input: SupplierUncheckedCreateInput) {
+  async create(input: SupplierCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Supplier>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _SupplierRepository {
     });
   }
 
-  async update(id: string, input: SupplierUncheckedUpdateInput) {
+  async update(id: string, input: SupplierUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Supplier>(url, {
       body: JSON.stringify(input),

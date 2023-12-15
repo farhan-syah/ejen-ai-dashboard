@@ -1,8 +1,8 @@
 import type {
+  OrganizationTagCreate,
   OrganizationTagDeleteMany,
   OrganizationTagSearch,
-  OrganizationTagUncheckedCreateInput,
-  OrganizationTagUncheckedUpdateInput,
+  OrganizationTagUpdate,
   OrganizationTagUpdateMany
 } from "$api/routes/organization-tag/organization-tag.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _OrganizationTagRepository {
   path = PUBLIC_API_BASE_PATH + "/organization-tag";
 
-  async create(input: OrganizationTagUncheckedCreateInput) {
+  async create(input: OrganizationTagCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.OrganizationTag>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _OrganizationTagRepository {
     });
   }
 
-  async update(id: string, input: OrganizationTagUncheckedUpdateInput) {
+  async update(id: string, input: OrganizationTagUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.OrganizationTag>(url, {
       body: JSON.stringify(input),

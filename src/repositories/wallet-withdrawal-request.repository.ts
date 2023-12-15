@@ -1,8 +1,8 @@
 import type {
+  WalletWithdrawalRequestCreate,
   WalletWithdrawalRequestDeleteMany,
   WalletWithdrawalRequestSearch,
-  WalletWithdrawalRequestUncheckedCreateInput,
-  WalletWithdrawalRequestUncheckedUpdateInput,
+  WalletWithdrawalRequestUpdate,
   WalletWithdrawalRequestUpdateMany
 } from "$api/routes/wallet-withdrawal-request/wallet-withdrawal-request.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _WalletWithdrawalRequestRepository {
   path = PUBLIC_API_BASE_PATH + "/wallet-withdrawal-request";
 
-  async create(input: WalletWithdrawalRequestUncheckedCreateInput) {
+  async create(input: WalletWithdrawalRequestCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.WalletWithdrawalRequest>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _WalletWithdrawalRequestRepository {
     });
   }
 
-  async update(id: string, input: WalletWithdrawalRequestUncheckedUpdateInput) {
+  async update(id: string, input: WalletWithdrawalRequestUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.WalletWithdrawalRequest>(url, {
       body: JSON.stringify(input),

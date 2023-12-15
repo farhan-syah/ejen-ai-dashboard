@@ -1,8 +1,8 @@
 import type {
+  SystemSettingsCreate,
   SystemSettingsDeleteMany,
   SystemSettingsSearch,
-  SystemSettingsUncheckedCreateInput,
-  SystemSettingsUncheckedUpdateInput,
+  SystemSettingsUpdate,
   SystemSettingsUpdateMany
 } from "$api/routes/system-settings/system-settings.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _SystemSettingsRepository {
   path = PUBLIC_API_BASE_PATH + "/system-settings";
 
-  async create(input: SystemSettingsUncheckedCreateInput) {
+  async create(input: SystemSettingsCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.SystemSettings>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _SystemSettingsRepository {
     });
   }
 
-  async update(id: string, input: SystemSettingsUncheckedUpdateInput) {
+  async update(id: string, input: SystemSettingsUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.SystemSettings>(url, {
       body: JSON.stringify(input),

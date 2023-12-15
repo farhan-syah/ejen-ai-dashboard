@@ -1,8 +1,8 @@
 import type {
+  WarehouseCreate,
   WarehouseDeleteMany,
   WarehouseSearch,
-  WarehouseUncheckedCreateInput,
-  WarehouseUncheckedUpdateInput,
+  WarehouseUpdate,
   WarehouseUpdateMany
 } from "$api/routes/warehouse/warehouse.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _WarehouseRepository {
   path = PUBLIC_API_BASE_PATH + "/warehouse";
 
-  async create(input: WarehouseUncheckedCreateInput) {
+  async create(input: WarehouseCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Warehouse>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _WarehouseRepository {
     });
   }
 
-  async update(id: string, input: WarehouseUncheckedUpdateInput) {
+  async update(id: string, input: WarehouseUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Warehouse>(url, {
       body: JSON.stringify(input),

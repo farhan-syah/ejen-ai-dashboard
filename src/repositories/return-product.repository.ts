@@ -1,8 +1,8 @@
 import type {
+  ReturnProductCreate,
   ReturnProductDeleteMany,
   ReturnProductSearch,
-  ReturnProductUncheckedCreateInput,
-  ReturnProductUncheckedUpdateInput,
+  ReturnProductUpdate,
   ReturnProductUpdateMany
 } from "$api/routes/return-product/return-product.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ReturnProductRepository {
   path = PUBLIC_API_BASE_PATH + "/return-product";
 
-  async create(input: ReturnProductUncheckedCreateInput) {
+  async create(input: ReturnProductCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.ReturnProduct>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ReturnProductRepository {
     });
   }
 
-  async update(id: string, input: ReturnProductUncheckedUpdateInput) {
+  async update(id: string, input: ReturnProductUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.ReturnProduct>(url, {
       body: JSON.stringify(input),

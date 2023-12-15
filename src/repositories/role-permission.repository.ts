@@ -1,8 +1,8 @@
 import type {
+  RolePermissionCreate,
   RolePermissionDeleteMany,
   RolePermissionSearch,
-  RolePermissionUncheckedCreateInput,
-  RolePermissionUncheckedUpdateInput,
+  RolePermissionUpdate,
   RolePermissionUpdateMany
 } from "$api/routes/role-permission/role-permission.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _RolePermissionRepository {
   path = PUBLIC_API_BASE_PATH + "/role-permission";
 
-  async create(input: RolePermissionUncheckedCreateInput) {
+  async create(input: RolePermissionCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.RolePermission>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _RolePermissionRepository {
     });
   }
 
-  async update(id: string, input: RolePermissionUncheckedUpdateInput) {
+  async update(id: string, input: RolePermissionUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.RolePermission>(url, {
       body: JSON.stringify(input),

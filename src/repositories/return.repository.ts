@@ -1,8 +1,8 @@
 import type {
+  ReturnCreate,
   ReturnDeleteMany,
   ReturnSearch,
-  ReturnUncheckedCreateInput,
-  ReturnUncheckedUpdateInput,
+  ReturnUpdate,
   ReturnUpdateMany
 } from "$api/routes/return/return.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ReturnRepository {
   path = PUBLIC_API_BASE_PATH + "/return";
 
-  async create(input: ReturnUncheckedCreateInput) {
+  async create(input: ReturnCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Return>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ReturnRepository {
     });
   }
 
-  async update(id: string, input: ReturnUncheckedUpdateInput) {
+  async update(id: string, input: ReturnUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Return>(url, {
       body: JSON.stringify(input),

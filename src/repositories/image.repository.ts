@@ -1,8 +1,8 @@
 import type {
+  ImageCreate,
   ImageDeleteMany,
   ImageSearch,
-  ImageUncheckedCreateInput,
-  ImageUncheckedUpdateInput,
+  ImageUpdate,
   ImageUpdateMany
 } from "$api/routes/image/image.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ImageRepository {
   path = PUBLIC_API_BASE_PATH + "/image";
 
-  async create(input: ImageUncheckedCreateInput) {
+  async create(input: ImageCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Image>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ImageRepository {
     });
   }
 
-  async update(id: string, input: ImageUncheckedUpdateInput) {
+  async update(id: string, input: ImageUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Image>(url, {
       body: JSON.stringify(input),

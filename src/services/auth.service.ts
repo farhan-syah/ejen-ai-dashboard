@@ -2,7 +2,7 @@ import type { LoginInput } from "$api/routes/auth/auth.schema";
 import { browser } from "$app/environment";
 import { UserState } from "$applications";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
-import { UserRepository } from "$repositories";
+import { UserRepository, UserSettingRepository } from "$repositories";
 import type { DecodedToken, ReceivedToken } from "$types";
 import { jwtDecode } from "jwt-decode";
 import { HttpService } from "./http.service";
@@ -58,10 +58,10 @@ class _AuthService {
 		}
 	}
 
-	async getPermissions(userId: string) {
+	async getPermissions(roleId: string) {
 		const url = this.path + "/permissions";
 		const permissions = await HttpService.post<string[]>(url, {
-			body: JSON.stringify({ id: userId }),
+			body: JSON.stringify({ roleId: roleId }),
 			auth: "accessToken"
 		});
 		return permissions;
@@ -88,12 +88,26 @@ class _AuthService {
 		return new Date() < new Date((token.exp - 60) * 1000);
 	}
 
+	refreshUser() {
+		if (browser) {
+			const token = UserState.accessToken.get();
+			// const currentRoleId = UserState.setting.c
+			if (token) {
+				this.fetchUserFromLocalAccessToken(token);
+			}
+		}
+	}
+
 	private async fetchUserFromLocalAccessToken(token: string) {
 		const { validExpiry, decodedToken } = this.validateAccessToken(token);
 		if (validExpiry) {
 			const user = await UserRepository.get(decodedToken.sub);
-			// const permissions = await this.getPermissions(user.id);
-			// UserState.permissions.set(permissions);
+			const setting = await UserSettingRepository.get(decodedToken.sub);
+			if (setting.defaultUserRole) {
+				const permissions = await this.getPermissions(setting.defaultUserRole);
+				UserState.permissions.set(permissions);
+			}
+			UserState.setting.set(setting);
 			UserState.user.set(user);
 		} else {
 			this.refreshToken();

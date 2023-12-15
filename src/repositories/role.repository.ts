@@ -1,8 +1,8 @@
 import type {
+  RoleCreate,
   RoleDeleteMany,
   RoleSearch,
-  RoleUncheckedCreateInput,
-  RoleUncheckedUpdateInput,
+  RoleUpdate,
   RoleUpdateMany
 } from "$api/routes/role/role.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _RoleRepository {
   path = PUBLIC_API_BASE_PATH + "/role";
 
-  async create(input: RoleUncheckedCreateInput) {
+  async create(input: RoleCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Role>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _RoleRepository {
     });
   }
 
-  async update(id: string, input: RoleUncheckedUpdateInput) {
+  async update(id: string, input: RoleUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Role>(url, {
       body: JSON.stringify(input),

@@ -1,8 +1,8 @@
 import type {
+  TaskReviewCreate,
   TaskReviewDeleteMany,
   TaskReviewSearch,
-  TaskReviewUncheckedCreateInput,
-  TaskReviewUncheckedUpdateInput,
+  TaskReviewUpdate,
   TaskReviewUpdateMany
 } from "$api/routes/task-review/task-review.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _TaskReviewRepository {
   path = PUBLIC_API_BASE_PATH + "/task-review";
 
-  async create(input: TaskReviewUncheckedCreateInput) {
+  async create(input: TaskReviewCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.TaskReview>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _TaskReviewRepository {
     });
   }
 
-  async update(id: string, input: TaskReviewUncheckedUpdateInput) {
+  async update(id: string, input: TaskReviewUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.TaskReview>(url, {
       body: JSON.stringify(input),

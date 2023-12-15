@@ -1,8 +1,8 @@
 import type {
+  TieredPricingCreate,
   TieredPricingDeleteMany,
   TieredPricingSearch,
-  TieredPricingUncheckedCreateInput,
-  TieredPricingUncheckedUpdateInput,
+  TieredPricingUpdate,
   TieredPricingUpdateMany
 } from "$api/routes/tiered-pricing/tiered-pricing.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _TieredPricingRepository {
   path = PUBLIC_API_BASE_PATH + "/tiered-pricing";
 
-  async create(input: TieredPricingUncheckedCreateInput) {
+  async create(input: TieredPricingCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.TieredPricing>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _TieredPricingRepository {
     });
   }
 
-  async update(id: string, input: TieredPricingUncheckedUpdateInput) {
+  async update(id: string, input: TieredPricingUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.TieredPricing>(url, {
       body: JSON.stringify(input),

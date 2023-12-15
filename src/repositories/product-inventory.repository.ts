@@ -1,8 +1,8 @@
 import type {
+  ProductInventoryCreate,
   ProductInventoryDeleteMany,
   ProductInventorySearch,
-  ProductInventoryUncheckedCreateInput,
-  ProductInventoryUncheckedUpdateInput,
+  ProductInventoryUpdate,
   ProductInventoryUpdateMany
 } from "$api/routes/product-inventory/product-inventory.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ProductInventoryRepository {
   path = PUBLIC_API_BASE_PATH + "/product-inventory";
 
-  async create(input: ProductInventoryUncheckedCreateInput) {
+  async create(input: ProductInventoryCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.ProductInventory>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ProductInventoryRepository {
     });
   }
 
-  async update(id: string, input: ProductInventoryUncheckedUpdateInput) {
+  async update(id: string, input: ProductInventoryUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.ProductInventory>(url, {
       body: JSON.stringify(input),

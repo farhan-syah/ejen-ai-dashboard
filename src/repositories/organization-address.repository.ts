@@ -1,8 +1,8 @@
 import type {
+  OrganizationAddressCreate,
   OrganizationAddressDeleteMany,
   OrganizationAddressSearch,
-  OrganizationAddressUncheckedCreateInput,
-  OrganizationAddressUncheckedUpdateInput,
+  OrganizationAddressUpdate,
   OrganizationAddressUpdateMany
 } from "$api/routes/organization-address/organization-address.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _OrganizationAddressRepository {
   path = PUBLIC_API_BASE_PATH + "/organization-address";
 
-  async create(input: OrganizationAddressUncheckedCreateInput) {
+  async create(input: OrganizationAddressCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.OrganizationAddress>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _OrganizationAddressRepository {
     });
   }
 
-  async update(id: string, input: OrganizationAddressUncheckedUpdateInput) {
+  async update(id: string, input: OrganizationAddressUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.OrganizationAddress>(url, {
       body: JSON.stringify(input),

@@ -1,8 +1,8 @@
 import type {
+  ShippingAddressCreate,
   ShippingAddressDeleteMany,
   ShippingAddressSearch,
-  ShippingAddressUncheckedCreateInput,
-  ShippingAddressUncheckedUpdateInput,
+  ShippingAddressUpdate,
   ShippingAddressUpdateMany
 } from "$api/routes/shipping-address/shipping-address.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ShippingAddressRepository {
   path = PUBLIC_API_BASE_PATH + "/shipping-address";
 
-  async create(input: ShippingAddressUncheckedCreateInput) {
+  async create(input: ShippingAddressCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.ShippingAddress>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ShippingAddressRepository {
     });
   }
 
-  async update(id: string, input: ShippingAddressUncheckedUpdateInput) {
+  async update(id: string, input: ShippingAddressUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.ShippingAddress>(url, {
       body: JSON.stringify(input),

@@ -1,8 +1,8 @@
 import type {
+  PermissionCreate,
   PermissionDeleteMany,
   PermissionSearch,
-  PermissionUncheckedCreateInput,
-  PermissionUncheckedUpdateInput,
+  PermissionUpdate,
   PermissionUpdateMany
 } from "$api/routes/permission/permission.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _PermissionRepository {
   path = PUBLIC_API_BASE_PATH + "/permission";
 
-  async create(input: PermissionUncheckedCreateInput) {
+  async create(input: PermissionCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Permission>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _PermissionRepository {
     });
   }
 
-  async update(id: string, input: PermissionUncheckedUpdateInput) {
+  async update(id: string, input: PermissionUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Permission>(url, {
       body: JSON.stringify(input),

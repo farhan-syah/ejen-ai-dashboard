@@ -1,8 +1,8 @@
 import type {
+  DepartmentCreate,
   DepartmentDeleteMany,
   DepartmentSearch,
-  DepartmentUncheckedCreateInput,
-  DepartmentUncheckedUpdateInput,
+  DepartmentUpdate,
   DepartmentUpdateMany
 } from "$api/routes/department/department.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _DepartmentRepository {
   path = PUBLIC_API_BASE_PATH + "/department";
 
-  async create(input: DepartmentUncheckedCreateInput) {
+  async create(input: DepartmentCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Department>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _DepartmentRepository {
     });
   }
 
-  async update(id: string, input: DepartmentUncheckedUpdateInput) {
+  async update(id: string, input: DepartmentUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Department>(url, {
       body: JSON.stringify(input),

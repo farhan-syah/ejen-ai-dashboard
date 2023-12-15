@@ -1,8 +1,8 @@
 import type {
+  CartCreate,
   CartDeleteMany,
   CartSearch,
-  CartUncheckedCreateInput,
-  CartUncheckedUpdateInput,
+  CartUpdate,
   CartUpdateMany
 } from "$api/routes/cart/cart.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _CartRepository {
   path = PUBLIC_API_BASE_PATH + "/cart";
 
-  async create(input: CartUncheckedCreateInput) {
+  async create(input: CartCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Cart>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _CartRepository {
     });
   }
 
-  async update(id: string, input: CartUncheckedUpdateInput) {
+  async update(id: string, input: CartUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Cart>(url, {
       body: JSON.stringify(input),

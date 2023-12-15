@@ -1,8 +1,8 @@
 import type {
+  TaskCreate,
   TaskDeleteMany,
   TaskSearch,
-  TaskUncheckedCreateInput,
-  TaskUncheckedUpdateInput,
+  TaskUpdate,
   TaskUpdateMany
 } from "$api/routes/task/task.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _TaskRepository {
   path = PUBLIC_API_BASE_PATH + "/task";
 
-  async create(input: TaskUncheckedCreateInput) {
+  async create(input: TaskCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Task>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _TaskRepository {
     });
   }
 
-  async update(id: string, input: TaskUncheckedUpdateInput) {
+  async update(id: string, input: TaskUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Task>(url, {
       body: JSON.stringify(input),

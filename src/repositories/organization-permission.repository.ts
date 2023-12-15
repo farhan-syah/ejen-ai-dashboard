@@ -1,8 +1,8 @@
 import type {
+  OrganizationPermissionCreate,
   OrganizationPermissionDeleteMany,
   OrganizationPermissionSearch,
-  OrganizationPermissionUncheckedCreateInput,
-  OrganizationPermissionUncheckedUpdateInput,
+  OrganizationPermissionUpdate,
   OrganizationPermissionUpdateMany
 } from "$api/routes/organization-permission/organization-permission.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _OrganizationPermissionRepository {
   path = PUBLIC_API_BASE_PATH + "/organization-permission";
 
-  async create(input: OrganizationPermissionUncheckedCreateInput) {
+  async create(input: OrganizationPermissionCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.OrganizationPermission>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _OrganizationPermissionRepository {
     });
   }
 
-  async update(id: string, input: OrganizationPermissionUncheckedUpdateInput) {
+  async update(id: string, input: OrganizationPermissionUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.OrganizationPermission>(url, {
       body: JSON.stringify(input),

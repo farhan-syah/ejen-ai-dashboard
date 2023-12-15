@@ -1,8 +1,8 @@
 import type {
+  AddressCreate,
   AddressDeleteMany,
   AddressSearch,
-  AddressUncheckedCreateInput,
-  AddressUncheckedUpdateInput,
+  AddressUpdate,
   AddressUpdateMany
 } from "$api/routes/address/address.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _AddressRepository {
   path = PUBLIC_API_BASE_PATH + "/address";
 
-  async create(input: AddressUncheckedCreateInput) {
+  async create(input: AddressCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Address>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _AddressRepository {
     });
   }
 
-  async update(id: string, input: AddressUncheckedUpdateInput) {
+  async update(id: string, input: AddressUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Address>(url, {
       body: JSON.stringify(input),

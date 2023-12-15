@@ -1,8 +1,8 @@
 import type {
+  ProductTaxCreate,
   ProductTaxDeleteMany,
   ProductTaxSearch,
-  ProductTaxUncheckedCreateInput,
-  ProductTaxUncheckedUpdateInput,
+  ProductTaxUpdate,
   ProductTaxUpdateMany
 } from "$api/routes/product-tax/product-tax.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ProductTaxRepository {
   path = PUBLIC_API_BASE_PATH + "/product-tax";
 
-  async create(input: ProductTaxUncheckedCreateInput) {
+  async create(input: ProductTaxCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.ProductTax>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ProductTaxRepository {
     });
   }
 
-  async update(id: string, input: ProductTaxUncheckedUpdateInput) {
+  async update(id: string, input: ProductTaxUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.ProductTax>(url, {
       body: JSON.stringify(input),

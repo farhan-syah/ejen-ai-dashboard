@@ -1,14 +1,14 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const overrideFiles = false;
+const overrideFiles = true;
 
 const generateRepositoryFile = (modelName: string, kebabCaseName: string) => {
 	const template = `import type {
+  ${modelName}Create,
   ${modelName}DeleteMany,
   ${modelName}Search,
-  ${modelName}UncheckedCreateInput,
-  ${modelName}UncheckedUpdateInput,
+  ${modelName}Update,
   ${modelName}UpdateMany
 } from "$api/routes/${kebabCaseName}/${kebabCaseName}.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -18,7 +18,7 @@ import { HttpService } from "$services/http.service";
 class _${modelName}Repository {
   path = PUBLIC_API_BASE_PATH + "/${kebabCaseName}";
 
-  async create(input: ${modelName}UncheckedCreateInput) {
+  async create(input: ${modelName}Create) {
     const url = this.path;
     return await HttpService.post<Prisma.${modelName}>(url, {
       body: JSON.stringify(input),
@@ -26,7 +26,7 @@ class _${modelName}Repository {
     });
   }
 
-  async update(id: string, input: ${modelName}UncheckedUpdateInput) {
+  async update(id: string, input: ${modelName}Update) {
     const url = \`\${this.path}/\${id}\`;
     return await HttpService.patch<Prisma.${modelName}>(url, {
       body: JSON.stringify(input),

@@ -1,8 +1,8 @@
 import type {
+  OrderReviewCreate,
   OrderReviewDeleteMany,
   OrderReviewSearch,
-  OrderReviewUncheckedCreateInput,
-  OrderReviewUncheckedUpdateInput,
+  OrderReviewUpdate,
   OrderReviewUpdateMany
 } from "$api/routes/order-review/order-review.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _OrderReviewRepository {
   path = PUBLIC_API_BASE_PATH + "/order-review";
 
-  async create(input: OrderReviewUncheckedCreateInput) {
+  async create(input: OrderReviewCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.OrderReview>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _OrderReviewRepository {
     });
   }
 
-  async update(id: string, input: OrderReviewUncheckedUpdateInput) {
+  async update(id: string, input: OrderReviewUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.OrderReview>(url, {
       body: JSON.stringify(input),

@@ -2,7 +2,7 @@ import type { ErrorResponse } from "$api/types/response";
 import { UserState } from "$applications";
 
 class _HttpService {
-	constructor(private userState: UserState) {}
+	constructor(private userState: typeof UserState) {}
 
 	async get<T = any>(
 		url: RequestInfo,

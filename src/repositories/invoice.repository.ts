@@ -1,8 +1,8 @@
 import type {
+  InvoiceCreate,
   InvoiceDeleteMany,
   InvoiceSearch,
-  InvoiceUncheckedCreateInput,
-  InvoiceUncheckedUpdateInput,
+  InvoiceUpdate,
   InvoiceUpdateMany
 } from "$api/routes/invoice/invoice.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _InvoiceRepository {
   path = PUBLIC_API_BASE_PATH + "/invoice";
 
-  async create(input: InvoiceUncheckedCreateInput) {
+  async create(input: InvoiceCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Invoice>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _InvoiceRepository {
     });
   }
 
-  async update(id: string, input: InvoiceUncheckedUpdateInput) {
+  async update(id: string, input: InvoiceUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Invoice>(url, {
       body: JSON.stringify(input),

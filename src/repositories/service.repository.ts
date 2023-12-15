@@ -1,8 +1,8 @@
 import type {
+  ServiceCreate,
   ServiceDeleteMany,
   ServiceSearch,
-  ServiceUncheckedCreateInput,
-  ServiceUncheckedUpdateInput,
+  ServiceUpdate,
   ServiceUpdateMany
 } from "$api/routes/service/service.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ServiceRepository {
   path = PUBLIC_API_BASE_PATH + "/service";
 
-  async create(input: ServiceUncheckedCreateInput) {
+  async create(input: ServiceCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Service>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ServiceRepository {
     });
   }
 
-  async update(id: string, input: ServiceUncheckedUpdateInput) {
+  async update(id: string, input: ServiceUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Service>(url, {
       body: JSON.stringify(input),

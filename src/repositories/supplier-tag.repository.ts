@@ -1,8 +1,8 @@
 import type {
+  SupplierTagCreate,
   SupplierTagDeleteMany,
   SupplierTagSearch,
-  SupplierTagUncheckedCreateInput,
-  SupplierTagUncheckedUpdateInput,
+  SupplierTagUpdate,
   SupplierTagUpdateMany
 } from "$api/routes/supplier-tag/supplier-tag.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _SupplierTagRepository {
   path = PUBLIC_API_BASE_PATH + "/supplier-tag";
 
-  async create(input: SupplierTagUncheckedCreateInput) {
+  async create(input: SupplierTagCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.SupplierTag>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _SupplierTagRepository {
     });
   }
 
-  async update(id: string, input: SupplierTagUncheckedUpdateInput) {
+  async update(id: string, input: SupplierTagUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.SupplierTag>(url, {
       body: JSON.stringify(input),

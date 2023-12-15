@@ -1,8 +1,8 @@
 import type {
+  InventoryMovementCreate,
   InventoryMovementDeleteMany,
   InventoryMovementSearch,
-  InventoryMovementUncheckedCreateInput,
-  InventoryMovementUncheckedUpdateInput,
+  InventoryMovementUpdate,
   InventoryMovementUpdateMany
 } from "$api/routes/inventory-movement/inventory-movement.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _InventoryMovementRepository {
   path = PUBLIC_API_BASE_PATH + "/inventory-movement";
 
-  async create(input: InventoryMovementUncheckedCreateInput) {
+  async create(input: InventoryMovementCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.InventoryMovement>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _InventoryMovementRepository {
     });
   }
 
-  async update(id: string, input: InventoryMovementUncheckedUpdateInput) {
+  async update(id: string, input: InventoryMovementUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.InventoryMovement>(url, {
       body: JSON.stringify(input),

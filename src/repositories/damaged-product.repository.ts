@@ -1,8 +1,8 @@
 import type {
+  DamagedProductCreate,
   DamagedProductDeleteMany,
   DamagedProductSearch,
-  DamagedProductUncheckedCreateInput,
-  DamagedProductUncheckedUpdateInput,
+  DamagedProductUpdate,
   DamagedProductUpdateMany
 } from "$api/routes/damaged-product/damaged-product.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _DamagedProductRepository {
   path = PUBLIC_API_BASE_PATH + "/damaged-product";
 
-  async create(input: DamagedProductUncheckedCreateInput) {
+  async create(input: DamagedProductCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.DamagedProduct>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _DamagedProductRepository {
     });
   }
 
-  async update(id: string, input: DamagedProductUncheckedUpdateInput) {
+  async update(id: string, input: DamagedProductUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.DamagedProduct>(url, {
       body: JSON.stringify(input),

@@ -1,8 +1,8 @@
 import type {
+  SessionCreate,
   SessionDeleteMany,
   SessionSearch,
-  SessionUncheckedCreateInput,
-  SessionUncheckedUpdateInput,
+  SessionUpdate,
   SessionUpdateMany
 } from "$api/routes/session/session.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _SessionRepository {
   path = PUBLIC_API_BASE_PATH + "/session";
 
-  async create(input: SessionUncheckedCreateInput) {
+  async create(input: SessionCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Session>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _SessionRepository {
     });
   }
 
-  async update(id: string, input: SessionUncheckedUpdateInput) {
+  async update(id: string, input: SessionUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Session>(url, {
       body: JSON.stringify(input),

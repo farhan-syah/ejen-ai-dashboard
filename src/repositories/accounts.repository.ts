@@ -1,8 +1,8 @@
 import type {
+  AccountsCreate,
   AccountsDeleteMany,
   AccountsSearch,
-  AccountsUncheckedCreateInput,
-  AccountsUncheckedUpdateInput,
+  AccountsUpdate,
   AccountsUpdateMany
 } from "$api/routes/accounts/accounts.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _AccountsRepository {
   path = PUBLIC_API_BASE_PATH + "/accounts";
 
-  async create(input: AccountsUncheckedCreateInput) {
+  async create(input: AccountsCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Accounts>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _AccountsRepository {
     });
   }
 
-  async update(id: string, input: AccountsUncheckedUpdateInput) {
+  async update(id: string, input: AccountsUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Accounts>(url, {
       body: JSON.stringify(input),

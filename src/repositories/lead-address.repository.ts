@@ -1,8 +1,8 @@
 import type {
+  LeadAddressCreate,
   LeadAddressDeleteMany,
   LeadAddressSearch,
-  LeadAddressUncheckedCreateInput,
-  LeadAddressUncheckedUpdateInput,
+  LeadAddressUpdate,
   LeadAddressUpdateMany
 } from "$api/routes/lead-address/lead-address.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _LeadAddressRepository {
   path = PUBLIC_API_BASE_PATH + "/lead-address";
 
-  async create(input: LeadAddressUncheckedCreateInput) {
+  async create(input: LeadAddressCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.LeadAddress>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _LeadAddressRepository {
     });
   }
 
-  async update(id: string, input: LeadAddressUncheckedUpdateInput) {
+  async update(id: string, input: LeadAddressUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.LeadAddress>(url, {
       body: JSON.stringify(input),

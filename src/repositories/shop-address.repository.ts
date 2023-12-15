@@ -1,8 +1,8 @@
 import type {
+  ShopAddressCreate,
   ShopAddressDeleteMany,
   ShopAddressSearch,
-  ShopAddressUncheckedCreateInput,
-  ShopAddressUncheckedUpdateInput,
+  ShopAddressUpdate,
   ShopAddressUpdateMany
 } from "$api/routes/shop-address/shop-address.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _ShopAddressRepository {
   path = PUBLIC_API_BASE_PATH + "/shop-address";
 
-  async create(input: ShopAddressUncheckedCreateInput) {
+  async create(input: ShopAddressCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.ShopAddress>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _ShopAddressRepository {
     });
   }
 
-  async update(id: string, input: ShopAddressUncheckedUpdateInput) {
+  async update(id: string, input: ShopAddressUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.ShopAddress>(url, {
       body: JSON.stringify(input),

@@ -1,8 +1,8 @@
 import type {
+  PurchaseBillCreate,
   PurchaseBillDeleteMany,
   PurchaseBillSearch,
-  PurchaseBillUncheckedCreateInput,
-  PurchaseBillUncheckedUpdateInput,
+  PurchaseBillUpdate,
   PurchaseBillUpdateMany
 } from "$api/routes/purchase-bill/purchase-bill.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _PurchaseBillRepository {
   path = PUBLIC_API_BASE_PATH + "/purchase-bill";
 
-  async create(input: PurchaseBillUncheckedCreateInput) {
+  async create(input: PurchaseBillCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.PurchaseBill>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _PurchaseBillRepository {
     });
   }
 
-  async update(id: string, input: PurchaseBillUncheckedUpdateInput) {
+  async update(id: string, input: PurchaseBillUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.PurchaseBill>(url, {
       body: JSON.stringify(input),

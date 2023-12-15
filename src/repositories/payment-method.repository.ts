@@ -1,8 +1,8 @@
 import type {
+  PaymentMethodCreate,
   PaymentMethodDeleteMany,
   PaymentMethodSearch,
-  PaymentMethodUncheckedCreateInput,
-  PaymentMethodUncheckedUpdateInput,
+  PaymentMethodUpdate,
   PaymentMethodUpdateMany
 } from "$api/routes/payment-method/payment-method.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _PaymentMethodRepository {
   path = PUBLIC_API_BASE_PATH + "/payment-method";
 
-  async create(input: PaymentMethodUncheckedCreateInput) {
+  async create(input: PaymentMethodCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.PaymentMethod>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _PaymentMethodRepository {
     });
   }
 
-  async update(id: string, input: PaymentMethodUncheckedUpdateInput) {
+  async update(id: string, input: PaymentMethodUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.PaymentMethod>(url, {
       body: JSON.stringify(input),

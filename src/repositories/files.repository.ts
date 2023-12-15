@@ -1,8 +1,8 @@
 import type {
+  FilesCreate,
   FilesDeleteMany,
   FilesSearch,
-  FilesUncheckedCreateInput,
-  FilesUncheckedUpdateInput,
+  FilesUpdate,
   FilesUpdateMany
 } from "$api/routes/files/files.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _FilesRepository {
   path = PUBLIC_API_BASE_PATH + "/files";
 
-  async create(input: FilesUncheckedCreateInput) {
+  async create(input: FilesCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Files>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _FilesRepository {
     });
   }
 
-  async update(id: string, input: FilesUncheckedUpdateInput) {
+  async update(id: string, input: FilesUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Files>(url, {
       body: JSON.stringify(input),

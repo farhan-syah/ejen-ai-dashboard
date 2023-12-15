@@ -1,8 +1,8 @@
 import type {
+  WalletTransactionCreate,
   WalletTransactionDeleteMany,
   WalletTransactionSearch,
-  WalletTransactionUncheckedCreateInput,
-  WalletTransactionUncheckedUpdateInput,
+  WalletTransactionUpdate,
   WalletTransactionUpdateMany
 } from "$api/routes/wallet-transaction/wallet-transaction.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _WalletTransactionRepository {
   path = PUBLIC_API_BASE_PATH + "/wallet-transaction";
 
-  async create(input: WalletTransactionUncheckedCreateInput) {
+  async create(input: WalletTransactionCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.WalletTransaction>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _WalletTransactionRepository {
     });
   }
 
-  async update(id: string, input: WalletTransactionUncheckedUpdateInput) {
+  async update(id: string, input: WalletTransactionUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.WalletTransaction>(url, {
       body: JSON.stringify(input),

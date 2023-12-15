@@ -1,8 +1,8 @@
 import type {
+  PromotionFreeGiftCreate,
   PromotionFreeGiftDeleteMany,
   PromotionFreeGiftSearch,
-  PromotionFreeGiftUncheckedCreateInput,
-  PromotionFreeGiftUncheckedUpdateInput,
+  PromotionFreeGiftUpdate,
   PromotionFreeGiftUpdateMany
 } from "$api/routes/promotion-free-gift/promotion-free-gift.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _PromotionFreeGiftRepository {
   path = PUBLIC_API_BASE_PATH + "/promotion-free-gift";
 
-  async create(input: PromotionFreeGiftUncheckedCreateInput) {
+  async create(input: PromotionFreeGiftCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.PromotionFreeGift>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _PromotionFreeGiftRepository {
     });
   }
 
-  async update(id: string, input: PromotionFreeGiftUncheckedUpdateInput) {
+  async update(id: string, input: PromotionFreeGiftUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.PromotionFreeGift>(url, {
       body: JSON.stringify(input),

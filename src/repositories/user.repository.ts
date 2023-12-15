@@ -1,8 +1,8 @@
 import type {
+  UserCreate,
   UserDeleteMany,
   UserSearch,
-  UserUncheckedCreateInput,
-  UserUncheckedUpdateInput,
+  UserUpdate,
   UserUpdateMany
 } from "$api/routes/user/user.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _UserRepository {
   path = PUBLIC_API_BASE_PATH + "/user";
 
-  async create(input: UserUncheckedCreateInput) {
+  async create(input: UserCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.User>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _UserRepository {
     });
   }
 
-  async update(id: string, input: UserUncheckedUpdateInput) {
+  async update(id: string, input: UserUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.User>(url, {
       body: JSON.stringify(input),

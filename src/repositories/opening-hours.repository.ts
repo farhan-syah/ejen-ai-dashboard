@@ -1,8 +1,8 @@
 import type {
+  OpeningHoursCreate,
   OpeningHoursDeleteMany,
   OpeningHoursSearch,
-  OpeningHoursUncheckedCreateInput,
-  OpeningHoursUncheckedUpdateInput,
+  OpeningHoursUpdate,
   OpeningHoursUpdateMany
 } from "$api/routes/opening-hours/opening-hours.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _OpeningHoursRepository {
   path = PUBLIC_API_BASE_PATH + "/opening-hours";
 
-  async create(input: OpeningHoursUncheckedCreateInput) {
+  async create(input: OpeningHoursCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.OpeningHours>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _OpeningHoursRepository {
     });
   }
 
-  async update(id: string, input: OpeningHoursUncheckedUpdateInput) {
+  async update(id: string, input: OpeningHoursUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.OpeningHours>(url, {
       body: JSON.stringify(input),

@@ -1,8 +1,8 @@
 import type {
+  PurchaseOrderCreate,
   PurchaseOrderDeleteMany,
   PurchaseOrderSearch,
-  PurchaseOrderUncheckedCreateInput,
-  PurchaseOrderUncheckedUpdateInput,
+  PurchaseOrderUpdate,
   PurchaseOrderUpdateMany
 } from "$api/routes/purchase-order/purchase-order.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _PurchaseOrderRepository {
   path = PUBLIC_API_BASE_PATH + "/purchase-order";
 
-  async create(input: PurchaseOrderUncheckedCreateInput) {
+  async create(input: PurchaseOrderCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.PurchaseOrder>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _PurchaseOrderRepository {
     });
   }
 
-  async update(id: string, input: PurchaseOrderUncheckedUpdateInput) {
+  async update(id: string, input: PurchaseOrderUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.PurchaseOrder>(url, {
       body: JSON.stringify(input),

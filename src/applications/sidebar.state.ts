@@ -8,6 +8,8 @@ class _SidebarState {
 		UserState.permissions.listen((permissions) => {
 			if (permissions.includes("All.manage")) {
 				this.sidebarItems.set(sidebarItems);
+			} else {
+				this.sidebarItems.set([]);
 			}
 		});
 	}

@@ -1,8 +1,8 @@
 import type {
+  BankCreate,
   BankDeleteMany,
   BankSearch,
-  BankUncheckedCreateInput,
-  BankUncheckedUpdateInput,
+  BankUpdate,
   BankUpdateMany
 } from "$api/routes/bank/bank.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _BankRepository {
   path = PUBLIC_API_BASE_PATH + "/bank";
 
-  async create(input: BankUncheckedCreateInput) {
+  async create(input: BankCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.Bank>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _BankRepository {
     });
   }
 
-  async update(id: string, input: BankUncheckedUpdateInput) {
+  async update(id: string, input: BankUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.Bank>(url, {
       body: JSON.stringify(input),

@@ -1,8 +1,8 @@
 import type {
+  TimeIntervalCreate,
   TimeIntervalDeleteMany,
   TimeIntervalSearch,
-  TimeIntervalUncheckedCreateInput,
-  TimeIntervalUncheckedUpdateInput,
+  TimeIntervalUpdate,
   TimeIntervalUpdateMany
 } from "$api/routes/time-interval/time-interval.schema";
 import type * as Prisma from "$api/types/prisma-client";
@@ -12,7 +12,7 @@ import { HttpService } from "$services/http.service";
 class _TimeIntervalRepository {
   path = PUBLIC_API_BASE_PATH + "/time-interval";
 
-  async create(input: TimeIntervalUncheckedCreateInput) {
+  async create(input: TimeIntervalCreate) {
     const url = this.path;
     return await HttpService.post<Prisma.TimeInterval>(url, {
       body: JSON.stringify(input),
@@ -20,7 +20,7 @@ class _TimeIntervalRepository {
     });
   }
 
-  async update(id: string, input: TimeIntervalUncheckedUpdateInput) {
+  async update(id: string, input: TimeIntervalUpdate) {
     const url = `${this.path}/${id}`;
     return await HttpService.patch<Prisma.TimeInterval>(url, {
       body: JSON.stringify(input),
