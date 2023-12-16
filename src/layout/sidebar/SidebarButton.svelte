@@ -2,16 +2,21 @@
 	import { page } from "$app/stores";
 	import { AppState } from "$applications";
 	import Icon from "@iconify/svelte";
+	import { writable } from "svelte/store";
 	import SidebarChildButton from "./SidebarChildButton.svelte";
 	import type { SidebarItem } from "./sidebar.config";
 
 	export let sidebarItem: SidebarItem;
 	const childItems = sidebarItem.items;
-	const pattern = new RegExp(`^${sidebarItem.link}`);
-	const active = pattern.test($page.url.pathname);
+	const pattern = RegExp(`^${sidebarItem.link}`);
+	const active = writable<boolean>(false);
 	const isOpen = sidebarItem.isOpen;
 
-	if (isOpen && active) {
+	page.subscribe(({ url }) => {
+		active.set(pattern.test(url.pathname));
+	});
+
+	if (isOpen && $active) {
 		isOpen.set(true);
 	}
 
@@ -33,7 +38,7 @@
 	{/if}
 {:else if childItems && childItems.length > 0}
 	<div
-		class="pointer-lighter w-full px-2 py-1.5 flex items-center gap-1.5 hover:text-white {active
+		class="pointer-lighter w-full px-2 py-1.5 flex items-center gap-1.5 hover:text-white {$active
 			? 'text-white bg-indigo-200/10'
 			: ''}"
 		on:click={handleClick}
@@ -42,7 +47,7 @@
 		tabindex="-1"
 	>
 		{#if sidebarItem.icon}
-			<Icon icon={sidebarItem.icon} class="text-base {active ? 'text-white' : ''}"></Icon>
+			<Icon icon={sidebarItem.icon} class="text-base {$active ? 'text-white' : ''}"></Icon>
 		{/if}
 		<div class="pt-0.5 flex-grow">
 			{sidebarItem.title}
@@ -60,7 +65,7 @@
 {:else}
 	<a
 		href={sidebarItem.link}
-		class="pointer-lighter w-full px-2 py-1.5 flex items-center gap-1.5 hover:text-white {active
+		class="pointer-lighter w-full px-2 py-1.5 flex items-center gap-1.5 hover:text-white {$active
 			? 'text-white bg-indigo-200/10'
 			: 'text-white/80'}"
 		tabindex="-1"
@@ -68,7 +73,7 @@
 		{#if sidebarItem.icon}
 			<Icon
 				icon={sidebarItem.icon}
-				class="text-base group-hover:text-white {active ? 'text-white' : ''}"
+				class="text-base group-hover:text-white {$active ? 'text-white' : ''}"
 			></Icon>
 		{/if}
 		<div class="pt-0.5 flex-grow">

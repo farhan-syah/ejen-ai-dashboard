@@ -19,7 +19,7 @@
 			: ''}"
 	>
 		<TopMenu />
-		<div class="flex-grow overflow-auto main">
+		<div class="flex-grow overflow-auto main p-2 sm:p-4">
 			<slot />
 		</div>
 	</div>

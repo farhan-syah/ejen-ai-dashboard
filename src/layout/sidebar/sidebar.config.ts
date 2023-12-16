@@ -8,6 +8,7 @@ export type SidebarItem = {
 	isParent?: boolean;
 	requiredPermissions: string[];
 	isOpen?: WritableAtom<boolean>;
+	regexp?: RegExp;
 };
 
 export const commonSidebarItems: SidebarItem[] = [
@@ -126,12 +127,18 @@ export const sidebarItems: SidebarItem[] = [
 			{
 				title: "Product List",
 				requiredPermissions: [],
-				link: "/products"
+				link: "/products",
+				regexp: new RegExp("^/products$")
 			},
 			{
 				title: "Add Product",
 				requiredPermissions: [],
 				link: "/products/add"
+			},
+			{
+				title: "Categories",
+				requiredPermissions: [],
+				link: "/products/categories"
 			}
 		]
 	},
@@ -152,6 +159,11 @@ export const sidebarItems: SidebarItem[] = [
 				title: "Add Product",
 				requiredPermissions: [],
 				link: "/services/add"
+			},
+			{
+				title: "Categories",
+				requiredPermissions: [],
+				link: "/services/categories"
 			}
 		]
 	},

@@ -6,6 +6,7 @@ export * from "./link";
 export * from "./loader";
 export * from "./modal";
 export * from "./overlay";
+export * from "./page-title";
 export * from "./popper";
 export * from "./profile-image";
 export * from "./table";
