@@ -16,7 +16,7 @@
 	const currentRole = atom<Role | undefined>();
 	const roles = atom<Role[]>([]);
 	const groupedRoles = atom<GroupedRole[]>([]);
-	const isModelOpen = atom(true);
+	const isModelOpen = atom(false);
 
 	currentRole.listen(async (value) => {
 		if (value && $user && $userSetting?.defaultUserRole != value.id) {
