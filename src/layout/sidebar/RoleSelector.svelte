@@ -1,67 +1,162 @@
 <script lang="ts">
 	import type Prisma from "$api/types/prisma-client";
 	import { AppState, UserState } from "$applications";
-	import { FormControl } from "$lib/components";
-	import SelectField from "$lib/components/form/select-field/SelectField.svelte";
+	import Modal from "$lib/components/modal/Modal.svelte";
 	import { RoleRepository, UserSettingRepository } from "$repositories";
 	import { AuthService } from "$services";
-	import type { FieldOption } from "$types";
-	import { atom, type WritableAtom } from "nanostores";
+	import Icon from "@iconify/svelte";
+	import { atom } from "nanostores";
 	import { onMount } from "svelte";
 
-	const roleOptions: WritableAtom<FieldOption<Prisma.Role>[]> = atom([]);
-	const roleController = new FormControl<Prisma.Role>();
+	type Role = Prisma.Role & { organization: { name: string } };
+	type GroupedRole = { organizationId: string; organizationName: string; roles: Role[] };
+	const user = UserState.user;
 	const isSidebarOpen = AppState.isSidebarOpen;
 	const userSetting = UserState.setting;
+	const currentRole = atom<Role | undefined>();
+	const roles = atom<Role[]>([]);
+	const groupedRoles = atom<GroupedRole[]>([]);
+	const isModelOpen = atom(true);
 
-	onMount(() => {
-		fetchRoles();
-	});
-
-	async function fetchRoles() {
-		const result = await RoleRepository.search({
-			where: {
-				userId: UserState.user.get()?.id
-			},
-			action: "search"
-		});
-		const options: FieldOption<Prisma.Role>[] = result.map((role) => {
-			return { value: role, label: role.name };
-		});
-
-		roleOptions.set(options);
-
-		const defaultUserRole = $userSetting?.defaultUserRole;
-		const initialRole =
-			options.find((option) => {
-				return option.value.id === defaultUserRole;
-			})?.value ?? options.at(0)?.value;
-
-		roleController.writableValue.set(initialRole);
-	}
-
-	roleController.writableValue.listen(async (value) => {
-		const currentUser = UserState.user.get();
-
-		if (value && currentUser && $userSetting?.defaultUserRole != value.id) {
-			await UserSettingRepository.update(currentUser.id, { data: { defaultUserRole: value.id } });
+	currentRole.listen(async (value) => {
+		if (value && $user && $userSetting?.defaultUserRole != value.id) {
+			await UserSettingRepository.update($user.id, { data: { defaultUserRole: value.id } });
 		}
 
 		AuthService.refreshUser();
 	});
+
+	onMount(() => {
+		fetchRole();
+	});
+
+	async function fetchRole() {
+		const result = (await RoleRepository.search({
+			where: {
+				userId: UserState.user.get()?.id
+			},
+			query: {
+				additionalFields: {
+					organization: {
+						select: {
+							name: true
+						}
+					}
+				}
+			},
+			action: "search"
+		})) as Role[];
+
+		{
+			const groups: Record<string, GroupedRole> = {};
+			result.forEach((role) => {
+				const organizationId = role.organizationId;
+				if (!groups[organizationId]) {
+					groups[organizationId] = {
+						organizationId: organizationId,
+						organizationName: role.organization.name,
+						roles: []
+					};
+				}
+				groups[organizationId].roles.push(role);
+			});
+
+			groupedRoles.set(Object.values(groups));
+		}
+
+		const defaultUserRole = $userSetting?.defaultUserRole;
+		const initialRole = result.find((role) => {
+			return role.id === defaultUserRole;
+		});
+		currentRole.set(initialRole);
+	}
+
+	function handleOpenModal() {
+		isModelOpen.set(true);
+	}
+
+	async function handleChangeRole(role: Role) {
+		currentRole.set(role);
+		isModelOpen.set(false);
+	}
 </script>
 
 {#if $isSidebarOpen}
-	<div class="p-3">
-		<div class="text-xs italic mb-2">Current Role :</div>
-		<SelectField
-			controller={roleController}
-			placeholder="Choose role"
-			class="bg-indigo-100 text-indigo-900 text-2xs"
-			options={$roleOptions}
-			valueTransform={(value) => {
-				return value?.name;
-			}}
-		/>
-	</div>
+	{#if $currentRole}
+		<div
+			role="button"
+			tabindex="-1"
+			class="p-2 flex items-center text-xs bg-indigo-950 pointer-light"
+			on:click={handleOpenModal}
+			on:keydown={handleOpenModal}
+		>
+			<div class="flex-grow">
+				<div>
+					{$currentRole.organization.name}
+				</div>
+				<div>
+					{$currentRole.name}
+				</div>
+			</div>
+			{#if $roles.length > 0}
+				<div class="p-2">
+					<Icon icon="icon-park-outline:switch" class="text-base"></Icon>
+				</div>
+			{/if}
+		</div>
+	{/if}
 {/if}
+
+<Modal isOpen={isModelOpen}>
+	<div class=" w-96">
+		<div class="font-semibold mb-2 text-center">Change Role</div>
+		<div class="mb-4 text-center">Choose the role you want to change into</div>
+		<table class=" w-full table-fixed">
+			<thead class="border-b">
+				<tr>
+					<th class="text-start"> Organization </th>
+					<th> Role</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{#each $groupedRoles as group}
+					<tr>
+						<td>
+							{group.organizationName}
+						</td>
+						<td class="text-cent er">
+							{#each group.roles as role}
+								<div
+									role="button"
+									class="p-2 pointer text-center text-blue-600"
+									on:click={() => {
+										handleChangeRole(role);
+									}}
+									on:keydown={() => {
+										handleChangeRole(role);
+									}}
+									tabindex="0"
+								>
+									{role.name}
+								</div>
+							{/each}
+						</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
+</Modal>
+
+<style lang="postcss">
+	th,
+	td {
+		@apply border-x;
+		@apply p-1;
+	}
+
+	tr {
+		@apply border-y;
+	}
+</style>

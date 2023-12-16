@@ -10,6 +10,54 @@ export type SidebarItem = {
 	isOpen?: WritableAtom<boolean>;
 };
 
+export const commonSidebarItems: SidebarItem[] = [
+	{
+		title: "Calendar",
+		icon: "material-symbols:calendar-today-outline-rounded",
+		requiredPermissions: [],
+		link: "/calendar",
+		isParent: true
+	},
+	{
+		title: "Tasks",
+		icon: "mingcute:task-line",
+		requiredPermissions: [],
+		link: "/calendar",
+		isParent: true
+	}
+	// {
+	// 	title: "Chat",
+	// 	icon: "material-symbols:mark-chat-unread-outline-rounded",
+	// 	requiredPermissions: [],
+	// 	link: "/chat",
+	// 	isParent: true
+	// }
+];
+
+export const staffSidebarItems: SidebarItem[] = [
+	{
+		title: "Calendar",
+		icon: "material-symbols:calendar-today-outline-rounded",
+		requiredPermissions: [],
+		link: "/calendar",
+		isParent: true
+	},
+	{
+		title: "Tasks",
+		icon: "mingcute:task-line",
+		requiredPermissions: [],
+		link: "/calendar",
+		isParent: true
+	}
+	// {
+	// 	title: "Chat",
+	// 	icon: "material-symbols:mark-chat-unread-outline-rounded",
+	// 	requiredPermissions: [],
+	// 	link: "/chat",
+	// 	isParent: true
+	// }
+];
+
 export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Dashboard",
@@ -141,49 +189,34 @@ export const sidebarItems: SidebarItem[] = [
 				link: "/users"
 			},
 			{
-				title: "Customer List",
-				requiredPermissions: [],
-				link: "/users/customers"
-			},
-			{
-				title: "Guest List",
-				requiredPermissions: [],
-				link: "/users/customers"
-			},
-			{
 				title: "Add User",
 				requiredPermissions: [],
 				link: "/users/add"
-			},
-			{
-				title: "User Types",
-				requiredPermissions: [],
-				link: "/users/types"
 			}
 		]
 	},
 	{
-		title: "User Groups",
+		title: "Organizations",
 		icon: "material-symbols:groups-outline-rounded",
 		requiredPermissions: [],
-		link: "/user-groups",
+		link: "/organizations",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
-				title: "User Group List",
+				title: "Organization List",
 				requiredPermissions: [],
-				link: "/user-groups"
+				link: "/organizations"
 			},
 			{
-				title: "Add User Group",
+				title: "Add Organization",
 				requiredPermissions: [],
-				link: "/user-groups/add"
+				link: "/organizations/add"
 			},
 			{
-				title: "User Group Types",
+				title: "Organization Types",
 				requiredPermissions: [],
-				link: "/user-groups/types"
+				link: "/organizations/types"
 			}
 		]
 	},
@@ -372,6 +405,11 @@ export const sidebarItems: SidebarItem[] = [
 				link: "/settings/apps"
 			},
 			{
+				title: "Country Settings",
+				requiredPermissions: [],
+				link: "/settings/countries"
+			},
+			{
 				title: "Payment Settings",
 				requiredPermissions: [],
 				link: "/settings/payments"
@@ -390,28 +428,4 @@ export const sidebarItems: SidebarItem[] = [
 		link: "/logs",
 		isParent: true
 	}
-];
-
-export const commonSidebarItems: SidebarItem[] = [
-	{
-		title: "Calendar",
-		icon: "material-symbols:calendar-today-outline-rounded",
-		requiredPermissions: [],
-		link: "/calendar",
-		isParent: true
-	},
-	{
-		title: "Tasks",
-		icon: "mingcute:task-line",
-		requiredPermissions: [],
-		link: "/calendar",
-		isParent: true
-	}
-	// {
-	// 	title: "Chat",
-	// 	icon: "material-symbols:mark-chat-unread-outline-rounded",
-	// 	requiredPermissions: [],
-	// 	link: "/chat",
-	// 	isParent: true
-	// }
 ];

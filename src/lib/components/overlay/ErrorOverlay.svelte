@@ -17,7 +17,7 @@
 		on:keypress={() => {}}
 		role="none"
 	>
-		<div class="m-auto relative opacity-100">
+		<div class="m-auto relative">
 			<Card class="p-4 w-96 ">
 				<div class="flex gap-2 font-medium text-medium border-b-2 pb-1 border-red-100 text-red-500">
 					<div>ERROR</div>

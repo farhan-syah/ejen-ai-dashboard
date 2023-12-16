@@ -19,10 +19,10 @@
 	>
 		<div class="m-auto"></div>
 	</div>
-
-	<style>
-		.overlay {
-			background-color: rgb(7, 7, 77, 0.25);
-		}
-	</style>
 {/if}
+
+<style>
+	.overlay {
+		background-color: rgb(7, 7, 77, 0.25);
+	}
+</style>

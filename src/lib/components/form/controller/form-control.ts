@@ -56,6 +56,10 @@ export class FormControl<T = any> {
 		});
 	}
 
+	get value() {
+		return this.writableValue.get();
+	}
+
 	validate() {
 		const errors: string[] = [];
 		const value = this.writableValue.get();
