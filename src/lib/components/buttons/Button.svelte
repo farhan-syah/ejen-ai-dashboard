@@ -2,8 +2,8 @@
 	export let label = "Submit";
 	export let onClick: any = () => {};
 	export let valid = true;
-	let validClass = "bg-blue-500 text-white hover:bg-opacity-90 hover:shadow-button ";
-	let invalidClass = "bg-gray-300 text-white";
+	let componentClass = "";
+	export { componentClass as class };
 	export let labelClass = "";
 
 	function handleClick() {
@@ -12,10 +12,10 @@
 </script>
 
 <button
-	class="flex items-center py-1.5 px-2.5 rounded text-sm {valid
-		? validClass
-		: invalidClass} {$$props.class}"
+	class="button {componentClass}"
 	on:click={handleClick}
+	on:keydown={handleClick}
+	disabled={!valid}
 >
 	{#if $$slots.prefix}
 		<slot name="prefix" />

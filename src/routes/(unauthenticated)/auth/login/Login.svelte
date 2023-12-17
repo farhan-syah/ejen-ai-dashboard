@@ -70,7 +70,7 @@
 			</div>
 		</TextField>
 
-		<Button class="w-32" valid={$formValid} onClick={handleSubmit} />
+		<Button class="w-32 " valid={$formValid} onClick={handleSubmit} />
 	</div>
 
 	<div />

@@ -6,21 +6,24 @@
 @layer components {
 	.pointer {
 		@apply cursor-pointer;
-		@apply bg-blend-soft-light;
-		@apply hover:bg-blue-700/10;
-		@apply active:bg-blue-700/15;
+		@apply hover:bg-slate-700/10;
+		@apply active:bg-slate-700/15;
+	}
+
+	.pointer-blue {
+		@apply cursor-pointer;
+		@apply hover:bg-blue-600;
+		@apply active:bg-blue-700;
 	}
 
 	.pointer-light {
 		@apply cursor-pointer;
-		@apply bg-blend-soft-light;
 		@apply hover:bg-white/30;
 		@apply active:bg-white/20;
 	}
 
 	.pointer-lighter {
 		@apply cursor-pointer;
-		@apply bg-blend-soft-light;
 		@apply hover:bg-white/10;
 		@apply active:bg-white/5;
 	}
@@ -28,6 +31,22 @@
 	.form-field {
 		@apply col-span-full;
 		@apply sm:col-span-3;
+	}
+
+	.button {
+		@apply flex items-center p-1.5 rounded cursor-pointer text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700 shadow;
+	}
+
+	.button:disabled {
+		@apply bg-gray-400;
+	}
+
+	.button-red {
+		@apply bg-red-500 hover:bg-red-600 active:bg-red-700;
+	}
+
+	.button-xs {
+		@apply text-xs px-1.5 py-0.5;
 	}
 }
 
