@@ -1,3 +1,4 @@
+import TextAreaField from "./TextAreaField.svelte";
 import TextField from "./TextField.svelte";
 
-export { TextField };
+export { TextAreaField, TextField };
