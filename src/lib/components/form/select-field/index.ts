@@ -1,2 +1,3 @@
+import MultiSelectField from "./MultiSelectField.svelte";
 import SelectField from "./SelectField.svelte";
-export { SelectField };
+export { MultiSelectField, SelectField };

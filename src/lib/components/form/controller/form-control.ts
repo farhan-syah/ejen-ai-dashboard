@@ -1,13 +1,13 @@
 import { nanoid } from "nanoid";
 import { atom, computed, type ReadableAtom, type WritableAtom } from "nanostores";
 
-export type Validator<T = any> = {
+export type Validator<T = string> = {
 	validator: (value: T, options?: any) => boolean;
 	errorMessage: string;
 	options?: any;
 };
 
-export class FormControl<T = any> {
+export class FormControl<T = string> {
 	id: string;
 	name: string | undefined;
 	initialValue: T | undefined;

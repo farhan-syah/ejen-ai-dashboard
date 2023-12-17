@@ -18,8 +18,13 @@
 	};
 	let required = controller.required;
 	let input: HTMLInputElement;
+
+	// Class
+	let componentClass = "";
+	export { componentClass as class };
 	let inputClass = "";
 	let labelClass = "";
+
 	$: isFocused = controller.isFocused;
 	$: errors = controller.errors;
 	$: hasError = controller.hasError;
@@ -66,7 +71,7 @@
 	}
 </script>
 
-<div class="text-gray-400 {$$props.class ?? ''}">
+<div class="text-gray-400 {componentClass}">
 	{#if label}
 		<div class="mb-1">
 			<label for={controller.id} class="flex {labelClass}">
