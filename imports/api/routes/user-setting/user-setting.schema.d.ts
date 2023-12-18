@@ -1,103 +1,92 @@
 import type { Static } from "@sinclair/typebox";
 export declare const UserSettingQuerySchema: import("@sinclair/typebox").TObject<{
-	limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-	skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-	select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-	additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+    skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+    select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type UserSettingQuery = Static<typeof UserSettingQuerySchema>;
 export declare const UserSettingIdSchema: import("@sinclair/typebox").TObject<{
-	id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
+    id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
 }>;
 export type UserSettingId = Static<typeof UserSettingIdSchema>;
 export declare const UserSettingUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
 export type UserSettingUncheckedCreateInput = Static<typeof UserSettingUncheckedCreateInputSchema>;
 export declare const UserSettingUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{
-	defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;
 export type UserSettingUncheckedUpdateInput = Static<typeof UserSettingUncheckedUpdateInputSchema>;
 export declare const UserSettingActionEnum: {
-	search: string;
+    search: string;
 };
-export type UserSettingActionEnum =
-	(typeof UserSettingActionEnum)[keyof typeof UserSettingActionEnum];
+export type UserSettingActionEnum = (typeof UserSettingActionEnum)[keyof typeof UserSettingActionEnum];
 export declare const UserSettingSearchWhereSchema: import("@sinclair/typebox").TObject<{}>;
 export declare const UserSettingSearchSchema: import("@sinclair/typebox").TObject<{
-	action: import("@sinclair/typebox").TLiteral<string>;
-	where: import("@sinclair/typebox").TObject<{}>;
-	query: import("@sinclair/typebox").TOptional<
-		import("@sinclair/typebox").TObject<{
-			limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-			skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-			select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-			additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-		}>
-	>;
+    action: import("@sinclair/typebox").TLiteral<string>;
+    where: import("@sinclair/typebox").TObject<{}>;
+    query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
+        limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    }>>;
 }>;
 export type UserSettingSearch = Static<typeof UserSettingSearchSchema>;
 export declare const UserSettingActionSchema: import("@sinclair/typebox").TObject<{
-	action: import("@sinclair/typebox").TLiteral<string>;
-	where: import("@sinclair/typebox").TObject<{}>;
-	query: import("@sinclair/typebox").TOptional<
-		import("@sinclair/typebox").TObject<{
-			limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-			skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-			select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-			additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-		}>
-	>;
+    action: import("@sinclair/typebox").TLiteral<string>;
+    where: import("@sinclair/typebox").TObject<{}>;
+    query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
+        limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    }>>;
 }>;
 export type UserSettingAction = Static<typeof UserSettingActionSchema>;
 export declare const UserSettingCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
 export type UserSettingCreateData = Static<typeof UserSettingCreateDataSchema>;
 export declare const UserSettingCreateSchema: import("@sinclair/typebox").TObject<{
-	data: import("@sinclair/typebox").TObject<{}>;
-	query: import("@sinclair/typebox").TOptional<
-		import("@sinclair/typebox").TObject<{
-			select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-			additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-		}>
-	>;
+    data: import("@sinclair/typebox").TObject<{}>;
+    query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
+        select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    }>>;
 }>;
 export type UserSettingCreate = Static<typeof UserSettingCreateSchema>;
 export declare const UserSettingUpdateDataSchema: import("@sinclair/typebox").TObject<{
-	defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;
 export type UserSettingUpdateData = Static<typeof UserSettingUpdateDataSchema>;
 export declare const UserSettingUpdateSchema: import("@sinclair/typebox").TObject<{
-	data: import("@sinclair/typebox").TObject<{
-		defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-	}>;
-	query: import("@sinclair/typebox").TOptional<
-		import("@sinclair/typebox").TObject<{
-			limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-			skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-			select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-			additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-		}>
-	>;
+    data: import("@sinclair/typebox").TObject<{
+        defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
+    query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
+        limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    }>>;
 }>;
 export type UserSettingUpdate = Static<typeof UserSettingUpdateSchema>;
 export declare const UserSettingUpdateManySchema: import("@sinclair/typebox").TObject<{
-	data: import("@sinclair/typebox").TObject<{
-		defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-	}>;
-	where: import("@sinclair/typebox").TObject<{
-		id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
-	}>;
-	query: import("@sinclair/typebox").TOptional<
-		import("@sinclair/typebox").TObject<{
-			limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-			skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-			select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-			additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
-		}>
-	>;
+    data: import("@sinclair/typebox").TObject<{
+        defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
+    where: import("@sinclair/typebox").TObject<{
+        id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
+    }>;
+    query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
+        limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    }>>;
 }>;
 export type UserSettingUpdateMany = Static<typeof UserSettingUpdateManySchema>;
 export declare const UserSettingDeleteManySchema: import("@sinclair/typebox").TObject<{
-	where: import("@sinclair/typebox").TObject<{
-		id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
-	}>;
+    where: import("@sinclair/typebox").TObject<{
+        id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
+    }>;
 }>;
 export type UserSettingDeleteMany = Static<typeof UserSettingDeleteManySchema>;

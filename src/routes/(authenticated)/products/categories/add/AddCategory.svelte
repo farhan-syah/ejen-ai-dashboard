@@ -1,6 +1,37 @@
-<script>
-	import { PageTitle, TextAreaField, TextField, TipTap } from "$lib/components";
-	import Card from "$lib/components/card/Card.svelte";
+<script lang="ts">
+	import { goto } from "$app/navigation";
+	import { AppState } from "$applications";
+	import { Button, Card, FormControl, PageTitle, TextAreaField, TextField } from "$lib/components";
+	import { ProductCategoryRepository } from "$repositories";
+	import { computed } from "nanostores";
+
+	const nameController = new FormControl({ required: true });
+	const descriptionController = new FormControl();
+
+	const formValid = computed([nameController.valid], (emailValid) => {
+		return emailValid;
+	});
+
+	async function handleSubmit() {
+		const name = nameController.writableValue.get();
+		const description = descriptionController.writableValue.get();
+		if (!name) return;
+
+		try {
+			AppState.loading.set(true);
+			const category = await ProductCategoryRepository.create({
+				data: {
+					name: name,
+					description: description
+				}
+			});
+			goto("/products/categories/" + category.id);
+		} catch (e) {
+			AppState.error.set(e);
+		} finally {
+			AppState.loading.set(false);
+		}
+	}
 </script>
 
 <PageTitle
@@ -11,11 +42,13 @@
 		{ label: "Add Category", path: "/products/categories/add", currentPage: true }
 	]}
 />
-<Card class="grid grid-cols-6 gap-4">
-	<TextField label="Category Name" class="form-field" />
-	<div class="form-field hidden sm:block"></div>
-	<TextAreaField label="Description" class="form-field" />
-	<div class=" col-span-full">
-		<TipTap />
+<Card>
+	<div class="grid grid-cols-6 gap-4">
+		<TextField controller={nameController} label="Category Name" class="form-field" />
+		<div class="form-field hidden sm:block"></div>
+		<TextAreaField controller={descriptionController} label="Description" class="form-field" />
+	</div>
+	<div class="mt-4">
+		<Button valid={$formValid} onClick={handleSubmit} />
 	</div>
 </Card>

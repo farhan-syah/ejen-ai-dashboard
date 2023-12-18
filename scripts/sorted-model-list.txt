@@ -31,9 +31,12 @@ OrganizationType
 PaymentMethod
 Permission
 Product
+ProductCategory
 ProductInventory
 ProductReview
+ProductTag
 ProductTax
+ProductVariation
 Promotion
 PromotionBundle
 PromotionBundleItem
@@ -49,6 +52,9 @@ ReturnProduct
 Role
 RolePermission
 Service
+ServiceCategory
+ServiceTag
+ServiceVariation
 Session
 ShippingAddress
 Shop

@@ -31,9 +31,12 @@ import { OrganizationTypeRepository } from "./organization-type.repository";
 import { PaymentMethodRepository } from "./payment-method.repository";
 import { PermissionRepository } from "./permission.repository";
 import { ProductRepository } from "./product.repository";
+import { ProductCategoryRepository } from "./product-category.repository";
 import { ProductInventoryRepository } from "./product-inventory.repository";
 import { ProductReviewRepository } from "./product-review.repository";
+import { ProductTagRepository } from "./product-tag.repository";
 import { ProductTaxRepository } from "./product-tax.repository";
+import { ProductVariationRepository } from "./product-variation.repository";
 import { PromotionRepository } from "./promotion.repository";
 import { PromotionBundleRepository } from "./promotion-bundle.repository";
 import { PromotionBundleItemRepository } from "./promotion-bundle-item.repository";
@@ -49,6 +52,9 @@ import { ReturnProductRepository } from "./return-product.repository";
 import { RoleRepository } from "./role.repository";
 import { RolePermissionRepository } from "./role-permission.repository";
 import { ServiceRepository } from "./service.repository";
+import { ServiceCategoryRepository } from "./service-category.repository";
+import { ServiceTagRepository } from "./service-tag.repository";
+import { ServiceVariationRepository } from "./service-variation.repository";
 import { SessionRepository } from "./session.repository";
 import { ShippingAddressRepository } from "./shipping-address.repository";
 import { ShopRepository } from "./shop.repository";
@@ -109,9 +115,12 @@ export {
   PaymentMethodRepository,
   PermissionRepository,
   ProductRepository,
+  ProductCategoryRepository,
   ProductInventoryRepository,
   ProductReviewRepository,
+  ProductTagRepository,
   ProductTaxRepository,
+  ProductVariationRepository,
   PromotionRepository,
   PromotionBundleRepository,
   PromotionBundleItemRepository,
@@ -127,6 +136,9 @@ export {
   RoleRepository,
   RolePermissionRepository,
   ServiceRepository,
+  ServiceCategoryRepository,
+  ServiceTagRepository,
+  ServiceVariationRepository,
   SessionRepository,
   ShippingAddressRepository,
   ShopRepository,

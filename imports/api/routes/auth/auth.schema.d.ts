@@ -32,6 +32,7 @@ export declare const AuthResponseSchema: import("@sinclair/typebox").TObject<{
 }>;
 export type AuthResponse = Static<typeof AuthResponseSchema>;
 export declare const PermissionRequestSchema: import("@sinclair/typebox").TObject<{
-    id: import("@sinclair/typebox").TString;
+    userId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    roleId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;
 export type PermissionRequest = Static<typeof PermissionRequestSchema>;
