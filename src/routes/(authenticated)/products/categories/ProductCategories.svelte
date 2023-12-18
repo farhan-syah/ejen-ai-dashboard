@@ -7,8 +7,9 @@
 	import { productCategoryColumns, type ProductCategory } from "./product-categories";
 
 	const tableContext = createTableContext<ProductCategory, ProductCategorySearch>({
-		filter: { where: {}, action: "search" },
+		filter: { where: {}, action: "search", query: { limit: 5 } },
 		columns: productCategoryColumns,
+		limit: 5,
 		onSearch: async (f) => {
 			if (f) return ProductCategoryRepository.search(f);
 			else return [];

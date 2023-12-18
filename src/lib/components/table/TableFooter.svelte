@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from "@iconify/svelte";
 	import { getTableContext } from ".";
-	import { FormControl } from "..";
+	import { FormControl, NumField } from "..";
 
 	const context = getTableContext();
 
@@ -16,12 +16,20 @@
 
 	const pageController = new FormControl<number>({ name: "page", value: 1 });
 
-	function handleKeyup(e: KeyboardEvent) {
+	function handleKeydown(e: KeyboardEvent, input: HTMLInputElement) {
+		if (e.key === ".") e.preventDefault();
 		if (e.key === "Enter" && typeof pageController.value === "number") {
 			let newPage = context.goToPage(pageController.value);
-			pageController.writableValue.set(newPage);
+			input.value = newPage.toString();
 		}
 	}
+	let input: HTMLInputElement | undefined;
+
+	currentPage.subscribe((currentPage) => {
+		if (input) {
+			input.value = currentPage.toString();
+		}
+	});
 </script>
 
 {#if $total > 0}
@@ -34,7 +42,12 @@
 		</div>
 		<div class="mr-2">Page</div>
 		<div class="mr-2 w-10 text-center">
-			<!-- <TextField controller={pageController} onKeyup={handleKeyup} inputClass="p-0.5 text-center" /> -->
+			<NumField
+				controller={pageController}
+				bind:input
+				onKeydown={handleKeydown}
+				inputClass=" px-1 py-0.5 text-center "
+			/>
 		</div>
 		<div class="mr-5">of {$maxPage}</div>
 		<div class="flex items-center text-2xl">
