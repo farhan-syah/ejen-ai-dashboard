@@ -65,6 +65,14 @@ class _ProductVariationRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: ProductVariationSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const ProductVariationRepository = new _ProductVariationRepository();

@@ -4,6 +4,7 @@ export declare const WalletTransactionQuerySchema: import("@sinclair/typebox").T
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type WalletTransactionQuery = Static<typeof WalletTransactionQuerySchema>;
 export declare const WalletTransactionIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const WalletTransactionSearchSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WalletTransactionSearch = Static<typeof WalletTransactionSearchSchema>;
@@ -38,6 +40,7 @@ export declare const WalletTransactionActionSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WalletTransactionAction = Static<typeof WalletTransactionActionSchema>;
@@ -60,6 +63,7 @@ export declare const WalletTransactionUpdateSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WalletTransactionUpdate = Static<typeof WalletTransactionUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const WalletTransactionUpdateManySchema: import("@sinclair/typebo
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WalletTransactionUpdateMany = Static<typeof WalletTransactionUpdateManySchema>;

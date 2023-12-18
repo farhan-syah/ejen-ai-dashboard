@@ -4,6 +4,7 @@ export declare const CartItemQuerySchema: import("@sinclair/typebox").TObject<{
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type CartItemQuery = Static<typeof CartItemQuerySchema>;
 export declare const CartItemIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const CartItemSearchSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type CartItemSearch = Static<typeof CartItemSearchSchema>;
@@ -38,6 +40,7 @@ export declare const CartItemActionSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type CartItemAction = Static<typeof CartItemActionSchema>;
@@ -60,6 +63,7 @@ export declare const CartItemUpdateSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type CartItemUpdate = Static<typeof CartItemUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const CartItemUpdateManySchema: import("@sinclair/typebox").TObje
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type CartItemUpdateMany = Static<typeof CartItemUpdateManySchema>;

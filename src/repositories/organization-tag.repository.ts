@@ -65,6 +65,14 @@ class _OrganizationTagRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: OrganizationTagSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const OrganizationTagRepository = new _OrganizationTagRepository();

@@ -65,6 +65,14 @@ class _ServiceVariationRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: ServiceVariationSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const ServiceVariationRepository = new _ServiceVariationRepository();

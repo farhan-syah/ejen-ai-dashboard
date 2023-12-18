@@ -65,6 +65,14 @@ class _EstimatesRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: EstimatesSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const EstimatesRepository = new _EstimatesRepository();

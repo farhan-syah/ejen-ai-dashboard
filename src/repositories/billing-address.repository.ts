@@ -65,6 +65,14 @@ class _BillingAddressRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: BillingAddressSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const BillingAddressRepository = new _BillingAddressRepository();

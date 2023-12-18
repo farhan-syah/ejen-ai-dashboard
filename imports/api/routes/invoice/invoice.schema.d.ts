@@ -4,6 +4,7 @@ export declare const InvoiceQuerySchema: import("@sinclair/typebox").TObject<{
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type InvoiceQuery = Static<typeof InvoiceQuerySchema>;
 export declare const InvoiceIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const InvoiceSearchSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type InvoiceSearch = Static<typeof InvoiceSearchSchema>;
@@ -38,6 +40,7 @@ export declare const InvoiceActionSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type InvoiceAction = Static<typeof InvoiceActionSchema>;
@@ -60,6 +63,7 @@ export declare const InvoiceUpdateSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type InvoiceUpdate = Static<typeof InvoiceUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const InvoiceUpdateManySchema: import("@sinclair/typebox").TObjec
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type InvoiceUpdateMany = Static<typeof InvoiceUpdateManySchema>;

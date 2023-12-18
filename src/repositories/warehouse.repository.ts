@@ -65,6 +65,14 @@ class _WarehouseRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: WarehouseSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const WarehouseRepository = new _WarehouseRepository();

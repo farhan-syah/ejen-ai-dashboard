@@ -4,6 +4,7 @@ export declare const PurchaseOrderItemQuerySchema: import("@sinclair/typebox").T
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type PurchaseOrderItemQuery = Static<typeof PurchaseOrderItemQuerySchema>;
 export declare const PurchaseOrderItemIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const PurchaseOrderItemSearchSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PurchaseOrderItemSearch = Static<typeof PurchaseOrderItemSearchSchema>;
@@ -38,6 +40,7 @@ export declare const PurchaseOrderItemActionSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PurchaseOrderItemAction = Static<typeof PurchaseOrderItemActionSchema>;
@@ -60,6 +63,7 @@ export declare const PurchaseOrderItemUpdateSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PurchaseOrderItemUpdate = Static<typeof PurchaseOrderItemUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const PurchaseOrderItemUpdateManySchema: import("@sinclair/typebo
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PurchaseOrderItemUpdateMany = Static<typeof PurchaseOrderItemUpdateManySchema>;

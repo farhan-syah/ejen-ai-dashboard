@@ -4,6 +4,7 @@ export declare const RegionQuerySchema: import("@sinclair/typebox").TObject<{
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type RegionQuery = Static<typeof RegionQuerySchema>;
 export declare const RegionIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const RegionSearchSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type RegionSearch = Static<typeof RegionSearchSchema>;
@@ -38,6 +40,7 @@ export declare const RegionActionSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type RegionAction = Static<typeof RegionActionSchema>;
@@ -60,6 +63,7 @@ export declare const RegionUpdateSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type RegionUpdate = Static<typeof RegionUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const RegionUpdateManySchema: import("@sinclair/typebox").TObject
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type RegionUpdateMany = Static<typeof RegionUpdateManySchema>;

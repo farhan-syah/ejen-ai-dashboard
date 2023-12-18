@@ -65,6 +65,14 @@ class _ImageRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: ImageSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const ImageRepository = new _ImageRepository();

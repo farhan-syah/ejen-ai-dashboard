@@ -65,6 +65,14 @@ class _TieredPricingRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: TieredPricingSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const TieredPricingRepository = new _TieredPricingRepository();

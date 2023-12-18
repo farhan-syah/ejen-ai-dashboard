@@ -4,6 +4,7 @@ export declare const ServiceVariationQuerySchema: import("@sinclair/typebox").TO
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type ServiceVariationQuery = Static<typeof ServiceVariationQuerySchema>;
 export declare const ServiceVariationIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const ServiceVariationSearchSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ServiceVariationSearch = Static<typeof ServiceVariationSearchSchema>;
@@ -38,6 +40,7 @@ export declare const ServiceVariationActionSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ServiceVariationAction = Static<typeof ServiceVariationActionSchema>;
@@ -60,6 +63,7 @@ export declare const ServiceVariationUpdateSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ServiceVariationUpdate = Static<typeof ServiceVariationUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const ServiceVariationUpdateManySchema: import("@sinclair/typebox
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ServiceVariationUpdateMany = Static<typeof ServiceVariationUpdateManySchema>;

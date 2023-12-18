@@ -65,6 +65,14 @@ class _PromotionUsageRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: PromotionUsageSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const PromotionUsageRepository = new _PromotionUsageRepository();

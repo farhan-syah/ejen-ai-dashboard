@@ -4,6 +4,7 @@ export declare const UserSubscriptionQuerySchema: import("@sinclair/typebox").TO
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type UserSubscriptionQuery = Static<typeof UserSubscriptionQuerySchema>;
 export declare const UserSubscriptionIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const UserSubscriptionSearchSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserSubscriptionSearch = Static<typeof UserSubscriptionSearchSchema>;
@@ -38,6 +40,7 @@ export declare const UserSubscriptionActionSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserSubscriptionAction = Static<typeof UserSubscriptionActionSchema>;
@@ -60,6 +63,7 @@ export declare const UserSubscriptionUpdateSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserSubscriptionUpdate = Static<typeof UserSubscriptionUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const UserSubscriptionUpdateManySchema: import("@sinclair/typebox
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserSubscriptionUpdateMany = Static<typeof UserSubscriptionUpdateManySchema>;

@@ -4,6 +4,7 @@ export declare const PromotionBundleQuerySchema: import("@sinclair/typebox").TOb
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type PromotionBundleQuery = Static<typeof PromotionBundleQuerySchema>;
 export declare const PromotionBundleIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const PromotionBundleSearchSchema: import("@sinclair/typebox").TO
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PromotionBundleSearch = Static<typeof PromotionBundleSearchSchema>;
@@ -38,6 +40,7 @@ export declare const PromotionBundleActionSchema: import("@sinclair/typebox").TO
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PromotionBundleAction = Static<typeof PromotionBundleActionSchema>;
@@ -60,6 +63,7 @@ export declare const PromotionBundleUpdateSchema: import("@sinclair/typebox").TO
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PromotionBundleUpdate = Static<typeof PromotionBundleUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const PromotionBundleUpdateManySchema: import("@sinclair/typebox"
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PromotionBundleUpdateMany = Static<typeof PromotionBundleUpdateManySchema>;

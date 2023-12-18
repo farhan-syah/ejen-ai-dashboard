@@ -4,6 +4,7 @@ export declare const RolePermissionQuerySchema: import("@sinclair/typebox").TObj
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type RolePermissionQuery = Static<typeof RolePermissionQuerySchema>;
 export declare const RolePermissionIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const RolePermissionSearchSchema: import("@sinclair/typebox").TOb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type RolePermissionSearch = Static<typeof RolePermissionSearchSchema>;
@@ -38,6 +40,7 @@ export declare const RolePermissionActionSchema: import("@sinclair/typebox").TOb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type RolePermissionAction = Static<typeof RolePermissionActionSchema>;
@@ -60,6 +63,7 @@ export declare const RolePermissionUpdateSchema: import("@sinclair/typebox").TOb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type RolePermissionUpdate = Static<typeof RolePermissionUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const RolePermissionUpdateManySchema: import("@sinclair/typebox")
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type RolePermissionUpdateMany = Static<typeof RolePermissionUpdateManySchema>;

@@ -4,6 +4,7 @@ export declare const UserGroupTypeQuerySchema: import("@sinclair/typebox").TObje
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type UserGroupTypeQuery = Static<typeof UserGroupTypeQuerySchema>;
 export declare const UserGroupTypeIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const UserGroupTypeSearchSchema: import("@sinclair/typebox").TObj
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserGroupTypeSearch = Static<typeof UserGroupTypeSearchSchema>;
@@ -38,6 +40,7 @@ export declare const UserGroupTypeActionSchema: import("@sinclair/typebox").TObj
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserGroupTypeAction = Static<typeof UserGroupTypeActionSchema>;
@@ -60,6 +63,7 @@ export declare const UserGroupTypeUpdateSchema: import("@sinclair/typebox").TObj
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserGroupTypeUpdate = Static<typeof UserGroupTypeUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const UserGroupTypeUpdateManySchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserGroupTypeUpdateMany = Static<typeof UserGroupTypeUpdateManySchema>;

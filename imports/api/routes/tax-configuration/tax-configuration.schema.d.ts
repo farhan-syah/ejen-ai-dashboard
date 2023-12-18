@@ -4,6 +4,7 @@ export declare const TaxConfigurationQuerySchema: import("@sinclair/typebox").TO
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type TaxConfigurationQuery = Static<typeof TaxConfigurationQuerySchema>;
 export declare const TaxConfigurationIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const TaxConfigurationSearchSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type TaxConfigurationSearch = Static<typeof TaxConfigurationSearchSchema>;
@@ -38,6 +40,7 @@ export declare const TaxConfigurationActionSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type TaxConfigurationAction = Static<typeof TaxConfigurationActionSchema>;
@@ -60,6 +63,7 @@ export declare const TaxConfigurationUpdateSchema: import("@sinclair/typebox").T
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type TaxConfigurationUpdate = Static<typeof TaxConfigurationUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const TaxConfigurationUpdateManySchema: import("@sinclair/typebox
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type TaxConfigurationUpdateMany = Static<typeof TaxConfigurationUpdateManySchema>;

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { AppState } from "$applications";
+	import { getAppState } from "$applications";
 	import Icon from "@iconify/svelte";
 	import { Card } from "../card";
-
-	const error = AppState.error;
+	const appState = getAppState();
+	const error = appState.error;
 
 	function handleDismiss() {
 		error.set(undefined);

@@ -4,6 +4,7 @@ export declare const TaskQuerySchema: import("@sinclair/typebox").TObject<{
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type TaskQuery = Static<typeof TaskQuerySchema>;
 export declare const TaskIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const TaskSearchSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type TaskSearch = Static<typeof TaskSearchSchema>;
@@ -38,6 +40,7 @@ export declare const TaskActionSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type TaskAction = Static<typeof TaskActionSchema>;
@@ -60,6 +63,7 @@ export declare const TaskUpdateSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type TaskUpdate = Static<typeof TaskUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const TaskUpdateManySchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type TaskUpdateMany = Static<typeof TaskUpdateManySchema>;

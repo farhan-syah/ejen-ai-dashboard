@@ -4,6 +4,7 @@ export declare const BillingAddressQuerySchema: import("@sinclair/typebox").TObj
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type BillingAddressQuery = Static<typeof BillingAddressQuerySchema>;
 export declare const BillingAddressIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const BillingAddressSearchSchema: import("@sinclair/typebox").TOb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type BillingAddressSearch = Static<typeof BillingAddressSearchSchema>;
@@ -38,6 +40,7 @@ export declare const BillingAddressActionSchema: import("@sinclair/typebox").TOb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type BillingAddressAction = Static<typeof BillingAddressActionSchema>;
@@ -60,6 +63,7 @@ export declare const BillingAddressUpdateSchema: import("@sinclair/typebox").TOb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type BillingAddressUpdate = Static<typeof BillingAddressUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const BillingAddressUpdateManySchema: import("@sinclair/typebox")
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type BillingAddressUpdateMany = Static<typeof BillingAddressUpdateManySchema>;

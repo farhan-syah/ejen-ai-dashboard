@@ -4,6 +4,7 @@ export declare const ImageQuerySchema: import("@sinclair/typebox").TObject<{
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type ImageQuery = Static<typeof ImageQuerySchema>;
 export declare const ImageIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const ImageSearchSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ImageSearch = Static<typeof ImageSearchSchema>;
@@ -38,6 +40,7 @@ export declare const ImageActionSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ImageAction = Static<typeof ImageActionSchema>;
@@ -60,6 +63,7 @@ export declare const ImageUpdateSchema: import("@sinclair/typebox").TObject<{
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ImageUpdate = Static<typeof ImageUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const ImageUpdateManySchema: import("@sinclair/typebox").TObject<
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ImageUpdateMany = Static<typeof ImageUpdateManySchema>;

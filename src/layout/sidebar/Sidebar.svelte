@@ -1,16 +1,17 @@
 <script lang="ts">
-	import { AppState } from "$applications";
-	import { SidebarState } from "$applications/sidebar.state";
+	import { getAppState } from "$applications";
+	import { createSidebarState } from "$applications/sidebar.state";
 	import { atom } from "nanostores";
 	import RoleSelector from "./RoleSelector.svelte";
 	import SidebarButton from "./SidebarButton.svelte";
 	import { commonSidebarItems } from "./sidebar.config";
 
-	const isSidebarOpen = AppState.isSidebarOpen;
-	const layout = AppState.layout;
-	const showOverlay = AppState.showOverlay;
+	const appState = getAppState();
+	const isSidebarOpen = appState.isSidebarOpen;
+	const layout = appState.layout;
+	const showOverlay = appState.showOverlay;
 	const sidebarClass = atom("");
-	const lockedSidebarPosition = AppState.lockedSidebarPosition;
+	const lockedSidebarPosition = appState.lockedSidebarPosition;
 
 	$: {
 		if ($layout != "desktop") {
@@ -37,8 +38,8 @@
 			}
 		}
 	}
-
-	const sidebarItems = SidebarState.sidebarItems;
+	const sidebarState = createSidebarState();
+	const sidebarItems = sidebarState.sidebarItems;
 
 	function handleMouseOver() {
 		if ($layout === "desktop" && !$isSidebarOpen) {

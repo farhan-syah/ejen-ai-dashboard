@@ -65,6 +65,14 @@ class _ReturnRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: ReturnSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const ReturnRepository = new _ReturnRepository();

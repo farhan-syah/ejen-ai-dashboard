@@ -65,6 +65,14 @@ class _DamagedProductRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: DamagedProductSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const DamagedProductRepository = new _DamagedProductRepository();

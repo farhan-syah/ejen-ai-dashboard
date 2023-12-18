@@ -65,6 +65,14 @@ class _SubscriptionRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: SubscriptionSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const SubscriptionRepository = new _SubscriptionRepository();

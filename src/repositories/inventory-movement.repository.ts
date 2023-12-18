@@ -65,6 +65,14 @@ class _InventoryMovementRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: InventoryMovementSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const InventoryMovementRepository = new _InventoryMovementRepository();

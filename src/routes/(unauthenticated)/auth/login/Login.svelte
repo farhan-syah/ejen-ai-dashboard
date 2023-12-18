@@ -1,13 +1,13 @@
 <script lang="ts">
 	import type { LoginInput } from "$api/routes/auth/auth.schema";
-	import { AppState } from "$applications";
+	import { getAppState } from "$applications";
 	import { Button, FormControl, Link, TextField } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { AuthService } from "$services/auth.service";
 	import type { FieldOption } from "$types";
 	import { computed } from "nanostores";
 	import validator from "validator";
-
+	const appState = getAppState();
 	const userTypeOptions: FieldOption[] = [{ value: "Staff" }, { value: "Guest" }];
 
 	const emailController = new FormControl({
@@ -40,22 +40,22 @@
 			includeCookie: true
 		};
 
-		AppState.loading.set(true);
+		appState.loading.set(true);
 
 		await AuthService.login(loginInput).catch((e) => {
 			e.message = "Unable to login. Please check if you are using the correct credential";
-			AppState.error.set(e);
+			appState.error.set(e);
 		});
 
-		AppState.loading.set(false);
+		appState.loading.set(false);
 	}
 
 	// async function handleRefresh() {
-	// 	AppState.loading.set(true);
+	// 	appState.loading.set(true);
 	// 	await AuthService.refreshToken().catch((e) => {
-	// 		AppState.error.set(e);
+	// 		appState.error.set(e);
 	// 	});
-	// 	AppState.loading.set(false);
+	// 	appState.loading.set(false);
 	// }
 </script>
 

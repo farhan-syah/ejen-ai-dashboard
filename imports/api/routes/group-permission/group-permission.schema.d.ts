@@ -4,6 +4,7 @@ export declare const GroupPermissionQuerySchema: import("@sinclair/typebox").TOb
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type GroupPermissionQuery = Static<typeof GroupPermissionQuerySchema>;
 export declare const GroupPermissionIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const GroupPermissionSearchSchema: import("@sinclair/typebox").TO
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type GroupPermissionSearch = Static<typeof GroupPermissionSearchSchema>;
@@ -38,6 +40,7 @@ export declare const GroupPermissionActionSchema: import("@sinclair/typebox").TO
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type GroupPermissionAction = Static<typeof GroupPermissionActionSchema>;
@@ -60,6 +63,7 @@ export declare const GroupPermissionUpdateSchema: import("@sinclair/typebox").TO
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type GroupPermissionUpdate = Static<typeof GroupPermissionUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const GroupPermissionUpdateManySchema: import("@sinclair/typebox"
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type GroupPermissionUpdateMany = Static<typeof GroupPermissionUpdateManySchema>;

@@ -65,6 +65,14 @@ class _OrderRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: OrderSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const OrderRepository = new _OrderRepository();

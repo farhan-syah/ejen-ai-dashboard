@@ -4,6 +4,7 @@ export declare const WalletWithdrawalRequestQuerySchema: import("@sinclair/typeb
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type WalletWithdrawalRequestQuery = Static<typeof WalletWithdrawalRequestQuerySchema>;
 export declare const WalletWithdrawalRequestIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const WalletWithdrawalRequestSearchSchema: import("@sinclair/type
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WalletWithdrawalRequestSearch = Static<typeof WalletWithdrawalRequestSearchSchema>;
@@ -38,6 +40,7 @@ export declare const WalletWithdrawalRequestActionSchema: import("@sinclair/type
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WalletWithdrawalRequestAction = Static<typeof WalletWithdrawalRequestActionSchema>;
@@ -60,6 +63,7 @@ export declare const WalletWithdrawalRequestUpdateSchema: import("@sinclair/type
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WalletWithdrawalRequestUpdate = Static<typeof WalletWithdrawalRequestUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const WalletWithdrawalRequestUpdateManySchema: import("@sinclair/
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WalletWithdrawalRequestUpdateMany = Static<typeof WalletWithdrawalRequestUpdateManySchema>;

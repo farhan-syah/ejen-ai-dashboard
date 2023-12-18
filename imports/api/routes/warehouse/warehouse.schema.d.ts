@@ -4,6 +4,7 @@ export declare const WarehouseQuerySchema: import("@sinclair/typebox").TObject<{
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type WarehouseQuery = Static<typeof WarehouseQuerySchema>;
 export declare const WarehouseIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const WarehouseSearchSchema: import("@sinclair/typebox").TObject<
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WarehouseSearch = Static<typeof WarehouseSearchSchema>;
@@ -38,6 +40,7 @@ export declare const WarehouseActionSchema: import("@sinclair/typebox").TObject<
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WarehouseAction = Static<typeof WarehouseActionSchema>;
@@ -60,6 +63,7 @@ export declare const WarehouseUpdateSchema: import("@sinclair/typebox").TObject<
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WarehouseUpdate = Static<typeof WarehouseUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const WarehouseUpdateManySchema: import("@sinclair/typebox").TObj
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type WarehouseUpdateMany = Static<typeof WarehouseUpdateManySchema>;

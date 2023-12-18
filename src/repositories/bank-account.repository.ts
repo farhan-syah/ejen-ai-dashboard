@@ -65,6 +65,14 @@ class _BankAccountRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: BankAccountSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const BankAccountRepository = new _BankAccountRepository();

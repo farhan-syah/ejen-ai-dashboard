@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AppState } from "$applications";
+	import { getAppState } from "$applications";
 	import { ProfileImage } from "$lib/components";
 	import Popper from "$lib/components/popper/Popper.svelte";
 	import { AuthService } from "$services";
@@ -8,7 +8,7 @@
 	import type { PopperOptions } from "svelte-popperjs";
 	import ProfileMenuButton from "./ProfileMenuButton.svelte";
 	import type { ProfileMenuItem } from "./profile-menu";
-
+	const appState = getAppState();
 	const isOpen = atom(false);
 	const popperOptions: PopperOptions<any> = {
 		modifiers: [
@@ -38,9 +38,9 @@
 			label: "Log Out",
 			icon: "mingcute:exit-line",
 			onclick: async () => {
-				AppState.loading.set(true);
+				appState.loading.set(true);
 				await AuthService.logout();
-				AppState.loading.set(false);
+				appState.loading.set(false);
 			}
 		}
 	];

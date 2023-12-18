@@ -1,4 +1,4 @@
-import type { DateInterval, DateOptions, SelectedDateRange } from "$lib/types/date";
+import type { DateInterval, DateOptions, DateRange } from "$types";
 import * as d from "date-fns";
 import ms from "date-fns/locale/ms/index.js";
 
@@ -20,7 +20,7 @@ export class DateSelection {
 		return {
 			label: "Last 7 Days",
 			startDate: d.startOfDay(d.subDays(this.date, 7)),
-			endDate: d.endOfToday(),
+			endDate: d.endOfToday()
 		};
 	}
 
@@ -28,7 +28,7 @@ export class DateSelection {
 		return {
 			label: "Last 30 Days",
 			startDate: d.startOfDay(d.subDays(this.date, 30)),
-			endDate: d.endOfToday(),
+			endDate: d.endOfToday()
 		};
 	}
 
@@ -36,7 +36,7 @@ export class DateSelection {
 		return {
 			label: "This Month",
 			startDate: d.startOfMonth(this.date),
-			endDate: d.endOfMonth(this.date),
+			endDate: d.endOfMonth(this.date)
 		};
 	}
 
@@ -44,7 +44,7 @@ export class DateSelection {
 		return {
 			label: "Last Month",
 			startDate: d.startOfMonth(d.subMonths(this.date, 1)),
-			endDate: d.endOfMonth(d.subMonths(this.date, 1)),
+			endDate: d.endOfMonth(d.subMonths(this.date, 1))
 		};
 	}
 
@@ -54,7 +54,7 @@ export class DateSelection {
 		this.last7Days(),
 		this.last30Days(),
 		this.thisMonth(),
-		this.lastMonth(),
+		this.lastMonth()
 	];
 }
 
@@ -63,7 +63,7 @@ export function formatLocalDate(date: Date | number, format?: string, options: D
 	return d.format(date, format ?? defaultFormat, options);
 }
 
-export function formatLocalInterval(selectedDate?: SelectedDateRange, format?: string): string {
+export function formatLocalInterval(selectedDate?: DateRange, format?: string): string {
 	if (!selectedDate) return "";
 	if (selectedDate.startDate && selectedDate.endDate) {
 		return (
@@ -82,7 +82,7 @@ export function getTimeDifference(
 	option: { showHours: boolean; showMinutes: boolean; showSeconds: boolean } = {
 		showHours: true,
 		showMinutes: true,
-		showSeconds: true,
+		showSeconds: true
 	}
 ) {
 	const diffTime = Math.abs(endDate.valueOf() - startDate.valueOf());
@@ -105,6 +105,6 @@ export function getTimeDifference(
 		str: arrString.join(" : "),
 		hours: hoursString,
 		minutes: minutesString,
-		seconds: secondsString,
+		seconds: secondsString
 	};
 }

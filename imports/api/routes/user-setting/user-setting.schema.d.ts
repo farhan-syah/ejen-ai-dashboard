@@ -4,6 +4,7 @@ export declare const UserSettingQuerySchema: import("@sinclair/typebox").TObject
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type UserSettingQuery = Static<typeof UserSettingQuerySchema>;
 export declare const UserSettingIdSchema: import("@sinclair/typebox").TObject<{
@@ -29,6 +30,7 @@ export declare const UserSettingSearchSchema: import("@sinclair/typebox").TObjec
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserSettingSearch = Static<typeof UserSettingSearchSchema>;
@@ -40,6 +42,7 @@ export declare const UserSettingActionSchema: import("@sinclair/typebox").TObjec
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserSettingAction = Static<typeof UserSettingActionSchema>;
@@ -66,6 +69,7 @@ export declare const UserSettingUpdateSchema: import("@sinclair/typebox").TObjec
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserSettingUpdate = Static<typeof UserSettingUpdateSchema>;
@@ -81,6 +85,7 @@ export declare const UserSettingUpdateManySchema: import("@sinclair/typebox").TO
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type UserSettingUpdateMany = Static<typeof UserSettingUpdateManySchema>;

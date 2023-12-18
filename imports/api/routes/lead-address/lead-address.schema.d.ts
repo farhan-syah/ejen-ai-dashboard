@@ -4,6 +4,7 @@ export declare const LeadAddressQuerySchema: import("@sinclair/typebox").TObject
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type LeadAddressQuery = Static<typeof LeadAddressQuerySchema>;
 export declare const LeadAddressIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const LeadAddressSearchSchema: import("@sinclair/typebox").TObjec
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type LeadAddressSearch = Static<typeof LeadAddressSearchSchema>;
@@ -38,6 +40,7 @@ export declare const LeadAddressActionSchema: import("@sinclair/typebox").TObjec
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type LeadAddressAction = Static<typeof LeadAddressActionSchema>;
@@ -60,6 +63,7 @@ export declare const LeadAddressUpdateSchema: import("@sinclair/typebox").TObjec
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type LeadAddressUpdate = Static<typeof LeadAddressUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const LeadAddressUpdateManySchema: import("@sinclair/typebox").TO
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type LeadAddressUpdateMany = Static<typeof LeadAddressUpdateManySchema>;

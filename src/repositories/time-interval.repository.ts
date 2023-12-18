@@ -65,6 +65,14 @@ class _TimeIntervalRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: TimeIntervalSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const TimeIntervalRepository = new _TimeIntervalRepository();

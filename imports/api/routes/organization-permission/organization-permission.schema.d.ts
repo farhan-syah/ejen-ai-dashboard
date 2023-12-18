@@ -4,6 +4,7 @@ export declare const OrganizationPermissionQuerySchema: import("@sinclair/typebo
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type OrganizationPermissionQuery = Static<typeof OrganizationPermissionQuerySchema>;
 export declare const OrganizationPermissionIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const OrganizationPermissionSearchSchema: import("@sinclair/typeb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type OrganizationPermissionSearch = Static<typeof OrganizationPermissionSearchSchema>;
@@ -38,6 +40,7 @@ export declare const OrganizationPermissionActionSchema: import("@sinclair/typeb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type OrganizationPermissionAction = Static<typeof OrganizationPermissionActionSchema>;
@@ -60,6 +63,7 @@ export declare const OrganizationPermissionUpdateSchema: import("@sinclair/typeb
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type OrganizationPermissionUpdate = Static<typeof OrganizationPermissionUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const OrganizationPermissionUpdateManySchema: import("@sinclair/t
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type OrganizationPermissionUpdateMany = Static<typeof OrganizationPermissionUpdateManySchema>;

@@ -65,6 +65,14 @@ class _OpeningHoursRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: OpeningHoursSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const OpeningHoursRepository = new _OpeningHoursRepository();

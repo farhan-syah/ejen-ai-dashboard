@@ -65,6 +65,14 @@ class _PromotionFreeGiftRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: PromotionFreeGiftSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const PromotionFreeGiftRepository = new _PromotionFreeGiftRepository();

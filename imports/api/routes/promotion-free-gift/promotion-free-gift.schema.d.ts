@@ -4,6 +4,7 @@ export declare const PromotionFreeGiftQuerySchema: import("@sinclair/typebox").T
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type PromotionFreeGiftQuery = Static<typeof PromotionFreeGiftQuerySchema>;
 export declare const PromotionFreeGiftIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const PromotionFreeGiftSearchSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PromotionFreeGiftSearch = Static<typeof PromotionFreeGiftSearchSchema>;
@@ -38,6 +40,7 @@ export declare const PromotionFreeGiftActionSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PromotionFreeGiftAction = Static<typeof PromotionFreeGiftActionSchema>;
@@ -60,6 +63,7 @@ export declare const PromotionFreeGiftUpdateSchema: import("@sinclair/typebox").
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PromotionFreeGiftUpdate = Static<typeof PromotionFreeGiftUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const PromotionFreeGiftUpdateManySchema: import("@sinclair/typebo
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type PromotionFreeGiftUpdateMany = Static<typeof PromotionFreeGiftUpdateManySchema>;

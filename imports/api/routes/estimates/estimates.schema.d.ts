@@ -4,6 +4,7 @@ export declare const EstimatesQuerySchema: import("@sinclair/typebox").TObject<{
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type EstimatesQuery = Static<typeof EstimatesQuerySchema>;
 export declare const EstimatesIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const EstimatesSearchSchema: import("@sinclair/typebox").TObject<
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type EstimatesSearch = Static<typeof EstimatesSearchSchema>;
@@ -38,6 +40,7 @@ export declare const EstimatesActionSchema: import("@sinclair/typebox").TObject<
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type EstimatesAction = Static<typeof EstimatesActionSchema>;
@@ -60,6 +63,7 @@ export declare const EstimatesUpdateSchema: import("@sinclair/typebox").TObject<
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type EstimatesUpdate = Static<typeof EstimatesUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const EstimatesUpdateManySchema: import("@sinclair/typebox").TObj
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type EstimatesUpdateMany = Static<typeof EstimatesUpdateManySchema>;

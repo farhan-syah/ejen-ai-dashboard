@@ -1,8 +1,9 @@
 import { persistentAtom } from "@nanostores/persistent";
 import { atom, type WritableAtom } from "nanostores";
+import { getContext, setContext } from "svelte";
 import { Breakpoint } from "../variables";
 
-class _App {
+class AppState {
 	width: WritableAtom<number> = atom(0);
 	height: WritableAtom<number> = atom(0);
 	loading: WritableAtom<boolean> = atom(false);
@@ -29,5 +30,10 @@ class _App {
 	}
 }
 
-export const AppState = new _App();
-export type AppState = typeof AppState;
+export function createAppState() {
+	return setContext("appState", new AppState());
+}
+
+export function getAppState() {
+	return getContext<AppState>("appState");
+}

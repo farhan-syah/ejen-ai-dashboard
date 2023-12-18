@@ -65,6 +65,14 @@ class _OrderReviewRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: OrderReviewSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const OrderReviewRepository = new _OrderReviewRepository();

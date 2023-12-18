@@ -65,6 +65,14 @@ class _TaskRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: TaskSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const TaskRepository = new _TaskRepository();

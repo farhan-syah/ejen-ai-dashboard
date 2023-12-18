@@ -71,6 +71,14 @@ class _${modelName}Repository {
       auth: "accessToken",
     });
   }
+
+  async count(input: ${modelName}Search) {
+    const url = \`\${this.path}/count\`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const ${modelName}Repository = new _${modelName}Repository();

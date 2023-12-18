@@ -65,6 +65,14 @@ class _ProductRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: ProductSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const ProductRepository = new _ProductRepository();

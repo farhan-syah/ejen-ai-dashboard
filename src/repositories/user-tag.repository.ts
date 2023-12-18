@@ -65,6 +65,14 @@ class _UserTagRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: UserTagSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const UserTagRepository = new _UserTagRepository();

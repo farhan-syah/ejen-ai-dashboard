@@ -65,6 +65,14 @@ class _AccountsRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: AccountsSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const AccountsRepository = new _AccountsRepository();

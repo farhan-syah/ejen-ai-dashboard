@@ -65,6 +65,14 @@ class _PromotionConditionRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: PromotionConditionSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const PromotionConditionRepository = new _PromotionConditionRepository();

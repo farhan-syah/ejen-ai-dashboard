@@ -65,6 +65,14 @@ class _SystemSettingsRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: SystemSettingsSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const SystemSettingsRepository = new _SystemSettingsRepository();

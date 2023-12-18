@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { AppState, UserState } from "$applications";
-	import { SidebarState } from "$applications/sidebar.state";
+	import { getAppState, UserState } from "$applications";
 	import { Overlay } from "$lib/components";
 	import Sidebar from "../../layout/sidebar/Sidebar.svelte";
 	import TopMenu from "../../layout/top-menu/TopMenu.svelte";
-	const lockedSidebarPosition = AppState.lockedSidebarPosition;
-	const isSidebarOpen = AppState.isSidebarOpen;
+	const appState = getAppState();
+	const lockedSidebarPosition = appState.lockedSidebarPosition;
+	const isSidebarOpen = appState.isSidebarOpen;
+
 	const user = UserState.user;
-	SidebarState;
 </script>
 
 {#if $user}

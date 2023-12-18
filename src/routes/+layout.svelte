@@ -9,7 +9,8 @@
 	import App from "./app.svelte";
 
 	// Initialize browser stores
-	const token = UserState.accessToken;
+	const userState = UserState;
+	const token = userState.accessToken;
 	if (token) {
 		AuthService;
 	}

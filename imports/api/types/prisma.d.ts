@@ -4,6 +4,7 @@ export declare const PrismaQuerySchema: import("@sinclair/typebox").TObject<{
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 type PrismaQuery = Static<typeof PrismaQuerySchema>;
 export declare function buildSelectQuery<T>(defaultSelectValue?: T, input?: PrismaQuery): T | undefined;
@@ -13,4 +14,4 @@ export declare const UserStatus: {
     Disabled: "Disabled";
     Blacklisted: "Blacklisted";
 };
-export {};
+export { };

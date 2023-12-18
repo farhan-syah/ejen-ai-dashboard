@@ -4,6 +4,7 @@ export declare const SubscriptionFeatureQuerySchema: import("@sinclair/typebox")
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type SubscriptionFeatureQuery = Static<typeof SubscriptionFeatureQuerySchema>;
 export declare const SubscriptionFeatureIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const SubscriptionFeatureSearchSchema: import("@sinclair/typebox"
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type SubscriptionFeatureSearch = Static<typeof SubscriptionFeatureSearchSchema>;
@@ -38,6 +40,7 @@ export declare const SubscriptionFeatureActionSchema: import("@sinclair/typebox"
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type SubscriptionFeatureAction = Static<typeof SubscriptionFeatureActionSchema>;
@@ -60,6 +63,7 @@ export declare const SubscriptionFeatureUpdateSchema: import("@sinclair/typebox"
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type SubscriptionFeatureUpdate = Static<typeof SubscriptionFeatureUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const SubscriptionFeatureUpdateManySchema: import("@sinclair/type
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type SubscriptionFeatureUpdateMany = Static<typeof SubscriptionFeatureUpdateManySchema>;

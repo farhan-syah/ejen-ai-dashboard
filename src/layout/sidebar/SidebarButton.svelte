@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import { AppState } from "$applications";
+	import { getAppState } from "$applications";
 	import Icon from "@iconify/svelte";
 	import { writable } from "svelte/store";
 	import SidebarChildButton from "./SidebarChildButton.svelte";
@@ -25,9 +25,9 @@
 			isOpen.set(!$isOpen);
 		}
 	}
-
-	const isSidebarOpen = AppState.isSidebarOpen;
-	const layout = AppState.layout;
+	const appState = getAppState();
+	const isSidebarOpen = appState.isSidebarOpen;
+	const layout = appState.layout;
 </script>
 
 {#if $layout === "desktop" && !$isSidebarOpen}

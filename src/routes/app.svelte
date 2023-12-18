@@ -1,29 +1,29 @@
 <script lang="ts">
-	import { AppState } from "$applications";
+	import { createAppState } from "$applications";
 	import { ToastState } from "$applications/toast.state";
 	import { ErrorOverlay, Toast } from "$lib/components";
 	import LoadingOverlay from "$lib/components/overlay/LoadingOverlay.svelte";
 	import { onMount } from "svelte";
 	import { flip } from "svelte/animate";
 
-	const app = AppState;
-	const loading = app.loading;
-	const error = app.error;
+	const appState = createAppState();
+	const loading = appState.loading;
+	const error = appState.error;
 	const toasts = ToastState.items;
 
 	onMount(() => {
-		app.width.set(window.innerWidth);
-		app.height.set(window.innerHeight);
+		appState.width.set(window.innerWidth);
+		appState.height.set(window.innerHeight);
 
 		// document.onfullscreenchange = (_e) => {
 		// 	console.log(document.fullscreenElement);
-		// 	AppState.fullScreenElement.set(document.fullscreenElement);
+		// 	appState.fullScreenElement.set(document.fullscreenElement);
 		// };
 	});
 
 	function handleResize(_e: any) {
-		app.width.set(window.innerWidth);
-		app.height.set(window.innerHeight);
+		appState.width.set(window.innerWidth);
+		appState.height.set(window.innerHeight);
 	}
 </script>
 
@@ -35,7 +35,7 @@
 		}
 	}}
 	on:fullscreenchange={(e) => {
-		AppState.fullScreenElement.set(document.fullscreenElement);
+		appState.fullScreenElement.set(document.fullscreenElement);
 	}}
 />
 

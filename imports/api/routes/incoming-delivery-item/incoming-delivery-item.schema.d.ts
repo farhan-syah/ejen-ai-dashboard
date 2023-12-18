@@ -4,6 +4,7 @@ export declare const IncomingDeliveryItemQuerySchema: import("@sinclair/typebox"
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+    orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type IncomingDeliveryItemQuery = Static<typeof IncomingDeliveryItemQuerySchema>;
 export declare const IncomingDeliveryItemIdSchema: import("@sinclair/typebox").TObject<{
@@ -27,6 +28,7 @@ export declare const IncomingDeliveryItemSearchSchema: import("@sinclair/typebox
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type IncomingDeliveryItemSearch = Static<typeof IncomingDeliveryItemSearchSchema>;
@@ -38,6 +40,7 @@ export declare const IncomingDeliveryItemActionSchema: import("@sinclair/typebox
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type IncomingDeliveryItemAction = Static<typeof IncomingDeliveryItemActionSchema>;
@@ -60,6 +63,7 @@ export declare const IncomingDeliveryItemUpdateSchema: import("@sinclair/typebox
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type IncomingDeliveryItemUpdate = Static<typeof IncomingDeliveryItemUpdateSchema>;
@@ -73,6 +77,7 @@ export declare const IncomingDeliveryItemUpdateManySchema: import("@sinclair/typ
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
+        orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type IncomingDeliveryItemUpdateMany = Static<typeof IncomingDeliveryItemUpdateManySchema>;

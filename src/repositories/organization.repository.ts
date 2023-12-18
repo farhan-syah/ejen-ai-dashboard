@@ -65,6 +65,14 @@ class _OrganizationRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: OrganizationSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const OrganizationRepository = new _OrganizationRepository();

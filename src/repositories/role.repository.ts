@@ -65,6 +65,14 @@ class _RoleRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: RoleSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const RoleRepository = new _RoleRepository();

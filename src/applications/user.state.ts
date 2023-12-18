@@ -8,8 +8,10 @@ class _UserState {
 	refreshToken = persistentAtom<string | undefined>("rt", undefined);
 	permissions = atom<string[]>([]);
 	setting = atom<UserSetting | undefined>();
-
-	constructor() {}
 }
 
-export const UserState = new _UserState();
+function createUserState() {
+	return new _UserState();
+}
+
+export const UserState = createUserState();

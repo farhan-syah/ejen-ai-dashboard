@@ -65,6 +65,14 @@ class _ProductTaxRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: ProductTaxSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const ProductTaxRepository = new _ProductTaxRepository();

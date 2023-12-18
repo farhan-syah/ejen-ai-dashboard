@@ -8,7 +8,7 @@ import TableHeader from "./TableHeader.svelte";
 import TableHeaderColumn from "./TableHeaderColumn.svelte";
 import TableOption from "./TableOption.svelte";
 import TableRow from "./TableRow.svelte";
-
+type OrderObject = Record<string, "asc" | "desc">;
 export { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableOption, TableRow };
 
 export interface TableColumn<T = any> {
@@ -41,7 +41,7 @@ export type TableInput<T = any, U = any> = {
 export class TableContext<T = any, U = any> {
 	asyncData: WritableAtom<Promise<T[] | undefined>> = atom(Promise.resolve([]));
 	dataLength: WritableAtom<number> = atom(0);
-	filter: WritableAtom<U | undefined>;
+	filter: WritableAtom<U> = atom({});
 	total: WritableAtom<number> = atom(0);
 	limit: WritableAtom<number | undefined>;
 	limitOptions: WritableAtom<FieldOption[]> = atom([{ value: 10, label: "10" }]);
@@ -53,6 +53,7 @@ export class TableContext<T = any, U = any> {
 	striped?: boolean;
 	toCSV?: (data: T[]) => CSV;
 	noDataText?: string;
+	orderBy: WritableAtom<Record<string, "asc" | "desc"> | undefined> = atom(undefined);
 
 	// Paging
 	currentPage: WritableAtom<number> = atom(1);
@@ -111,10 +112,10 @@ export class TableContext<T = any, U = any> {
 	onLimitChange(input: FieldOption) {
 		if (this.limit) {
 			this.limit.set(input.value);
-			if (this.currentFilter) {
-				const newFilter = { ...this.currentFilter, limit: input.value } as U;
-				this.filter.set(newFilter);
-			}
+			const filter = this.currentFilter as any;
+			const query = filter.query ?? {};
+			const newFilter = { ...this.currentFilter, query: { ...query, limit: input.value } };
+			this.filter.set(newFilter);
 		}
 		this.currentPage.set(1);
 		this.calculatePage();
@@ -133,6 +134,19 @@ export class TableContext<T = any, U = any> {
 		if (this.onSearch) {
 			this.asyncData.set(this.onSearch(this.currentFilter));
 		}
+	}
+
+	sort(key: string) {
+		const filter = this.currentFilter as any;
+		const query = filter.query ?? {};
+		const sortOrder = filter.query?.orderBy[key];
+		const orderBy: OrderObject = {};
+		if (sortOrder === "asc") orderBy[key] = "desc";
+		else orderBy[key] = "asc";
+		const newFilter = { ...filter, query: { ...query, orderBy } };
+		this.filter.set(newFilter);
+		this.search();
+		this.orderBy.set(orderBy);
 	}
 
 	apply() {
@@ -200,12 +214,18 @@ export class TableContext<T = any, U = any> {
 		const limit = this.limit.get();
 		if (limit) {
 			const skip = (currentPage - 1) * limit;
-			if (this.currentFilter) {
-				const newFilter = { ...this.currentFilter, skip: skip } as U;
-				this.filter.set(newFilter);
-				this.search();
-				this.calculatePage();
-			}
+			const filter = this.currentFilter as any;
+			const query = filter.query ?? {};
+			const newFilter = { ...this.currentFilter, query: { ...query, skip: skip } } as U;
+			this.filter.set(newFilter);
+			this.search();
+			this.calculatePage();
+
+			// this.limit.set(input.value);
+			// const filter = this.currentFilter as any;
+			// const query = filter.query ?? {};
+			// const newFilter = { ...this.currentFilter, query: { ...query, limit: input.value } };
+			// this.filter.set(newFilter);
 		}
 	}
 }

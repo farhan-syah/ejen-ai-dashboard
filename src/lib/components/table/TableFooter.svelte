@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Icon from "@iconify/svelte";
 	import { getTableContext } from ".";
-	import { FormControl } from "../form";
-	import TextField from "../form/text-field/TextField.svelte";
+	import { FormControl } from "..";
 
 	const context = getTableContext();
 
@@ -35,7 +34,7 @@
 		</div>
 		<div class="mr-2">Page</div>
 		<div class="mr-2 w-10 text-center">
-			<TextField control={pageController} onKeyup={handleKeyup} inputClass="p-0.5 text-center" />
+			<!-- <TextField controller={pageController} onKeyup={handleKeyup} inputClass="p-0.5 text-center" /> -->
 		</div>
 		<div class="mr-5">of {$maxPage}</div>
 		<div class="flex items-center text-2xl">

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { AppState } from "$applications";
+	import { getAppState } from "$applications";
 	import Icon from "@iconify/svelte";
-
-	const isSidebarOpen = AppState.isSidebarOpen;
-	const layout = AppState.layout;
-	const lockedSidebarPosition = AppState.lockedSidebarPosition;
+	const appState = getAppState();
+	const isSidebarOpen = appState.isSidebarOpen;
+	const layout = appState.layout;
+	const lockedSidebarPosition = appState.lockedSidebarPosition;
 
 	function handleDrawerClick() {
 		if ($layout == "desktop") {

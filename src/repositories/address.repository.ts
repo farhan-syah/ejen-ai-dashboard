@@ -65,6 +65,14 @@ class _AddressRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: AddressSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const AddressRepository = new _AddressRepository();

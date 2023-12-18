@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { AppState } from "$applications";
+	import { getAppState } from "$applications";
 
-	const showOverlay = AppState.showOverlay;
-	const isSidebarOpen = AppState.isSidebarOpen;
+	const appState = getAppState();
+	const showOverlay = appState.showOverlay;
+	const isSidebarOpen = appState.isSidebarOpen;
 
 	function handleClick() {
 		isSidebarOpen.set(false);

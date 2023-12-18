@@ -22,9 +22,6 @@
 	class="group pointer-lighter text-ss w-full px-2 py-1.5 flex items-center gap-1.5 pl-4 hover:text-white {$isActive
 		? 'font-semibold text-white'
 		: ' text-white/80'}"
-	on:click={() => {
-		// SidebarState.refresh();
-	}}
 >
 	<Icon
 		icon="bx:radio-circle"

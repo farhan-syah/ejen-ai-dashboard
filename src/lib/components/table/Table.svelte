@@ -21,7 +21,7 @@
 {#if showOption}
 	<TableOption />
 {/if}
-<div class="flex flex-col overflow-x-auto rounded-sm shadow-sm mt-2 cursor-default text-sm">
+<div class="flex flex-col overflow-x-auto rounded-sm shadow-sm mt-2 cursor-default text-xs">
 	<table class="table-auto">
 		{#if showHeader}
 			<TableHeader />

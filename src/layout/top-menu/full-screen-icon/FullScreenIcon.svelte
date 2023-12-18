@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { AppState } from "$applications";
+	import { getAppState } from "$applications";
 	import IconWithTooltip from "$lib/components/icons/IconWithTooltip.svelte";
-
-	const fullScreenElement = AppState.fullScreenElement;
+	const appState = getAppState();
+	const fullScreenElement = appState.fullScreenElement;
 
 	async function handleFullScreenChange() {
 		if (!$fullScreenElement) {
@@ -14,7 +14,7 @@
 
 	// document.onfullscreenchange = (_e) => {
 	// 	console.log
-	// 	AppState.fullScreenElement.set(document.fullscreenElement);
+	// 	appState.fullScreenElement.set(document.fullscreenElement);
 	// };
 </script>
 

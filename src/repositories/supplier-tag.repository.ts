@@ -65,6 +65,14 @@ class _SupplierTagRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: SupplierTagSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const SupplierTagRepository = new _SupplierTagRepository();

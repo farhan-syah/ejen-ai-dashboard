@@ -65,6 +65,14 @@ class _LeadAddressRepository {
       auth: "accessToken",
     });
   }
+
+  async count(input: LeadAddressSearch) {
+    const url = `${this.path}/count`;
+		return await HttpService.post<number>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 }
 
 export const LeadAddressRepository = new _LeadAddressRepository();
