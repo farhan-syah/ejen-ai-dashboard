@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { AppState } from "$applications";
+	import { ToastState } from "$applications/toast.state";
 	import { Button, Card, FormControl, PageTitle, TextAreaField, TextField } from "$lib/components";
 	import { ProductCategoryRepository } from "$repositories";
 	import { computed } from "nanostores";
@@ -25,7 +26,8 @@
 					description: description
 				}
 			});
-			goto("/products/categories/" + category.id);
+			await goto("/products/categories/" + category.id);
+			ToastState.add({ type: "success", message: "Category has been added" });
 		} catch (e) {
 			AppState.error.set(e);
 		} finally {

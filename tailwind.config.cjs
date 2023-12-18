@@ -29,6 +29,9 @@ const config = {
 			},
 			animation: {
 				"ping-sm": "ping-sm 2s cubic-bezier(0, 0, 0.2, 1.5) infinite"
+			},
+			borderWidth: {
+				6: "6px"
 			}
 		}
 	},
