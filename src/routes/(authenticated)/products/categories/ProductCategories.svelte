@@ -25,6 +25,12 @@
 			// else return [];
 			return 1;
 		},
+		onGetSelected: async (selected) => {
+			return ProductCategoryRepository.search({
+				action: "search",
+				where: {}
+			});
+		},
 		toCSV: toProductCategoryCSV
 	});
 </script>

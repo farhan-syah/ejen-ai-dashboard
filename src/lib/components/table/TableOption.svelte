@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getAppState } from "$applications";
+
 	import SelectField from "../form/select-field/SelectField.svelte";
 
 	import { FileType, saveAsFile } from "$lib/utils/file-saver";
@@ -18,14 +20,34 @@
 	const options = context.limitOptions;
 	const columns = context.columns;
 	const selected = context.selected;
+	const appState = getAppState();
 
-	// let overlay = createOverlay("overlay");
-
-	async function handleDownload() {
+	async function handleDownloadSelected() {
 		if (toCSV)
 			try {
-				// overlay.open();
+				if (context.onGetSelected) {
+					appState.loading.set(true);
+
+					const data = await context.onGetSelected([...$selected]);
+
+					const csv = toCSV(data);
+
+					const csvString = json2csv(csv.data, { keys: csv.columnKeys });
+
+					saveAsFile(csvString, csv.fileName, FileType.csv);
+				}
+			} catch (error) {
+				appState.error.set(error);
+			} finally {
+				appState.loading.set(false);
+			}
+	}
+
+	async function handleDownloadAll() {
+		if (toCSV)
+			try {
 				if (context.onSearch) {
+					appState.loading.set(true);
 					let filter = context.currentFilter;
 					delete filter.skip;
 					delete filter.limit;
@@ -33,13 +55,14 @@
 
 					let csv = toCSV(data);
 
-					let csvString = await json2csv(csv.data, { keys: csv.columnKeys });
+					let csvString = json2csv(csv.data, { keys: csv.columnKeys });
 
 					saveAsFile(csvString, csv.fileName, FileType.csv);
 				}
-				// overlay.close();
 			} catch (error) {
-				console.log(error);
+				appState.error.set(error);
+			} finally {
+				appState.loading.set(false);
 			}
 	}
 	const columnOptions: FieldOption[] = (columns ?? []).map((c) => {
@@ -118,11 +141,21 @@
 				/> -->
 			</div>
 		{/if}
+		{#if toCSV && $selected.length > 0}
+			<Button
+				class="px-1.5 py-1 text-xs gap-1"
+				label="Download Selected to CSV ({$selected.length})"
+				onClick={() => handleDownloadSelected()}
+			>
+				<div slot="prefix">
+					<Icon icon="mdi:download" class="text-2xs -mt-0.5" />
+				</div>
+			</Button>{/if}
 		{#if toCSV}
 			<Button
 				class="px-1.5 py-1 text-xs gap-1"
-				label="Download CSV ({$total})"
-				onClick={() => handleDownload()}
+				label="Download All to CSV ({$total})"
+				onClick={() => handleDownloadAll()}
 			>
 				<div slot="prefix">
 					<Icon icon="mdi:download" class="text-2xs -mt-0.5" />

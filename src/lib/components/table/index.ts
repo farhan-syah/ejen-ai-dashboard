@@ -32,6 +32,7 @@ export type TableInput<T = any, U = any> = {
 	limit?: number;
 	onCount?: (filter?: U) => Promise<number>;
 	onSearch?: (filter?: U) => Promise<T[]>;
+	onGetSelected?: (selected: (string | number | symbol)[]) => Promise<T[]>;
 	columns?: TableColumn[];
 	striped?: boolean;
 	showColumnFilter?: boolean;
@@ -53,6 +54,7 @@ export class TableContext<T = any, U = any> {
 	showColumnFilter: boolean;
 	onCount?: (filter?: U) => Promise<number>;
 	onSearch?: (filter?: U) => Promise<T[]>;
+	onGetSelected?: (selected: (string | number | symbol)[]) => Promise<T[]>;
 	striped?: boolean;
 	toCSV?: (data: T[]) => CSV;
 	noDataText?: string;
@@ -76,6 +78,7 @@ export class TableContext<T = any, U = any> {
 		this.showColumnFilter = data.showColumnFilter ?? false;
 		this.onSearch = data.onSearch;
 		this.onCount = data.onCount;
+		this.onGetSelected = data.onGetSelected;
 		this.toCSV = data.toCSV;
 		this.selectable = atom(data.selectable);
 		this.selectByKey = data.selectByKey;
