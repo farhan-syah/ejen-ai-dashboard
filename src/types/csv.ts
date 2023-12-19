@@ -1,11 +1,11 @@
 export class CSV<T = any> {
-	columns: string[];
+	columnKeys: string[];
 	data: Array<T>;
 	fileName: string;
 
-	constructor(obj: { data?: Array<T>; columns?: string[]; filename: string }) {
+	constructor(obj: { data?: Array<T>; columnKeys?: string[]; fileName: string }) {
 		this.data = obj.data ?? [];
-		this.columns = obj.columns ?? [];
-		this.fileName = obj.filename;
+		this.columnKeys = obj.columnKeys ?? [];
+		this.fileName = obj.fileName;
 	}
 }

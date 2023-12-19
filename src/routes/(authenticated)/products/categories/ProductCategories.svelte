@@ -4,12 +4,18 @@
 	import { Button, PageTitle, Table, createTableContext } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { ProductCategoryRepository } from "$repositories";
-	import { productCategoryColumns, type ProductCategory } from "./product-categories";
+	import {
+		productCategoryColumns,
+		toProductCategoryCSV,
+		type ProductCategory
+	} from "./product-categories";
 
 	const tableContext = createTableContext<ProductCategory, ProductCategorySearch>({
 		filter: { where: {}, action: "search", query: { limit: 5 } },
 		columns: productCategoryColumns,
 		limit: 5,
+		selectable: true,
+		selectByKey: "id",
 		onSearch: async (f) => {
 			if (f) return ProductCategoryRepository.search(f);
 			else return [];
@@ -18,7 +24,8 @@
 			if (f) return ProductCategoryRepository.count(f);
 			// else return [];
 			return 1;
-		}
+		},
+		toCSV: toProductCategoryCSV
 	});
 </script>
 

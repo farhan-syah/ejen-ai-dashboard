@@ -9,17 +9,21 @@
 
 	type T = $$Generic;
 
-	export let controller: FormControl<T> = new FormControl<T>();
+	export let initialValue: T | undefined = undefined;
+	export let controller: FormControl<T> = new FormControl<T>({ value: initialValue });
+
 	export let label: string | undefined = undefined;
 	export let options: readonly FieldOption<T>[] = [];
 	export let placeholder: string = "Select";
+	export let showSelectedIcon: boolean = false;
 
 	export let valueTransform: (value?: T) => string | undefined = (value) => {
 		return value?.toString() ?? undefined;
 	};
 
 	let required = controller.required;
-	let inputClass = "";
+	export let optionClass = "";
+	let outlineClass = "";
 	let labelClass = "";
 
 	$: value = controller.writableValue;
@@ -29,18 +33,18 @@
 	$: dirty = controller.dirty;
 	$: {
 		if ($isFocused) {
-			inputClass = "outline-2";
+			outlineClass = "outline-2";
 			if ($hasError) {
-				inputClass += " outline-red-500";
+				outlineClass += " outline-red-500";
 			} else {
-				inputClass += " outline-blue-500";
+				outlineClass += " outline-blue-500";
 			}
 		} else {
-			inputClass = "outline-1";
+			outlineClass = "outline-1";
 			if ($hasError) {
-				inputClass += " outline-red-500";
+				outlineClass += " outline-red-500";
 			} else {
-				inputClass += " outline-gray-300";
+				outlineClass += " outline-gray-300";
 			}
 		}
 	}
@@ -162,8 +166,11 @@
 	>
 		<Popper bind:isOpen={$isOpen} {popperOptions}>
 			<!-- Main Component -->
-			<div slot="main" class="flex rounded outline p-2 cursor-pointer {inputClass}">
-				<div>{valueTransform($value) ?? placeholder}</div>
+			<div
+				slot="main"
+				class="flex text-center rounded outline p-2 cursor-pointer {outlineClass} {optionClass}"
+			>
+				<div class="w-full">{valueTransform($value) ?? placeholder}</div>
 			</div>
 			<!-- Popper Component -->
 
@@ -187,7 +194,7 @@
 							<div class="flex-grow">
 								{option.label ?? option.value}
 							</div>
-							{#if $value == option.value}
+							{#if showSelectedIcon && $value == option.value}
 								<div class="text-xl text-green-500">
 									<Icon icon="bx:check" />
 								</div>

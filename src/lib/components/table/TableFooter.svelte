@@ -37,7 +37,7 @@
 		<div class="flex-auto inline-flex">
 			Showing {$start} to {$end}
 			{#if total}
-				<div class="ml-2">of {$total} entries</div>
+				<div class="ml-1">of {$total} entries</div>
 			{/if}
 		</div>
 		<div class="mr-2">Page</div>
@@ -46,15 +46,15 @@
 				controller={pageController}
 				bind:input
 				onKeydown={handleKeydown}
-				inputClass=" px-1 py-0.5 text-center "
+				inputClass=" text-xs py-0.5 px-0.5 text-center "
 			/>
 		</div>
-		<div class="mr-5">of {$maxPage}</div>
+		<div class="mr-3">of {$maxPage}</div>
 		<div class="flex items-center text-2xl">
 			<div
 				role="button"
 				tabindex="-1"
-				class=" waves-effect"
+				class="pointer"
 				on:click={() => {
 					context.goToFirstPage();
 				}}

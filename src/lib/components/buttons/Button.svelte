@@ -12,7 +12,7 @@
 </script>
 
 <button
-	class="button {componentClass}"
+	class="button flex items-center {componentClass}"
 	on:click={handleClick}
 	on:keydown={handleClick}
 	disabled={!valid}

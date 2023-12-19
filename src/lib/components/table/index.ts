@@ -1,5 +1,6 @@
+import { mergeArray } from "$lib/utils";
 import type { CSV, FieldOption } from "$types";
-import { atom, type WritableAtom } from "nanostores";
+import { atom, computed, type WritableAtom } from "nanostores";
 import { getContext, setContext, type SvelteComponent } from "svelte";
 import Table from "./Table.svelte";
 import TableBody from "./TableBody.svelte";
@@ -36,11 +37,13 @@ export type TableInput<T = any, U = any> = {
 	showColumnFilter?: boolean;
 	toCSV?: (data: T[]) => CSV;
 	noDataText?: string;
+	selectable?: boolean;
+	selectByKey?: keyof T;
 };
 
 export class TableContext<T = any, U = any> {
 	asyncData: WritableAtom<Promise<T[] | undefined>> = atom(Promise.resolve([]));
-	dataLength: WritableAtom<number> = atom(0);
+	data: WritableAtom<T[]> = atom([]);
 	filter: WritableAtom<U> = atom({});
 	total: WritableAtom<number> = atom(0);
 	limit: WritableAtom<number | undefined>;
@@ -54,12 +57,15 @@ export class TableContext<T = any, U = any> {
 	toCSV?: (data: T[]) => CSV;
 	noDataText?: string;
 	orderBy: WritableAtom<Record<string, "asc" | "desc"> | undefined> = atom(undefined);
-
+	// Selection
+	selectable: WritableAtom<boolean>;
+	selected = atom<(string | number | symbol)[]>([]);
 	// Paging
 	currentPage: WritableAtom<number> = atom(1);
 	start: WritableAtom<number> = atom(1);
 	end: WritableAtom<number> = atom(1);
 	maxPage: WritableAtom<number> = atom(1);
+	selectByKey?: string | number | symbol;
 
 	constructor(data: TableInput<T, U>) {
 		this.columns = data.columns ?? [];
@@ -71,6 +77,8 @@ export class TableContext<T = any, U = any> {
 		this.onSearch = data.onSearch;
 		this.onCount = data.onCount;
 		this.toCSV = data.toCSV;
+		this.selectable = atom(data.selectable);
+		this.selectByKey = data.selectByKey;
 
 		this.total.subscribe((total) => {
 			if (total) this.buildLimitOptions(total);
@@ -84,7 +92,7 @@ export class TableContext<T = any, U = any> {
 		this.asyncData.subscribe((data) => {
 			data.then((data) => {
 				if (data) {
-					this.dataLength.set(data.length);
+					this.data.set(data);
 				}
 			});
 		});
@@ -109,17 +117,17 @@ export class TableContext<T = any, U = any> {
 		this.limitOptions.set(option);
 	}
 
-	onLimitChange(input: FieldOption) {
+	onLimitChange(value: number) {
 		if (this.limit) {
-			this.limit.set(input.value);
+			this.limit.set(value);
 			const filter = this.currentFilter as any;
 			const query = filter.query ?? {};
-			const newFilter = { ...this.currentFilter, query: { ...query, limit: input.value } };
+			const newFilter = { ...this.currentFilter, query: { ...query, limit: value } };
 			this.filter.set(newFilter);
 		}
-		this.currentPage.set(1);
-		this.calculatePage();
+		this.goToFirstPage();
 		this.search();
+		this.calculatePage();
 	}
 
 	count() {
@@ -139,14 +147,15 @@ export class TableContext<T = any, U = any> {
 	sort(key: string) {
 		const filter = this.currentFilter as any;
 		const query = filter.query ?? {};
-		const sortOrder = filter.query?.orderBy[key];
+		const sortOrder = filter.query?.orderBy ? filter.query.orderBy[key] : undefined;
 		const orderBy: OrderObject = {};
 		if (sortOrder === "asc") orderBy[key] = "desc";
 		else orderBy[key] = "asc";
 		const newFilter = { ...filter, query: { ...query, orderBy } };
 		this.filter.set(newFilter);
-		this.search();
 		this.orderBy.set(orderBy);
+		this.goToFirstPage();
+		this.search();
 	}
 
 	apply() {
@@ -168,9 +177,7 @@ export class TableContext<T = any, U = any> {
 			if (max > total) {
 				this.end.set(total);
 			} else {
-				const dataLength = this.dataLength.get();
-				if (max > dataLength) this.end.set(max);
-				else this.end.set(dataLength);
+				this.end.set(max);
 			}
 			this.maxPage.set(Math.ceil(total / limit));
 		}
@@ -227,6 +234,52 @@ export class TableContext<T = any, U = any> {
 			// const newFilter = { ...this.currentFilter, query: { ...query, limit: input.value } };
 			// this.filter.set(newFilter);
 		}
+	}
+
+	isAllSelected = computed([this.selected, this.data], (selected, data) => {
+		const key = this.selectByKey;
+		if (key) {
+			return data.every((data: any) => selected.includes(data[key]));
+		}
+		return false;
+	});
+
+	select(row: any) {
+		if (this.selectable.get() && this.selectByKey) {
+			const value = row[this.selectByKey];
+			const selected = [...this.selected.get()];
+			const index = selected.findIndex((s) => s === value);
+			if (index == -1) {
+				selected.push(value);
+			} else {
+				selected.splice(index, 1);
+			}
+			this.selected.set(selected);
+		}
+	}
+
+	selectAll() {
+		const key = this.selectByKey;
+		if (this.selectable.get() && key) {
+			if (!this.isAllSelected.get()) {
+				const currentSelected = [...this.selected.get()];
+				const data = this.data.get();
+				const currentPageValues = data.map((data: any) => data[key]);
+				const newSelected = mergeArray(currentSelected, currentPageValues);
+				this.selected.set(newSelected);
+			} else {
+				const currentSelected = [...this.selected.get()];
+				const currentPageValues = this.data.get().map((data: any) => data[key]);
+				const newSelected = currentSelected.filter((row) => {
+					return !currentPageValues.includes(row);
+				});
+				this.selected.set(newSelected);
+			}
+		}
+	}
+
+	clearSelection() {
+		this.selected.set([]);
 	}
 }
 

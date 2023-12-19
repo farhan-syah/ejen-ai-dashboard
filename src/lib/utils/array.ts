@@ -14,3 +14,16 @@ export function moveAndCopyArray<T = any>(array: Array<T>, fromIndex: number, to
 	moveArray(newArray, fromIndex, toIndex);
 	return newArray;
 }
+
+export function mergeArray<T = any>(a: Array<T>, b: Array<T>) {
+	const c = [...a];
+	b.forEach((bItem) => {
+		const exist = c.some((cItem) => cItem === bItem);
+		if (!exist) c.push(bItem);
+	});
+	return c;
+}
+
+export function arrayIncludesEvery<T = any>(a: Array<T>, b: Array<T>) {
+	return b.every((bItem) => a.includes(bItem));
+}

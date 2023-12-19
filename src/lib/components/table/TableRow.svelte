@@ -2,7 +2,6 @@
 	import { getTableContext } from ".";
 
 	const context = getTableContext();
-
 	export let data: any;
 
 	export let odd = "odd:bg-white";
@@ -16,10 +15,24 @@
 		else return "";
 	}
 
-	let columns = context.visibleColumns;
+	const columns = context.visibleColumns;
+	const selectable = context.selectable;
+	const selected = context.selected;
+	const selectKey = context.selectByKey;
 </script>
 
 <tr class="{stripe} {hover} align-top">
+	{#if $selectable && selectKey != null}
+		<td class="pl-2 pt-2">
+			<input
+				type="checkbox"
+				on:click={() => {
+					context.select(data);
+				}}
+				checked={$selected.includes(data[selectKey])}
+			/>
+		</td>
+	{/if}
 	{#each $columns as column}
 		<td
 			class="{getPosition(column.align)}  {column.contentClass ?? ''} {column.shrink
