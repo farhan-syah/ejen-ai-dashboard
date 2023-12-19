@@ -102,8 +102,14 @@ class _AuthService {
 		const { validExpiry, decodedToken } = this.validateAccessToken(token);
 		if (validExpiry) {
 			const user = await UserRepository.get(decodedToken.sub);
-			const setting = await UserSettingRepository.get(decodedToken.sub);
-			if (setting.defaultUserRole) {
+			const searchSettingResults = await UserSettingRepository.search({
+				action: "search",
+				where: {
+					userId: decodedToken.sub
+				}
+			});
+			const setting = searchSettingResults.at(0);
+			if (setting?.defaultUserRole) {
 				const permissions = await this.getPermissions(setting.defaultUserRole);
 				UserState.permissions.set(permissions);
 			}

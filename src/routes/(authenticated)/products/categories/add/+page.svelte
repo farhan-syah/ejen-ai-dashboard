@@ -1,5 +1,5 @@
 <script>
-	import AddCategory from "./AddCategory.svelte";
+	import AddCategory from "./AddProductCategory.svelte";
 </script>
 
 <AddCategory />

@@ -43,7 +43,7 @@ const rowHeaders = Object.keys(row);
 export function toProductCategoryCSV(productCategory: ProductCategory[]) {
 	const data: CSVRow[] = [];
 	const date: string = formatLocalDate(new Date(), "yy-MM-dd hh-mm aa");
-	const fileName = "Admin " + date + ".csv";
+	const fileName = "product-categories " + date + ".csv";
 
 	productCategory.forEach((p) => {
 		const csv: CSVRow = {
@@ -53,7 +53,6 @@ export function toProductCategoryCSV(productCategory: ProductCategory[]) {
 		};
 		data.push(csv);
 	});
-	console.log(data);
 
 	return new CSV<CSVRow>({ columnKeys: rowHeaders, data, fileName });
 }

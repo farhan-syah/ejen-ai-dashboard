@@ -11,7 +11,10 @@ export declare const ProductCategoryIdSchema: import("@sinclair/typebox").TObjec
     id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
 }>;
 export type ProductCategoryId = Static<typeof ProductCategoryIdSchema>;
-export declare const ProductCategoryUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const ProductCategoryUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TString;
+    description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type ProductCategoryUncheckedCreateInput = Static<typeof ProductCategoryUncheckedCreateInputSchema>;
 export declare const ProductCategoryUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
 export type ProductCategoryUncheckedUpdateInput = Static<typeof ProductCategoryUncheckedUpdateInputSchema>;
@@ -149,10 +152,16 @@ export declare const ProductCategoryActionSchema: import("@sinclair/typebox").TO
     }>>;
 }>;
 export type ProductCategoryAction = Static<typeof ProductCategoryActionSchema>;
-export declare const ProductCategoryCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const ProductCategoryCreateDataSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TString;
+    description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type ProductCategoryCreateData = Static<typeof ProductCategoryCreateDataSchema>;
 export declare const ProductCategoryCreateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TString;
+        description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;

@@ -141,11 +141,12 @@
 				/> -->
 			</div>
 		{/if}
-		{#if toCSV && $selected.length > 0}
+		{#if toCSV}
 			<Button
 				class="px-1.5 py-1 text-xs gap-1"
 				label="Download Selected to CSV ({$selected.length})"
 				onClick={() => handleDownloadSelected()}
+				valid={$selected.length > 0}
 			>
 				<div slot="prefix">
 					<Icon icon="mdi:download" class="text-2xs -mt-0.5" />

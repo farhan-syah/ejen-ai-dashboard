@@ -13,7 +13,9 @@ export declare const UserSettingIdSchema: import("@sinclair/typebox").TObject<{
 export type UserSettingId = Static<typeof UserSettingIdSchema>;
 export declare const UserSettingUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
 export type UserSettingUncheckedCreateInput = Static<typeof UserSettingUncheckedCreateInputSchema>;
-export declare const UserSettingUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const UserSettingUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{
+    defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type UserSettingUncheckedUpdateInput = Static<typeof UserSettingUncheckedUpdateInputSchema>;
 export declare const UserSettingActionEnum: {
     search: string;
@@ -54,6 +56,20 @@ export declare const UserSettingSearchWhereSchema: import("@sinclair/typebox").T
         gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
         not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
     }>, import("@sinclair/typebox").TString]>>>;
+    userId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+        equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+        notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+        lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
+        not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+    }>, import("@sinclair/typebox").TString]>>>;
 }>;
 export declare const UserSettingSearchSchema: import("@sinclair/typebox").TObject<{
     action: import("@sinclair/typebox").TLiteral<string>;
@@ -90,6 +106,20 @@ export declare const UserSettingSearchSchema: import("@sinclair/typebox").TObjec
             lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
+        userId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
     }>;
@@ -139,6 +169,20 @@ export declare const UserSettingActionSchema: import("@sinclair/typebox").TObjec
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
+        userId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -159,10 +203,14 @@ export declare const UserSettingCreateSchema: import("@sinclair/typebox").TObjec
     }>>;
 }>;
 export type UserSettingCreate = Static<typeof UserSettingCreateSchema>;
-export declare const UserSettingUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const UserSettingUpdateDataSchema: import("@sinclair/typebox").TObject<{
+    defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type UserSettingUpdateData = Static<typeof UserSettingUpdateDataSchema>;
 export declare const UserSettingUpdateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -173,7 +221,9 @@ export declare const UserSettingUpdateSchema: import("@sinclair/typebox").TObjec
 }>;
 export type UserSettingUpdate = Static<typeof UserSettingUpdateSchema>;
 export declare const UserSettingUpdateManySchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
     }>;

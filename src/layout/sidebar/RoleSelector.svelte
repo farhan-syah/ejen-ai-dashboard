@@ -21,8 +21,8 @@
 	const isModelOpen = atom(false);
 
 	currentRole.listen(async (value) => {
-		if (value && $user && $userSetting?.defaultUserRole != value.id) {
-			await UserSettingRepository.update($user.id, { data: { defaultUserRole: value.id } });
+		if (value && $user && $userSetting && $userSetting?.defaultUserRole != value.id) {
+			await UserSettingRepository.update($userSetting.id, { data: { defaultUserRole: value.id } });
 		}
 
 		AuthService.refreshUser();
@@ -67,9 +67,10 @@
 		}
 
 		const defaultUserRole = $userSetting?.defaultUserRole;
-		const initialRole = result.find((role) => {
-			return role.id === defaultUserRole;
-		});
+		const initialRole =
+			result.find((role) => {
+				return role.id === defaultUserRole;
+			}) ?? result.at(0);
 		currentRole.set(initialRole);
 	}
 

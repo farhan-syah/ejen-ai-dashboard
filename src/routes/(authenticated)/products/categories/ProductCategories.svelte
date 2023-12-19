@@ -26,9 +26,10 @@
 			return 1;
 		},
 		onGetSelected: async (selected) => {
+			console.log(selected);
 			return ProductCategoryRepository.search({
 				action: "search",
-				where: {}
+				where: { id: { in: selected as string[] } }
 			});
 		},
 		toCSV: toProductCategoryCSV
