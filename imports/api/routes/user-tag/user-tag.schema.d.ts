@@ -7,10 +7,6 @@ export declare const UserTagQuerySchema: import("@sinclair/typebox").TObject<{
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type UserTagQuery = Static<typeof UserTagQuerySchema>;
-export declare const UserTagIdSchema: import("@sinclair/typebox").TObject<{
-    id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
-}>;
-export type UserTagId = Static<typeof UserTagIdSchema>;
 export declare const UserTagUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
 export type UserTagUncheckedCreateInput = Static<typeof UserTagUncheckedCreateInputSchema>;
 export declare const UserTagUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
@@ -55,6 +51,7 @@ export declare const UserTagSearchWhereSchema: import("@sinclair/typebox").TObje
         not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
     }>, import("@sinclair/typebox").TString]>>>;
 }>;
+export type UserTagSearchWhere = Static<typeof UserTagSearchWhereSchema>;
 export declare const UserTagSearchSchema: import("@sinclair/typebox").TObject<{
     action: import("@sinclair/typebox").TLiteral<string>;
     where: import("@sinclair/typebox").TObject<{
@@ -175,7 +172,53 @@ export type UserTagUpdate = Static<typeof UserTagUpdateSchema>;
 export declare const UserTagUpdateManySchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     where: import("@sinclair/typebox").TObject<{
-        id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
+        id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>, import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>]>;
+        createdDate: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
+        updatedAt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -188,7 +231,53 @@ export declare const UserTagUpdateManySchema: import("@sinclair/typebox").TObjec
 export type UserTagUpdateMany = Static<typeof UserTagUpdateManySchema>;
 export declare const UserTagDeleteManySchema: import("@sinclair/typebox").TObject<{
     where: import("@sinclair/typebox").TObject<{
-        id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
+        id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>, import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>]>;
+        createdDate: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
+        updatedAt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
+            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
     }>;
 }>;
 export type UserTagDeleteMany = Static<typeof UserTagDeleteManySchema>;

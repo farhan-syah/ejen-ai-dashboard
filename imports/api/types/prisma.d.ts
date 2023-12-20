@@ -1,4 +1,4 @@
-import type { Static } from "@sinclair/typebox";
+import type { Static, TSchema } from "@sinclair/typebox";
 export declare const PrismaQuerySchema: import("@sinclair/typebox").TObject<{
     limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -34,5 +34,10 @@ export declare const PrismaDateTimeFilterSchema: import("@sinclair/typebox").TRe
     not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
 }>, import("@sinclair/typebox").TString]>>;
 export type PrismaDateTimeFilter = Static<typeof PrismaDateTimeFilterSchema>;
+export declare const PrismaListFilter: <T extends TSchema>(schema: T) => import("@sinclair/typebox").TObject<{
+    every: import("@sinclair/typebox").TOptional<T>;
+    some: import("@sinclair/typebox").TOptional<T>;
+    none: import("@sinclair/typebox").TOptional<T>;
+}>;
 export { };
 
