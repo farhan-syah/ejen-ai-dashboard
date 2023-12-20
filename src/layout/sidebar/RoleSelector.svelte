@@ -33,9 +33,15 @@
 	});
 
 	async function fetchRole() {
+		const user = UserState.user.get();
+		if (!user) return;
 		const result = (await RoleRepository.search({
 			where: {
-				userId: UserState.user.get()?.id
+				users: {
+					some: {
+						id: user.id
+					}
+				}
 			},
 			query: {
 				additionalFields: {

@@ -244,15 +244,18 @@
 		button {
 			@apply text-black px-1.5 py-1 text-xs border border-gray-300 rounded;
 			min-width: 1.6rem;
-		}
-		button:not(.active):not(:disabled) {
-			@apply hover:bg-gray-100;
-		}
-		button.active {
-			@apply bg-black text-white;
-		}
-		button:disabled {
-			@apply text-gray-400 border-gray-200;
+
+			:not(.active):not(:disabled) {
+				@apply hover:bg-gray-100;
+			}
+
+			.active {
+				@apply bg-black text-white;
+			}
+
+			:disabled {
+				@apply text-gray-400 border-gray-200;
+			}
 		}
 	}
 

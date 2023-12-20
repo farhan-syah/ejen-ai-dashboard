@@ -11,9 +11,9 @@
 	} from "./product-categories";
 
 	const tableContext = createTableContext<ProductCategory, ProductCategorySearch>({
-		filter: { where: {}, action: "search", query: { limit: 5 } },
+		filter: { where: {}, action: "search", query: { limit: 20 } },
 		columns: productCategoryColumns,
-		limit: 5,
+		limit: 20,
 		selectable: true,
 		selectByKey: "id",
 		onSearch: async (f) => {
