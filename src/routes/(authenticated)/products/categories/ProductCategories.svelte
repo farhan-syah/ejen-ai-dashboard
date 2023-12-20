@@ -3,6 +3,7 @@
 	import { goto } from "$app/navigation";
 	import { Button, PageTitle, Table, createTableContext } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
+	import { delay } from "$lib/utils";
 	import { ProductCategoryRepository } from "$repositories";
 	import {
 		productCategoryColumns,
@@ -26,13 +27,21 @@
 			return 1;
 		},
 		onGetSelected: async (selected) => {
-			console.log(selected);
 			return ProductCategoryRepository.search({
 				action: "search",
 				where: { id: { in: selected as string[] } }
 			});
 		},
-		toCSV: toProductCategoryCSV
+		toCSV: toProductCategoryCSV,
+		bulkActions: {
+			"Action A": async (selected) => {
+				await delay(3000);
+			},
+			"Action B": async () => {
+				await delay(3000);
+				throw "Bulk Action Error";
+			}
+		}
 	});
 </script>
 

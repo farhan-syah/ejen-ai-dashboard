@@ -12,6 +12,10 @@ import TableRow from "./TableRow.svelte";
 type OrderObject = Record<string, "asc" | "desc">;
 export { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableOption, TableRow };
 
+export type BulkActionCallback = (selected: (string | number | symbol)[]) => Promise<any>;
+
+export type BulkAction = Record<string, BulkActionCallback>;
+
 export interface TableColumn<T = any> {
 	key: keyof T;
 	label: string;
@@ -40,6 +44,7 @@ export type TableInput<T = any, U = any> = {
 	noDataText?: string;
 	selectable?: boolean;
 	selectByKey?: keyof T;
+	bulkActions?: BulkAction;
 };
 
 export class TableContext<T = any, U = any> {
@@ -68,6 +73,7 @@ export class TableContext<T = any, U = any> {
 	end: WritableAtom<number> = atom(1);
 	maxPage: WritableAtom<number> = atom(1);
 	selectByKey?: string | number | symbol;
+	bulkActions: BulkAction;
 
 	constructor(data: TableInput<T, U>) {
 		this.columns = data.columns ?? [];
@@ -82,6 +88,7 @@ export class TableContext<T = any, U = any> {
 		this.toCSV = data.toCSV;
 		this.selectable = atom(data.selectable);
 		this.selectByKey = data.selectByKey;
+		this.bulkActions = data.bulkActions ?? {};
 
 		this.total.subscribe((total) => {
 			if (total) this.buildLimitOptions(total);

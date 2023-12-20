@@ -4,10 +4,10 @@
 	import SelectField from "../form/select-field/SelectField.svelte";
 
 	import { FileType, saveAsFile } from "$lib/utils/file-saver";
-	import type { FieldOption } from "$types";
+	import { FieldOption } from "$types";
 	import Icon from "@iconify/svelte";
 	import { json2csv } from "json-2-csv";
-	import { getTableContext, type TableColumn } from ".";
+	import { getTableContext, type BulkActionCallback, type TableColumn } from ".";
 	import { Button, FormControl } from "..";
 	type T = $$Generic;
 
@@ -98,6 +98,34 @@
 			context.visibleColumns.set(newColumn);
 		}
 	});
+
+	// Bulk Actions
+
+	const bulkActions = context.bulkActions;
+	const bulkActionOptions: FieldOption<FieldOption<BulkActionCallback>>[] = Object.entries(
+		bulkActions
+	).map((action) => {
+		return { label: action[0], value: { label: action[0], value: action[1] } };
+	});
+	const bulkActionController = new FormControl<FieldOption<BulkActionCallback>>();
+	const bulkActionValue = bulkActionController.writableValue;
+
+	async function handleBulkAction() {
+		if ($bulkActionValue)
+			try {
+				appState.loading.set(true);
+				const selected = context.selected.get();
+				await $bulkActionValue.value(selected);
+			} catch (e) {
+				appState.error.set(e);
+			} finally {
+				appState.loading.set(false);
+			}
+	}
+
+	function handleClearBulkAction() {
+		bulkActionController.writableValue.set(undefined);
+	}
 </script>
 
 {#if $total != null && $total > 0}
@@ -128,7 +156,27 @@
 					<Icon icon="bx:x" class="text-slate-500 text-sm"></Icon>
 				</button>
 			</div>
+			{#if bulkActionOptions.length > 0}
+				<div class="border-l-2 border-slate-300 pl-2 flex items-center gap-1">
+					<SelectField
+						controller={bulkActionController}
+						optionClass="w-20 py-1"
+						placeholder="Bulk Action"
+						options={bulkActionOptions}
+						valueTransform={(option) => option?.label}
+					/>
+					{#if $bulkActionValue}
+						<Button class="py-1 text-xs" label="Apply" onClick={handleBulkAction} />
+						<Button
+							class="button-red py-1 text-xs"
+							label="Cancel"
+							onClick={handleClearBulkAction}
+						/>
+					{/if}
+				</div>
+			{/if}
 		{/if}
+
 		<div class="flex-grow"></div>
 
 		{#if context.showColumnFilter && columnOptions.length > 0}
