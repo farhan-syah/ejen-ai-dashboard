@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createAppState } from "$applications";
-	import { ToastState } from "$applications/toast.state";
+	import { createToastState } from "$applications/toast.state";
 	import { ErrorOverlay, Toast } from "$lib/components";
 	import LoadingOverlay from "$lib/components/overlay/LoadingOverlay.svelte";
 	import { onMount } from "svelte";
@@ -9,7 +9,8 @@
 	const appState = createAppState();
 	const loading = appState.loading;
 	const error = appState.error;
-	const toasts = ToastState.items;
+	const toastState = createToastState();
+	const toasts = toastState.items;
 
 	onMount(() => {
 		appState.width.set(window.innerWidth);

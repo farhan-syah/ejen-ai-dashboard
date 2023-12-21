@@ -23,4 +23,10 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> {
 		});
 		this.valid = computed(validReadables, (...arr) => arr.every((value) => value === true));
 	}
+
+	resetValue() {
+		this.controllers.forEach((controller) => {
+			controller.resetValue();
+		});
+	}
 }

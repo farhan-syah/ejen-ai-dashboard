@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from "$app/environment";
 	import type { FormGroup } from "./form-group";
 	let componentClass = "";
 	type T = $$Generic<Record<string, any>>;
@@ -7,6 +8,8 @@
 	const value = formGroup.value;
 </script>
 
-<div class="whitespace-pre-wrap p-2 {componentClass} ">
-	{JSON.stringify($value, null, 4)}
-</div>
+{#if dev}
+	<div class="whitespace-pre-wrap p-2 {componentClass} ">
+		{JSON.stringify($value, null, 4)}
+	</div>
+{/if}

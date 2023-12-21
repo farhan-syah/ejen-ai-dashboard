@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { ToastState } from "$applications/toast.state";
+	import { getToastState } from "$applications/toast.state";
 	import Icon from "@iconify/svelte";
 	import { cubicOut, sineOut } from "svelte/easing";
 	import { tweened } from "svelte/motion";
 	import { fade } from "svelte/transition";
 	import { type ToastItem } from ".";
+	const toastState = getToastState();
 	export let toast: ToastItem;
 
 	const progress = tweened(100, { duration: toast.duration, easing: sineOut });
@@ -17,7 +18,7 @@
 	});
 
 	function handleDismiss() {
-		ToastState.dismiss(toast.key);
+		toastState.dismiss(toast.key);
 	}
 </script>
 

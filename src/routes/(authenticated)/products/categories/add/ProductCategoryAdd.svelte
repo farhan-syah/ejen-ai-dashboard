@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { getAppState } from "$applications";
-	import { ToastState } from "$applications/toast.state";
+	import { getToastState } from "$applications/toast.state";
 	import { Button, Card, FormControl, PageTitle, TextAreaField, TextField } from "$lib/components";
 	import { ProductCategoryRepository } from "$repositories";
 	import { computed } from "nanostores";
 	const appState = getAppState();
+	const toastState = getToastState();
 	const nameController = new FormControl({ required: true });
 	const descriptionController = new FormControl();
 
@@ -27,7 +28,7 @@
 				}
 			});
 			await goto("/products/categories/" + category.id);
-			ToastState.add({ type: "success", message: "Category has been added" });
+			toastState.add({ type: "success", message: "Category has been added" });
 		} catch (e) {
 			appState.error.set(e);
 		} finally {

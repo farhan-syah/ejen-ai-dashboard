@@ -1,7 +1,8 @@
 import { createToastItem, type ToastItem, type ToastOption } from "$lib/components";
 import { atom } from "nanostores";
+import { getContext, setContext } from "svelte";
 
-class _ToastState {
+class ToastState {
 	items = atom<Record<string, ToastItem>>({});
 
 	add(option: ToastOption) {
@@ -19,4 +20,10 @@ class _ToastState {
 	}
 }
 
-export const ToastState = new _ToastState();
+export function createToastState() {
+	return setContext("toastState", new ToastState());
+}
+
+export function getToastState() {
+	return getContext<ToastState>("toastState");
+}

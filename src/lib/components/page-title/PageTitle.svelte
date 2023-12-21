@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import { ToastState } from "$applications/toast.state";
+	import { getToastState } from "$applications/toast.state";
 	import Icon from "@iconify/svelte";
 	import type { BreadcrumbItem } from ".";
 	import IconWithTooltip from "../icons/IconWithTooltip.svelte";
 	let componentClass = "";
 	export { componentClass as class };
+
+	const toastState = getToastState();
 
 	export let title: string;
 	export let id: string | undefined = undefined;
@@ -36,7 +38,7 @@
 						onClick={async () => {
 							if (id) {
 								await navigator.clipboard.writeText(id);
-								ToastState.add({
+								toastState.add({
 									type: "info",
 									key: "id",
 									message: "ID has been copied"
@@ -52,7 +54,7 @@
 					onClick={async () => {
 						const url = $page.url.toString();
 						await navigator.clipboard.writeText(url);
-						ToastState.add({
+						toastState.add({
 							type: "info",
 							// key: url,
 							message: "URL has been copied"

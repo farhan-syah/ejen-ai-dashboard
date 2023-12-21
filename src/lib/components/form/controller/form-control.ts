@@ -8,6 +8,7 @@ export type Validator<T = string> = {
 };
 
 export class FormControl<T = any> {
+	el?: HTMLInputElement | HTMLTextAreaElement;
 	id: string;
 	name: string;
 	initialValue: T | undefined;
@@ -20,18 +21,21 @@ export class FormControl<T = any> {
 	required: boolean;
 	touched = atom(false);
 	dirty = atom(false);
+	onReset?: (control: FormControl) => any;
 	constructor({
 		id,
 		name,
 		value,
 		validators,
-		required
+		required,
+		onReset
 	}: {
 		id?: string;
 		name?: string;
 		value?: T;
 		validators?: Validator<T>[];
 		required?: boolean;
+		onReset?: (control: FormControl) => any;
 	} = {}) {
 		this.id = id ?? nanoid(6);
 		this.name = name ?? nanoid(6);
@@ -39,10 +43,10 @@ export class FormControl<T = any> {
 		this.writableValue = atom(value);
 		this.validators = validators ?? [];
 		this.required = required ?? false;
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		this.writableValue.listen(() => {
 			this.validate();
 		});
+		this.onReset = onReset;
 		this.errors.listen((errors) => {
 			this.validateErrors([...errors]);
 		});
@@ -84,6 +88,17 @@ export class FormControl<T = any> {
 			this.hasError.set(true);
 		} else {
 			this.hasError.set(false);
+		}
+	}
+
+	resetValue() {
+		this.writableValue.set(this.initialValue);
+		if (this.onReset) {
+			this.onReset(this);
+		} else {
+			if (this.el instanceof HTMLInputElement || this.el instanceof HTMLTextAreaElement) {
+				this.el.value = this.initialValue?.toString() ?? "";
+			}
 		}
 	}
 }

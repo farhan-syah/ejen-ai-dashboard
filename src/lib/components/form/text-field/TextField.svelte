@@ -5,6 +5,7 @@
 	export let controller: FormControl = new FormControl<string>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
+	export let disabled: boolean = false;
 	export let onChange: (inputValue: string, input: HTMLInputElement, e: any) => any = (
 		inputValue
 	) => {
@@ -16,8 +17,8 @@
 			} else controller.writableValue.set(trimmed);
 		}
 	};
+
 	let required = controller.required;
-	let input: HTMLInputElement;
 
 	// Class
 	let componentClass = "";
@@ -67,7 +68,8 @@
 	}
 
 	function handleInput(e: any) {
-		onChange(input.value, input, e);
+		const el = controller.el as HTMLInputElement;
+		onChange(el.value, el, e);
 	}
 </script>
 
@@ -90,7 +92,8 @@
 	{/if}
 	<div class="flex rounded outline {inputClass}">
 		<input
-			bind:this={input}
+			bind:this={controller.el}
+			{disabled}
 			name={controller.name}
 			value={controller.writableValue.get() ?? ""}
 			id={controller.id}

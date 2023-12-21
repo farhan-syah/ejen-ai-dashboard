@@ -4,7 +4,9 @@ export function validatePermissions(
 	requiredPermissions: readonly string[],
 	userPermissions: readonly string[]
 ): boolean {
-	return requiredPermissions.some((permission) => userPermissions.includes(permission));
+	const defaultPermissions: string[] = ["All.manage"];
+	const permissions = defaultPermissions.concat(requiredPermissions);
+	return permissions.some((permission) => userPermissions.includes(permission));
 }
 
 export { Guard };

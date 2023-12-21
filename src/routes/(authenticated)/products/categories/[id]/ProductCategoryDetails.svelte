@@ -30,6 +30,11 @@
 		]}
 	/>
 	<Card>
-		<ProductCategoryDetailsForm productCategory={$productCategory} />
+		{#key $productCategory}
+			<ProductCategoryDetailsForm
+				productCategory={$productCategory}
+				fetchProductCategory={fetchData}
+			/>
+		{/key}
 	</Card>
 {/if}

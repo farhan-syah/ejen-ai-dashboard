@@ -41,7 +41,7 @@
 		<div slot="content" class="m-0.5">
 			{#if tooltip}
 				<div class="flex justify-center text-white text-xs w-24 items-center text-center">
-					<div class="rounded bg-slate-500 py-1 px-1.5">{tooltip}</div>
+					<div class="rounded bg-slate-500 py-1 px-1.5 font-medium">{tooltip}</div>
 					<!-- <div class=" max-w-[12rem] text-white text-xs text-center">
 						<div class="rounded bg-slate-500 py-1 px-1.5">{tooltip}</div>
 					</div> -->
