@@ -30,7 +30,7 @@
 				tabindex="0"
 				on:click={handleClick}
 				on:keyup={handleClick}
-				class="{onClick ? 'cursor-pointer' : ''} {$$props.class}"
+				class=" {onClick ? 'pointer' : ''} {$$props.class}"
 			>
 				<Icon {icon} class=" {$$props.class ?? ''}" />
 			</div>

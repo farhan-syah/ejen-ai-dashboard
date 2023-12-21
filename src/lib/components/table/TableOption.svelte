@@ -160,7 +160,7 @@
 				<div class="border-l-2 border-slate-300 pl-2 flex items-center gap-1">
 					<SelectField
 						controller={bulkActionController}
-						optionClass="w-20 py-1"
+						optionClass="whitespace-nowrap py-1"
 						placeholder="Bulk Action"
 						options={bulkActionOptions}
 						valueTransform={(option) => option?.label}

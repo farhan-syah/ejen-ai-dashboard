@@ -1,5 +1,5 @@
 <script>
-	import AddProduct from "./AddProduct.svelte";
+	import ProductAdd from "./ProductAdd.svelte";
 </script>
 
-<AddProduct />
+<ProductAdd />

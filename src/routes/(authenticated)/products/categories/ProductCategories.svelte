@@ -34,10 +34,10 @@
 		},
 		toCSV: toProductCategoryCSV,
 		bulkActions: {
-			"Action A": async (selected) => {
+			"Bulk Action A": async (selected) => {
 				await delay(3000);
 			},
-			"Action B": async () => {
+			"Bulk Action B": async () => {
 				await delay(3000);
 				throw "Bulk Action Error";
 			}

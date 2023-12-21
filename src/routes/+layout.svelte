@@ -15,17 +15,14 @@
 		AuthService;
 	}
 
-	let loading = true;
 	const reserved: string[] = ["/auth"];
 
 	onMount(() => {
 		token.subscribe(async (token) => {
 			if (!browser) {
-				loading = false;
 				return;
 			} else {
 				await redirect(token);
-				loading = false;
 			}
 		});
 	});
@@ -38,7 +35,9 @@
 				}
 				await goto("/auth/login", { replaceState: true });
 			} else {
-				if ($page.url.pathname == "/") await goto("/dashboard", { replaceState: true });
+				if ($page.url.pathname == "/") {
+					await goto("/dashboard", { replaceState: true });
+				}
 			}
 		} catch (e) {
 			console.log(e);

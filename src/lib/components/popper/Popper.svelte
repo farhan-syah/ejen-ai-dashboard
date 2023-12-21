@@ -54,13 +54,7 @@
 
 <div bind:this={component} class="">
 	<!-- Main Component -->
-	<div
-		role="none"
-		use:popperRef
-		class=" {mainClass}"
-		on:click={handleClick}
-		on:keydown={handleClick}
-	>
+	<div role="none" use:popperRef class={mainClass} on:click={handleClick} on:keydown={handleClick}>
 		<slot name="main" />
 	</div>
 	<!-- Popper Component -->

@@ -91,7 +91,6 @@ class _AuthService {
 	refreshUser() {
 		if (browser) {
 			const token = UserState.accessToken.get();
-			// const currentRoleId = UserState.setting.c
 			if (token) {
 				this.fetchUserFromLocalAccessToken(token);
 			}

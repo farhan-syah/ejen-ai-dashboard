@@ -1,5 +1,17 @@
 <script>
-	import EditCategory from "./EditCategory.svelte";
+	import { Guard } from "$lib/components";
+	import EditCategory from "./ProductCategoryEdit.svelte";
 </script>
 
-<EditCategory />
+<Guard
+	requiredPermissions={[
+		"ProductCategory.manage",
+		"ProductCategory.view",
+		"ProductCategory.update",
+		"ProductCategory.delete"
+	]}
+	redirect
+	redirectPath="/products/categories"
+>
+	<EditCategory />
+</Guard>
