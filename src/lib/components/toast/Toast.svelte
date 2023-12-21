@@ -23,7 +23,7 @@
 
 <div
 	class="bg-white rounded w-72 shadow-md overflow-clip"
-	out:fade={{ duration: 250, easing: cubicOut }}
+	out:fade={{ duration: 500, easing: cubicOut }}
 >
 	<div class="relative {toast.type}">
 		<div class="h-1 {toast.type} left-0" style="width:{$progress}%" />

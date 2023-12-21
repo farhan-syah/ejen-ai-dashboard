@@ -7,9 +7,15 @@ export declare const ProductCategoryQuerySchema: import("@sinclair/typebox").TOb
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type ProductCategoryQuery = Static<typeof ProductCategoryQuerySchema>;
-export declare const ProductCategoryUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const ProductCategoryUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TString;
+    description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type ProductCategoryUncheckedCreateInput = Static<typeof ProductCategoryUncheckedCreateInputSchema>;
-export declare const ProductCategoryUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const ProductCategoryUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type ProductCategoryUncheckedUpdateInput = Static<typeof ProductCategoryUncheckedUpdateInputSchema>;
 export declare const ProductCategoryActionEnum: {
     search: string;
@@ -146,20 +152,32 @@ export declare const ProductCategoryActionSchema: import("@sinclair/typebox").TO
     }>>;
 }>;
 export type ProductCategoryAction = Static<typeof ProductCategoryActionSchema>;
-export declare const ProductCategoryCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const ProductCategoryCreateDataSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TString;
+    description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type ProductCategoryCreateData = Static<typeof ProductCategoryCreateDataSchema>;
 export declare const ProductCategoryCreateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TString;
+        description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type ProductCategoryCreate = Static<typeof ProductCategoryCreateSchema>;
-export declare const ProductCategoryUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const ProductCategoryUpdateDataSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type ProductCategoryUpdateData = Static<typeof ProductCategoryUpdateDataSchema>;
 export declare const ProductCategoryUpdateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -170,7 +188,10 @@ export declare const ProductCategoryUpdateSchema: import("@sinclair/typebox").TO
 }>;
 export type ProductCategoryUpdate = Static<typeof ProductCategoryUpdateSchema>;
 export declare const ProductCategoryUpdateManySchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

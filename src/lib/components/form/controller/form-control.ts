@@ -7,9 +7,9 @@ export type Validator<T = string> = {
 	options?: any;
 };
 
-export class FormControl<T = string> {
+export class FormControl<T = any> {
 	id: string;
-	name: string | undefined;
+	name: string;
 	initialValue: T | undefined;
 	writableValue: WritableAtom<T | undefined>;
 	isFocused = atom(false);
@@ -34,7 +34,7 @@ export class FormControl<T = string> {
 		required?: boolean;
 	} = {}) {
 		this.id = id ?? nanoid(6);
-		this.name = name;
+		this.name = name ?? nanoid(6);
 		this.initialValue = value;
 		this.writableValue = atom(value);
 		this.validators = validators ?? [];

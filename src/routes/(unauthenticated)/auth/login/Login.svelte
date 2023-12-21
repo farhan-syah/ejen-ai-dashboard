@@ -4,11 +4,9 @@
 	import { Button, FormControl, Link, TextField } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { AuthService } from "$services/auth.service";
-	import type { FieldOption } from "$types";
 	import { computed } from "nanostores";
 	import validator from "validator";
 	const appState = getAppState();
-	const userTypeOptions: FieldOption[] = [{ value: "Staff" }, { value: "Guest" }];
 
 	const emailController = new FormControl({
 		name: "email",

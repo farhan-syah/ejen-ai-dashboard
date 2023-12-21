@@ -52,7 +52,7 @@
 		{ label: "Categories", path: "/products/categories", currentPage: true }
 	]}
 >
-	<div slot="action">
+	<div slot="action" class="mt-0.5">
 		<Button
 			label="Add Category"
 			onClick={() => {

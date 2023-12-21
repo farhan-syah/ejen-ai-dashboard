@@ -75,7 +75,6 @@ class _AuthService {
 	private async clearToken() {
 		UserState.refreshToken.set(undefined);
 		UserState.accessToken.set(undefined);
-		UserState.permissions.set([]);
 	}
 
 	private validateAccessToken(accessToken: string) {

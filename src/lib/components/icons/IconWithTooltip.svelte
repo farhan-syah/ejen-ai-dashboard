@@ -21,6 +21,7 @@
 		isOpen = false;
 	}}
 	role="none"
+	class={$$props.class ?? ""}
 >
 	<Popper bind:isOpen {popperOptions} placement="bottom">
 		<!-- Main Component -->
@@ -30,9 +31,9 @@
 				tabindex="0"
 				on:click={handleClick}
 				on:keyup={handleClick}
-				class=" {onClick ? 'pointer' : ''} {$$props.class}"
+				class=" {onClick ? 'pointer' : ''}"
 			>
-				<Icon {icon} class=" {$$props.class ?? ''}" />
+				<Icon {icon} class=" {$$props.iconClass ?? ''}" />
 			</div>
 		</div>
 		<!-- Popper Component -->

@@ -2,7 +2,7 @@
 	import type { HTMLInputTypeAttribute } from "svelte/elements";
 	import { FormControl } from "../controller/form-control";
 	export let type: HTMLInputTypeAttribute | undefined | null = "text";
-	export let controller: FormControl = new FormControl();
+	export let controller: FormControl = new FormControl<string>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
 	export let onChange: (inputValue: string, input: HTMLInputElement, e: any) => any = (
@@ -94,7 +94,7 @@
 			name={controller.name}
 			value={controller.writableValue.get() ?? ""}
 			id={controller.id}
-			class="p-2 text-sm w-full outline-none"
+			class="p-2 text-sm w-full outline-none text-gray600"
 			on:focus={() => {
 				isFocused.set(true);
 				if (!$touched) {

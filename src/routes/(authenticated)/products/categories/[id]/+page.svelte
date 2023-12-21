@@ -1,6 +1,6 @@
 <script>
 	import { Guard } from "$lib/components";
-	import EditCategory from "./ProductCategoryEdit.svelte";
+	import ProductCategoryDetails from "./ProductCategoryDetails.svelte";
 </script>
 
 <Guard
@@ -13,5 +13,5 @@
 	redirect
 	redirectPath="/products/categories"
 >
-	<EditCategory />
+	<ProductCategoryDetails />
 </Guard>
