@@ -7,27 +7,35 @@
 		FormControl,
 		FormDebugger,
 		FormGroup,
+		Guard,
 		TextAreaField,
+		Tooltip,
 		validatePermissions
 	} from "$lib/components";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
 	import { ProductCategoryRepository } from "$repositories";
+	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
 	import type { ProductCategory } from "../product-categories";
+	import ProductCategoryDeleteButton from "./ProductCategoryDeleteButton.svelte";
 
 	// Variables
 
 	export let productCategory: ProductCategory;
-	console.log(productCategory);
 	export let fetchProductCategory: () => Promise<any>;
 
 	// States
 
 	const appState = getAppState();
 	const toastState = getToastState();
-	const editable = atom(false);
+	const editable = atom(true);
 
 	//  Forms
+
+	const idController = new FormControl({
+		name: "id",
+		value: productCategory.id
+	});
 
 	const nameController = new FormControl({
 		name: "name",
@@ -72,22 +80,40 @@
 </script>
 
 <div class="grid grid-cols-6 gap-4">
+	<TextField controller={idController} label="ID" class="col-r1" disabled>
+		<div slot="postfix" class="text-blue-500 h-full border-l bg-white rounded-r pointer">
+			<Tooltip
+				tooltip="Copy"
+				class="h-full flex items-center p-2 "
+				onClick={async () => {
+					if (idController.value) {
+						await navigator.clipboard.writeText(idController.value);
+						toastState.add({
+							type: "info",
+							key: "id",
+							message: "Copied"
+						});
+					}
+				}}
+			>
+				<Icon icon="bx:copy" />
+			</Tooltip>
+		</div>
+	</TextField>
 	<TextField
 		controller={nameController}
 		label="Category Name"
-		class="form-field"
+		class="col-r1"
 		disabled={!$editable}
 	/>
-	<div class="form-field hidden sm:block"></div>
 	<TextAreaField
 		disabled={!$editable}
 		controller={descriptionController}
 		label="Category Description"
-		class="form-field"
+		class="col-r1"
 	/>
-	<div class="form-field hidden sm:block"></div>
 	{#if hasEditPermission}
-		<div class="flex gap-2">
+		<div class="flex gap-2 col-start-1">
 			{#if $editable}
 				<Button valid={$valid} label="Save Changes" onClick={handleSaveForm} />
 				<Button
@@ -98,6 +124,9 @@
 						form.resetValue();
 					}}
 				/>
+				<Guard requiredPermissions={["ProductCategory.delete"]}>
+					<ProductCategoryDeleteButton />
+				</Guard>
 			{:else}
 				<Button
 					label="Edit"

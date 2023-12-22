@@ -13,3 +13,4 @@ export * from "./profile-image";
 export * from "./table";
 export * from "./tiptap";
 export * from "./toast";
+export * from "./tooltip";

@@ -14,15 +14,15 @@
 	export let breadcrumbs: BreadcrumbItem[] = [];
 </script>
 
-<div class="flex items-center text-gray-800 mb-2 {componentClass}">
-	<div class="flex-grow flex items-center gap-1">
+<div class="flex flex-wrap items-center text-gray-800 mb-2 {componentClass}">
+	<div class="hidden sm:flex flex-grow items-center gap-1">
 		<h1 class="flex items-center gap-1 font-bold">
 			{title}
 		</h1>
 		<div class="flex items-center">
 			{#if id}
 				<div class="flex items-center">
-					<div class=" mr-1">|</div>
+					<div class="hidden sm:block mr-1">|</div>
 					<div class="text-slate-500">
 						{id}
 					</div>

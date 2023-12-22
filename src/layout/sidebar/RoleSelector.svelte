@@ -18,7 +18,7 @@
 	const currentRole = atom<Role | undefined>();
 	const roles = atom<Role[]>([]);
 	const groupedRoles = atom<GroupedRole[]>([]);
-	const isModelOpen = atom(false);
+	const isModalOpen = atom(false);
 
 	currentRole.listen(async (value) => {
 		if (value && $user && $userSetting && $userSetting?.defaultUserRole != value.id) {
@@ -81,12 +81,12 @@
 	}
 
 	function handleOpenModal() {
-		isModelOpen.set(true);
+		isModalOpen.set(true);
 	}
 
 	async function handleChangeRole(role: Role) {
 		currentRole.set(role);
-		isModelOpen.set(false);
+		isModalOpen.set(false);
 	}
 </script>
 
@@ -116,8 +116,8 @@
 	{/if}
 {/if}
 
-<Modal isOpen={isModelOpen}>
-	<div class=" w-96">
+<Modal isOpen={isModalOpen}>
+	<div class="w-96">
 		<div class="font-semibold mb-2 text-center">Change Role</div>
 		<div class="mb-4 text-center">Choose the role you want to change into</div>
 		<table class=" w-full table-fixed">

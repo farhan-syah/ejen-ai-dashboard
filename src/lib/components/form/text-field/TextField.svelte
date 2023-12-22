@@ -23,7 +23,7 @@
 	// Class
 	let componentClass = "";
 	export { componentClass as class };
-	let inputClass = "";
+	let outlineClass = "";
 	let labelClass = "";
 
 	$: isFocused = controller.isFocused;
@@ -33,18 +33,18 @@
 	$: dirty = controller.dirty;
 	$: {
 		if ($isFocused) {
-			inputClass = "outline-2";
+			outlineClass = "outline-2";
 			if ($hasError) {
-				inputClass += " outline-red-500";
+				outlineClass += " outline-red-500";
 			} else {
-				inputClass += " outline-blue-500";
+				outlineClass += " outline-blue-500";
 			}
 		} else {
-			inputClass = "outline-1";
+			outlineClass = "outline-1";
 			if ($hasError) {
-				inputClass += " outline-red-500";
+				outlineClass += " outline-red-500";
 			} else {
-				inputClass += " outline-gray-300";
+				outlineClass += " outline-gray-300";
 			}
 		}
 	}
@@ -90,7 +90,7 @@
 			</label>
 		</div>
 	{/if}
-	<div class="flex rounded outline {inputClass}">
+	<div class="flex items-center relative rounded outline {outlineClass}">
 		<input
 			bind:this={controller.el}
 			{disabled}
@@ -113,6 +113,11 @@
 			}}
 			on:input={handleInput}
 		/>
+		{#if $$slots.postfix}
+			<div class="absolute right-0 h-full">
+				<slot name="postfix" />
+			</div>
+		{/if}
 	</div>
 	<div class="text-red-500 text-xs">
 		{#each $errors as error, index}

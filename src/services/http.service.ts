@@ -154,7 +154,7 @@ class _HttpService {
 		}
 		const result = await fetch(url, {
 			method: "DELETE",
-			body: body,
+			body: body ?? JSON.stringify({}),
 			headers: _headers,
 			credentials
 		});

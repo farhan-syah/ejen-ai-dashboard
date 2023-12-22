@@ -20,7 +20,11 @@
 	{#if $$slots.prefix}
 		<slot name="prefix" />
 	{/if}
-	<div class="whitespace-nowrap flex-grow {labelClass}">
-		{label}
-	</div>
+	{#if $$slots.label}
+		<slot name="label" />
+	{:else}
+		<div class="whitespace-nowrap flex-grow {labelClass}">
+			{label}
+		</div>
+	{/if}
 </button>
