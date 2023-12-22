@@ -18,6 +18,19 @@ class ToastState {
 		delete currentItems[key];
 		this.items.set({ ...currentItems });
 	}
+
+	info(option: Omit<ToastOption, "type">) {
+		this.add({ ...option, type: "info" });
+	}
+	success(option: Omit<ToastOption, "type">) {
+		this.add({ ...option, type: "success" });
+	}
+	warning(option: Omit<ToastOption, "type">) {
+		this.add({ ...option, type: "warning" });
+	}
+	error(option: Omit<ToastOption, "type">) {
+		this.add({ ...option, type: "error" });
+	}
 }
 
 export function createToastState() {

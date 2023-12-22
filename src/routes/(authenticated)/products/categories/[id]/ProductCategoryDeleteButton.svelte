@@ -1,18 +1,25 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { getAppState } from "$applications";
+	import { getToastState } from "$applications/toast.state";
 	import { Button, Modal } from "$lib/components";
 	import { ProductCategoryRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
+	import type { ProductCategory } from "../product-categories";
 
+	export let productCategory: ProductCategory;
 	const isModalOpen = atom(false);
 	const appState = getAppState();
+	const toastState = getToastState();
 
 	async function handleDeleteProductCategory() {
 		try {
 			isModalOpen.set(false);
 			appState.loading.set(true);
-			await ProductCategoryRepository.delete("t2");
+			await ProductCategoryRepository.delete(productCategory.id);
+			await goto("/products/categories", { replaceState: true });
+			toastState.success({ key: productCategory.id, message: "Object has been deleted" });
 		} catch (error) {
 			appState.error.set(error);
 		} finally {

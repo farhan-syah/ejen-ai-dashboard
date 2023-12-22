@@ -125,7 +125,7 @@
 					}}
 				/>
 				<Guard requiredPermissions={["ProductCategory.delete"]}>
-					<ProductCategoryDeleteButton />
+					<ProductCategoryDeleteButton {productCategory} />
 				</Guard>
 			{:else}
 				<Button
