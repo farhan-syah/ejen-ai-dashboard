@@ -2,9 +2,10 @@
 	import { goto } from "$app/navigation";
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
-	import { Button, Card, FormControl, PageTitle, TextAreaField, TextField } from "$lib/components";
+	import { Card, FormControl, PageTitle } from "$lib/components";
 	import { ProductCategoryRepository } from "$repositories";
 	import { computed } from "nanostores";
+	import ProductCategoryAddForm from "./ProductCategoryAddForm.svelte";
 	const appState = getAppState();
 	const toastState = getToastState();
 	const nameController = new FormControl({ required: true });
@@ -46,12 +47,5 @@
 	]}
 />
 <Card>
-	<div class="grid grid-cols-6 gap-4">
-		<TextField controller={nameController} label="Category Name" class="form-field" />
-		<div class="form-field hidden sm:block"></div>
-		<TextAreaField controller={descriptionController} label="Description" class="form-field" />
-	</div>
-	<div class="mt-4">
-		<Button valid={$formValid} onClick={handleSubmit} />
-	</div>
+	<ProductCategoryAddForm />
 </Card>

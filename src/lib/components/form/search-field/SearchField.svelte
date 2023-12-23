@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from "@iconify/svelte";
 
-	import { delay } from "$lib/utils";
+	import { deepEqual, delay } from "$lib/utils";
 
 	import { Popper } from "$lib/components";
 	import type { ModifierPhases } from "@popperjs/core";
@@ -95,7 +95,7 @@
 		]
 	};
 
-	const isOpen = atom(true);
+	const isOpen = atom(false);
 	isOpen.subscribe((value) => {
 		if (value) {
 			handleInput();
@@ -106,9 +106,16 @@
 
 	function handleSelect(result: T) {
 		const currentValue = controller.writableValue.get() ?? [];
-		const newValue = [...currentValue, result];
-		controller.writableValue.set(newValue);
-		handleReset();
+
+		if (
+			!currentValue.some((value) => {
+				return deepEqual(value, result);
+			})
+		) {
+			const newValue = [...currentValue, result];
+			controller.writableValue.set(newValue);
+		}
+		isOpen.set(false);
 	}
 
 	function handleReset() {

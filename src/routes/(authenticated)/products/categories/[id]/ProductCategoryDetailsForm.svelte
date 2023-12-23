@@ -28,7 +28,7 @@
 
 	const appState = getAppState();
 	const toastState = getToastState();
-	const editable = atom(true);
+	const editable = atom(false);
 
 	//  Forms
 
@@ -42,7 +42,7 @@
 		value: productCategory.name,
 		required: true
 	});
-	const descriptionController = new FormControl({
+	const descriptionController = new FormControl<string | null>({
 		name: "description",
 		value: productCategory.description
 	});
@@ -124,7 +124,7 @@
 						form.resetValue();
 					}}
 				/>
-				<Guard requiredPermissions={["ProductCategory.delete"]}>
+				<Guard requiredPermissions={["ProductCategory.manage", "ProductCategory.delete"]}>
 					<ProductCategoryDeleteButton {productCategory} />
 				</Guard>
 			{:else}

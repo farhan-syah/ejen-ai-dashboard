@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { atom, computed, type ReadableAtom, type WritableAtom } from "nanostores";
 
-export type Validator<T = string> = {
+export type Validator<T = any> = {
 	validator: (value: T, options?: any) => boolean;
 	errorMessage: string;
 	options?: any;
@@ -21,7 +21,7 @@ export class FormControl<T = any> {
 	required: boolean;
 	touched = atom(false);
 	dirty = atom(false);
-	onReset?: (control: FormControl) => any;
+	onReset?: (control: FormControl<T>) => any;
 	constructor({
 		id,
 		name,
@@ -35,7 +35,7 @@ export class FormControl<T = any> {
 		value?: T;
 		validators?: Validator<T>[];
 		required?: boolean;
-		onReset?: (control: FormControl) => any;
+		onReset?: (control: FormControl<T>) => any;
 	} = {}) {
 		this.id = id ?? nanoid(6);
 		this.name = name ?? nanoid(6);

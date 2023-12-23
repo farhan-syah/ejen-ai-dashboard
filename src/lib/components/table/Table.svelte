@@ -16,6 +16,8 @@
 		const newData = await d;
 		if (newData) data.set(newData);
 	});
+	const selectable = context.selectable;
+	const visibleColumns = context.visibleColumns;
 </script>
 
 <div class="text-xs">
@@ -29,7 +31,7 @@
 			{/if}
 			<TableBody data={$data} />
 			<tr>
-				<td colspan={context.visibleColumns.get().length}>
+				<td colspan={$visibleColumns.length + (selectable ? 1 : 0)}>
 					{#if $data.length === 0}
 						<div class="flex h-28 bg-gray-50 justify-center items-center text-gray-400">
 							<p>{context.noDataText ?? "No data available"}</p>

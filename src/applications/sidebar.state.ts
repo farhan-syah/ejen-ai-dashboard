@@ -10,12 +10,35 @@ class SidebarState {
 			if (permissions.includes("All.manage")) {
 				this.sidebarItems.set(sidebarItems);
 			} else {
-				this.sidebarItems.set([]);
+				const userSidebarItems = filterSidebarConfig(sidebarItems, permissions);
+				this.sidebarItems.set(userSidebarItems);
 			}
 		});
 	}
 }
 
+function filterSidebarConfig(
+	sidebarConfig: SidebarItem[],
+	userPermissions: readonly string[]
+): SidebarItem[] {
+	return sidebarConfig
+		.map((parent) => {
+			const hasParentPermission =
+				!parent.requiredPermissions.length ||
+				parent.requiredPermissions.some((permission) => userPermissions.includes(permission));
+
+			const filteredItems =
+				parent.items &&
+				parent.items.filter(
+					(item) =>
+						!item.requiredPermissions.length ||
+						item.requiredPermissions.some((permission) => userPermissions.includes(permission))
+				);
+
+			return hasParentPermission ? { ...parent, items: filteredItems } : null;
+		})
+		.filter(Boolean) as SidebarItem[];
+}
 export function createSidebarState() {
 	return setContext("sidebarState", new SidebarState());
 }

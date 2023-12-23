@@ -52,7 +52,7 @@
 	<ErrorOverlay />
 {/if}
 
-<div class="fixed bottom-3 right-3 z-10 flex flex-col gap-2">
+<div class="fixed top-3 right-3 z-10 flex flex-col gap-2">
 	{#each Object.values($toasts) as toast, index (toast.key)}
 		<div animate:flip={{ duration: 250 }}>
 			<Toast {toast} />

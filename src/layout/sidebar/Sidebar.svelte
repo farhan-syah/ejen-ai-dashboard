@@ -63,9 +63,11 @@
 >
 	<div class=" bg-indigo-950 h-screen overflow-x-hidden sidebar z-60 text-white/80">
 		<RoleSelector />
-		{#each $sidebarItems as sidebarItem}
-			<SidebarButton {sidebarItem}></SidebarButton>
-		{/each}
+		{#key $sidebarItems}
+			{#each $sidebarItems as sidebarItem}
+				<SidebarButton {sidebarItem}></SidebarButton>
+			{/each}
+		{/key}
 
 		<div class=" px-2">
 			<div class="my-2 w-full h-0.25 bg-white/20"></div>

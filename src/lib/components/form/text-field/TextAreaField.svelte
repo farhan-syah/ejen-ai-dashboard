@@ -1,8 +1,9 @@
 <script lang="ts">
+	type T = $$Generic;
 	import type { HTMLInputTypeAttribute } from "svelte/elements";
 	import { FormControl } from "../controller/form-control";
 	export let type: HTMLInputTypeAttribute | undefined | null = "text";
-	export let controller: FormControl = new FormControl();
+	export let controller: FormControl = new FormControl<string>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;

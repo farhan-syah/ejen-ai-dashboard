@@ -99,19 +99,35 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Orders",
 		icon: "material-symbols:package-2-outline",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Order.manage",
+			"Order.create",
+			"Order.view",
+			"Order.update",
+			"Order.delete",
+			"Order.update-many",
+			"Order.delete-many"
+		],
 		link: "/orders",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Order List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Order.manage",
+					"Order.create",
+					"Order.view",
+					"Order.update",
+					"Order.delete",
+					"Order.update-many",
+					"Order.delete-many"
+				],
 				link: "/orders"
 			},
 			{
 				title: "Add Order",
-				requiredPermissions: [],
+				requiredPermissions: ["Order.manage", "Order.create"],
 				link: "/orders/add"
 			}
 		]
@@ -119,25 +135,56 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Products",
 		icon: "material-symbols:package-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Product.manage",
+			"Product.create",
+			"Product.view",
+			"Product.update",
+			"Product.delete",
+			"Product.update-many",
+			"Product.delete-many",
+			"ProductCategory.manage",
+			"ProductCategory.create",
+			"ProductCategory.view",
+			"ProductCategory.update",
+			"ProductCategory.delete",
+			"ProductCategory.update-many",
+			"ProductCategory.delete-many"
+		],
 		link: "/products",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Product List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Product.manage",
+					"Product.create",
+					"Product.view",
+					"Product.update",
+					"Product.delete",
+					"Product.update-many",
+					"Product.delete-many"
+				],
 				link: "/products",
 				regexp: new RegExp("^/products$")
 			},
 			{
 				title: "Add Product",
-				requiredPermissions: [],
+				requiredPermissions: ["Product.manage", "Product.create"],
 				link: "/products/add"
 			},
 			{
 				title: "Categories",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"ProductCategory.manage",
+					"ProductCategory.create",
+					"ProductCategory.view",
+					"ProductCategory.update",
+					"ProductCategory.delete",
+					"ProductCategory.update-many",
+					"ProductCategory.delete-many"
+				],
 				link: "/products/categories"
 			}
 		]
@@ -145,24 +192,48 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Services",
 		icon: "material-symbols:business-center-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Service.manage",
+			"Service.create",
+			"Service.view",
+			"Service.update",
+			"Service.delete",
+			"Service.update-many",
+			"Service.delete-many"
+		],
 		link: "/services",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Service  List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Service.manage",
+					"Service.create",
+					"Service.view",
+					"Service.update",
+					"Service.delete",
+					"Service.update-many",
+					"Service.delete-many"
+				],
 				link: "/services"
 			},
 			{
-				title: "Add Product",
-				requiredPermissions: [],
+				title: "Add Service",
+				requiredPermissions: ["Service.manage", "Service.create"],
 				link: "/services/add"
 			},
 			{
 				title: "Categories",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"ServiceCategory.manage",
+					"ServiceCategory.create",
+					"ServiceCategory.view",
+					"ServiceCategory.update",
+					"ServiceCategory.delete",
+					"ServiceCategory.update-many",
+					"ServiceCategory.delete-many"
+				],
 				link: "/services/categories"
 			}
 		]
@@ -170,19 +241,35 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Promotions",
 		icon: "material-symbols:shopping-basket-outline",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Promotion.manage",
+			"Promotion.create",
+			"Promotion.view",
+			"Promotion.update",
+			"Promotion.delete",
+			"Promotion.update-many",
+			"Promotion.delete-many"
+		],
 		link: "/promotions",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Promotion List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Promotion.manage",
+					"Promotion.create",
+					"Promotion.view",
+					"Promotion.update",
+					"Promotion.delete",
+					"Promotion.update-many",
+					"Promotion.delete-many"
+				],
 				link: "/promotions"
 			},
 			{
 				title: "Add Promotion",
-				requiredPermissions: [],
+				requiredPermissions: ["Promotion.manage", "Promotion.create"],
 				link: "/promotions/add"
 			}
 		]
@@ -190,19 +277,35 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Users",
 		icon: "material-symbols:person-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"User.manage",
+			"User.create",
+			"User.view",
+			"User.update",
+			"User.delete",
+			"User.update-many",
+			"User.delete-many"
+		],
 		link: "/users",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "User List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"User.manage",
+					"User.create",
+					"User.view",
+					"User.update",
+					"User.delete",
+					"User.update-many",
+					"User.delete-many"
+				],
 				link: "/users"
 			},
 			{
 				title: "Add User",
-				requiredPermissions: [],
+				requiredPermissions: ["User.manage", "User.create"],
 				link: "/users/add"
 			}
 		]
@@ -210,24 +313,48 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Organizations",
 		icon: "material-symbols:groups-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Organization.manage",
+			"Organization.create",
+			"Organization.view",
+			"Organization.update",
+			"Organization.delete",
+			"Organization.update-many",
+			"Organization.delete-many"
+		],
 		link: "/organizations",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Organization List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Organization.manage",
+					"Organization.create",
+					"Organization.view",
+					"Organization.update",
+					"Organization.delete",
+					"Organization.update-many",
+					"Organization.delete-many"
+				],
 				link: "/organizations"
 			},
 			{
 				title: "Add Organization",
-				requiredPermissions: [],
+				requiredPermissions: ["Organization.manage", "Organization.create"],
 				link: "/organizations/add"
 			},
 			{
 				title: "Organization Types",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"OrganizationType.manage",
+					"OrganizationType.create",
+					"OrganizationType.view",
+					"OrganizationType.update",
+					"OrganizationType.delete",
+					"OrganizationType.update-many",
+					"OrganizationType.delete-many"
+				],
 				link: "/organizations/types"
 			}
 		]
@@ -235,19 +362,35 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Leads",
 		icon: "material-symbols:account-box-outline",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Lead.manage",
+			"Lead.create",
+			"Lead.view",
+			"Lead.update",
+			"Lead.delete",
+			"Lead.update-many",
+			"Lead.delete-many"
+		],
 		link: "/leads",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Lead List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Lead.manage",
+					"Lead.create",
+					"Lead.view",
+					"Lead.update",
+					"Lead.delete",
+					"Lead.update-many",
+					"Lead.delete-many"
+				],
 				link: "/leads"
 			},
 			{
 				title: "Add Lead",
-				requiredPermissions: [],
+				requiredPermissions: ["Lead.manage", "Lead.create"],
 				link: "/leads/add"
 			}
 		]
@@ -256,19 +399,35 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Shops/Stores",
 		icon: "material-symbols:store-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Shop.manage",
+			"Shop.create",
+			"Shop.view",
+			"Shop.update",
+			"Shop.delete",
+			"Shop.update-many",
+			"Shop.delete-many"
+		],
 		link: "/shops",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Shop List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Shop.manage",
+					"Shop.create",
+					"Shop.view",
+					"Shop.update",
+					"Shop.delete",
+					"Shop.update-many",
+					"Shop.delete-many"
+				],
 				link: "/shops"
 			},
 			{
 				title: "Add Shop",
-				requiredPermissions: [],
+				requiredPermissions: ["Shop.manage", "Shop.create"],
 				link: "/shops/add"
 			}
 		]
@@ -276,19 +435,35 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Warehouse",
 		icon: "material-symbols:warehouse-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Warehouse.manage",
+			"Warehouse.create",
+			"Warehouse.view",
+			"Warehouse.update",
+			"Warehouse.delete",
+			"Warehouse.update-many",
+			"Warehouse.delete-many"
+		],
 		link: "/warehouses",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Warehouse List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Warehouse.manage",
+					"Warehouse.create",
+					"Warehouse.view",
+					"Warehouse.update",
+					"Warehouse.delete",
+					"Warehouse.update-many",
+					"Warehouse.delete-many"
+				],
 				link: "/warehouses"
 			},
 			{
 				title: "Add Warehouse",
-				requiredPermissions: [],
+				requiredPermissions: ["Warehouse.manage", "Warehouse.create"],
 				link: "/warehouses/add"
 			}
 		]
@@ -296,19 +471,35 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Suppliers",
 		icon: "material-symbols:factory-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Supplier.manage",
+			"Supplier.create",
+			"Supplier.view",
+			"Supplier.update",
+			"Supplier.delete",
+			"Supplier.update-many",
+			"Supplier.delete-many"
+		],
 		link: "/suppliers",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Suppliers List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"Supplier.manage",
+					"Supplier.create",
+					"Supplier.view",
+					"Supplier.update",
+					"Supplier.delete",
+					"Supplier.update-many",
+					"Supplier.delete-many"
+				],
 				link: "/suppliers"
 			},
 			{
 				title: "Add Suppliers",
-				requiredPermissions: [],
+				requiredPermissions: ["Supplier.manage", "Supplier.create"],
 				link: "/suppliers/add"
 			}
 		]
@@ -316,19 +507,35 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Purchase Orders",
 		icon: "material-symbols:local-shipping-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"PurchaseOrder.manage",
+			"PurchaseOrder.create",
+			"PurchaseOrder.view",
+			"PurchaseOrder.update",
+			"PurchaseOrder.delete",
+			"PurchaseOrder.update-many",
+			"PurchaseOrder.delete-many"
+		],
 		link: "/purchase-orders",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Purchase Orders List",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"PurchaseOrder.manage",
+					"PurchaseOrder.create",
+					"PurchaseOrder.view",
+					"PurchaseOrder.update",
+					"PurchaseOrder.delete",
+					"PurchaseOrder.update-many",
+					"PurchaseOrder.delete-many"
+				],
 				link: "/purchase-orders"
 			},
 			{
 				title: "Add Purchase Orders",
-				requiredPermissions: [],
+				requiredPermissions: ["PurchaseOrder.manage", "PurchaseOrder.create", "PurchaseOrder.view"],
 				link: "/purchase-orders/add"
 			}
 		]
@@ -336,19 +543,43 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Reports",
 		icon: "material-symbols:table-chart-view-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Report.manage",
+			"Report.create",
+			"Report.view",
+			"Report.update",
+			"Report.delete",
+			"Report.update-many",
+			"Report.delete-many"
+		],
 		link: "/reports",
 		isParent: true,
 		isOpen: atom(false),
 		items: [
 			{
 				title: "Sales Report",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"ReportSales.manage",
+					"ReportSales.create",
+					"ReportSales.view",
+					"ReportSales.update",
+					"ReportSales.delete",
+					"ReportSales.update-many",
+					"ReportSales.delete-many"
+				],
 				link: "/reports/sales"
 			},
 			{
 				title: "Finance",
-				requiredPermissions: [],
+				requiredPermissions: [
+					"ReportFinance.manage",
+					"ReportFinance.create",
+					"ReportFinance.view",
+					"ReportFinance.update",
+					"ReportFinance.delete",
+					"ReportFinance.update-many",
+					"ReportFinance.delete-many"
+				],
 				link: "/reports/finance"
 			}
 		]
@@ -356,7 +587,7 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Customer Support",
 		icon: "material-symbols:headphones-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: ["CustomerSupport.manage"],
 		link: "/support",
 		isParent: true,
 		isOpen: atom(false),
@@ -371,7 +602,15 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Staffs",
 		icon: "material-symbols:frame-person-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: [
+			"Staff.manage",
+			"Staff.create",
+			"Staff.view",
+			"Staff.update",
+			"Staff.delete",
+			"Staff.update-many",
+			"Staff.delete-many"
+		],
 		link: "/staffs",
 		isParent: true,
 		isOpen: atom(false),
@@ -436,7 +675,7 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Logs",
 		icon: "material-symbols:nest-clock-farsight-analog-outline-rounded",
-		requiredPermissions: [],
+		requiredPermissions: ["Logs.view"],
 		link: "/logs",
 		isParent: true
 	}

@@ -24,8 +24,17 @@ export function lowerCaseWord(word: string): string {
  */
 export function tryParseInt(input: string | undefined | null, or?: number): number | undefined {
 	if (typeof input === "string") {
-		const val: number = parseInt(input);
-		if (Number.isInteger(val)) return val;
+		if (Number.isInteger(+input)) return parseInt(input);
+	}
+	return or;
+}
+export function tryParseNum(input: string | undefined | null): number | undefined;
+export function tryParseNum(input: string | undefined | null, or: number): number;
+export function tryParseNum(input: string | undefined | null, or?: number): number | undefined {
+	if (typeof input === "string") {
+		if (Number.isInteger(+input)) return +input;
+		const number = parseFloat(input);
+		if (!isNaN(number)) return number;
 	}
 	return or;
 }

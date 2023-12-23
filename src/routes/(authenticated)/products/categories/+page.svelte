@@ -6,6 +6,7 @@
 <Guard
 	requiredPermissions={[
 		"ProductCategory.manage",
+		"ProductCategory.create",
 		"ProductCategory.view",
 		"ProductCategory.update",
 		"ProductCategory.delete"
