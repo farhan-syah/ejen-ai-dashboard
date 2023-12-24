@@ -635,6 +635,7 @@ export const sidebarItems: SidebarItem[] = [
 		isParent: true,
 		isOpen: atom(false),
 		items: [
+			{ title: "System Settings", requiredPermissions: ["All.manage"], link: "/settings/system" },
 			{
 				title: "Business Settings",
 				requiredPermissions: [],
@@ -654,21 +655,6 @@ export const sidebarItems: SidebarItem[] = [
 				title: "App Settings",
 				requiredPermissions: [],
 				link: "/settings/apps"
-			},
-			{
-				title: "Country Settings",
-				requiredPermissions: [],
-				link: "/settings/countries"
-			},
-			{
-				title: "Payment Settings",
-				requiredPermissions: [],
-				link: "/settings/payments"
-			},
-			{
-				title: "Tax Settings",
-				requiredPermissions: [],
-				link: "/settings/tax"
 			}
 		]
 	},

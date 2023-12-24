@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProductUncheckedCreateInput } from "$api/routes/product/product.schema";
+	import type { ProductCreateInput } from "$api/routes/product/product.schema";
 	import { goto } from "$app/navigation";
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
@@ -61,7 +61,7 @@
 		value: true
 	});
 
-	const form = new FormGroup<ProductUncheckedCreateInput>([
+	const form = new FormGroup<ProductCreateInput>([
 		nameController,
 		skuController,
 		retailPriceController,
@@ -73,8 +73,20 @@
 		try {
 			appState.loading.set(true);
 
+			const data = form.value.get();
+
+			const productCategories = productCategoryController.value;
+
+			if (productCategories && productCategories.length > 0) {
+				data.categories = {
+					connect: productCategories.map((c) => {
+						return { id: c.id };
+					})
+				};
+			}
+
 			const product = await ProductRepository.create({
-				data: form.value.get()
+				data: data
 			});
 
 			await goto(`/products/${product.id}`);

@@ -7,16 +7,21 @@ export declare const ProductQuerySchema: import("@sinclair/typebox").TObject<{
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type ProductQuery = Static<typeof ProductQuerySchema>;
-export declare const ProductUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{
+export declare const ProductCreateInputSchema: import("@sinclair/typebox").TObject<{
     name: import("@sinclair/typebox").TString;
     sku: import("@sinclair/typebox").TString;
     retailPrice: import("@sinclair/typebox").TInteger;
     active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
     barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
+        connect: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
+            id: import("@sinclair/typebox").TString;
+        }>>;
+    }>>;
 }>;
-export type ProductUncheckedCreateInput = Static<typeof ProductUncheckedCreateInputSchema>;
-export declare const ProductUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
-export type ProductUncheckedUpdateInput = Static<typeof ProductUncheckedUpdateInputSchema>;
+export type ProductCreateInput = Static<typeof ProductCreateInputSchema>;
+export declare const ProductUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export type ProductUpdateInput = Static<typeof ProductUpdateInputSchema>;
 export declare const ProductActionEnum: {
     search: string;
 };
@@ -158,6 +163,11 @@ export declare const ProductCreateDataSchema: import("@sinclair/typebox").TObjec
     retailPrice: import("@sinclair/typebox").TInteger;
     active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
     barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
+        connect: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
+            id: import("@sinclair/typebox").TString;
+        }>>;
+    }>>;
 }>;
 export type ProductCreateData = Static<typeof ProductCreateDataSchema>;
 export declare const ProductCreateSchema: import("@sinclair/typebox").TObject<{
@@ -167,6 +177,11 @@ export declare const ProductCreateSchema: import("@sinclair/typebox").TObject<{
         retailPrice: import("@sinclair/typebox").TInteger;
         active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
         barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
+            connect: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
+                id: import("@sinclair/typebox").TString;
+            }>>;
+        }>>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
