@@ -1,15 +1,9 @@
 <script lang="ts">
-	import { tryParseNum } from "$lib/utils";
 	import { FormControl } from "../controller/form-control";
 	export let controller: FormControl<number> = new FormControl<number>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
-	export let onInput: (value: string, input: HTMLInputElement, event: any) => any = (
-		inputValue
-	) => {
-		const value = tryParseNum(inputValue) ?? 0;
-		controller.writableValue.set(value);
-	};
+	export let onInput: (value: string, input: HTMLInputElement, event: any) => any;
 	export let onKeydown: ((e: KeyboardEvent, controller: FormControl) => any) | undefined =
 		undefined;
 	let required = controller.required;
@@ -95,7 +89,7 @@
 	<div class="flex rounded outline {outlineClass}">
 		<input
 			bind:this={controller.el}
-			type="number"
+			type="text"
 			name={controller.name}
 			value={controller.writableValue.get()?.toString() ?? ""}
 			id={controller.id}

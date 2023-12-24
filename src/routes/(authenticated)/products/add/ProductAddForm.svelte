@@ -8,12 +8,12 @@
 		FormControl,
 		FormDebugger,
 		FormGroup,
-		NumField,
 		SearchField,
+		ToggleField,
 		validatePermissions
 	} from "$lib/components";
+	import PriceField from "$lib/components/form/text-field/PriceField.svelte";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
-	import { tryParseNum } from "$lib/utils";
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
 	import type { ProductCategory } from "../products";
 
@@ -56,10 +56,17 @@
 		required: true
 	});
 
+	const activeController = new FormControl<boolean>({
+		name: "active",
+		required: true,
+		value: true
+	});
+
 	const form = new FormGroup<ProductUncheckedCreateInput>([
 		nameController,
 		skuController,
-		retailPriceController
+		retailPriceController,
+		activeController
 	]);
 	const valid = form.valid;
 
@@ -89,39 +96,13 @@
 		["Product.manage", "Product.update"],
 		UserState.permissions.get()
 	);
-
-	function handleKeydown(e: KeyboardEvent) {
-		const el = retailPriceController.el as HTMLInputElement;
-		const acceptedKeys: string[] = ["Delete", "Backspace", "ArrowRight", "ArrowLeft"];
-
-		const decimalPlaces: number = 2;
-		if (!acceptedKeys.includes(e.key)) {
-			console.log(e.key);
-			e.preventDefault();
-			const regex: RegExp = new RegExp(`^-?\\d*(\\.\\d{0,${decimalPlaces}})?$`);
-			const currentInput = el.value;
-			const newInput = currentInput + e.key;
-			const validInput = regex.test(newInput);
-			if (validInput) {
-				el.value = newInput;
-			}
-		}
-		const num = tryParseNum(el.value, 0);
-		const newValue = +(num * Math.pow(10, decimalPlaces)).toFixed(decimalPlaces);
-		retailPriceController.writableValue.set(newValue);
-	}
 </script>
 
 <div class="grid grid-cols-6 gap-4">
 	<TextField controller={nameController} label="Product Name" class="col-r1" />
 	<TextField controller={skuController} label="SKU" class="col-r1" />
-	<NumField
-		controller={retailPriceController}
-		label="Price"
-		class="col-r1"
-		onKeydown={handleKeydown}
-		onInput={() => {}}
-	/>
+	<PriceField controller={retailPriceController} label="Price" class="col-r1" decimalPlaces={0} />
+	<ToggleField controller={activeController} class="col-start-1" label="Active" />
 	<SearchField
 		controller={productCategoryController}
 		label="Categories"

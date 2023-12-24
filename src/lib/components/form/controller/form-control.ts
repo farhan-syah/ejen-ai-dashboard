@@ -67,7 +67,7 @@ export class FormControl<T = any> {
 	validate() {
 		const errors: string[] = [];
 		const value = this.writableValue.get();
-		if (value) {
+		if (value != null) {
 			for (const validator of this.validators) {
 				const valid = validator.validator(value, validator.options);
 				if (!valid) {

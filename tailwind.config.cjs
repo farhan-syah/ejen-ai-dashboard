@@ -32,6 +32,9 @@ const config = {
 			},
 			borderWidth: {
 				6: "6px"
+			},
+			borderRadius: {
+				"4xl": "32px"
 			}
 		}
 	},
