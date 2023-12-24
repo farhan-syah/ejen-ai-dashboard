@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ProductUncheckedCreateInput } from "$api/routes/product/product.schema";
 	import { goto } from "$app/navigation";
-	import { UserState, getAppState } from "$applications";
+	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import {
 		Button,
@@ -9,8 +9,7 @@
 		FormDebugger,
 		FormGroup,
 		SearchField,
-		ToggleField,
-		validatePermissions
+		ToggleField
 	} from "$lib/components";
 	import PriceField from "$lib/components/form/text-field/PriceField.svelte";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
@@ -74,14 +73,14 @@
 		try {
 			appState.loading.set(true);
 
-			const productCategory = await ProductRepository.create({
+			const product = await ProductRepository.create({
 				data: form.value.get()
 			});
 
-			await goto(`/products/categories/${productCategory.id}`);
+			await goto(`/products/${product.id}`);
 
 			toastState.success({
-				message: "Category has been created"
+				message: "Product has been created"
 			});
 		} catch (error) {
 			appState.error.set(error);
@@ -89,13 +88,6 @@
 			appState.loading.set(false);
 		}
 	}
-
-	// Permissions
-
-	const hasEditPermission = validatePermissions(
-		["Product.manage", "Product.update"],
-		UserState.permissions.get()
-	);
 </script>
 
 <div class="grid grid-cols-6 gap-4">

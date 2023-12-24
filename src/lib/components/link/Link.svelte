@@ -14,21 +14,18 @@
 <div on:click={handleClick} on:keydown={handleClick} role="link" tabindex="-1">
 	{#if link}
 		{#if replaceState}
-			<a
-				data-sveltekit-replacestate
-				href={link}
-				{target}
-				class="cursor-pointer {$$props.class ?? ''}"><slot /></a
+			<a data-sveltekit-replacestate href={link} {target} class="pointer {$$props.class ?? ''}"
+				><slot /></a
 			>
 		{:else if reload}
-			<a data-sveltekit-reload href={link} {target} class="cursor-pointer {$$props.class ?? ''}"
+			<a data-sveltekit-reload href={link} {target} class="pointer {$$props.class ?? ''}"
 				><slot /></a
 			>
 		{:else}
 			<a
 				href={link}
 				{target}
-				class="cursor-pointer hover:text-blue-600 {$$props.class ?? ''}"
+				class="pointer hover:text-blue-600 {$$props.class ?? ''}"
 				tabindex="-1"
 			>
 				<slot />

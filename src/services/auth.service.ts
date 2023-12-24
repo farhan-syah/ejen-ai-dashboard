@@ -87,6 +87,15 @@ class _AuthService {
 		return new Date() < new Date((token.exp - 60) * 1000);
 	}
 
+	checkTokenExpiry() {
+		const token = UserState.accessToken.get();
+		if (token) {
+			const decodedToken: DecodedToken = jwtDecode(token);
+			const validExpiry = this.validateTokenExpiry(decodedToken);
+			if (!validExpiry) this.refreshToken();
+		}
+	}
+
 	refreshUser() {
 		if (browser) {
 			const token = UserState.accessToken.get();

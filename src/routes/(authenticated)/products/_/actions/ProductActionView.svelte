@@ -9,6 +9,7 @@
 	icon="material-symbols:docs-outline"
 	class="text-blue-500 text-xl font-bold pointer rounded-sm w-min p-0.25"
 	tooltip="View Details"
+	link={`/products/${productCategory.id}`}
 	onClick={() => {
 		goto(`/products/${productCategory.id}`);
 	}}

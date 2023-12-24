@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Product } from "../../products";
-	import ActionView from "./ActionView.svelte";
+	import ActionView from "./ProductActionView.svelte";
 
 	export let data: Product;
 	const productCategory = data;

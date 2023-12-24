@@ -5,6 +5,8 @@
 	export let icon: string;
 	export let onClick: (() => any) | undefined = undefined;
 	export let tooltip: string | undefined = undefined;
+	export let link: string | undefined = undefined;
+	export let target: "_self" | "_blank" | "_top" | "_parent" | undefined | null = undefined;
 	let isOpen = false;
 	const popperOptions: PopperOptions<any> = {};
 	function handleClick() {
@@ -26,15 +28,38 @@
 	<Popper bind:isOpen {popperOptions} placement="bottom">
 		<!-- Main Component -->
 		<div slot="main">
-			<div
-				role="button"
-				tabindex="0"
-				on:click={handleClick}
-				on:keyup={handleClick}
-				class=" {onClick ? 'pointer' : ''}"
-			>
-				<Icon {icon} class=" {$$props.iconClass ?? ''}" />
-			</div>
+			{#if link}
+				<a href={link} {target} tabindex="-1">
+					<div
+						role="button"
+						tabindex="0"
+						on:keydown={(e) => {
+							e.stopImmediatePropagation();
+							if (e.key === "Enter") {
+								handleClick();
+							}
+						}}
+						class={onClick ? "pointer" : ""}
+					>
+						<Icon {icon} class=" {$$props.iconClass ?? ''}" />
+					</div>
+				</a>
+			{:else}
+				<div
+					role="button"
+					tabindex="0"
+					on:click={handleClick}
+					on:keydown={(e) => {
+						e.stopImmediatePropagation();
+						if (e.key === "Enter") {
+							handleClick();
+						}
+					}}
+					class=" {onClick ? 'pointer' : ''}"
+				>
+					<Icon {icon} class=" {$$props.iconClass ?? ''}" />
+				</div>
+			{/if}
 		</div>
 		<!-- Popper Component -->
 

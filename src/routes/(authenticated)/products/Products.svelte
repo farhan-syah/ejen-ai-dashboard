@@ -47,6 +47,7 @@
 >
 	<div slot="action" class="mt-0.5">
 		<Button
+			link="/products/add"
 			label="Add Product"
 			onClick={() => {
 				goto("/products/add");

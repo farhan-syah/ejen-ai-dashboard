@@ -3,6 +3,7 @@
 	import { createToastState } from "$applications/toast.state";
 	import { ErrorOverlay, Toast } from "$lib/components";
 	import LoadingOverlay from "$lib/components/overlay/LoadingOverlay.svelte";
+	import { AuthService } from "$services";
 	import { onMount } from "svelte";
 	import { flip } from "svelte/animate";
 
@@ -30,6 +31,9 @@
 
 <svelte:window
 	on:resize={handleResize}
+	on:focus={() => {
+		AuthService.checkTokenExpiry();
+	}}
 	on:keydown={(e) => {
 		if (e.key === "F11") {
 			e.preventDefault();
