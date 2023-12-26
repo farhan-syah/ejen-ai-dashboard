@@ -5,6 +5,8 @@ BankAccount
 BillingAddress
 Cart
 CartItem
+Country
+Currency
 DamagedProduct
 Delivery
 DeliveryProduct

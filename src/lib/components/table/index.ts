@@ -29,7 +29,7 @@ export interface TableColumn<T = any> {
 	visible?: boolean;
 }
 
-export type TableInput<T = any, U = any> = {
+export type TableInput<T = any, U extends { query?: any } = any> = {
 	data?: Promise<T[]>;
 	filter?: U;
 	total?: number;
@@ -47,7 +47,7 @@ export type TableInput<T = any, U = any> = {
 	bulkActions?: BulkAction;
 };
 
-export class TableContext<T = any, U = any> {
+export class TableContext<T = any, U extends { query?: any } = any> {
 	asyncData: WritableAtom<Promise<T[] | undefined>> = atom(Promise.resolve([]));
 	data: WritableAtom<T[]> = atom([]);
 	filter: WritableAtom<U> = atom({});
@@ -78,7 +78,7 @@ export class TableContext<T = any, U = any> {
 	constructor(data: TableInput<T, U>) {
 		this.columns = data.columns ?? [];
 		this.visibleColumns = atom(data.columns?.filter((c) => c.visible) ?? []);
-		this.filter = atom(data.filter);
+		this.filter = atom(data.filter ?? { query: {} });
 		this.limit = atom(data.limit ?? undefined);
 		this.striped = data.striped;
 		this.showColumnFilter = data.showColumnFilter ?? false;
@@ -293,11 +293,13 @@ export class TableContext<T = any, U = any> {
 	}
 }
 
-export function getTableContext<T = any, U = any>() {
+export function getTableContext<T = any, U extends { query?: any } = any>() {
 	return getContext<TableContext<T, U>>("tableContext");
 }
 
-export function createTableContext<T = any, U = any>(data: TableInput<T, U> = {}) {
+export function createTableContext<T = any, U extends { query?: any } = any>(
+	data: TableInput<T, U> = {}
+) {
 	const context = new TableContext<T, U>(data);
 	setContext("tableContext", context);
 	return context;

@@ -5,7 +5,7 @@
 	import { atom, type WritableAtom } from "nanostores";
 	import { onMount } from "svelte";
 	// import type { Product } from "../product-categories";
-	import type { Product } from "../products";
+	import type { Product } from "../Products";
 	import ProductDetailsForm from "./ProductDetailsForm.svelte";
 
 	const id = $page.params.id;

@@ -5,6 +5,8 @@ import { BankAccountRepository } from "./bank-account.repository";
 import { BillingAddressRepository } from "./billing-address.repository";
 import { CartRepository } from "./cart.repository";
 import { CartItemRepository } from "./cart-item.repository";
+import { CountryRepository } from "./country.repository";
+import { CurrencyRepository } from "./currency.repository";
 import { DamagedProductRepository } from "./damaged-product.repository";
 import { DeliveryRepository } from "./delivery.repository";
 import { DeliveryProductRepository } from "./delivery-product.repository";
@@ -89,6 +91,8 @@ export {
   BillingAddressRepository,
   CartRepository,
   CartItemRepository,
+  CountryRepository,
+  CurrencyRepository,
   DamagedProductRepository,
   DeliveryRepository,
   DeliveryProductRepository,

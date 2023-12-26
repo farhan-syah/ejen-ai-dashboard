@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Product } from "../../products";
+	import type { Product } from "../../Products";
 	import ActionView from "./ProductActionView.svelte";
 
 	export let data: Product;

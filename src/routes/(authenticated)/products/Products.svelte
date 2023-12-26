@@ -5,7 +5,7 @@
 	import Card from "$lib/components/card/Card.svelte";
 	import { delay } from "$lib/utils";
 	import { ProductRepository } from "$repositories";
-	import { productColumns, toProductCSV, type Product } from "./products";
+	import { productColumns, toProductCSV, type Product } from "./Products";
 
 	const tableContext = createTableContext<Product, ProductSearch>({
 		filter: { where: {}, action: "search", query: { limit: 20 } },

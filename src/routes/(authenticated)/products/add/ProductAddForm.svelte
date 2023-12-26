@@ -14,7 +14,7 @@
 	import PriceField from "$lib/components/form/text-field/PriceField.svelte";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
-	import type { ProductCategory } from "../products";
+	import type { ProductCategory } from "../Products";
 
 	// States
 

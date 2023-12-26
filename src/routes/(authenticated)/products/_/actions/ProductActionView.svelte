@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { IconWithTooltip } from "$lib/components";
-	import type { Product } from "../../products";
+	import type { Product } from "../../Products";
 	export let productCategory: Product;
 </script>
 
