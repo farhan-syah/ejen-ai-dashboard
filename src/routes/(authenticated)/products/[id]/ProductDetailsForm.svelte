@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProductUpdateData } from "$api/routes/product/product.schema";
+	import type { ProductUpdateInput } from "$api/routes/product/product.schema";
 	import { UserState, getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import {
@@ -8,14 +8,17 @@
 		FormDebugger,
 		FormGroup,
 		Guard,
+		PriceField,
+		SearchField,
+		ToggleField,
 		Tooltip,
 		validatePermissions
 	} from "$lib/components";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
-	import { ProductRepository } from "$repositories";
+	import { ProductCategoryRepository, ProductRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
-	import type { Product } from "../Products";
+	import type { Product, ProductCategory } from "../Products";
 	import ProductDeleteButton from "./ProductDeleteButton.svelte";
 
 	// Variables
@@ -42,15 +45,55 @@
 		required: true
 	});
 
-	const form = new FormGroup<ProductUpdateData>([nameController]);
+	const skuController = new FormControl({
+		name: "sku",
+		value: product.sku,
+		required: true
+	});
+
+	const retailPriceController = new FormControl<number>({
+		name: "retailPrice",
+		value: product.retailPrice,
+		required: true
+	});
+
+	const activeController = new FormControl<boolean>({
+		name: "active",
+		required: true,
+		value: product.active
+	});
+
+	const productCategoryController = new FormControl<ProductCategory[]>({
+		name: "categories",
+		value: product.categories
+	});
+
+	const form = new FormGroup([
+		nameController,
+		skuController,
+		retailPriceController,
+		activeController,
+		productCategoryController
+	]);
 	const valid = form.valid;
 
 	async function handleSaveForm() {
 		try {
 			appState.loading.set(true);
 
+			const data = form.value.get() as ProductUpdateInput;
+			const productCategories = productCategoryController.value;
+
+			if (productCategories) {
+				data.categories = {
+					set: productCategories.map((c) => {
+						return { id: c.id };
+					})
+				};
+			}
+
 			await ProductRepository.update(product.id, {
-				data: form.value.get()
+				data: data
 			});
 
 			await fetchProduct();
@@ -72,6 +115,31 @@
 		["Product.manage", "Product.update"],
 		UserState.permissions.get()
 	);
+
+	// Functions
+
+	async function handleCategorySearch(input?: string) {
+		const selectedCategoryIds: string[] =
+			productCategoryController.value?.map((category) => category.id) ?? [];
+		const categories = await ProductCategoryRepository.search({
+			where: {
+				id: {
+					notIn: selectedCategoryIds
+				},
+				name: {
+					contains: input,
+					mode: "insensitive"
+				}
+			},
+			query: {
+				select: {
+					id: true,
+					name: true
+				}
+			}
+		});
+		return categories;
+	}
 </script>
 
 <div class="grid grid-cols-6 gap-4">
@@ -97,11 +165,33 @@
 	</TextField>
 	<TextField
 		controller={nameController}
-		label="Category Name"
+		label="Product Name"
 		class="col-r1"
 		disabled={!$editable}
 	/>
-
+	<TextField controller={skuController} label="SKU" class="col-r1" disabled={!$editable} />
+	<PriceField
+		controller={retailPriceController}
+		label="Price"
+		class="col-r1"
+		decimalPlaces={0}
+		disabled={!$editable}
+	/>
+	<ToggleField
+		controller={activeController}
+		class="col-start-1"
+		label="Active"
+		disabled={!$editable}
+	/>
+	<SearchField
+		controller={productCategoryController}
+		label="Categories"
+		class="col-r1"
+		onSearch={handleCategorySearch}
+		disabled={!$editable}
+		transformResult={(result) => result.name}
+		transformSelectedItem={(selectedItem) => selectedItem.name}
+	/>
 	{#if hasEditPermission}
 		<div class="flex gap-2 col-start-1">
 			{#if $editable}

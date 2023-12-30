@@ -12,7 +12,7 @@
 	} from "./product-categories";
 
 	const tableContext = createTableContext<ProductCategory, ProductCategorySearch>({
-		filter: { where: {}, action: "search", query: { limit: 20 } },
+		filter: { where: {}, query: { limit: 20 } },
 		columns: productCategoryColumns,
 		limit: 20,
 		selectable: true,
@@ -28,7 +28,6 @@
 		},
 		onGetSelected: async (selected) => {
 			return ProductCategoryRepository.search({
-				action: "search",
 				where: { id: { in: selected as string[] } }
 			});
 		},

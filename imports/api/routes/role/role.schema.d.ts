@@ -11,19 +11,11 @@ export declare const RoleUncheckedCreateInputSchema: import("@sinclair/typebox")
 export type RoleUncheckedCreateInput = Static<typeof RoleUncheckedCreateInputSchema>;
 export declare const RoleUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
 export type RoleUncheckedUpdateInput = Static<typeof RoleUncheckedUpdateInputSchema>;
-export declare const RoleActionEnum: {
-    search: string;
-};
-export type RoleActionEnum = (typeof RoleActionEnum)[keyof typeof RoleActionEnum];
 export declare const RoleSearchWhereSchema: import("@sinclair/typebox").TObject<{
     id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
         equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
         notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-        lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -56,10 +48,6 @@ export declare const RoleSearchWhereSchema: import("@sinclair/typebox").TObject<
                 equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                 notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -92,10 +80,6 @@ export declare const RoleSearchWhereSchema: import("@sinclair/typebox").TObject<
                 equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                 notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -128,10 +112,6 @@ export declare const RoleSearchWhereSchema: import("@sinclair/typebox").TObject<
                 equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                 notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                 endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -164,10 +144,6 @@ export declare const RoleSearchWhereSchema: import("@sinclair/typebox").TObject<
         equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
         notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-        lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -177,16 +153,11 @@ export declare const RoleSearchWhereSchema: import("@sinclair/typebox").TObject<
 }>;
 export type RoleSearchWhere = Static<typeof RoleSearchWhereSchema>;
 export declare const RoleSearchSchema: import("@sinclair/typebox").TObject<{
-    action: import("@sinclair/typebox").TLiteral<string>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -219,10 +190,6 @@ export declare const RoleSearchSchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -255,10 +222,6 @@ export declare const RoleSearchSchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -291,10 +254,6 @@ export declare const RoleSearchSchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -327,10 +286,6 @@ export declare const RoleSearchSchema: import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -348,16 +303,11 @@ export declare const RoleSearchSchema: import("@sinclair/typebox").TObject<{
 }>;
 export type RoleSearch = Static<typeof RoleSearchSchema>;
 export declare const RoleActionSchema: import("@sinclair/typebox").TObject<{
-    action: import("@sinclair/typebox").TLiteral<string>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -390,10 +340,6 @@ export declare const RoleActionSchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -426,10 +372,6 @@ export declare const RoleActionSchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -462,10 +404,6 @@ export declare const RoleActionSchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -498,10 +436,6 @@ export declare const RoleActionSchema: import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -548,10 +482,6 @@ export declare const RoleUpdateManySchema: import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -561,10 +491,6 @@ export declare const RoleUpdateManySchema: import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -597,10 +523,6 @@ export declare const RoleUpdateManySchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -633,10 +555,6 @@ export declare const RoleUpdateManySchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -669,10 +587,6 @@ export declare const RoleUpdateManySchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -705,10 +619,6 @@ export declare const RoleUpdateManySchema: import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -731,10 +641,6 @@ export declare const RoleDeleteManySchema: import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -744,10 +650,6 @@ export declare const RoleDeleteManySchema: import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -780,10 +682,6 @@ export declare const RoleDeleteManySchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -816,10 +714,6 @@ export declare const RoleDeleteManySchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -852,10 +746,6 @@ export declare const RoleDeleteManySchema: import("@sinclair/typebox").TObject<{
                     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
                     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-                    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-                    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
                     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -888,10 +778,6 @@ export declare const RoleDeleteManySchema: import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
             notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-            lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-            gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
             endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

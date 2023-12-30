@@ -20,11 +20,10 @@
 
 	const appState = getAppState();
 	const toastState = getToastState();
-	async function handleCategorySearch(input: string) {
+	async function handleCategorySearch(input?: string) {
 		const selectedCategoryIds: string[] =
 			productCategoryController.value?.map((category) => category.id) ?? [];
 		const categories = await ProductCategoryRepository.search({
-			action: "search",
 			where: {
 				id: {
 					notIn: selectedCategoryIds
@@ -33,10 +32,6 @@
 		});
 		return categories;
 	}
-
-	// Options
-
-	const productCategoryController = new FormControl<ProductCategory[]>();
 
 	//  Forms
 
@@ -61,11 +56,14 @@
 		value: true
 	});
 
+	const productCategoryController = new FormControl<ProductCategory[]>({ name: "categories" });
+
 	const form = new FormGroup<ProductCreateInput>([
 		nameController,
 		skuController,
 		retailPriceController,
-		activeController
+		activeController,
+		productCategoryController
 	]);
 	const valid = form.valid;
 
@@ -74,7 +72,6 @@
 			appState.loading.set(true);
 
 			const data = form.value.get();
-
 			const productCategories = productCategoryController.value;
 
 			if (productCategories && productCategories.length > 0) {

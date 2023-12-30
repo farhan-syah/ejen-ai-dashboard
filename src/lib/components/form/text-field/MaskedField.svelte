@@ -3,6 +3,7 @@
 	export let controller: FormControl<number> = new FormControl<number>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
+	export let disabled: boolean = false;
 	export let onInput: (value: string, input: HTMLInputElement, event: any) => any;
 	export let onKeydown: ((e: KeyboardEvent, controller: FormControl) => any) | undefined =
 		undefined;
@@ -89,6 +90,7 @@
 	<div class="flex rounded outline {outlineClass}">
 		<input
 			bind:this={controller.el}
+			{disabled}
 			type="text"
 			name={controller.name}
 			value={controller.writableValue.get()?.toString() ?? ""}

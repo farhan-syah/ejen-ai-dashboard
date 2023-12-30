@@ -4,8 +4,8 @@ import { formatLocalDate } from "$lib/utils/date";
 import { CSV } from "$types";
 import ProductActions from "./_/actions/ProductActions.svelte";
 
-export type Product = Prisma.Product;
-export type ProductCategory = Prisma.ProductCategory;
+export type Product = Prisma.Product & { categories?: ProductCategory[] };
+export type ProductCategory = Pick<Prisma.ProductCategory, "id" | "name">;
 export const productColumns: TableColumn<Product>[] = [
 	{
 		key: "id",

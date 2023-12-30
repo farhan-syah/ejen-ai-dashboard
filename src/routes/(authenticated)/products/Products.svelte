@@ -8,7 +8,7 @@
 	import { productColumns, toProductCSV, type Product } from "./Products";
 
 	const tableContext = createTableContext<Product, ProductSearch>({
-		filter: { where: {}, action: "search", query: { limit: 20 } },
+		filter: { where: {}, query: { limit: 20 } },
 		columns: productColumns,
 		limit: 20,
 		selectable: true,
@@ -24,7 +24,6 @@
 		},
 		onGetSelected: async (selected) => {
 			return ProductRepository.search({
-				action: "search",
 				where: { id: { in: selected as string[] } }
 			});
 		},

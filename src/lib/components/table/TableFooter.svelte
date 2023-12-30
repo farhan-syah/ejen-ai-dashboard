@@ -16,11 +16,11 @@
 
 	const pageController = new FormControl<number>({ name: "page", value: 1 });
 
-	function handleKeydown(e: KeyboardEvent, input: HTMLInputElement) {
+	function handleKeydown(e: KeyboardEvent, controller: FormControl) {
 		if (e.key === ".") e.preventDefault();
 		if (e.key === "Enter" && typeof pageController.value === "number") {
 			let newPage = context.goToPage(pageController.value);
-			input.value = newPage.toString();
+			(controller.el as HTMLInputElement).value = newPage.toString();
 		}
 	}
 	let input: HTMLInputElement | undefined;
@@ -44,7 +44,6 @@
 		<div class="mr-2 w-10 text-center">
 			<NumField
 				controller={pageController}
-				bind:input
 				onKeydown={handleKeydown}
 				inputClass=" text-xs py-0.5 px-0.5 text-center "
 			/>

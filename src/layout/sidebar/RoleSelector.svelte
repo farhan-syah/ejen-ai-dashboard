@@ -51,8 +51,7 @@
 						}
 					}
 				}
-			},
-			action: "search"
+			}
 		})) as Role[];
 
 		{

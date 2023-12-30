@@ -110,7 +110,6 @@ class _AuthService {
 		if (validExpiry) {
 			const user = await UserRepository.get(decodedToken.sub);
 			const searchSettingResults = await UserSettingRepository.search({
-				action: "search",
 				where: {
 					userId: decodedToken.sub
 				}

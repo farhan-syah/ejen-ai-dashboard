@@ -6,6 +6,7 @@
 	export let label: string | undefined;
 	export let decimalPlaces: number = 2;
 	export let allowNegativeValue: boolean = false;
+	export let disabled: boolean = false;
 	let componentClass = "";
 	export { componentClass as class };
 	function handleKeydown(e: KeyboardEvent) {
@@ -39,6 +40,7 @@
 
 <MaskedField
 	{controller}
+	{disabled}
 	{label}
 	class={componentClass}
 	onKeydown={handleKeydown}

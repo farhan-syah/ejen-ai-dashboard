@@ -4,6 +4,9 @@
 @tailwind utilities;
 
 @layer components {
+	input:disabled {
+		@apply !bg-gray-50 text-gray-400;
+	}
 	.pointer {
 		@apply cursor-pointer;
 		@apply hover:bg-slate-700/10;

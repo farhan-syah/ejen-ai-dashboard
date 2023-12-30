@@ -3,7 +3,6 @@
 	import { FormControl } from "../controller/form-control";
 	export let controller: FormControl<boolean> = new FormControl<boolean>();
 	export let label: string | undefined = undefined;
-	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;
 	const required = controller.required;
 	const selected = controller.writableValue;
@@ -44,7 +43,11 @@
 		aria-checked={$selected}
 		tabindex="0"
 	>
-		<span class="toggle-bg w-full h-full {$selected ? 'bg-blue-500' : 'bg-gray-200'}" />
+		<span
+			class="toggle-bg w-full h-full {$selected ? 'bg-blue-500' : 'bg-gray-200'} {disabled
+				? 'bg-opacity-50'
+				: ''}"
+		/>
 		<span class="toggle-circle bg-white left-0.5 {$selected ? 'translate-x-[19px]' : ''}" />
 	</button>
 </div>

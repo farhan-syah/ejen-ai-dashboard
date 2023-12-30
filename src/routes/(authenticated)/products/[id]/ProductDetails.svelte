@@ -22,7 +22,7 @@
 
 {#if $product}
 	<PageTitle
-		title="Product Category - {$product.name}"
+		title="Product - {$product.name}"
 		id={$product.id}
 		breadcrumbs={[
 			{ label: "Products", path: "/products" },

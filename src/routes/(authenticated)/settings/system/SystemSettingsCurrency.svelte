@@ -7,8 +7,7 @@
 	const tableContext = createTableContext<Currency, CurrencySearch>({
 		columns: currencyColumns,
 		filter: {
-			where: {},
-			action: "search"
+			where: {}
 		},
 		limit: 20,
 		onSearch: async (f) => {

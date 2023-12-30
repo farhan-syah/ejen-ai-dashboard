@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from "@iconify/svelte";
 
-	import { deepEqual, delay } from "$lib/utils";
+	import { asyncDebounce, deepEqual } from "$lib/utils";
 
 	import { Popper } from "$lib/components";
 	import type { ModifierPhases } from "@popperjs/core";
@@ -16,9 +16,8 @@
 	export let placeholder: string = "Select";
 	export let searchPlaceholder: string = "Search";
 	export let inputMinCharLength: number = -1;
-	export let showSearchPlaceholder = false;
-	export let searchDelay: number = showSearchPlaceholder ? 200 : 0;
-	export let onSearch: (input: string) => Promise<Array<T>> = async () => {
+	export let disabled = false;
+	export let onSearch: (input?: string) => Promise<Array<T>> = async () => {
 		return [];
 	};
 	export let transformResult: ((result: T) => string) | undefined = undefined;
@@ -35,8 +34,6 @@
 	// State
 
 	const searchResults = atom<T[]>([]);
-	const isSearching = atom(false);
-	const searchError = atom<string | undefined>();
 	const selectedItems = controller.writableValue;
 
 	$: isFocused = controller.isFocused;
@@ -85,7 +82,6 @@
 		modifiers: [
 			{
 				name: "widthModifier",
-				enabled: true,
 				phase: "beforeWrite" as ModifierPhases,
 				requires: ["computeStyles"],
 				fn: ({ state }: any) => {
@@ -96,9 +92,12 @@
 	};
 
 	const isOpen = atom(false);
-	isOpen.subscribe((value) => {
+	isOpen.subscribe(async (value) => {
 		if (value) {
-			handleInput();
+			const result = await onSearch(filterString);
+			if (result) {
+				searchResults.set(result);
+			}
 		}
 	});
 
@@ -118,31 +117,33 @@
 		isOpen.set(false);
 	}
 
-	function handleReset() {
-		isOpen.set(false);
-	}
+	const debounceSearch = asyncDebounce(onSearch, 500);
 
 	async function handleInput() {
 		if (filterString.length > inputMinCharLength) {
-			if (!$isSearching) {
-				isSearching.set(true);
-				let result: T[];
-				[result] = await Promise.all([
-					onSearch(filterString)
-						.then((res) => {
-							searchError.set(undefined);
-							return res;
-						})
-						.catch((e) => {
-							searchError.set(e.data.message ?? e.data.error ?? "Error");
-							return [];
-						}),
-					delay(searchDelay)
-				]);
+			const result = await debounceSearch(filterString);
+			if (result) {
 				searchResults.set(result);
-
-				isSearching.set(false);
 			}
+
+			// if (!$isSearching) {
+			// 	isSearching.set(true);
+			// 	let result: T[];
+			// 	[result] = await Promise.all([
+			// 		onSearch(filterString)
+			// 			.then((res) => {
+			// 				searchError.set(undefined);
+			// 				return res;
+			// 			})
+			// 			.catch((e) => {
+			// 				searchError.set(e.data.message ?? e.data.error ?? "Error");
+			// 				return [];
+			// 			}),
+			// 		delay(searchDelay)
+			// 	]);
+			// 	searchResults.set(result);
+			// 	isSearching.set(false);
+			// }
 		}
 	}
 
@@ -177,9 +178,11 @@
 		tabindex="0"
 		class="outline-none"
 		on:focus={() => {
-			isFocused.set(true);
-			if (!$touched) {
-				touched.set(true);
+			if (!disabled) {
+				isFocused.set(true);
+				if (!$touched) {
+					touched.set(true);
+				}
 			}
 		}}
 		on:blur={() => {
@@ -190,11 +193,13 @@
 			controller.validate();
 		}}
 	>
-		<Popper bind:isOpen={$isOpen} {popperOptions}>
+		<Popper bind:isOpen={$isOpen} {popperOptions} {disabled}>
 			<!-- Main Component -->
 			<div
 				slot="main"
-				class="flex flex-wrap gap-2 items-center rounded outline p-2 cursor-pointer {inputClass}"
+				class="flex flex-wrap gap-2 items-center rounded outline p-2 cursor-pointer {disabled
+					? 'bg-gray-50'
+					: ''} {inputClass}"
 			>
 				{#if $selectedItems && $selectedItems.length > 0}
 					<div class="flex flex-wrap gap-2">
@@ -203,7 +208,7 @@
 								<slot name="selectedItem" {selectedItem} />
 							{:else}
 								<div class="flex gap-1 rounded items-center bg-slate-100 px-1 py-0.5 -m-0.5">
-									<div class="text-slate-700">
+									<div class={disabled ? "text-gray-400" : "text-slate-700"}>
 										{transformSelectedItem ? transformSelectedItem(selectedItem) : selectedItem}
 									</div>
 									<div
@@ -214,7 +219,9 @@
 											handleRemoveSelectedItem(index);
 										}}
 									>
-										<Icon icon="bx:x"></Icon>
+										{#if !disabled}
+											<Icon icon="bx:x"></Icon>
+										{/if}
 									</div>
 								</div>
 							{/if}
