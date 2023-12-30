@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { flyAndScale } from "$lib/utils";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
 	import { onMount } from "svelte";
@@ -25,7 +26,7 @@
 		on:click|self={handleDismiss}
 		on:keypress={() => {}}
 	>
-		<div class="  m-auto relative">
+		<div class="m-auto relative" transition:flyAndScale>
 			<Card class="p-4">
 				<slot />
 			</Card>

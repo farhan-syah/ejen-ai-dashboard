@@ -4,4 +4,5 @@ export * from "./array";
 export * from "./etc";
 export * from "./object";
 export * from "./string";
+export * from "./transition";
 export { isOdd, toCurrency, toCurrencyFromCent };

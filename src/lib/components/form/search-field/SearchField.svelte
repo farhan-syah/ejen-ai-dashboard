@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { fly } from "svelte/transition";
+
+	import { Popover } from "bits-ui";
+
 	import Icon from "@iconify/svelte";
 
 	import { asyncDebounce, deepEqual } from "$lib/utils";
 
-	import { Popper } from "$lib/components";
-	import type { ModifierPhases } from "@popperjs/core";
 	import { atom } from "nanostores";
-	import type { PopperOptions } from "svelte-popperjs";
 	import { FormControl } from "../controller/form-control";
 
 	type T = $$Generic;
@@ -76,21 +77,6 @@
 		}
 	}
 
-	//  Popper
-
-	const popperOptions: PopperOptions<any> = {
-		modifiers: [
-			{
-				name: "widthModifier",
-				phase: "beforeWrite" as ModifierPhases,
-				requires: ["computeStyles"],
-				fn: ({ state }: any) => {
-					state.styles.popper.width = `${state.rects.reference.width}px`;
-				}
-			}
-		]
-	};
-
 	const isOpen = atom(false);
 	isOpen.subscribe(async (value) => {
 		if (value) {
@@ -113,6 +99,7 @@
 		) {
 			const newValue = [...currentValue, result];
 			controller.writableValue.set(newValue);
+			filterString = "";
 		}
 		isOpen.set(false);
 	}
@@ -125,25 +112,6 @@
 			if (result) {
 				searchResults.set(result);
 			}
-
-			// if (!$isSearching) {
-			// 	isSearching.set(true);
-			// 	let result: T[];
-			// 	[result] = await Promise.all([
-			// 		onSearch(filterString)
-			// 			.then((res) => {
-			// 				searchError.set(undefined);
-			// 				return res;
-			// 			})
-			// 			.catch((e) => {
-			// 				searchError.set(e.data.message ?? e.data.error ?? "Error");
-			// 				return [];
-			// 			}),
-			// 		delay(searchDelay)
-			// 	]);
-			// 	searchResults.set(result);
-			// 	isSearching.set(false);
-			// }
 		}
 	}
 
@@ -193,55 +161,57 @@
 			controller.validate();
 		}}
 	>
-		<Popper bind:isOpen={$isOpen} {popperOptions} {disabled}>
-			<!-- Main Component -->
-			<div
-				slot="main"
-				class="flex flex-wrap gap-2 items-center rounded outline p-2 cursor-pointer {disabled
-					? 'bg-gray-50'
-					: ''} {inputClass}"
+		<Popover.Root bind:open={$isOpen}>
+			<Popover.Trigger {disabled} class="w-full">
+				<div
+					class="flex flex-wrap gap-2 items-center rounded outline p-2 {disabled
+						? 'bg-gray-50'
+						: ''} {inputClass}"
+				>
+					{#if $selectedItems && $selectedItems.length > 0}
+						<div class="flex flex-wrap gap-2">
+							{#each $selectedItems as selectedItem, index}
+								{#if $$slots.selectedItem}
+									<slot name="selectedItem" {selectedItem} />
+								{:else}
+									<div class="flex gap-1 rounded items-center bg-slate-100 px-1 py-0.5 -m-0.5">
+										<div class={disabled ? "text-gray-400" : "text-slate-700"}>
+											{transformSelectedItem ? transformSelectedItem(selectedItem) : selectedItem}
+										</div>
+										<div
+											class=" bg-slate-300 hover:bg-slate-500 text-white rounded text-base"
+											role="none"
+											on:click={(e) => {
+												e.stopPropagation();
+												handleRemoveSelectedItem(index);
+											}}
+										>
+											{#if !disabled}
+												<Icon icon="bx:x"></Icon>
+											{/if}
+										</div>
+									</div>
+								{/if}
+							{/each}
+						</div>
+					{:else}
+						{placeholder}
+					{/if}
+				</div>
+			</Popover.Trigger>
+			<Popover.Content
+				transition={fly}
+				transitionConfig={{ duration: 100, delay: 0 }}
+				sameWidth
+				class="cursor-pointer bg-white mt-1.5 w-full"
 			>
-				{#if $selectedItems && $selectedItems.length > 0}
-					<div class="flex flex-wrap gap-2">
-						{#each $selectedItems as selectedItem, index}
-							{#if $$slots.selectedItem}
-								<slot name="selectedItem" {selectedItem} />
-							{:else}
-								<div class="flex gap-1 rounded items-center bg-slate-100 px-1 py-0.5 -m-0.5">
-									<div class={disabled ? "text-gray-400" : "text-slate-700"}>
-										{transformSelectedItem ? transformSelectedItem(selectedItem) : selectedItem}
-									</div>
-									<div
-										class=" bg-slate-300 hover:bg-slate-500 text-white rounded text-base"
-										role="none"
-										on:click={(e) => {
-											e.stopPropagation();
-											handleRemoveSelectedItem(index);
-										}}
-									>
-										{#if !disabled}
-											<Icon icon="bx:x"></Icon>
-										{/if}
-									</div>
-								</div>
-							{/if}
-						{/each}
-					</div>
-				{:else}
-					{placeholder}
-				{/if}
-			</div>
-			<!-- Popper Component -->
-			<div slot="content" class="cursor-pointer bg-white mt-1.5" role="dialog">
-				<div class=" shadow-lg rounded border">
-					<!-- Search Box -->
+				<div class="w-full shadow-lg rounded border">
 					<input
 						placeholder={searchPlaceholder}
 						bind:value={filterString}
 						class="text-blue-700/70 text-sm w-full px-1.5 py-1 rounded-t focus:outline-none border-b-2 border-blue-100 {inputClass}"
 						on:input={handleInput}
 					/>
-					<!-- Search Results -->
 					{#each $searchResults as result}
 						<div
 							role="option"
@@ -265,8 +235,8 @@
 						</div>
 					{/each}
 				</div>
-			</div>
-		</Popper>
+			</Popover.Content>
+		</Popover.Root>
 	</div>
 </div>
 

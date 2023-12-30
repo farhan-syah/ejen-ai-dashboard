@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { getToastState } from "$applications/toast.state";
+	import { flyAndScale } from "$lib/utils";
 	import Icon from "@iconify/svelte";
-	import { cubicOut, sineOut } from "svelte/easing";
+	import { sineOut } from "svelte/easing";
 	import { tweened } from "svelte/motion";
-	import { fade } from "svelte/transition";
 	import { type ToastItem } from ".";
 	const toastState = getToastState();
 	export let toast: ToastItem;
@@ -22,10 +22,7 @@
 	}
 </script>
 
-<div
-	class="bg-white rounded w-72 shadow-md overflow-clip"
-	out:fade={{ duration: 500, easing: cubicOut }}
->
+<div class="bg-white rounded w-72 shadow-md overflow-clip" transition:flyAndScale>
 	<div class="relative {toast.type}">
 		<div class="h-1 {toast.type} left-0" style="width:{$progress}%" />
 		<div class="flex p-2 items-center">
