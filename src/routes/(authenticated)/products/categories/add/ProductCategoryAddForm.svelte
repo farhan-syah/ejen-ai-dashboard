@@ -64,8 +64,12 @@
 </script>
 
 <div class="grid grid-cols-6 gap-4">
-	<TextField controller={nameController} label="Category Name" class="col-r1" />
-	<TextAreaField controller={descriptionController} label="Category Description" class="col-r1" />
+	<TextField controller={nameController} label="Category Name" class="col-col-1" />
+	<TextAreaField
+		controller={descriptionController}
+		label="Category Description"
+		class="col-col-1"
+	/>
 	<div class="flex gap-2 col-start-1">
 		<Button valid={$valid} onClick={handleSaveForm} />
 	</div>

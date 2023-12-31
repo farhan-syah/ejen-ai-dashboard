@@ -80,7 +80,7 @@
 </script>
 
 <div class="grid grid-cols-6 gap-4">
-	<TextField controller={idController} label="ID" class="col-r1" disabled>
+	<TextField controller={idController} label="ID" class="col-col-1" disabled>
 		<div slot="postfix" class="text-blue-500 h-full border-l bg-white rounded-r pointer">
 			<Tooltip
 				tooltip="Copy"
@@ -103,14 +103,14 @@
 	<TextField
 		controller={nameController}
 		label="Category Name"
-		class="col-r1"
+		class="col-col-1"
 		disabled={!$editable}
 	/>
 	<TextAreaField
 		disabled={!$editable}
 		controller={descriptionController}
 		label="Category Description"
-		class="col-r1"
+		class="col-col-1"
 	/>
 	{#if hasEditPermission}
 		<div class="flex gap-2 col-start-1">

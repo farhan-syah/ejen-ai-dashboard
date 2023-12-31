@@ -8,6 +8,7 @@
 		FormDebugger,
 		FormGroup,
 		Guard,
+		ImageField,
 		PriceField,
 		SearchField,
 		ToggleField,
@@ -142,8 +143,8 @@
 	}
 </script>
 
-<div class="grid grid-cols-6 gap-4">
-	<TextField controller={idController} label="ID" class="col-r1" disabled>
+<div class="grid grid-cols-5 grid-flow-col gap-4">
+	<TextField controller={idController} label="ID" class="col-col-1" disabled>
 		<div slot="postfix" class="text-blue-500 h-full border-l bg-white rounded-r pointer">
 			<Tooltip
 				tooltip="Copy"
@@ -166,14 +167,14 @@
 	<TextField
 		controller={nameController}
 		label="Product Name"
-		class="col-r1"
+		class="col-col-1"
 		disabled={!$editable}
 	/>
-	<TextField controller={skuController} label="SKU" class="col-r1" disabled={!$editable} />
+	<TextField controller={skuController} label="SKU" class="col-col-1" disabled={!$editable} />
 	<PriceField
 		controller={retailPriceController}
 		label="Price"
-		class="col-r1"
+		class="col-col-1"
 		decimalPlaces={0}
 		disabled={!$editable}
 	/>
@@ -186,12 +187,13 @@
 	<SearchField
 		controller={productCategoryController}
 		label="Categories"
-		class="col-r1"
+		class="col-col-1"
 		onSearch={handleCategorySearch}
 		disabled={!$editable}
 		transformResult={(result) => result.name}
 		transformSelectedItem={(selectedItem) => selectedItem.name}
 	/>
+	<ImageField label="Image" class="col-col-2"></ImageField>
 	{#if hasEditPermission}
 		<div class="flex gap-2 col-start-1">
 			{#if $editable}

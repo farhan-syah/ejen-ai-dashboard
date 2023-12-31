@@ -100,14 +100,19 @@
 </script>
 
 <div class="grid grid-cols-6 gap-4">
-	<TextField controller={nameController} label="Product Name" class="col-r1" />
-	<TextField controller={skuController} label="SKU" class="col-r1" />
-	<PriceField controller={retailPriceController} label="Price" class="col-r1" decimalPlaces={0} />
+	<TextField controller={nameController} label="Product Name" class="col-col-1" />
+	<TextField controller={skuController} label="SKU" class="col-col-1" />
+	<PriceField
+		controller={retailPriceController}
+		label="Price"
+		class="col-col-1"
+		decimalPlaces={0}
+	/>
 	<ToggleField controller={activeController} class="col-start-1" label="Active" />
 	<SearchField
 		controller={productCategoryController}
 		label="Categories"
-		class="col-r1"
+		class="col-col-1"
 		onSearch={handleCategorySearch}
 		transformResult={(result) => result.name}
 		transformSelectedItem={(selectedItem) => selectedItem.name}
