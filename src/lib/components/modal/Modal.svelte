@@ -5,6 +5,11 @@
 	import { onMount } from "svelte";
 	import { Card } from "../card";
 
+	// Class
+	let componentClass = "";
+	export { componentClass as class };
+	export let cardClass = "p-4";
+
 	export let isOpen = atom<boolean>(false);
 	function handleDismiss() {
 		isOpen.set(false);
@@ -26,8 +31,8 @@
 		on:click|self={handleDismiss}
 		on:keypress={() => {}}
 	>
-		<div class="m-auto relative" transition:flyAndScale>
-			<Card class="p-4">
+		<div class="m-auto relative {componentClass}" transition:flyAndScale>
+			<Card class={cardClass}>
 				<slot />
 			</Card>
 			<div

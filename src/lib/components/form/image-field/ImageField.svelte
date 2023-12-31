@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FormControl } from "$lib/components";
+	import { FormControl, Modal } from "$lib/components";
 	import Icon from "@iconify/svelte";
 	import { fromEvent, type FileWithPath } from "file-selector";
 	import { atom } from "nanostores";
@@ -24,22 +24,22 @@
 	// Functions
 
 	function handleDndConsider(e: CustomEvent<DndEvent>) {
-		$writableItems = e.detail.items as ImageItem[];
+		writableItems.set([...(e.detail.items as ImageItem[])]);
 	}
 	function handleDndFinalize(e: CustomEvent<DndEvent>) {
 		const { items: newItems } = e.detail;
 		onDrop(newItems as ImageItem[]);
 	}
 	export let onDrop: (newItems: ImageItem[]) => any = (newItems) => {
-		$writableItems = newItems;
+		writableItems.set([...newItems]);
 	};
 
-	function handleUploadClick(event: any) {
+	function handleChooseFile(event: any) {
 		if (inputRef) {
 			inputRef.click();
 		}
 	}
-	async function handleUploadChange(e: Event) {
+	async function handleFileSelected(e: Event) {
 		let _files = (await fromEvent(e)) as FileWithPath[];
 		let items = [...$writableItems];
 		_files.forEach((file) => {
@@ -55,12 +55,12 @@
 				items.push(item);
 			}
 		});
-		$writableItems = [...items];
+		writableItems.set([...items]);
 	}
 
-	function handleImageClick(event: any, i: number) {
-		// currentIndex = i;
-		// overlay.open();
+	function handleImageClick(event: EventTarget & HTMLImageElement, i: number) {
+		previewImageSrc.set(event.src);
+		isModalOpen.set(true);
 	}
 
 	function handleImageDelete(event: any, i: number) {
@@ -68,6 +68,15 @@
 		currentValue.splice(i, 1);
 		writableItems.set([...currentValue]);
 	}
+
+	async function handleUploadFiles() {
+		const images = writableItems.get();
+		console.log(images);
+	}
+
+	// States
+	const previewImageSrc = atom<string | undefined>();
+	const isModalOpen = atom(false);
 </script>
 
 <div class={componentClass}>
@@ -102,7 +111,7 @@
 			on:consider={handleDndConsider}
 			on:finalize={handleDndFinalize}
 		>
-			{#each $writableItems as item, i (item.id + item.image)}
+			{#each $writableItems as item, i (item.id + (item.file ?? item.image))}
 				<div
 					class="m-1 bg-gray-50 shadow-md shadow-gray-300 drop-shadow-md rounded-sm hover:shadow-gray-600/50 transition hover:scale-[1.03] {limit &&
 					limit - 1 < i
@@ -116,11 +125,11 @@
 						<img
 							src={item.file ? item.image : item.image + "?width=" + width * 3}
 							alt={item.image}
-							class=" object-cover"
+							class="object-cover"
 							style={`height: ${height}px; width: ${width}px`}
 							crossorigin=""
 							on:click={(e) => {
-								handleImageClick(e, i);
+								handleImageClick(e.currentTarget, i);
 							}}
 							on:keypress
 						/>
@@ -143,7 +152,7 @@
 		<div class="w-full flex gap-2 text-xs text-white">
 			<button
 				class="flex-grow bg-blue-500 rounded text-white hover:opacity-90"
-				on:click={handleUploadClick}
+				on:click={handleChooseFile}
 			>
 				<div class=" w-full flex gap-1 items-center justify-center p-1.5">
 					<Icon icon="bx:plus-circle" class="text-lg " />
@@ -155,13 +164,16 @@
 					accept="image/png, image/jpeg"
 					class="hidden"
 					multiple
-					on:change={handleUploadChange}
+					on:change={handleFileSelected}
 				/>
 			</button>
 
 			<button class="flex-grow bg-green-500 rounded text-white hover:opacity-90">
-				<div class=" w-full flex gap-1 items-center justify-center p-1.5">
-					<Icon icon="bx:cloud-upload" class="text-lg " />
+				<div
+					class=" w-full flex gap-1 items-center justify-center p-1.5"
+					on:click={handleUploadFiles}
+				>
+					<Icon icon="bx:cloud-upload" class="text-lg" />
 					<div>Upload to Cloud</div>
 				</div>
 			</button>
@@ -174,3 +186,9 @@
 		</div>
 	</div>
 </div>
+
+<Modal isOpen={isModalOpen} class=" max-w-7xl" cardClass="p-2">
+	{#if $previewImageSrc}
+		<img src={$previewImageSrc} alt="Preview" crossorigin="" class="" />
+	{/if}
+</Modal>

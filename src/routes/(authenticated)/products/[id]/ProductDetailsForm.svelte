@@ -193,7 +193,7 @@
 		transformResult={(result) => result.name}
 		transformSelectedItem={(selectedItem) => selectedItem.name}
 	/>
-	<ImageField label="Image" class="col-col-2"></ImageField>
+	<ImageField label="Image" class="col-col-2" />
 	{#if hasEditPermission}
 		<div class="flex gap-2 col-start-1">
 			{#if $editable}
