@@ -2,6 +2,7 @@
 	import type { ProductUpdateInput } from "$api/routes/product/product.schema";
 	import { UserState, getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
+	import { PUBLIC_CDN } from "$env/static/public";
 	import {
 		Button,
 		FormControl,
@@ -16,7 +17,7 @@
 		validatePermissions
 	} from "$lib/components";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
-	import { ProductCategoryRepository, ProductRepository } from "$repositories";
+	import { ImageRepository, ProductCategoryRepository, ProductRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
 	import type { Product, ProductCategory } from "../Products";
@@ -69,12 +70,18 @@
 		value: product.categories
 	});
 
+	const imageController = new FormControl<string[]>({
+		name: "images",
+		value: product.images?.map((image) => image.path)
+	});
+
 	const form = new FormGroup([
 		nameController,
 		skuController,
 		retailPriceController,
 		activeController,
-		productCategoryController
+		productCategoryController,
+		imageController
 	]);
 	const valid = form.valid;
 
@@ -110,6 +117,22 @@
 		}
 	}
 
+	async function handleSaveImage() {
+		const imageSrc: string[] = imageController.value
+			? imageController.value.map((image) => {
+					if (image.startsWith("http")) return image;
+					return PUBLIC_CDN + "/" + image;
+				})
+			: [];
+
+		await ImageRepository.set({
+			productId: product.id,
+			images: imageSrc
+		});
+
+		await fetchProduct();
+	}
+
 	// Permissions
 
 	const hasEditPermission = validatePermissions(
@@ -143,82 +166,93 @@
 	}
 </script>
 
-<div class="grid grid-cols-5 grid-flow-col gap-4">
-	<TextField controller={idController} label="ID" class="col-col-1" disabled>
-		<div slot="postfix" class="text-blue-500 h-full border-l bg-white rounded-r pointer">
-			<Tooltip
-				tooltip="Copy"
-				class="h-full flex items-center p-2 "
-				onClick={async () => {
-					if (idController.value) {
-						await navigator.clipboard.writeText(idController.value);
-						toastState.add({
-							type: "info",
-							key: "id",
-							message: "Copied"
-						});
-					}
-				}}
-			>
-				<Icon icon="bx:copy" />
-			</Tooltip>
-		</div>
-	</TextField>
-	<TextField
-		controller={nameController}
-		label="Product Name"
-		class="col-col-1"
-		disabled={!$editable}
-	/>
-	<TextField controller={skuController} label="SKU" class="col-col-1" disabled={!$editable} />
-	<PriceField
-		controller={retailPriceController}
-		label="Price"
-		class="col-col-1"
-		decimalPlaces={0}
-		disabled={!$editable}
-	/>
-	<ToggleField
-		controller={activeController}
-		class="col-start-1"
-		label="Active"
-		disabled={!$editable}
-	/>
-	<SearchField
-		controller={productCategoryController}
-		label="Categories"
-		class="col-col-1"
-		onSearch={handleCategorySearch}
-		disabled={!$editable}
-		transformResult={(result) => result.name}
-		transformSelectedItem={(selectedItem) => selectedItem.name}
-	/>
-	<ImageField label="Image" class="col-col-2" />
-	{#if hasEditPermission}
-		<div class="flex gap-2 col-start-1">
-			{#if $editable}
-				<Button valid={$valid} label="Save Changes" onClick={handleSaveForm} />
-				<Button
-					label="Cancel"
-					class="button-red"
-					onClick={() => {
-						editable.set(false);
-						form.resetValue();
+<div class="grid grid-cols-5 gap-4">
+	<div class="col-span-5 lg:col-span-2 grid gap-4 auto-rows-min">
+		<TextField controller={idController} label="ID" class="col-span-2" disabled>
+			<div slot="postfix" class="text-blue-500 h-full border-l bg-white rounded-r pointer">
+				<Tooltip
+					tooltip="Copy"
+					class="h-full flex items-center p-2 "
+					onClick={async () => {
+						if (idController.value) {
+							await navigator.clipboard.writeText(idController.value);
+							toastState.add({
+								type: "info",
+								key: "id",
+								message: "Copied"
+							});
+						}
 					}}
-				/>
-				<Guard requiredPermissions={["Product.manage", "Product.delete"]}>
-					<ProductDeleteButton {product} />
-				</Guard>
-			{:else}
-				<Button
-					label="Edit"
-					class="button-green"
-					onClick={() => {
-						editable.set(true);
-					}}
-				/>
+				>
+					<Icon icon="bx:copy" />
+				</Tooltip>
+			</div>
+		</TextField>
+		<TextField
+			controller={nameController}
+			label="Product Name"
+			class="col-span-2"
+			disabled={!$editable}
+		/>
+		<TextField controller={skuController} label="SKU" class="col-span-2" disabled={!$editable} />
+		<PriceField
+			controller={retailPriceController}
+			label="Price"
+			class="col-span-2"
+			decimalPlaces={0}
+			disabled={!$editable}
+		/>
+		<ToggleField
+			controller={activeController}
+			label="Active"
+			disabled={!$editable}
+			class="col-span-2"
+		/>
+		<SearchField
+			controller={productCategoryController}
+			label="Categories"
+			onSearch={handleCategorySearch}
+			disabled={!$editable}
+			transformResult={(result) => result.name}
+			transformSelectedItem={(selectedItem) => selectedItem.name}
+			class="col-span-2"
+		/>
+		<div class="col-span-2">
+			{#if hasEditPermission}
+				<div class="flex gap-2">
+					{#if $editable}
+						<Button valid={$valid} label="Save Changes" onClick={handleSaveForm} />
+						<Button
+							label="Cancel"
+							class="button-red"
+							onClick={() => {
+								editable.set(false);
+								form.resetValue();
+							}}
+						/>
+						<Guard requiredPermissions={["Product.manage", "Product.delete"]}>
+							<ProductDeleteButton {product} />
+						</Guard>
+					{:else}
+						<Button
+							label="Edit"
+							class="button-green"
+							onClick={() => {
+								editable.set(true);
+							}}
+						/>
+					{/if}
+				</div>
 			{/if}
+			<FormDebugger formGroup={form} />
 		</div>
-	{/if}
+	</div>
+	<div class="col-span-5 lg:col-span-3 auto-rows-min gap-4">
+		<ImageField
+			controller={imageController}
+			label="Image"
+			onSave={handleSaveImage}
+			pathPrefix="products/{product.id}"
+		/>
+	</div>
 </div>
-<FormDebugger formGroup={form} />

@@ -205,3 +205,13 @@ export declare const ImageDeleteManySchema: import("@sinclair/typebox").TObject<
     }>;
 }>;
 export type ImageDeleteMany = Static<typeof ImageDeleteManySchema>;
+export declare const ImageSetSchema: import("@sinclair/typebox").TObject<{
+    images: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
+    productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    orderProductId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    serviceId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    orderServiceId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    warehouseId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    damagedProductId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
+export type ImageSet = Static<typeof ImageSetSchema>;

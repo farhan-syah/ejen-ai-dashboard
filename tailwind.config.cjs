@@ -35,6 +35,10 @@ const config = {
 			},
 			borderRadius: {
 				"4xl": "32px"
+			},
+			scale: {
+				98: ".98",
+				99: ".99"
 			}
 		}
 	},

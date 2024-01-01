@@ -3,6 +3,7 @@ export * from "./card";
 export * from "./form";
 export * from "./guard";
 export * from "./icons";
+export * from "./image";
 export * from "./link";
 export * from "./loader";
 export * from "./modal";
