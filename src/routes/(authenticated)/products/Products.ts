@@ -6,7 +6,7 @@ import ProductActions from "./_/actions/ProductActions.svelte";
 
 export type Product = Prisma.Product & {
 	categories?: ProductCategory[];
-	images: { path: string; id: string }[];
+	images?: { path: string; id: string }[];
 };
 export type ProductCategory = Pick<Prisma.ProductCategory, "id" | "name">;
 export const productColumns: TableColumn<Product>[] = [

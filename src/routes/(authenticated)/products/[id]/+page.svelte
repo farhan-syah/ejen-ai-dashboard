@@ -1,17 +1,12 @@
 <script>
 	import { Guard } from "$lib/components";
-	import ProductCategoryDetails from "./ProductDetails.svelte";
+	import Product from "./Product.svelte";
 </script>
 
 <Guard
-	requiredPermissions={[
-		"ProductCategory.manage",
-		"ProductCategory.view",
-		"ProductCategory.update",
-		"ProductCategory.delete"
-	]}
+	requiredPermissions={["Product.manage", "Product.view", "Product.update", "Product.delete"]}
 	redirect
 	redirectPath="/products/categories"
 >
-	<ProductCategoryDetails />
+	<Product />
 </Guard>
