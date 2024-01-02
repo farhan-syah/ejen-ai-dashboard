@@ -1,6 +1,7 @@
 import type Prisma from "$api/types/prisma-client";
-import type { TabItem } from "$lib/components";
-import { atom, type WritableAtom } from "nanostores";
+import { UserState } from "$applications";
+import { validatePermissions, type TabItem } from "$lib/components";
+import { atom, computed, type WritableAtom } from "nanostores";
 import { getContext, setContext } from "svelte";
 
 export type Product = Prisma.Product & {
@@ -37,12 +38,17 @@ export type ProductContextOption = {
 export class ProductContext {
 	index: WritableAtom<number>;
 	product: WritableAtom<Product> = atom(undefined);
+
 	private readonly fetchProductCallback: (context: this) => Promise<Product | void>;
 
 	constructor(obj: ProductContextOption) {
 		this.index = atom(obj.index ?? 0);
 		this.fetchProductCallback = obj.fetchProductCallback;
 	}
+
+	hasEditPermission = computed([UserState.permissions], (permissions) => {
+		return validatePermissions(["Product.manage", "Product.update"], permissions);
+	});
 
 	async fetchProduct() {
 		this.fetchProductCallback(this);

@@ -6,7 +6,7 @@
 	import { ProductRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
-	import type { Product } from "../Products";
+	import type { Product } from "../../../Products";
 
 	export let product: Product;
 	const isModalOpen = atom(false);

@@ -6,7 +6,7 @@
 	import { ProductRepository } from "$repositories";
 	import { onMount } from "svelte";
 	import { ProductTab, createProductContext, productKeys, productTabs } from "./Product";
-	import ProductDetails from "./ProductDetails.svelte";
+	import ProductInfoTab from "./tabs/info/ProductInfoTab.svelte";
 
 	const id = $page.params.id;
 	const initialPage = $page.url.searchParams.get("page");
@@ -59,7 +59,7 @@
 	<Tab {tabs} index={$index} onClick={handleSwitchTab}>
 		<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">
 			{#if tabs[$index].label === ProductTab.info}
-				<ProductDetails />
+				<ProductInfoTab />
 			{/if}
 		</div>
 	</Tab>
