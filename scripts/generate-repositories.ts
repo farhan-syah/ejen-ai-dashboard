@@ -11,7 +11,7 @@ const generateRepositoryFile = (modelName: string, kebabCaseName: string) => {
   ${modelName}Update,
   ${modelName}UpdateMany
 } from "$api/routes/${kebabCaseName}/${kebabCaseName}.schema";
-import type * as Prisma from "$api/types/prisma-client";
+import * as Prisma from "@prisma/client";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
 import { HttpService } from "$services/http.service";
 

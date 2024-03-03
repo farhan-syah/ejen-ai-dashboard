@@ -1,5 +1,5 @@
-import type Prisma from "$api/types/prisma-client";
 import type { TableColumn } from "$lib/components";
+import type Prisma from "../../../$api/types/prisma-client";
 
 export type Currency = Prisma.Currency;
 export const currencyColumns: TableColumn<Currency>[] = [

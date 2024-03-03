@@ -1,73 +1,73 @@
 import type {
-  IncomingDeliveryCreate,
-  IncomingDeliveryDeleteMany,
-  IncomingDeliverySearch,
-  IncomingDeliveryUpdate,
-  IncomingDeliveryUpdateMany
+	IncomingDeliveryCreate,
+	IncomingDeliveryDeleteMany,
+	IncomingDeliverySearch,
+	IncomingDeliveryUpdate,
+	IncomingDeliveryUpdateMany
 } from "$api/routes/incoming-delivery/incoming-delivery.schema";
-import type * as Prisma from "$api/types/prisma-client";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
 import { HttpService } from "$services/http.service";
+import * as Prisma from "@prisma/client";
 
 class _IncomingDeliveryRepository {
-  path = PUBLIC_API_BASE_PATH + "/incoming-delivery";
+	path = PUBLIC_API_BASE_PATH + "/incoming-delivery";
 
-  async create(input: IncomingDeliveryCreate) {
-    const url = this.path;
-    return await HttpService.post<Prisma.IncomingDelivery>(url, {
-      body: JSON.stringify(input),
-      auth: "accessToken",
-    });
-  }
+	async create(input: IncomingDeliveryCreate) {
+		const url = this.path;
+		return await HttpService.post<Prisma.IncomingDelivery>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 
-  async update(id: string, input: IncomingDeliveryUpdate) {
-    const url = `${this.path}/${id}`;
-    return await HttpService.patch<Prisma.IncomingDelivery>(url, {
-      body: JSON.stringify(input),
-      auth: "accessToken",
-    });
-  }
+	async update(id: string, input: IncomingDeliveryUpdate) {
+		const url = `${this.path}/${id}`;
+		return await HttpService.patch<Prisma.IncomingDelivery>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 
-  async get(id: string) {
-    const url = `${this.path}/${id}`;
-    return await HttpService.get<Prisma.IncomingDelivery>(url, {
-      auth: "accessToken",
-    });
-  }
+	async get(id: string) {
+		const url = `${this.path}/${id}`;
+		return await HttpService.get<Prisma.IncomingDelivery>(url, {
+			auth: "accessToken"
+		});
+	}
 
-  async updateMany(input: IncomingDeliveryUpdateMany) {
-    const url = this.path;
-    return await HttpService.patch<Prisma.Prisma.BatchPayload>(url, {
-      body: JSON.stringify(input),
-      auth: "accessToken",
-    });
-  }
+	async updateMany(input: IncomingDeliveryUpdateMany) {
+		const url = this.path;
+		return await HttpService.patch<Prisma.Prisma.BatchPayload>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 
-  async delete(id: string) {
-    const url = `${this.path}/${id}`;
-    return await HttpService.delete<Prisma.IncomingDelivery>(url, {
-      auth: "accessToken",
-    });
-  }
+	async delete(id: string) {
+		const url = `${this.path}/${id}`;
+		return await HttpService.delete<Prisma.IncomingDelivery>(url, {
+			auth: "accessToken"
+		});
+	}
 
-  async deleteMany(input: IncomingDeliveryDeleteMany) {
-    const url = this.path;
-    return await HttpService.delete<Prisma.Prisma.BatchPayload>(url, {
-      body: JSON.stringify(input),
-      auth: "accessToken",
-    });
-  }
+	async deleteMany(input: IncomingDeliveryDeleteMany) {
+		const url = this.path;
+		return await HttpService.delete<Prisma.Prisma.BatchPayload>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 
-  async search(input: IncomingDeliverySearch) {
-    const url = `${this.path}/search`;
-    return await HttpService.post<Prisma.IncomingDelivery[]>(url, {
-      body: JSON.stringify(input),
-      auth: "accessToken",
-    });
-  }
+	async search(input: IncomingDeliverySearch) {
+		const url = `${this.path}/search`;
+		return await HttpService.post<Prisma.IncomingDelivery[]>(url, {
+			body: JSON.stringify(input),
+			auth: "accessToken"
+		});
+	}
 
-  async count(input: IncomingDeliverySearch) {
-    const url = `${this.path}/count`;
+	async count(input: IncomingDeliverySearch) {
+		const url = `${this.path}/count`;
 		return await HttpService.post<number>(url, {
 			body: JSON.stringify(input),
 			auth: "accessToken"

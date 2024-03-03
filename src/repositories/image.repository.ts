@@ -6,9 +6,9 @@ import type {
 	ImageUpdate,
 	ImageUpdateMany
 } from "$api/routes/image/image.schema";
-import type * as Prisma from "$api/types/prisma-client";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
 import { HttpService } from "$services/http.service";
+import * as Prisma from "@prisma/client";
 
 class _ImageRepository {
 	path = PUBLIC_API_BASE_PATH + "/image";

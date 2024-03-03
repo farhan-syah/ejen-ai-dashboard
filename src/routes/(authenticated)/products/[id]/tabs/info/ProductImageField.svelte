@@ -33,7 +33,8 @@
 
 <ImageField
 	controller={imageController}
-	label="Image"
+	description="Common images shared with all product items"
+	label="Shared Images"
 	onSave={handleSaveImage}
 	pathPrefix="products/{$product.id}"
 	disabled={!$hasEditPermission}

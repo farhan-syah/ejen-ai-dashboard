@@ -29,7 +29,7 @@
 </script>
 
 <Button
-	class="button-cyan"
+	class="button-slate"
 	onClick={() => {
 		isModalOpen.set(true);
 	}}

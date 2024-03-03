@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { CurrencySearch } from "$api/routes/currency/currency.schema";
 	import { Table, createTableContext } from "$lib/components";
 	import { CurrencyRepository } from "$repositories";
+	import type { CurrencySearch } from "../../../$api/routes/currency/currency.schema";
 	import { currencyColumns, type Currency } from "./SystemSettingsCurrency";
 
 	const tableContext = createTableContext<Currency, CurrencySearch>({

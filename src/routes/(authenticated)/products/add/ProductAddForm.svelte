@@ -3,17 +3,13 @@
 	import { goto } from "$app/navigation";
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
-	import {
-		Button,
-		FormControl,
-		FormDebugger,
-		FormGroup,
-		SearchField,
-		ToggleField
-	} from "$lib/components";
+	import { Button, FormControl, FormDebugger, FormGroup, SearchField } from "$lib/components";
+	import SelectField from "$lib/components/form/select-field/SelectField.svelte";
 	import PriceField from "$lib/components/form/text-field/PriceField.svelte";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
+	import type { FieldOption } from "$types";
+	import { PublishStatus } from "@prisma/client";
 	import type { ProductCategory } from "../Products";
 
 	// States
@@ -40,29 +36,26 @@
 		required: true
 	});
 
-	const skuController = new FormControl({
-		name: "sku",
-		required: true
-	});
-
 	const retailPriceController = new FormControl<number>({
-		name: "retailPrice",
+		name: "price",
 		required: true
 	});
 
-	const activeController = new FormControl<boolean>({
-		name: "active",
+	const statusController = new FormControl<PublishStatus>({
+		name: "status",
 		required: true,
-		value: true
+		value: PublishStatus.Draft
 	});
 
+	const statusOptions: FieldOption[] = Object.values(PublishStatus).map((e) => {
+		return { value: e, label: e };
+	});
 	const productCategoryController = new FormControl<ProductCategory[]>({ name: "categories" });
 
 	const form = new FormGroup<ProductCreateInput>([
 		nameController,
-		skuController,
 		retailPriceController,
-		activeController,
+		statusController,
 		productCategoryController
 	]);
 	const valid = form.valid;
@@ -101,14 +94,19 @@
 
 <div class="grid grid-cols-6 gap-4">
 	<TextField controller={nameController} label="Product Name" class="col-col-1" />
-	<TextField controller={skuController} label="SKU" class="col-col-1" />
 	<PriceField
 		controller={retailPriceController}
-		label="Price"
+		label="Recommended Retail Price"
 		class="col-col-1"
 		decimalPlaces={0}
 	/>
-	<ToggleField controller={activeController} class="col-start-1" label="Active" />
+	<SelectField
+		controller={statusController}
+		label="Status"
+		class="  col-start-1"
+		options={statusOptions}
+	></SelectField>
+
 	<SearchField
 		controller={productCategoryController}
 		label="Categories"

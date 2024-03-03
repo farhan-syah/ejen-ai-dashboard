@@ -1,8 +1,8 @@
-import type Prisma from "$api/types/prisma-client";
 import { UserState } from "$applications";
 import { validatePermissions, type TabItem } from "$lib/components";
 import { atom, computed, type WritableAtom } from "nanostores";
 import { getContext, setContext } from "svelte";
+import type Prisma from "../../../$api/types/prisma-client";
 
 export type Product = Prisma.Product & {
 	categories?: ProductCategory[];
@@ -12,7 +12,9 @@ export type ProductCategory = Pick<Prisma.ProductCategory, "id" | "name">;
 
 export const ProductTab = {
 	info: "Info",
+	items: "Items",
 	inventory: "Inventory",
+	shipping: "Shipping",
 	promotions: "Promotions",
 	analytics: "Analytics",
 	orders: "Orders",

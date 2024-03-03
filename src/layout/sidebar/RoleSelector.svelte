@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type Prisma from "$api/types/prisma-client";
+	import type Prisma from "$api/types/prisma-client-defts";
 	import { UserState, getAppState } from "$applications";
 	import Modal from "$lib/components/modal/Modal.svelte";
 	import { RoleRepository, UserSettingRepository } from "$repositories";

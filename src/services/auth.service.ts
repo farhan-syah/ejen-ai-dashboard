@@ -14,7 +14,9 @@ class _AuthService {
 		UserState.accessToken.subscribe((token) => {
 			if (browser) {
 				if (token) {
-					this.fetchUserFromLocalAccessToken(token);
+					this.fetchUserFromLocalAccessToken(token).catch(() => {
+						this.logout();
+					});
 				}
 			}
 		});

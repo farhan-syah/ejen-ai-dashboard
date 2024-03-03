@@ -7,6 +7,7 @@
 	import { onMount } from "svelte";
 	import { ProductTab, createProductContext, productKeys, productTabs } from "./Product";
 	import ProductInfoTab from "./tabs/info/ProductInfoTab.svelte";
+	import ProductVariationsTab from "./tabs/variations/ProductVariationsTab.svelte";
 
 	const id = $page.params.id;
 	const initialPage = $page.url.searchParams.get("page");
@@ -55,11 +56,13 @@
 			{ label: "Edit Category", path: "/products/categories/" + id, currentPage: true }
 		]}
 	/>
-
 	<Tab {tabs} index={$index} onClick={handleSwitchTab}>
 		<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">
 			{#if tabs[$index].label === ProductTab.info}
 				<ProductInfoTab />
+			{/if}
+			{#if tabs[$index].label === ProductTab.items}
+				<ProductVariationsTab />
 			{/if}
 		</div>
 	</Tab>

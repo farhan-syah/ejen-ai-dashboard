@@ -9,10 +9,13 @@ export declare const ProductQuerySchema: import("@sinclair/typebox").TObject<{
 export type ProductQuery = Static<typeof ProductQuerySchema>;
 export declare const ProductCreateInputSchema: import("@sinclair/typebox").TObject<{
     name: import("@sinclair/typebox").TString;
-    sku: import("@sinclair/typebox").TString;
-    retailPrice: import("@sinclair/typebox").TInteger;
-    active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
-    barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    price: import("@sinclair/typebox").TInteger;
+    status: import("@sinclair/typebox").TEnum<{
+        Publish: "Publish";
+        Draft: "Draft";
+        Archived: "Archived";
+        Disabled: "Disabled";
+    }>;
     categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         connect: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
             id: import("@sinclair/typebox").TString;
@@ -22,10 +25,13 @@ export declare const ProductCreateInputSchema: import("@sinclair/typebox").TObje
 export type ProductCreateInput = Static<typeof ProductCreateInputSchema>;
 export declare const ProductUpdateInputSchema: import("@sinclair/typebox").TObject<{
     name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    sku: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    retailPrice: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-    active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
-    barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+    status: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+        Publish: "Publish";
+        Draft: "Draft";
+        Archived: "Archived";
+        Disabled: "Disabled";
+    }>>;
     categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         set: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
             id: import("@sinclair/typebox").TString;
@@ -110,10 +116,13 @@ export declare const ProductSearchSchema: import("@sinclair/typebox").TObject<{
 export type ProductSearch = Static<typeof ProductSearchSchema>;
 export declare const ProductCreateDataSchema: import("@sinclair/typebox").TObject<{
     name: import("@sinclair/typebox").TString;
-    sku: import("@sinclair/typebox").TString;
-    retailPrice: import("@sinclair/typebox").TInteger;
-    active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
-    barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    price: import("@sinclair/typebox").TInteger;
+    status: import("@sinclair/typebox").TEnum<{
+        Publish: "Publish";
+        Draft: "Draft";
+        Archived: "Archived";
+        Disabled: "Disabled";
+    }>;
     categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         connect: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
             id: import("@sinclair/typebox").TString;
@@ -124,10 +133,13 @@ export type ProductCreateData = Static<typeof ProductCreateDataSchema>;
 export declare const ProductCreateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{
         name: import("@sinclair/typebox").TString;
-        sku: import("@sinclair/typebox").TString;
-        retailPrice: import("@sinclair/typebox").TInteger;
-        active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
-        barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        price: import("@sinclair/typebox").TInteger;
+        status: import("@sinclair/typebox").TEnum<{
+            Publish: "Publish";
+            Draft: "Draft";
+            Archived: "Archived";
+            Disabled: "Disabled";
+        }>;
         categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
             connect: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
                 id: import("@sinclair/typebox").TString;
@@ -142,10 +154,13 @@ export declare const ProductCreateSchema: import("@sinclair/typebox").TObject<{
 export type ProductCreate = Static<typeof ProductCreateSchema>;
 export declare const ProductUpdateDataSchema: import("@sinclair/typebox").TObject<{
     name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    sku: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    retailPrice: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-    active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
-    barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+    status: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+        Publish: "Publish";
+        Draft: "Draft";
+        Archived: "Archived";
+        Disabled: "Disabled";
+    }>>;
     categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         set: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
             id: import("@sinclair/typebox").TString;
@@ -156,10 +171,13 @@ export type ProductUpdateData = Static<typeof ProductUpdateDataSchema>;
 export declare const ProductUpdateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{
         name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        sku: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        retailPrice: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-        active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
-        barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        status: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+            Publish: "Publish";
+            Draft: "Draft";
+            Archived: "Archived";
+            Disabled: "Disabled";
+        }>>;
         categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
             set: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
                 id: import("@sinclair/typebox").TString;
@@ -178,10 +196,13 @@ export type ProductUpdate = Static<typeof ProductUpdateSchema>;
 export declare const ProductUpdateManySchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{
         name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        sku: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        retailPrice: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
-        active: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
-        barcode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        status: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+            Publish: "Publish";
+            Draft: "Draft";
+            Archived: "Archived";
+            Disabled: "Disabled";
+        }>>;
         categories: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
             set: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TObject<{
                 id: import("@sinclair/typebox").TString;

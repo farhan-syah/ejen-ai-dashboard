@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { ProductSearch } from "$api/routes/product/product.schema";
 	import { goto } from "$app/navigation";
 	import { Button, PageTitle, Table, createTableContext } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { delay } from "$lib/utils";
 	import { ProductRepository } from "$repositories";
+	import type { ProductSearch } from "../../$api/routes/product/product.schema";
 	import { productColumns, toProductCSV, type Product } from "./Products";
 
 	const tableContext = createTableContext<Product, ProductSearch>({

@@ -10,6 +10,7 @@
 	import { flip } from "svelte/animate";
 	import type { ImageItem } from ".";
 	export let label: string | undefined = undefined;
+	export let description: string | undefined = undefined;
 	export let height = 100;
 	export let width = 100;
 	export let limit: number | undefined = undefined;
@@ -138,29 +139,34 @@
 	const isModalOpen = atom(false);
 </script>
 
-<div class={componentClass}>
+<div class="flex flex-col gap-1 {componentClass}">
 	{#if label}
-		<div class="mb-1">
-			<label for={controller.id} class="flex {labelClass}">
-				<div class="flex-grow">
-					{label}
-					{#if controller.required}
-						<span class="text-red-500">*</span>
-					{/if}
-				</div>
-
-				{#if $$slots.labelPostfix}
-					<slot name="labelPostfix" />
+		<label for={controller.id} class="flex {labelClass}">
+			<div class="flex-grow">
+				{label}
+				{#if controller.required}
+					<span class="text-red-500">*</span>
 				{/if}
-			</label>
+			</div>
+
+			{#if $$slots.labelPostfix}
+				<slot name="labelPostfix" />
+			{/if}
+		</label>
+	{/if}
+
+	{#if description}
+		<div class="italic text-xs mb-1">
+			{description}
 		</div>
 	{/if}
 
 	<div id={controller.id} class=" bg-gray-50 p-2 outline outline-1 rounded outline-gray-300">
-		<div class="w-full p-2 bg-slate-100 flex flex-col gap-2">
+		<div class="w-full p-2 bg-slate-100 flex flex-col gap-2.5">
 			<div
 				class="flex w-full flex-wrap bg-slate-100 {$writableItems.length > 0 ? 'p-0.5' : 'p-0'}"
 				use:dndzone={{
+					// @ts-ignore
 					items: $writableItems,
 					flipDurationMs: 200,
 					dropTargetStyle: {},
@@ -214,8 +220,8 @@
 			{/if}
 
 			{#if !disabled}
-				{#if $isEditing}
-					<div class="w-full justify-center flex gap-2 text-xs text-white">
+				<div class="mx-1.5 flex w-full gap-2 items-center text-xs text-white">
+					{#if $isEditing}
 						<Button onClick={handleChooseFile}>
 							<div slot="label" class="w-full">
 								<div class=" flex gap-1 items-center justify-center">
@@ -248,9 +254,7 @@
 								</div>
 							</div>
 						</Button>
-					</div>
-				{:else}
-					<div class="flex justify-center w-full items-center text-xs text-white">
+					{:else}
 						<Button
 							class="button-cyan"
 							onClick={() => {
@@ -264,8 +268,8 @@
 								</div>
 							</div></Button
 						>
-					</div>
-				{/if}
+					{/if}
+				</div>
 			{/if}
 		</div>
 	</div>

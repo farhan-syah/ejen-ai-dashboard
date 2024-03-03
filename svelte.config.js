@@ -4,7 +4,7 @@ import preprocess from "svelte-preprocess";
 const config = {
 	preprocess: [preprocess({ postcss: true })],
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({}),
 		alias: {
 			$services: "src/services",
 			$repositories: "src/repositories",
@@ -13,7 +13,10 @@ const config = {
 			$types: "src/types"
 		}
 	},
-	onwarn: (warning, handler) => {
+	onwarn: (
+		/** @type {{ code: string; }} */ warning,
+		/** @type {(arg0: any) => void} */ handler
+	) => {
 		if (warning.code.startsWith("a11y-")) {
 			return;
 		}

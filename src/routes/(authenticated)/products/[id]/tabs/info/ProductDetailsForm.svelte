@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { ProductUpdateInput } from "$api/routes/product/product.schema";
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import {
@@ -11,12 +10,12 @@
 		PriceField,
 		SearchField,
 		TextField,
-		ToggleField,
 		Tooltip
 	} from "$lib/components";
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
+	import type { ProductUpdateInput } from "../../../../../$api/routes/product/product.schema";
 	import { getProductContext, type ProductCategory } from "../../Product";
 	import ProductDeleteButton from "./ProductDeleteButton.svelte";
 
@@ -45,22 +44,10 @@
 		required: true
 	});
 
-	const skuController = new FormControl({
-		name: "sku",
-		value: $product.sku,
-		required: true
-	});
-
 	const retailPriceController = new FormControl<number>({
 		name: "retailPrice",
-		value: $product.retailPrice,
+		value: $product.price,
 		required: true
-	});
-
-	const activeController = new FormControl<boolean>({
-		name: "active",
-		required: true,
-		value: $product.active
 	});
 
 	const productCategoryController = new FormControl<ProductCategory[]>({
@@ -68,13 +55,7 @@
 		value: $product.categories
 	});
 
-	const form = new FormGroup([
-		nameController,
-		skuController,
-		retailPriceController,
-		activeController,
-		productCategoryController
-	]);
+	const form = new FormGroup([nameController, retailPriceController, productCategoryController]);
 	const valid = form.valid;
 
 	// Functions
@@ -161,20 +142,14 @@
 	class="col-span-2"
 	disabled={!$editable}
 />
-<TextField controller={skuController} label="SKU" class="col-span-2" disabled={!$editable} />
 <PriceField
 	controller={retailPriceController}
-	label="Price"
+	label="Retail Price (RRSP)"
 	class="col-span-2"
 	decimalPlaces={0}
 	disabled={!$editable}
 />
-<ToggleField
-	controller={activeController}
-	label="Active"
-	disabled={!$editable}
-	class="col-span-2"
-/>
+
 <SearchField
 	controller={productCategoryController}
 	label="Categories"
@@ -188,7 +163,7 @@
 	{#if $hasEditPermission}
 		<div class="flex gap-2">
 			{#if $editable}
-				<Button valid={$valid} label="Save Changes" onClick={handleSaveForm} />
+				<Button valid={$valid} label="Save Changes" class="button-green" onClick={handleSaveForm} />
 				<Button
 					label="Cancel"
 					class="button-red"
@@ -203,7 +178,7 @@
 			{:else}
 				<Button
 					label="Edit"
-					class="button-green"
+					class="button-cyan"
 					onClick={() => {
 						editable.set(true);
 					}}

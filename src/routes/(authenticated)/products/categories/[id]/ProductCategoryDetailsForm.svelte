@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { ProductCategoryUpdateData } from "$api/routes/product-category/product-category.schema";
 	import { UserState, getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import {
@@ -16,6 +15,7 @@
 	import { ProductCategoryRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
+	import type { ProductCategoryUpdateData } from "../../../../$api/routes/product-category/product-category.schema";
 	import type { ProductCategory } from "../product-categories";
 	import ProductCategoryDeleteButton from "./ProductCategoryDeleteButton.svelte";
 

@@ -1,7 +1,7 @@
-import type Prisma from "$api/types/prisma-client";
 import type { TableColumn } from "$lib/components";
 import { formatLocalDate } from "$lib/utils/date";
 import { CSV } from "$types";
+import type Prisma from "../../../$api/types/prisma-client";
 import ProductCategoryActions from "./_/actions/ProductCategoryActions.svelte";
 
 export type ProductCategory = Prisma.ProductCategory;

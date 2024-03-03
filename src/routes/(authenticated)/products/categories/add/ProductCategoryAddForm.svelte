@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { ProductCategoryUncheckedCreateInput } from "$api/routes/product-category/product-category.schema";
 	import { goto } from "$app/navigation";
 	import { UserState, getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
@@ -13,6 +12,7 @@
 	} from "$lib/components";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
 	import { ProductCategoryRepository } from "$repositories";
+	import type { ProductCategoryUncheckedCreateInput } from "../../../../$api/routes/product-category/product-category.schema";
 
 	// States
 

@@ -1,0 +1,1494 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserStatus {
+  Active
+  Inactive
+  Disabled
+  Blacklisted
+}
+
+enum PublishStatus {
+  Publish
+  Draft
+  Archived
+  Disabled
+}
+
+enum OrderStatus {
+  Open
+  Pending
+  PendingApproval
+  Approved
+  PendingAcceptence
+  Accepted
+  NotStarted
+  Processing
+  InProgress
+  Incomplete
+  Completed
+  Cancelled
+  Rejected
+  Declined
+  Delivered
+}
+
+enum TaskStatus {
+  Open
+  Pending
+  PendingApproval
+  Approved
+  PendingAcceptence
+  Accepted
+  NotStarted
+  Processing
+  InProgress
+  Incomplete
+  Completed
+  Cancelled
+  Rejected
+  Declined
+  Delivered
+}
+
+enum TaskReviewStatus {
+  Approved
+  Rejected
+  Amended
+  Pending
+}
+
+enum TransactionStatus {
+  Processing
+  Success
+  Failed
+}
+
+enum PaymentStatus {
+  Unpaid
+  InReview
+  Processing
+  Paid
+}
+
+enum DeliveryStatus {
+  Pending
+  InTransit
+  Delivered
+  Failed
+  Returned
+  Cancelled
+}
+
+enum ReturnStatus {
+  Pending
+  Received
+  Refunded
+  Rejected
+  Completed
+}
+
+enum InventoryMovementType {
+  Restock // from supplier to location (either warehouse or shop)
+  Sale // from location to customer
+  Return // from customer to location
+  Transfer // between locations
+  Adjustment // internal adjustments
+  Damage // from damages
+}
+
+enum DamageLocation {
+  InStore
+  DuringDelivery
+  DuringTransfer
+  DuringIncomingDelivery
+  Other
+}
+
+enum InventoryLocationType {
+  Warehouse
+  Shop
+}
+
+enum Weekday {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
+}
+
+enum PurchaseOrderStatus {
+  Ordered
+  PartiallyReceived
+  FullyReceived
+  Cancelled
+}
+
+enum PromotionType {
+  ProductFixedPriceDiscount
+  ProductFixedPrice
+  ProductPercentageDiscount
+  OrderFixedPriceDiscount
+  OrderPercentageDiscount
+  FreeGift
+  Bundle
+}
+
+enum LeadStatus {
+  Pending
+  Contacted
+  Converted
+  Rejected
+}
+
+enum RegionType {
+  Country
+  State
+  City
+  Custom
+}
+
+enum WalletTransactionType {
+  Payment
+  Topup
+  Withdrawal
+  Invoice
+}
+
+enum TopupMethod {
+  CashDeposit
+  BankTransfer
+  PaymentGateway
+}
+
+enum WithdrawalStatus {
+  Pending
+  Approved
+  Rejected
+  Completed
+}
+
+enum BillingCycle {
+  Monthlu
+  Quarterly
+  Annually
+  Custom
+}
+
+model User {
+  id        String     @id @default(cuid())
+  status    UserStatus @default(Active)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  email              String    @unique
+  emailVerified      Boolean   @default(false)
+  verificationToken  String?   @unique
+  verificationExpiry DateTime?
+  newEmail           String?
+
+  name      String?
+  firstName String?
+  lastName  String?
+  phone     String?
+
+  password                 String
+  passwordChangeToken      String?                   @unique
+  passwordChangeExpiry     DateTime?
+  sessions                 Session[]
+  roles                    Role[]
+  orders                   Order[]
+  tasks                    Task[]
+  productReviews           ProductReview[]
+  taskReviews              TaskReview[]
+  orderReviews             OrderReview[]
+  addresses                UserAddress[]
+  promotionUsages          PromotionUsage[]
+  promotionConditions      PromotionCondition[]
+  leads                    Lead[]
+  regions                  Region[]
+  cart                     Cart?
+  bankAccounts             BankAccount[]
+  wallet                   Wallet?
+  topups                   WalletTopup[]             @relation("topupBy")
+  walletWithdrawalRequests WalletWithdrawalRequest[] @relation("requestedBy")
+  paymentMethod            PaymentMethod[]
+  tags                     UserTag[]
+  settings                 UserSetting?
+  damagedProductItems      DamagedProductItem[]
+}
+
+// ** User Setting ** //
+
+model UserSetting {
+  id              String   @id @default(cuid())
+  user            User     @relation(fields: [userId], references: [id])
+  userId          String   @unique
+  defaultUserRole String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ** User Tag ** //
+
+model UserTag {
+  id        String   @id @default(cuid())
+  name      String
+  users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ** Address ** //
+
+model Address {
+  id                  String                @id @default(cuid())
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  name                String?
+  firstName           String?
+  lastName            String?
+  address1            String
+  address2            String? // This can be optional as not all addresses have a second line.
+  city                String
+  state               String
+  postalCode          String
+  country             String
+  phone               String?
+  email               String?
+  latitude            Float?
+  longitude           Float?
+  userAddress         UserAddress[]
+  billingAddress      BillingAddress[]
+  shippingAddress     ShippingAddress[]
+  organizationAddress OrganizationAddress[]
+  leadAddress         LeadAddress[]
+  warehouseAddress    WarehouseAddress[]
+  shopAddress         ShopAddress[]
+}
+
+// ** UserAddress ** //
+
+model UserAddress {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  address   Address  @relation(fields: [addressId], references: [id])
+  addressId String
+  isDefault Boolean  @default(false)
+}
+
+// ** Session ** //
+
+model Session {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user           User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String?
+  hashedRt       String
+  hashedSn       String
+  ipAddress      String?
+  userAgent      String?
+  expirationDate DateTime
+
+  @@unique([userId, hashedSn], name: "unique_user_session")
+}
+
+// ** Role ** //
+
+model Role {
+  id             String           @id @default(cuid())
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  name           String
+  description    String?
+  key            String
+  users          User[]
+  permissions    RolePermission[]
+  organization   Organization     @relation(fields: [organizationId], references: [id])
+  organizationId String
+
+  @@unique([key, organizationId], name: "unique_organization_role")
+}
+
+// ** Permission ** //
+
+model Permission {
+  id                     String                   @id @default(cuid())
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  name                   String
+  description            String?
+  key                    String                   @unique
+  rolePermissions        RolePermission[]
+  organizationPermission OrganizationPermission[]
+}
+
+// ** RolePermission (Join Table) ** //
+
+model RolePermission {
+  id           String     @id @default(cuid())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+
+  @@unique([roleId, permissionId], name: "unique_role_permission")
+}
+
+// ** OrganizationType ** // e.g HQ, Company -> Must create Organization first. At least one organization is required
+
+model OrganizationType {
+  id                    String         @id @default(cuid())
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  name                  String         @unique
+  organizations         Organization[]
+  ownedByOrganization   Organization?  @relation("OwnedOrganizations", fields: [ownedByOrganizationId], references: [id])
+  ownedByOrganizationId String?
+}
+
+// ** Organization ** //
+
+model Organization {
+  id                   String                   @id @default(cuid())
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+  name                 String
+  description          String?
+  organizationType     OrganizationType         @relation(fields: [organizationTypeId], references: [id])
+  organizationTypeId   String
+  permissions          OrganizationPermission[]
+  promotionUsage       PromotionUsage[]
+  promotionConditions  PromotionCondition[]
+  regions              Region[]
+  bankAccounts         BankAccount[]
+  wallet               Wallet?
+  addresses            OrganizationAddress[]
+  tags                 OrganizationTag[]
+  organizations        Organization[]           @relation(name: "ParentToChild")
+  parentOrganizationId String?
+  parentOrganization   Organization?            @relation(name: "ParentToChild", fields: [parentOrganizationId], references: [id])
+  organizationTypes    OrganizationType[]       @relation("OwnedOrganizations")
+  isMainOrganization   Boolean?
+  roles                Role[]
+}
+
+// ** User Tag ** //
+
+model OrganizationTag {
+  id            String         @id @default(cuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  name          String
+  organizations Organization[]
+}
+
+// ** OrganizationAddress ** //
+
+model OrganizationAddress {
+  id             String       @id @default(cuid())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String
+  address        Address      @relation(fields: [addressId], references: [id])
+  addressId      String
+  isDefault      Boolean      @default(false)
+}
+
+// ** OrganizationPermission (Join Table for Organization and Permission) ** //
+
+model OrganizationPermission {
+  id             String       @id @default(cuid())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organizationId String
+  permissionId   String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  permission     Permission   @relation(fields: [permissionId], references: [id])
+
+  @@unique([organizationId, permissionId], name: "unique_organization_permission")
+}
+
+// ** Order ** //
+
+model Order {
+  id        String      @id @default(cuid())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  status    OrderStatus
+
+  userId          String
+  user            User             @relation(fields: [userId], references: [id])
+  services        OrderService[]
+  shippingAddress ShippingAddress?
+  billingAddress  BillingAddress?
+
+  deliveries         Delivery[]
+  returns            Return[]
+  orderReviews       OrderReview[]
+  promotionCondition PromotionCondition[]
+  promotions         Promotion[]
+  OrderProductItem   OrderProductItem[]
+
+  @@index([userId], name: "idx_order_user")
+  @@index([status], name: "idx_order_status")
+}
+
+// ** OrderReview ** //
+
+model OrderReview {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  feedback  String? // Detailed feedback about the entire order
+  rating    Int // Rating given by the customer for the order (e.g., out of 5 or 10)
+
+  // Relations
+  orderId String // ID of the Order the review is related to
+  order   Order  @relation(fields: [orderId], references: [id])
+  userId  String // ID of the User who left the review
+  user    User   @relation(fields: [userId], references: [id])
+
+  @@unique([orderId, userId], name: "unique_order_user_review")
+}
+
+// ** Product ** //
+
+model Product {
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  name      String
+  items     ProductItem[]
+  status    PublishStatus
+  price     Int // RSP
+
+  productReviews      ProductReview[]
+  promotionConditions PromotionCondition[]
+
+  taxes      ProductTax[]
+  images     Image[]
+  tags       ProductTag[]
+  categories ProductCategory[]
+
+  @@index([status], name: "idx_product_status")
+}
+
+model ProductItem {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  sku       String   @unique
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  price     Int // RSP
+  gtin8     String?  @unique @db.Char(8)
+  gtin12    String?  @unique @db.Char(12)
+  gtin13    String?  @unique @db.Char(13)
+  gtin14    String?  @unique @db.Char(14)
+
+  cartItems            CartItem[]
+  orderProductItems    OrderProductItem[]
+  deliveryProductItems DeliveryProductItem[]
+  returnProductItems   ReturnProductItem[]
+  damagedProductItems  DamagedProductItem[]
+  purchaseOrderItems   PurchaseOrderItem[]
+  incomingDeliveryItem IncomingDeliveryItem[]
+
+  inventories        ProductItemInventory[]
+  inventoryMovements InventoryMovement[]
+
+  promotionConditions  PromotionCondition[]
+  promotionFreeGifts   PromotionFreeGift[]
+  promotionBundleItems PromotionBundleItem[]
+
+  tieredPricing TieredPricing[]
+  images        Image[]
+}
+
+// ** Product Category ** //
+
+model ProductCategory {
+  id                  String               @id @default(cuid())
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  name                String               @unique()
+  description         String?
+  products            Product[]
+  promotionConditions PromotionCondition[]
+}
+
+// ** Product Tag ** //
+
+model ProductTag {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  products  Product[]
+}
+
+//** TieredPricing ** //
+model TieredPricing {
+  id            String      @id @default(cuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  productItem   ProductItem @relation(fields: [productItemId], references: [id])
+  productItemId String
+  minQty        Int // Minimum quantity for this tier
+  maxQty        Int? // Maximum quantity for this tier (optional)
+  price         Int // Price for this tier
+}
+
+// ** OrderProductItem (Join Table for Order and ProductItem) ** //
+
+model OrderProductItem {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orderId     String
+  skuId       String
+  quantity    Int
+  unitPrice   Int // Price of the product at the time of the order
+  totalAmount Int // Computed as quantity * unitPrice
+  discount    Int? // Any discount applied to this product for this order
+  images      Image[]
+
+  order Order       @relation(fields: [orderId], references: [id])
+  sku   ProductItem @relation(fields: [skuId], references: [id])
+}
+
+// ** ProductReview ** //
+
+model ProductReview {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  feedback  String? // Detailed feedback
+  rating    Int // Rating given by the customer (e.g., out of 5 or 10)
+
+  // Relations
+  productId String // ID of the Product the review is related to
+  product   Product @relation(fields: [productId], references: [id])
+  userId    String // ID of the User who left the review
+  user      User    @relation(fields: [userId], references: [id])
+
+  @@unique([productId, userId], name: "unique_product_user_review")
+}
+
+// ** Service ** //
+
+model Service {
+  id            String             @id @default(cuid())
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  name          String
+  code          String             @unique
+  price         Int
+  active        Boolean
+  description   String?
+  orderServices OrderService[]
+  images        Image[]
+  categories    ServiceCategory[]
+  tags          ServiceTag[]
+  variations    ServiceVariation[]
+}
+
+// ** Service Category ** //
+
+model ServiceCategory {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  name        String    @unique()
+  description String?
+  services    Service[]
+}
+
+// ** Service Tag ** //
+
+model ServiceTag {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  services  Service[]
+}
+
+// ** ServiceVariation ** //
+
+model ServiceVariation {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  services  Service[]
+}
+
+// ** OrderService (Join Table for Order and Service) ** //
+
+model OrderService {
+  id           String    @id @default(cuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  orderId      String
+  serviceId    String
+  quantity     Int
+  unitPrice    Int // Price of the service at the time of the order
+  totalAmount  Int // Computed as quantity * unitPrice
+  discount     Int? // Any discount applied to this service for this order
+  duration     Int? // Duration of the service in minutes (e.g., 120 for 2 hours)
+  deliverable  String? // Description of the deliverable, if any
+  deliveryDate DateTime? // Expected delivery date for the service deliverable
+  images       Image[]
+
+  order   Order   @relation(fields: [orderId], references: [id])
+  service Service @relation(fields: [serviceId], references: [id])
+  tasks   Task[]
+}
+
+// ** BillingAddress ** //
+
+model BillingAddress {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  address   Address  @relation(fields: [addressId], references: [id])
+  addressId String
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String   @unique
+}
+
+// ** ShippingAddress ** //
+
+model ShippingAddress {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String?
+  address   Address  @relation(fields: [addressId], references: [id])
+  addressId String
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String   @unique
+}
+
+// ** Delivery ** //
+
+model Delivery {
+  id                   String                @id @default(cuid())
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  deliveryDate         DateTime? // Expected or actual delivery date
+  status               DeliveryStatus
+  trackingNumber       String? // If you have a tracking system
+  carrier              String? // E.g., UPS, FedEx, etc.
+  notes                String? // Any additional notes or details about the delivery
+  order                Order                 @relation(fields: [orderId], references: [id])
+  orderId              String
+  deliveryProductItems DeliveryProductItem[]
+  damagedProductItems  DamagedProductItem[]
+}
+
+// ** DeliveryProductItem (Join Table for Delivery and ProductItem) ** //
+
+model DeliveryProductItem {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  deliveryId    String
+  productItemId String
+  quantity      Int // Quantity of the product in this delivery
+
+  delivery    Delivery    @relation(fields: [deliveryId], references: [id])
+  productItem ProductItem @relation(fields: [productItemId], references: [id])
+
+  @@unique([deliveryId, productItemId], name: "unique_delivery_product")
+}
+
+// ** Return ** //
+
+model Return {
+  id           String              @id @default(cuid())
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  returnDate   DateTime // Date when the return was initiated
+  status       ReturnStatus
+  reason       String? // Reason for the return
+  notes        String? // Any additional notes or details about the return
+  order        Order               @relation(fields: [orderId], references: [id])
+  orderId      String
+  productItems ReturnProductItem[]
+}
+
+// ** ReturnProductItem (Join Table for Return and ProductItem) ** //
+
+model ReturnProductItem {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  returnId      String
+  productItemId String
+  quantity      Int // Quantity of the product being returned
+
+  return      Return      @relation(fields: [returnId], references: [id])
+  productItem ProductItem @relation(fields: [productItemId], references: [id])
+
+  @@unique([returnId, productItemId], name: "unique_return_product")
+}
+
+// ** Return ** //
+
+model Task {
+  id             String         @id @default(cuid())
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  status         TaskStatus
+  assignedToId   String? // ID of the user the task is assigned to
+  assignedTo     User?          @relation(fields: [assignedToId], references: [id])
+  orderServiceId String? // ID of the OrderService the task is related to
+  orderService   OrderService?  @relation(fields: [orderServiceId], references: [id])
+  description    String? // Description or details of the task
+  dueDate        DateTime? // Expected completion date for the task
+  startTime      DateTime? // Time when the task was started
+  endTime        DateTime? // Time when the task was completed
+  totalDuration  Int? // Total duration (combined by TimeInterval[]) in minutes (or seconds, based on your preference)
+  updatedPrice   Int? // Updated price based on the timer
+  timeIntervals  TimeInterval[] // Relation to the TimeInterval model
+  reviews        TaskReview[] // Relation to the TaskReview model
+}
+
+// ** TaskReview ** //
+
+model TaskReview {
+  id        String           @id @default(cuid())
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  feedback  String? // Detailed feedback
+  rating    Int // Rating given by the customer (e.g., out of 5 or 10)
+  status    TaskReviewStatus // Status of the review
+
+  // Relations
+  taskId String // ID of the Task the review is related to
+  task   Task   @relation(fields: [taskId], references: [id])
+  userId String // ID of the User who left the review
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([taskId, userId], name: "unique_task_user_review")
+}
+
+// ** TimeInterval ** //
+
+model TimeInterval {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  taskId    String // ID of the Task the time interval is related to
+  task      Task     @relation(fields: [taskId], references: [id])
+  startTime DateTime // Start time of this interval
+  endTime   DateTime // End time of this interval
+}
+
+// ** Warehouse ** //
+
+model Warehouse {
+  id                  String               @id @default(cuid())
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  name                String
+  addresses           WarehouseAddress[]
+  damagedProductItems DamagedProductItem[]
+  incomingDeliveries  IncomingDelivery[]
+  images              Image[]
+}
+
+// ** WarehouseAddress ** //
+
+model WarehouseAddress {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+  warehouseId String
+  address     Address   @relation(fields: [addressId], references: [id])
+  addressId   String
+  isDefault   Boolean   @default(false)
+}
+
+// ** ProductItemInventory ** //
+
+model ProductItemInventory {
+  id            String                @id @default(cuid())
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  productItemId String
+  productItem   ProductItem           @relation(fields: [productItemId], references: [id])
+  locationId    String // ID of either a Warehouse or a Shop
+  locationType  InventoryLocationType // Specifies whether the location is a Warehouse or a Shop
+  stock         Int
+  minimumStock  Int? // Optional, based on your needs
+
+  @@unique([productItemId, locationId, locationType], name: "unique_product_location")
+}
+
+// ** InventoryMovement ** //
+
+model InventoryMovement {
+  id                  String                 @id @default(cuid())
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  type                InventoryMovementType
+  quantity            Int
+  date                DateTime               @default(now())
+  notes               String?
+  productItemId       String
+  productItem         ProductItem            @relation(fields: [productItemId], references: [id])
+  fromLocationId      String? // Optional, based on movement type
+  fromLocationType    InventoryLocationType? // Specifies whether the location is a Warehouse or a Shop
+  toLocationId        String? // Optional, based on movement type
+  toLocationType      InventoryLocationType? // Specifies whether the location is a Warehouse or a Shop
+  damagedProductItems DamagedProductItem[]
+  orderId             String?
+
+  @@index([fromLocationId, fromLocationType, toLocationId, toLocationType], name: "idx_inventory_transfer")
+}
+
+// ** DamagedProductItem ** //
+
+model DamagedProductItem {
+  id                  String             @id @default(cuid())
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  productItemId       String
+  productItem         ProductItem        @relation(fields: [productItemId], references: [id])
+  warehouseId         String
+  warehouse           Warehouse          @relation(fields: [warehouseId], references: [id])
+  deliveryId          String? // Optional, if the damage happened during delivery
+  delivery            Delivery?          @relation(fields: [deliveryId], references: [id])
+  inventoryMovementId String? // Optional, if the damage happened during transfer
+  inventoryMovement   InventoryMovement? @relation(fields: [inventoryMovementId], references: [id])
+  quantity            Int
+  date                DateTime           @default(now())
+  notes               String?
+  location            DamageLocation
+  images              Image[]
+  reporterId          String? // ID of the User who reported the damage
+  reporter            User?              @relation(fields: [reporterId], references: [id])
+  incomingDelivery    IncomingDelivery?  @relation(fields: [incomingDeliveryId], references: [id])
+  incomingDeliveryId  String?
+}
+
+// ** Shop ** //
+
+model Shop {
+  id           String         @id @default(cuid())
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  name         String
+  addresses    ShopAddress[]
+  openingHours OpeningHours[]
+  isActive     Boolean        @default(true) // To indicate if the shop is currently operational
+  images       Image[]
+  // ... any other fields specific to the shop
+}
+
+// ** ShopAddress ** //
+
+model ShopAddress {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  shopId    String
+  address   Address  @relation(fields: [addressId], references: [id])
+  addressId String
+  isDefault Boolean  @default(false)
+}
+
+// ** Opening Hours ** //
+
+model OpeningHours {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  day       Weekday
+  openAt    String // e.g., "09:00"
+  closeAt   String // e.g., "17:00"
+  shopId    String
+  shop      Shop     @relation(fields: [shopId], references: [id])
+
+  @@unique([day, shopId], name: "unique_day_shop")
+}
+
+// ** Supplier ** //
+
+model Supplier {
+  id             String          @id @default(cuid())
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  name           String
+  contactName    String? // Contact person at the supplier
+  phone          String? // Contact number for the supplier
+  email          String? // Contact email for the supplier
+  address        String? // Address of the supplier
+  notes          String? // Any additional notes or details about the supplier
+  purchaseOrders PurchaseOrder[] // Orders made to this supplier
+  tags           SupplierTag[]
+}
+
+// ** Supplier Tag ** //
+
+model SupplierTag {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String
+  suppliers Supplier[]
+}
+
+// ** Purchase Order ** //
+
+model PurchaseOrder {
+  id                 String              @id @default(cuid())
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  supplierId         String
+  supplier           Supplier            @relation(fields: [supplierId], references: [id])
+  orderDate          DateTime            @default(now()) // Date when the order was made
+  expectedDate       DateTime? // Expected delivery date
+  status             PurchaseOrderStatus
+  items              PurchaseOrderItem[] // Items ordered
+  incomingDeliveries IncomingDelivery[] // Receipts when items are received
+}
+
+// ** Purchase Order Item ** //
+
+model PurchaseOrderItem {
+  id               String        @id @default(cuid())
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  purchaseOrderId  String
+  purchaseOrder    PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
+  productItemId    String
+  productItem      ProductItem   @relation(fields: [productItemId], references: [id])
+  orderedQuantity  Int // Quantity ordered from the supplier
+  receivedQuantity Int           @default(0) // Quantity received so far
+  unitPrice        Int // Price of the product at the time of the order
+}
+
+// ** IncomingDelivery ** (This model will represent the receipt of items from an external order into a warehouse.) // 
+
+model IncomingDelivery {
+  id                  String                 @id @default(cuid())
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  purchaseOrder       PurchaseOrder          @relation(fields: [purchaseOrderId], references: [id])
+  purchaseOrderId     String
+  warehouseId         String
+  warehouse           Warehouse              @relation(fields: [warehouseId], references: [id])
+  deliveryDate        DateTime               @default(now()) // Date when the incoming delivery was received
+  items               IncomingDeliveryItem[]
+  damagedProductItems DamagedProductItem[]
+}
+
+// ** IncomingDeliveryItem ** //
+
+model IncomingDeliveryItem {
+  id                 String           @id @default(cuid())
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  incomingDelivery   IncomingDelivery @relation(fields: [incomingDeliveryId], references: [id])
+  incomingDeliveryId String
+  productItemId      String
+  productItem        ProductItem      @relation(fields: [productItemId], references: [id])
+  quantity           Int
+  // Add other relevant fields like unit price, total amount, etc.
+}
+
+// ** Promotion  ** //
+model Promotion {
+  id          String              @id @default(cuid())
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  name        String // Name of the promotion
+  description String? // Description of the promotion
+  type        PromotionType
+  value       Float // The value of the promotion (e.g., discount amount or fixed price)
+  isUnlimited Boolean // Indicates if the promotion is unlimited
+  maxUsage    Int? // Maximum number of times the promotion can be used globally (only if not unlimited)
+  startDate   DateTime? // Start date of the promotion (optional)
+  endDate     DateTime? // End date of the promotion (optional)
+  couponCode  String?             @unique
+  freeGifts   PromotionFreeGift[]
+  bundle      PromotionBundle?    @relation(fields: [bundleId], references: [id])
+  bundleId    String?
+
+  promotionUsage PromotionUsage[]
+  conditions     PromotionCondition[]
+  order          Order[]
+}
+
+// ** Promotion Condition ** //
+
+model PromotionCondition {
+  id                    String            @id @default(cuid())
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  promotion             Promotion         @relation(fields: [promotionId], references: [id])
+  promotionId           String
+  minOrderTotal         Int? // Minimum order total for the promotion to apply
+  eligibleUsers         User[] // Users that are eligible for the promotion
+  eligibleProducts      Product[] // Products that are eligible for the promotion
+  eligibleCategories    ProductCategory[] // Product categories that are eligible for the promotion
+  eligibleProductItems  ProductItem[] // Products that are eligible for the promotion
+  eligibleOrganizations Organization[] // Organizations that are eligible for the promotion
+  limit                 Int? // Usage limit per user or organization
+
+  // Add other fields as needed
+  order   Order?  @relation(fields: [orderId], references: [id])
+  orderId String?
+}
+
+// ** PromotionUsage ** //
+
+model PromotionUsage {
+  id             String        @id @default(cuid())
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  promotion      Promotion     @relation(fields: [promotionId], references: [id])
+  promotionId    String
+  user           User?         @relation(fields: [userId], references: [id])
+  userId         String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
+  usageDate      DateTime      @default(now())
+}
+
+// ** PromotionFreeGift  ** //
+
+model PromotionFreeGift {
+  id            String      @id @default(cuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  promotion     Promotion   @relation(fields: [promotionId], references: [id])
+  promotionId   String
+  quantity      Int
+  productItem   ProductItem @relation(fields: [productItemId], references: [id])
+  productItemId String
+}
+
+// ** PromotionBundle  ** //
+model PromotionBundle {
+  id        String                @id @default(cuid())
+  createdAt DateTime              @default(now())
+  updatedAt DateTime              @updatedAt
+  name      String // Name of the bundle
+  price     Int? // Price of the bundle
+  products  PromotionBundleItem[] // Products included in the bundle
+  Promotion Promotion[]
+}
+
+// ** PromotionBundleItem  ** //
+model PromotionBundleItem {
+  id            String          @id @default(cuid())
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  bundle        PromotionBundle @relation(fields: [bundleId], references: [id])
+  bundleId      String
+  productItem   ProductItem     @relation(fields: [productItemId], references: [id])
+  productItemId String
+  price         Int?
+  quantity      Int // Quantity of this product in the bundle
+}
+
+// ** Lead ** //
+model Lead {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String?
+  firstName String?
+  lastName  String?
+  email     String?
+  phone     String?
+  company   String?
+
+  // Relationships
+  createdBy       User?         @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String?       @unique
+  addresses       LeadAddress[]
+}
+
+// ** LeadAddress ** //
+
+model LeadAddress {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lead      Lead     @relation(fields: [leadId], references: [id])
+  leadId    String
+  address   Address  @relation(fields: [addressId], references: [id])
+  addressId String
+  isDefault Boolean  @default(false)
+}
+
+// ** Region ** //
+model Region {
+  id            String         @id @default(cuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  name          String
+  type          RegionType // Enum: Country, State, City, Custom
+  description   String?
+  users         User[] // Users assigned to this region individually
+  organizations Organization[] // Organizations that cover this region
+  boundary      String? // NATIVE=GEOMETRY, String field to store polygon coordinates as JSON or WKT (Well-Known Text)
+
+  parent   Region? @relation("Subregions", fields: [parentId], references: [id])
+  parentId String?
+
+  regions Region[] @relation("Subregions")
+
+  @@unique([name, type], name: "unique_region_name_type")
+}
+
+// ** Cart ** //
+model Cart {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [userId], references: [id])
+  userId    String     @unique
+  items     CartItem[] // A list of items in the cart
+}
+
+// ** CartItem ** //
+
+model CartItem {
+  id            String      @id @default(cuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  cart          Cart        @relation(fields: [cartId], references: [id])
+  cartId        String
+  productItem   ProductItem @relation(fields: [productItemId], references: [id])
+  productItemId String
+  quantity      Int // Quantity of the product in the cart
+}
+
+// ** Bank ** //
+
+model Bank {
+  id           String        @id @default(cuid())
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  name         String
+  countryCode  String
+  swiftCode    String        @unique
+  bankAccount  BankAccount[]
+  searchString String?
+}
+
+// ** BankAccount ** //
+
+model BankAccount {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accountNumber            String
+  alias                    String
+  accountName              String
+  beneficiaryId            String?
+  bank                     Bank                      @relation(fields: [bankId], references: [id])
+  bankId                   String
+  user                     User?                     @relation(fields: [userId], references: [id])
+  userId                   String?
+  organization             Organization?             @relation(fields: [organizationId], references: [id])
+  organizationId           String?
+  default                  Boolean                   @default(false)
+  walletWithdrawalRequests WalletWithdrawalRequest[]
+}
+
+// ** Wallet ** //
+
+model Wallet {
+  id                          String                    @id @default(cuid())
+  createdAt                   DateTime                  @default(now())
+  updatedAt                   DateTime                  @updatedAt
+  balance                     Float                     @default(0)
+  user                        User?                     @relation(fields: [userId], references: [id])
+  userId                      String?                   @unique
+  organization                Organization?             @relation(fields: [organizationId], references: [id])
+  organizationId              String?                   @unique
+  topups                      WalletTopup[]
+  withdrawalRequests          WalletWithdrawalRequest[]
+  senderWalletTransactions    WalletTransaction[]       @relation("senderWallet")
+  recipientWalletTransactions WalletTransaction[]       @relation("recipientWallet")
+}
+
+// ** WalletTopup ** //
+
+model WalletTopup {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  wallet    Wallet   @relation(fields: [walletId], references: [id])
+  walletId  String
+  amount    Int
+  user      User?    @relation("topupBy", fields: [userId], references: [id])
+  userId    String?
+
+  date               DateTime?
+  ref                String?
+  proof              String?
+  method             TopupMethod
+  walletTransactions WalletTransaction[]
+}
+
+// ** WalletWithdrawalRequest ** //
+
+model WalletWithdrawalRequest {
+  id                 String              @id @default(cuid())
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  wallet             Wallet              @relation(fields: [walletId], references: [id])
+  walletId           String
+  bankAccount        BankAccount         @relation(fields: [bankAccountId], references: [id])
+  bankAccountId      String
+  amount             Int
+  status             WithdrawalStatus // Enum: Pending, Approved, Rejected, Completed
+  // Add any other fields related to the withdrawal request
+  user               User?               @relation("requestedBy", fields: [userId], references: [id])
+  userId             String?
+  walletTransactions WalletTransaction[]
+}
+
+// ** WalletTransaction ** //
+
+model WalletTransaction {
+  id                Int                      @id @default(autoincrement())
+  createdAt         DateTime                 @default(now())
+  updatedAt         DateTime                 @updatedAt
+  senderWalletId    String?
+  recipientWalletId String
+  amount            Int
+  senderWallet      Wallet?                  @relation("senderWallet", fields: [senderWalletId], references: [id])
+  recipientWallet   Wallet                   @relation("recipientWallet", fields: [recipientWalletId], references: [id])
+  transactionType   WalletTransactionType
+  status            TransactionStatus
+  topup             WalletTopup?             @relation(fields: [topupId], references: [id])
+  topupId           String?
+  withdrawal        WalletWithdrawalRequest? @relation(fields: [withdrawalId], references: [id])
+  withdrawalId      String?
+}
+
+// ** Subscription ** //
+
+model Subscription {
+  id                String                @id @default(cuid())
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+  name              String
+  code              String                @unique
+  price             Int
+  active            Boolean
+  description       String?
+  features          SubscriptionFeature[]
+  userSubscriptions UserSubscription[] // Users that have this subscription
+}
+
+// ** SubscriptionFeature ** //
+
+model SubscriptionFeature {
+  id             String       @id @default(cuid())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  name           String
+  description    String?
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  subscriptionId String
+}
+
+// ** UserSubscription ** //
+
+model UserSubscription {
+  id                  String         @id @default(cuid())
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  userId              String // Refers to your User model's ID
+  subscriptionId      String // Refers to Subscription model's ID
+  startDate           DateTime       @default(now())
+  endDate             DateTime?
+  currentStartDate    DateTime
+  currentEndDate      DateTime
+  active              Boolean
+  subscription        Subscription   @relation(fields: [subscriptionId], references: [id])
+  paymentMethod       PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
+  paymentMethodId     String?
+  billingCycle        BillingCycle
+  customBillingDays   Int? // Number of days for custom billing cycle
+  customBillingMonths Int? // Number of months for custom billing cycle
+
+  @@unique([userId, subscriptionId], name: "unique_user_subscription")
+}
+
+// ** PaymentMethod ** //
+model PaymentMethod {
+  id                String             @id @default(cuid())
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  type              String
+  ref               String?
+  details           Json? // Store sensitive data encrypted if needed
+  user              User               @relation(fields: [userId], references: [id])
+  userId            String
+  userSubscriptions UserSubscription[]
+
+  @@unique([type, userId], name: "unique_paymentmethod_type_user")
+}
+
+// Tax Related Config
+
+model TaxConfiguration {
+  id          String       @id @default(cuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  name        String
+  percentage  Float // The tax rate, represented as a percentage
+  description String? // Additional information about the tax
+  active      Boolean      @default(true) // Whether the tax is currently in use
+  products    ProductTax[] // Connects taxes to their products
+}
+
+model ProductTax {
+  product            Product          @relation(fields: [productId], references: [id])
+  productId          String
+  taxConfiguration   TaxConfiguration @relation(fields: [taxConfigurationId], references: [id])
+  taxConfigurationId String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@id([productId, taxConfigurationId])
+}
+
+model Image {
+  id                   String              @id @default(cuid())
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  path                 String
+  sortOrder            Int? // Optional. Larger number will be ordered first
+  product              Product?            @relation(fields: [productId], references: [id])
+  productId            String?
+  productItem          ProductItem?        @relation(fields: [productItemId], references: [id])
+  productItemId        String?
+  orderProductItem     OrderProductItem?   @relation(fields: [orderProductItemId], references: [id])
+  orderProductItemId   String?
+  service              Service?            @relation(fields: [serviceId], references: [id])
+  serviceId            String?
+  orderService         OrderService?       @relation(fields: [orderServiceId], references: [id])
+  orderServiceId       String?
+  warehouse            Warehouse?          @relation(fields: [warehouseId], references: [id])
+  warehouseId          String?
+  damagedProductItem   DamagedProductItem? @relation(fields: [damagedProductItemId], references: [id])
+  damagedProductItemId String?
+  shop                 Shop?               @relation(fields: [shopId], references: [id])
+  shopId               String?
+}
+
+model SystemSettings {
+  id        String   @id @default(cuid())
+  key       String   @unique()
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Files {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  resourceName String
+  resourceId   String
+  filePath     String
+  fileType     String
+}
+
+model Department {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+}
+
+model Estimates {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  runningNumber Int
+}
+
+model Invoice {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  runningNumber Int
+}
+
+model PurchaseBill {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  runningNumber Int
+}
+
+model Account {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @unique()
+}
+
+model Country {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  alpha2        String   @unique
+  alpha3        String   @unique
+  locales       String[] @default([])
+  defaultLocale String
+  languages     String[] @default([])
+  emoji         String
+  currencyCode  String
+  continent     String
+  region        String
+}
+
+model Currency {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  code           String
+  name           String
+  symbol         String
+  exchangeRate   Float
+  isBaseCurrency Boolean
+}
