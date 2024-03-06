@@ -1,73 +1,73 @@
 import type {
-	InventoryMovementCreate,
-	InventoryMovementDeleteMany,
-	InventoryMovementSearch,
-	InventoryMovementUpdate,
-	InventoryMovementUpdateMany
+  InventoryMovementCreate,
+  InventoryMovementDeleteMany,
+  InventoryMovementSearch,
+  InventoryMovementUpdate,
+  InventoryMovementUpdateMany
 } from "$api/routes/inventory-movement/inventory-movement.schema";
+import * as Prisma from "@prisma/client";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
 import { HttpService } from "$services/http.service";
-import * as Prisma from "@prisma/client";
 
 class _InventoryMovementRepository {
-	path = PUBLIC_API_BASE_PATH + "/inventory-movement";
+  path = PUBLIC_API_BASE_PATH + "/inventory-movement";
 
-	async create(input: InventoryMovementCreate) {
-		const url = this.path;
-		return await HttpService.post<Prisma.InventoryMovement>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+  async create(input: InventoryMovementCreate) {
+    const url = this.path;
+    return await HttpService.post<Prisma.InventoryMovement>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
 
-	async update(id: string, input: InventoryMovementUpdate) {
-		const url = `${this.path}/${id}`;
-		return await HttpService.patch<Prisma.InventoryMovement>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+  async update(id: string, input: InventoryMovementUpdate) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.patch<Prisma.InventoryMovement>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
 
-	async get(id: string) {
-		const url = `${this.path}/${id}`;
-		return await HttpService.get<Prisma.InventoryMovement>(url, {
-			auth: "accessToken"
-		});
-	}
+  async get(id: string) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.get<Prisma.InventoryMovement>(url, {
+      auth: "accessToken",
+    });
+  }
 
-	async updateMany(input: InventoryMovementUpdateMany) {
-		const url = this.path;
-		return await HttpService.patch<Prisma.Prisma.BatchPayload>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+  async updateMany(input: InventoryMovementUpdateMany) {
+    const url = this.path;
+    return await HttpService.patch<Prisma.Prisma.BatchPayload>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
 
-	async delete(id: string) {
-		const url = `${this.path}/${id}`;
-		return await HttpService.delete<Prisma.InventoryMovement>(url, {
-			auth: "accessToken"
-		});
-	}
+  async delete(id: string) {
+    const url = `${this.path}/${id}`;
+    return await HttpService.delete<Prisma.InventoryMovement>(url, {
+      auth: "accessToken",
+    });
+  }
 
-	async deleteMany(input: InventoryMovementDeleteMany) {
-		const url = this.path;
-		return await HttpService.delete<Prisma.Prisma.BatchPayload>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+  async deleteMany(input: InventoryMovementDeleteMany) {
+    const url = this.path;
+    return await HttpService.delete<Prisma.Prisma.BatchPayload>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
 
-	async search(input: InventoryMovementSearch) {
-		const url = `${this.path}/search`;
-		return await HttpService.post<Prisma.InventoryMovement[]>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+  async search(input: InventoryMovementSearch) {
+    const url = `${this.path}/search`;
+    return await HttpService.post<Prisma.InventoryMovement[]>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken",
+    });
+  }
 
-	async count(input: InventoryMovementSearch) {
-		const url = `${this.path}/count`;
+  async count(input: InventoryMovementSearch) {
+    const url = `${this.path}/count`;
 		return await HttpService.post<number>(url, {
 			body: JSON.stringify(input),
 			auth: "accessToken"
