@@ -138,22 +138,14 @@
 			{#if !disabled}
 				<div class="mx-1.5 flex w-full gap-2 items-center text-xs text-white">
 					{#if $isEditing}
-						<!-- <Button onClick={handleChooseFile}>
+						<Button>
 							<div slot="label" class="w-full">
 								<div class=" flex gap-1 items-center justify-center">
 									<Icon icon="bx:image-add" class="text-lg " />
-									<div>Add image</div>
+									<div>Add Item</div>
 								</div>
-								<input
-									bind:this={inputRef}
-									type="file"
-									accept="image/png, image/jpeg"
-									class="hidden"
-									multiple
-									on:change={handleFileSelected}
-								/>
 							</div>
-						</Button> -->
+						</Button>
 						<Button class="button-green " onClick={handleSave}>
 							<div slot="label" class="w-full">
 								<div class=" w-full flex gap-1 items-center justify-center">

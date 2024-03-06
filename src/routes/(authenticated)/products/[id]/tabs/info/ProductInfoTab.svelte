@@ -1,7 +1,6 @@
 <script lang="ts">
 	import ProductDetailsForm from "./ProductDetailsForm.svelte";
 	import ProductImageField from "./ProductImageField.svelte";
-	import ProductItemsField from "./ProductItemsField.svelte";
 </script>
 
 <div class="grid grid-cols-5 gap-4">
@@ -14,6 +13,5 @@
 	</div>
 	<div class="col-span-5 lg:col-span-3 auto-rows-min grid gap-4">
 		<ProductImageField />
-		<ProductItemsField />
 	</div>
 </div>

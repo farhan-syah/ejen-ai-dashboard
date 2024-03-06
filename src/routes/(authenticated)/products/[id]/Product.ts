@@ -1,8 +1,8 @@
 import { UserState } from "$applications";
 import { validatePermissions, type TabItem } from "$lib/components";
+import Prisma from "@prisma/client";
 import { atom, computed, type WritableAtom } from "nanostores";
 import { getContext, setContext } from "svelte";
-import type Prisma from "../../../$api/types/prisma-client";
 
 export type Product = Prisma.Product & {
 	categories?: ProductCategory[];

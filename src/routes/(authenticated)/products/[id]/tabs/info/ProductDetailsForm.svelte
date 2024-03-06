@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ProductUpdateInput } from "$api/routes/product/product.schema";
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import {
@@ -15,7 +16,6 @@
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
-	import type { ProductUpdateInput } from "../../../../../$api/routes/product/product.schema";
 	import { getProductContext, type ProductCategory } from "../../Product";
 	import ProductDeleteButton from "./ProductDeleteButton.svelte";
 
@@ -44,8 +44,8 @@
 		required: true
 	});
 
-	const retailPriceController = new FormControl<number>({
-		name: "retailPrice",
+	const priceController = new FormControl<number>({
+		name: "price",
 		value: $product.price,
 		required: true
 	});
@@ -55,7 +55,7 @@
 		value: $product.categories
 	});
 
-	const form = new FormGroup([nameController, retailPriceController, productCategoryController]);
+	const form = new FormGroup([nameController, priceController, productCategoryController]);
 	const valid = form.valid;
 
 	// Functions
@@ -80,6 +80,8 @@
 			});
 
 			await context.fetchProduct();
+
+			editable.set(false);
 
 			toastState.add({
 				type: "success",
@@ -143,7 +145,7 @@
 	disabled={!$editable}
 />
 <PriceField
-	controller={retailPriceController}
+	controller={priceController}
 	label="Retail Price (RRSP)"
 	class="col-span-2"
 	decimalPlaces={0}

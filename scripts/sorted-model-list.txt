@@ -1,4 +1,4 @@
-Accounts
+Account
 Address
 Bank
 BankAccount
@@ -7,9 +7,9 @@ Cart
 CartItem
 Country
 Currency
-DamagedProduct
+DamagedProductItem
 Delivery
-DeliveryProduct
+DeliveryProductItem
 Department
 Estimates
 Files
@@ -22,7 +22,7 @@ Lead
 LeadAddress
 OpeningHours
 Order
-OrderProduct
+OrderProductItem
 OrderReview
 OrderService
 Organization
@@ -34,11 +34,11 @@ PaymentMethod
 Permission
 Product
 ProductCategory
-ProductInventory
+ProductItem
+ProductItemInventory
 ProductReview
 ProductTag
 ProductTax
-ProductVariation
 Promotion
 PromotionBundle
 PromotionBundleItem
@@ -50,7 +50,7 @@ PurchaseOrder
 PurchaseOrderItem
 Region
 Return
-ReturnProduct
+ReturnProductItem
 Role
 RolePermission
 Service

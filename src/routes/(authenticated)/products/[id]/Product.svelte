@@ -7,7 +7,7 @@
 	import { onMount } from "svelte";
 	import { ProductTab, createProductContext, productKeys, productTabs } from "./Product";
 	import ProductInfoTab from "./tabs/info/ProductInfoTab.svelte";
-	import ProductVariationsTab from "./tabs/variations/ProductVariationsTab.svelte";
+	import ProductItemsTab from "./tabs/items/ProductItemsTab.svelte";
 
 	const id = $page.params.id;
 	const initialPage = $page.url.searchParams.get("page");
@@ -62,7 +62,7 @@
 				<ProductInfoTab />
 			{/if}
 			{#if tabs[$index].label === ProductTab.items}
-				<ProductVariationsTab />
+				<ProductItemsTab />
 			{/if}
 		</div>
 	</Tab>
