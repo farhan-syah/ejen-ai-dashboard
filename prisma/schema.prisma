@@ -1,6 +1,10 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// generator fake_data_generator {
+//   provider = "prisma-generator-fake-data"
+// }
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -181,10 +185,17 @@ enum WithdrawalStatus {
 }
 
 enum BillingCycle {
-  Monthlu
+  Monthly
   Quarterly
   Annually
   Custom
+}
+
+enum UnitType {
+  Weight
+  Dimension
+  Duration
+  Packaging
 }
 
 model User {
@@ -503,9 +514,9 @@ model ProductItem {
   product   Product  @relation(fields: [productId], references: [id])
   productId String
   price     Int // RSP
-  gtin8     String?  @unique @db.Char(8)
-  gtin12    String?  @unique @db.Char(12)
-  gtin13    String?  @unique @db.Char(13)
+  gtin8     String?  @unique @db.Char(8) // EAN-8
+  gtin12    String?  @unique @db.Char(12) // UPC
+  gtin13    String?  @unique @db.Char(13) // EAN-13
   gtin14    String?  @unique @db.Char(14)
 
   cartItems            CartItem[]
@@ -525,6 +536,21 @@ model ProductItem {
 
   tieredPricing TieredPricing[]
   images        Image[]
+
+  height          Decimal? @db.Decimal(10, 2)
+  width           Decimal? @db.Decimal(10, 2)
+  depth           Decimal? @db.Decimal(10, 2)
+  dimensionUnit   Unit?    @relation(name: "dimensionUnit", fields: [dimensionUnitId], references: [id])
+  dimensionUnitId String?
+
+  netWeight    Decimal? @db.Decimal(10, 2)
+  grossWeight  Decimal? @db.Decimal(10, 2)
+  weightUnit   Unit?    @relation(name: "weightUnit", fields: [weightUnitId], references: [id])
+  weightUnitId String?
+
+  packagingCount  Decimal? @db.Decimal(10, 2)
+  packagingUnit   Unit?    @relation(name: "packagingUnit", fields: [packagingUnitId], references: [id])
+  packagingUnitId String?
 }
 
 // ** Product Category ** //
@@ -1491,4 +1517,19 @@ model Currency {
   symbol         String
   exchangeRate   Float
   isBaseCurrency Boolean
+}
+
+//  https://help.sap.com/doc/saphelp_nw73ehp1/7.31.19/en-US/4b/ce80a00cac3c6be10000000a42189c/content.htm?no_cache=true
+
+model Unit {
+  id                    String        @id @default(cuid())
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  code                  String // Common Code, based on https://unece.org/trade/uncefact/cl-recommendations Rec 20
+  symbol                String
+  type                  UnitType?
+  description           String?
+  productItemWeights    ProductItem[] @relation(name: "weightUnit")
+  productItemDimensions ProductItem[] @relation(name: "dimensionUnit")
+  ProductItemPackagings ProductItem[] @relation(name: "packagingUnit")
 }

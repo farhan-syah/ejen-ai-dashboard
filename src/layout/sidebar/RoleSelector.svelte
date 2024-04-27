@@ -1,16 +1,16 @@
 <script lang="ts">
-	import type Prisma from "$api/types/prisma-client-defts";
 	import { UserState, getAppState } from "$applications";
 	import Modal from "$lib/components/modal/Modal.svelte";
 	import { RoleRepository, UserSettingRepository } from "$repositories";
 	import { AuthService } from "$services";
 	import Icon from "@iconify/svelte";
+	import { type Role as PrismaRole } from "@prisma/client";
 	import { atom } from "nanostores";
 	import { onMount } from "svelte";
 
 	const appState = getAppState();
 
-	type Role = Prisma.Role & { organization: { name: string } };
+	type Role = PrismaRole & { organization: { name: string } };
 	type GroupedRole = { organizationId: string; organizationName: string; roles: Role[] };
 	const user = UserState.user;
 	const isSidebarOpen = appState.isSidebarOpen;

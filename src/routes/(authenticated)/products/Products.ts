@@ -1,14 +1,14 @@
 import type { TableColumn } from "$lib/components";
 import { formatLocalDate } from "$lib/utils/date";
 import { CSV } from "$types";
-import type Prisma from "../../$api/types/prisma-client";
+import type { Product, ProductCategory } from "@prisma/client";
 import ProductActions from "./_/actions/ProductActions.svelte";
 
-export type Product = Prisma.Product & {
+export type _Product = Product & {
 	categories?: ProductCategory[];
 	images?: { path: string; id: string }[];
 };
-export type ProductCategory = Pick<Prisma.ProductCategory, "id" | "name">;
+export type _ProductCategory = Pick<ProductCategory, "id" | "name">;
 export const productColumns: TableColumn<Product>[] = [
 	{
 		key: "id",
@@ -53,7 +53,7 @@ const rowHeaders = Object.keys(row);
 export function toProductCSV(product: Product[]) {
 	const data: CSVRow[] = [];
 	const date: string = formatLocalDate(new Date(), "yy-MM-dd hh-mm aa");
-	const fileName = "product-categories " + date + ".csv";
+	const fileName = "products " + date + ".csv";
 
 	product.forEach((p) => {
 		const csv: CSVRow = {

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { twMerge } from "tailwind-merge";
+
 	export let link: string | undefined = undefined;
 	export let target: "_self" | "_blank" | "_top" | "_parent" | undefined | null = undefined;
 	export let label = "Submit";
@@ -16,7 +18,7 @@
 {#if link}
 	<a href={link} {target} tabindex="-1">
 		<button
-			class="button flex items-center {componentClass}"
+			class={twMerge(["button flex items-center", componentClass])}
 			on:click={handleClick}
 			on:keydown={(e) => {
 				e.stopImmediatePropagation();

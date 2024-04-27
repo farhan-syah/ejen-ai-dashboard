@@ -10,7 +10,7 @@
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
 	import type { FieldOption } from "$types";
 	import { PublishStatus } from "@prisma/client";
-	import type { ProductCategory } from "../Products";
+	import type { _ProductCategory } from "../Products";
 
 	// States
 
@@ -50,7 +50,7 @@
 	const statusOptions: FieldOption[] = Object.values(PublishStatus).map((e) => {
 		return { value: e, label: e };
 	});
-	const productCategoryController = new FormControl<ProductCategory[]>({ name: "categories" });
+	const productCategoryController = new FormControl<_ProductCategory[]>({ name: "categories" });
 
 	const form = new FormGroup<ProductCreateInput>([
 		nameController,

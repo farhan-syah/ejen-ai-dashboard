@@ -42,6 +42,16 @@ export declare const ProductItemSearchWhereSchema: import("@sinclair/typebox").T
         gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
         not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
     }>, import("@sinclair/typebox").TString]>>>;
+    productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+        equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+        notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+        contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
+        not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+    }>, import("@sinclair/typebox").TString]>>>;
 }>;
 export type ProductItemSearchWhere = Static<typeof ProductItemSearchWhereSchema>;
 export declare const ProductItemSearchSchema: import("@sinclair/typebox").TObject<{
@@ -74,6 +84,16 @@ export declare const ProductItemSearchSchema: import("@sinclair/typebox").TObjec
             lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
+        productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
     }>;
@@ -151,6 +171,16 @@ export declare const ProductItemUpdateManySchema: import("@sinclair/typebox").TO
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
+        productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -200,6 +230,16 @@ export declare const ProductItemDeleteManySchema: import("@sinclair/typebox").TO
             lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
+            not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
+        }>, import("@sinclair/typebox").TString]>>>;
+        productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
+            equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
+            contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+            mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
     }>;

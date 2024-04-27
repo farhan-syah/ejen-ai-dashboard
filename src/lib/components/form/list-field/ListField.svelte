@@ -11,7 +11,6 @@
 
 	export let label: string | undefined = undefined;
 	export let description: string | undefined = undefined;
-	export let limit: number | undefined = undefined;
 	export let controller: FormControl<T[]> = new FormControl();
 	export let disabled = false;
 	export let isEditing = atom(false);
