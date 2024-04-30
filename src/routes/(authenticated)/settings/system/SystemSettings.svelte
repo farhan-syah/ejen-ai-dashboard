@@ -9,8 +9,8 @@
 		systemSettingsTabs
 	} from "./SystemSettings";
 	import SystemSettingsCountry from "./SystemSettingsCountry.svelte";
-	import SystemSettingsCurrency from "./SystemSettingsCurrency.svelte";
 	import SystemSettingsGeneral from "./SystemSettingsGeneral.svelte";
+	import SystemSettingsCurrency from "./currency/SystemSettingsCurrency.svelte";
 
 	const initialPage = $page.url.searchParams.get("page");
 	const tabs: TabItem[] = systemSettingsTabs;

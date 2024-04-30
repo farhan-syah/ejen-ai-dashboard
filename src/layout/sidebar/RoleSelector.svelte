@@ -116,7 +116,7 @@
 {/if}
 
 <Modal isOpen={isModalOpen}>
-	<div class="w-96">
+	<div class=" w-64 md:w-96">
 		<div class="font-semibold mb-2 text-center">Change Role</div>
 		<div class="mb-4 text-center">Choose the role you want to change into</div>
 		<table class=" w-full table-fixed">

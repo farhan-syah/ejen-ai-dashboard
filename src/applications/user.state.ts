@@ -1,5 +1,5 @@
-import type { User, UserSetting } from "$api/types/prisma-client";
 import { persistentAtom } from "@nanostores/persistent";
+import type { User, UserSetting } from "@prisma/client";
 import { atom } from "nanostores";
 
 class _UserState {

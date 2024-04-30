@@ -27,11 +27,11 @@
 {#if $isOpen}
 	<div
 		role="none"
-		class="fixed overlay top-0 left-0 h-full flex w-full z-50 text-gray-600"
+		class="fixed overlay top-0 left-0 h-full flex w-screen z-50 text-gray-600"
 		on:click|self={handleDismiss}
 		on:keypress={() => {}}
 	>
-		<div class="m-auto relative {componentClass}" transition:flyAndScale>
+		<div class="m-auto relative max:w-full {componentClass}" transition:flyAndScale>
 			<Card class={cardClass}>
 				<slot />
 			</Card>

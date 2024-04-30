@@ -7,9 +7,21 @@ export declare const CurrencyQuerySchema: import("@sinclair/typebox").TObject<{
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type CurrencyQuery = Static<typeof CurrencyQuerySchema>;
-export declare const CurrencyCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const CurrencyCreateInputSchema: import("@sinclair/typebox").TObject<{
+    code: import("@sinclair/typebox").TString;
+    name: import("@sinclair/typebox").TString;
+    symbol: import("@sinclair/typebox").TString;
+    exchangeRate: import("@sinclair/typebox").TNumber;
+    isBaseCurrency: import("@sinclair/typebox").TBoolean;
+}>;
 export type CurrencyCreateInput = Static<typeof CurrencyCreateInputSchema>;
-export declare const CurrencyUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const CurrencyUpdateInputSchema: import("@sinclair/typebox").TObject<{
+    code: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    symbol: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    exchangeRate: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TNumber>;
+    isBaseCurrency: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
+}>;
 export type CurrencyUpdateInput = Static<typeof CurrencyUpdateInputSchema>;
 export declare const CurrencySearchWhereSchema: import("@sinclair/typebox").TObject<{
     id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
@@ -86,20 +98,44 @@ export declare const CurrencySearchSchema: import("@sinclair/typebox").TObject<{
     }>>;
 }>;
 export type CurrencySearch = Static<typeof CurrencySearchSchema>;
-export declare const CurrencyCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const CurrencyCreateDataSchema: import("@sinclair/typebox").TObject<{
+    code: import("@sinclair/typebox").TString;
+    name: import("@sinclair/typebox").TString;
+    symbol: import("@sinclair/typebox").TString;
+    exchangeRate: import("@sinclair/typebox").TNumber;
+    isBaseCurrency: import("@sinclair/typebox").TBoolean;
+}>;
 export type CurrencyCreateData = Static<typeof CurrencyCreateDataSchema>;
 export declare const CurrencyCreateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        code: import("@sinclair/typebox").TString;
+        name: import("@sinclair/typebox").TString;
+        symbol: import("@sinclair/typebox").TString;
+        exchangeRate: import("@sinclair/typebox").TNumber;
+        isBaseCurrency: import("@sinclair/typebox").TBoolean;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type CurrencyCreate = Static<typeof CurrencyCreateSchema>;
-export declare const CurrencyUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const CurrencyUpdateDataSchema: import("@sinclair/typebox").TObject<{
+    code: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    symbol: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    exchangeRate: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TNumber>;
+    isBaseCurrency: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
+}>;
 export type CurrencyUpdateData = Static<typeof CurrencyUpdateDataSchema>;
 export declare const CurrencyUpdateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        code: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        symbol: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        exchangeRate: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TNumber>;
+        isBaseCurrency: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -110,7 +146,13 @@ export declare const CurrencyUpdateSchema: import("@sinclair/typebox").TObject<{
 }>;
 export type CurrencyUpdate = Static<typeof CurrencyUpdateSchema>;
 export declare const CurrencyUpdateManySchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        code: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        symbol: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        exchangeRate: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TNumber>;
+        isBaseCurrency: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TBoolean>;
+    }>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

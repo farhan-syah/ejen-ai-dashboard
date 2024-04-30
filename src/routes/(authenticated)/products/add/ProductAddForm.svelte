@@ -98,14 +98,14 @@
 		controller={retailPriceController}
 		label="Recommended Retail Price"
 		class="col-col-1"
-		decimalPlaces={0}
+		decimalPlaces={2}
 	/>
 	<SelectField
 		controller={statusController}
 		label="Status"
 		class="  col-start-1"
 		options={statusOptions}
-	></SelectField>
+	/>
 
 	<SearchField
 		controller={productCategoryController}

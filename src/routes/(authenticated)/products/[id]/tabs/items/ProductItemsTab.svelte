@@ -2,10 +2,10 @@
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import { Button, Table } from "$lib/components";
-	import { ProductItemRepository } from "$repositories";
 	import { atom } from "nanostores";
-	import { onMount } from "svelte";
+	import type { _Product } from "../../../Products";
 	import { getProductContext } from "../../Product";
+	import ProductItemAddModal from "./ProductItemAddModal.svelte";
 	import { createProductItemContext, type _ProductItem } from "./ProductItemsTab";
 
 	// Context
@@ -13,7 +13,7 @@
 	const productContext = getProductContext();
 	const product = productContext.product;
 	const hasEditPermission = productContext.hasEditPermission;
-	const productItemsContext = createProductItemContext({ productId: $product.id });
+	const productItemsContext = createProductItemContext({ product: $product as _Product });
 
 	// States
 
@@ -23,16 +23,6 @@
 	// Stores
 
 	const productItems = atom<_ProductItem[]>([]);
-
-	// Functions
-
-	async function getProductItems() {
-		const result = await ProductItemRepository.search({ where: { productId: $product.id } });
-	}
-
-	onMount(() => {
-		getProductItems();
-	});
 </script>
 
 <div class="flex flex-col gap-2">
@@ -44,15 +34,21 @@
 			packaging.
 		</li>
 	</div>
+	<hr class="my-2" />
 	<div class="flex gap-3 items-center">
 		<div class="font-semibold">Product Items</div>
 		<div>
-			<Button class="button-cyan p-1.5 text-2xs" onClick={() => {}}>
-				<div slot="label" class="w-full">
-					<div>Add Product Item</div>
-				</div></Button
+			<Button
+				class="button-cyan p-1.5 text-2xs"
+				onClick={() => productItemsContext.openProductItemModal()}
 			>
+				<div slot="label">
+					<div>Add Product Item</div>
+				</div>
+			</Button>
 		</div>
 	</div>
 	<Table context={productItemsContext.table} />
 </div>
+
+<ProductItemAddModal />
