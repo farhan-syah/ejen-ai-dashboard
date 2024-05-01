@@ -18,30 +18,33 @@
 
 	// Functions
 
+	function openConfirmationDialog() {
+		appState.confirmationModal.openDialog({
+			title: "Confirm Currency Change",
+			message:
+				"Are you sure you want to change the default currency?\nIt will affect the whole system.",
+			onConfirm: setDefaultCurrency
+		});
+	}
+
 	async function setDefaultCurrency() {
-		try {
-			appState.loading.set(true);
-			await CurrencyRepository.updateMany({
-				where: {
-					id: { not: currency.id }
-				},
-				data: {
-					isBaseCurrency: false
-				}
-			});
+		appState.loading.set(true);
+		await CurrencyRepository.updateMany({
+			where: {
+				id: { not: currency.id }
+			},
+			data: {
+				isBaseCurrency: false
+			}
+		});
 
-			await CurrencyRepository.update(currency.id, { data: { isBaseCurrency: true } });
+		await CurrencyRepository.update(currency.id, { data: { isBaseCurrency: true } });
 
-			systemSettingsCurrencyContext.table.search();
+		systemSettingsCurrencyContext.table.search();
 
-			toastState.success({
-				message: "Default currency has been changed"
-			});
-		} catch (error) {
-			appState.error.set(error);
-		} finally {
-			appState.loading.set(false);
-		}
+		toastState.success({
+			message: "Default currency has been changed"
+		});
 	}
 </script>
 
@@ -49,5 +52,5 @@
 	icon="material-symbols:docs-outline"
 	class="text-blue-500 text-xl font-bold pointer rounded-sm w-min p-0.25"
 	tooltip="Set as default currency"
-	onClick={setDefaultCurrency}
+	onClick={openConfirmationDialog}
 />

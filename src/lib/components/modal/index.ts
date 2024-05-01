@@ -1,3 +1,4 @@
+import ConfirmationModal from "./ConfirmationModal.svelte";
 import Modal from "./Modal.svelte";
 
-export { Modal };
+export { ConfirmationModal, Modal };

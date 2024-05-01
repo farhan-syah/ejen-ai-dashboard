@@ -4,7 +4,7 @@
 	export let link: string | undefined = undefined;
 	export let target: "_self" | "_blank" | "_top" | "_parent" | undefined | null = undefined;
 	export let label = "Submit";
-	export let onClick: any = () => {};
+	export let onClick: (...args: any[]) => any = () => {};
 	export let valid = true;
 	let componentClass = "";
 	export { componentClass as class };

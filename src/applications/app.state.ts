@@ -1,7 +1,44 @@
+import type { CallbackFunction } from "$types";
 import { persistentAtom } from "@nanostores/persistent";
 import { atom, type WritableAtom } from "nanostores";
 import { getContext, setContext } from "svelte";
 import { Breakpoint } from "../variables";
+
+class ConfirmationModalState {
+	isOpen: WritableAtom<boolean> = atom(true);
+	title: WritableAtom<string | undefined> = atom("title");
+	message: WritableAtom<string | undefined> = atom("message");
+	onConfirm: WritableAtom<CallbackFunction | undefined> = atom(undefined);
+	onCancel: WritableAtom<CallbackFunction | undefined> = atom(undefined);
+	openDialog(obj: {
+		title?: string;
+		message?: string;
+		onConfirm?: (...args: any[]) => any | Promise<any>;
+		onCancel?: (...args: any[]) => any | Promise<any>;
+	}) {
+		if (!this.isOpen.get()) {
+			if (obj.title) this.title.set(obj.title);
+			if (obj.message) this.message.set(obj.message);
+			if (obj.onConfirm) this.onConfirm.set(obj.onConfirm);
+			if (obj.onCancel) this.onCancel.set(obj.onCancel);
+			this.isOpen.set(true);
+		}
+	}
+
+	closeDialog() {
+		if (this.isOpen.get()) {
+			this.isOpen.set(false);
+			this.reset();
+		}
+	}
+
+	reset() {
+		this.title.set(undefined);
+		this.message.set(undefined);
+		this.onConfirm.set(undefined);
+		this.onCancel.set(undefined);
+	}
+}
 
 class AppState {
 	width: WritableAtom<number> = atom(0);
@@ -13,6 +50,7 @@ class AppState {
 	isSidebarOpen = atom(false);
 	showOverlay = atom(false);
 	lockedSidebarPosition: WritableAtom<string>;
+	confirmationModal = new ConfirmationModalState();
 	constructor() {
 		this.lockedSidebarPosition = persistentAtom<string>("sb", "close");
 		this.width.subscribe((width) => {
@@ -27,6 +65,18 @@ class AppState {
 				this.isSidebarOpen.set(lockedPosition == "open" ? true : false);
 			}
 		});
+	}
+
+	startLoading() {
+		if (!this.loading.get()) {
+			this.loading.set(true);
+		}
+	}
+
+	stopLoading() {
+		if (this.loading.get()) {
+			this.loading.set(false);
+		}
 	}
 }
 

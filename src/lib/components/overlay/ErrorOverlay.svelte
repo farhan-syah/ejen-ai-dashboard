@@ -18,8 +18,8 @@
 		role="none"
 	>
 		<div class="m-auto relative">
-			<Card class="p-4 w-96 ">
-				<div class="flex gap-2 font-medium text-medium border-b-2 pb-1 border-red-100 text-red-500">
+			<Card class="p-4  modal-body ">
+				<div class="flex gap-2 font-medium text-medium border-b pb-1 border-red-100 text-red-500">
 					<div>ERROR</div>
 					<div class=" flex-grow flex justify-between">
 						{#if $error.status}
@@ -31,6 +31,13 @@
 					</div>
 				</div>
 				<div class="mt-4">{$error.message ?? "Something when wrong."}</div>
+				{#if !$error.message}
+					<div
+						class="p-2 mt-1 border border-red-100 rounded-sm bg-yellow-50 max-h-96 text-red-400 font-light text-xs whitespace-pre-line overflow-y-scroll"
+					>
+						{$error}
+					</div>
+				{/if}
 			</Card>
 			<div
 				class="absolute -top-2 -right-2 cursor-pointer bg-red-500 rounded-full p-0.5 waves-effect shadow-md shadow-gray-500 hover:shadow-gray-600 text-white"

@@ -2,6 +2,7 @@
 	import { createAppState } from "$applications";
 	import { createToastState } from "$applications/toast.state";
 	import { ErrorOverlay, Toast } from "$lib/components";
+	import ConfirmationModal from "$lib/components/modal/ConfirmationModal.svelte";
 	import LoadingOverlay from "$lib/components/overlay/LoadingOverlay.svelte";
 	import { AuthService } from "$services";
 	import { onMount } from "svelte";
@@ -56,7 +57,9 @@
 	<ErrorOverlay />
 {/if}
 
-<div class="fixed top-3 right-3 z-10 flex flex-col gap-2">
+<ConfirmationModal />
+
+<div class="fixed bottom-4 right-4 z-10 flex flex-col gap-2">
 	{#each Object.values($toasts) as toast, index (toast.key)}
 		<div animate:flip={{ duration: 250 }}>
 			<Toast {toast} />

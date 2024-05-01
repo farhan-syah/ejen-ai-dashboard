@@ -7,10 +7,10 @@ class CurrencyState {
 	defaultCurrency: WritableAtom<Currency | undefined> = atom();
 }
 
-export function createAppState() {
+export function createCurrencyState() {
 	return setContext("currencyState", new CurrencyState());
 }
 
-export function getAppState() {
+export function getCurrencyState() {
 	return getContext<CurrencyState>("currencyState");
 }
