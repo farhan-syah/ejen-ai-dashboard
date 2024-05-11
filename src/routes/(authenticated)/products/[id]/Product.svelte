@@ -52,8 +52,7 @@
 		id={$product.id}
 		breadcrumbs={[
 			{ label: "Products", path: "/products" },
-			{ label: "Categories", path: "/products/categories" },
-			{ label: "Edit Category", path: "/products/categories/" + id, currentPage: true }
+			{ label: "Edit Product", path: "/products/" + id, currentPage: true }
 		]}
 	/>
 	<Tab {tabs} index={$index} onClick={handleSwitchTab}>

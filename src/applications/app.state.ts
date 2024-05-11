@@ -4,10 +4,10 @@ import { atom, type WritableAtom } from "nanostores";
 import { getContext, setContext } from "svelte";
 import { Breakpoint } from "../variables";
 
-class ConfirmationModalState {
-	isOpen: WritableAtom<boolean> = atom(true);
-	title: WritableAtom<string | undefined> = atom("title");
-	message: WritableAtom<string | undefined> = atom("message");
+class ConfirmationDialogState {
+	isOpen: WritableAtom<boolean> = atom(false);
+	title: WritableAtom<string | undefined> = atom(undefined);
+	message: WritableAtom<string | undefined> = atom(undefined);
 	onConfirm: WritableAtom<CallbackFunction | undefined> = atom(undefined);
 	onCancel: WritableAtom<CallbackFunction | undefined> = atom(undefined);
 	openDialog(obj: {
@@ -50,7 +50,7 @@ class AppState {
 	isSidebarOpen = atom(false);
 	showOverlay = atom(false);
 	lockedSidebarPosition: WritableAtom<string>;
-	confirmationModal = new ConfirmationModalState();
+	confirmationDialog = new ConfirmationDialogState();
 	constructor() {
 		this.lockedSidebarPosition = persistentAtom<string>("sb", "close");
 		this.width.subscribe((width) => {

@@ -2,17 +2,17 @@
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import { Button } from "../buttons";
-	import Modal from "./Modal.svelte";
+	import Dialog from "./Dialog.svelte";
 
 	// States
 
 	const appState = getAppState();
 	const toastState = getToastState();
 
-	const title = appState.confirmationModal.title;
-	const message = appState.confirmationModal.message;
-	const onConfirm = appState.confirmationModal.onConfirm;
-	const onCancel = appState.confirmationModal.onCancel;
+	const title = appState.confirmationDialog.title;
+	const message = appState.confirmationDialog.message;
+	const onConfirm = appState.confirmationDialog.onConfirm;
+	const onCancel = appState.confirmationDialog.onCancel;
 
 	// Functions
 
@@ -22,9 +22,9 @@
 			if ($onConfirm) {
 				await Promise.resolve($onConfirm());
 			}
-			appState.confirmationModal.closeDialog();
+			appState.confirmationDialog.closeDialog();
 		} catch (error) {
-			appState.confirmationModal.closeDialog();
+			appState.confirmationDialog.closeDialog();
 			appState.error.set(error);
 		} finally {
 			appState.stopLoading();
@@ -37,7 +37,7 @@
 			if ($onCancel) {
 				await Promise.resolve($onCancel());
 			}
-			appState.confirmationModal.closeDialog();
+			appState.confirmationDialog.closeDialog();
 		} catch (error) {
 			appState.error.set(error);
 		} finally {
@@ -46,7 +46,7 @@
 	}
 </script>
 
-<Modal isOpen={appState.confirmationModal.isOpen}>
+<Dialog isOpen={appState.confirmationDialog.isOpen}>
 	<div class="min-w-64 flex flex-col gap-3">
 		{#if $title}
 			<div class=" border-b pb-1 font-medium whitespace-pre-line">
@@ -66,4 +66,4 @@
 			<Button class="button-red" label="No" onClick={handleCancel} />
 		</div>
 	</div>
-</Modal>
+</Dialog>

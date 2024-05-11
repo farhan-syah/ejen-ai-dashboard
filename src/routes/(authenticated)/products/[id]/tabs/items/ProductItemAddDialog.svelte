@@ -4,10 +4,10 @@
 	import { getToastState } from "$applications/toast.state";
 	import {
 		Button,
+		Dialog,
 		FormControl,
 		FormDebugger,
 		FormGroup,
-		Modal,
 		PriceField,
 		TextField
 	} from "$lib/components";
@@ -22,7 +22,7 @@
 
 	const appState = getAppState();
 	const toastState = getToastState();
-	const isModalOpen = productItemsContext.isAddItemOpen;
+	const isDialogOpen = productItemsContext.isAddItemOpen;
 
 	//  Forms
 
@@ -81,8 +81,8 @@
 	}
 </script>
 
-<Modal isOpen={isModalOpen}>
-	<div class="modal-body grid grid-cols-6 gap-3">
+<Dialog isOpen={isDialogOpen}>
+	<div class="dialog-body grid grid-cols-6 gap-3">
 		<div class="col-span-full grid grid-cols-subgrid gap-3">
 			<TextField
 				controller={productIdController}
@@ -91,12 +91,12 @@
 				disabled
 			/>
 		</div>
-		<TextField controller={nameController} label="Product Item Name" class="col-modal-1/2" />
-		<TextField controller={skuController} label="Unique SKU" class="col-modal-1/2" />
+		<TextField controller={nameController} label="Product Item Name" class="col-dialog-1/2" />
+		<TextField controller={skuController} label="Unique SKU" class="col-dialog-1/2" />
 		<PriceField
 			controller={retailPriceController}
 			label="Recommended Retail Price"
-			class="col-modal-1/2"
+			class="col-dialog-1/2"
 			decimalPlaces={2}
 		/>
 		<div class="col-span-full">
@@ -106,4 +106,4 @@
 			<FormDebugger formGroup={form} />
 		</div>
 	</div>
-</Modal>
+</Dialog>

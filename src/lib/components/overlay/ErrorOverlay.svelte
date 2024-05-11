@@ -18,7 +18,7 @@
 		role="none"
 	>
 		<div class="m-auto relative">
-			<Card class="p-4  modal-body ">
+			<Card class="p-4  dialog-body ">
 				<div class="flex gap-2 font-medium text-medium border-b pb-1 border-red-100 text-red-500">
 					<div>ERROR</div>
 					<div class=" flex-grow flex justify-between">

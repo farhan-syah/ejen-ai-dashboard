@@ -19,7 +19,7 @@
 	// Functions
 
 	function openConfirmationDialog() {
-		appState.confirmationModal.openDialog({
+		appState.confirmationDialog.openDialog({
 			title: "Confirm Currency Change",
 			message:
 				"Are you sure you want to change the default currency?\nIt will affect the whole system.",
@@ -29,16 +29,9 @@
 
 	async function setDefaultCurrency() {
 		appState.loading.set(true);
-		await CurrencyRepository.updateMany({
-			where: {
-				id: { not: currency.id }
-			},
-			data: {
-				isBaseCurrency: false
-			}
-		});
+		await CurrencyRepository.setDefault({ id: currency.id });
 
-		await CurrencyRepository.update(currency.id, { data: { isBaseCurrency: true } });
+		// await CurrencyRepository.update(currency.id, { data: { isBaseCurrency: true } });
 
 		systemSettingsCurrencyContext.table.search();
 
@@ -48,9 +41,14 @@
 	}
 </script>
 
-<IconWithTooltip
-	icon="material-symbols:docs-outline"
-	class="text-blue-500 text-xl font-bold pointer rounded-sm w-min p-0.25"
-	tooltip="Set as default currency"
-	onClick={openConfirmationDialog}
-/>
+<div class="flex flex-wrap -mt-0.75">
+	{#if !currency.isBaseCurrency}
+		<IconWithTooltip
+			icon="mdi:web-check"
+			class="text-blue-500 h-4 text-xl p-0.25"
+			buttonClass="rounded-xs"
+			tooltip="Set as default currency"
+			onClick={openConfirmationDialog}
+		/>
+	{/if}
+</div>

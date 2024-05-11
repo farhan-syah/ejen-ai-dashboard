@@ -2,6 +2,7 @@ import type { CurrencySearch } from "$api/routes/currency/currency.schema";
 import { createTableContext, TableContext, type TableColumn } from "$lib/components";
 import { CurrencyRepository } from "$repositories";
 import { type Currency } from "@prisma/client";
+import { atom } from "nanostores";
 import { getContext, setContext } from "svelte";
 import SystemSettingsCurrencyActions from "./actions/SystemSettingsCurrencyActions.svelte";
 
@@ -48,6 +49,7 @@ export const currencyColumns: TableColumn<_Currency>[] = [
 
 export class SystemSettingsCurrencyContext {
 	table: TableContext<_Currency, CurrencySearch>;
+	isAddCurrencyDialogOpen = atom(false);
 
 	constructor() {
 		this.table = createTableContext<_Currency, CurrencySearch>({

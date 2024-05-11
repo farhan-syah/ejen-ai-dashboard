@@ -2,20 +2,20 @@
 	import { goto } from "$app/navigation";
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
-	import { Button, Modal } from "$lib/components";
+	import { Button, Dialog } from "$lib/components";
 	import { ProductCategoryRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
 	import type { ProductCategory } from "../product-categories";
 
 	export let productCategory: ProductCategory;
-	const isModalOpen = atom(false);
+	const isDialogOpen = atom(false);
 	const appState = getAppState();
 	const toastState = getToastState();
 
 	async function handleDeleteProductCategory() {
 		try {
-			isModalOpen.set(false);
+			isDialogOpen.set(false);
 			appState.loading.set(true);
 			await ProductCategoryRepository.delete(productCategory.id);
 			await goto("/products/categories", { replaceState: true });
@@ -31,7 +31,7 @@
 <Button
 	class="button-cyan"
 	onClick={() => {
-		isModalOpen.set(true);
+		isDialogOpen.set(true);
 	}}
 >
 	<div slot="label">
@@ -39,7 +39,7 @@
 	</div>
 </Button>
 
-<Modal isOpen={isModalOpen}>
+<Dialog isOpen={isDialogOpen}>
 	<div class="w-96 flex flex-col gap-3">
 		<div class="font-semibold">Delete Confirmation</div>
 		<div>Are you sure you want to delete this object? This action is irreversible.</div>
@@ -49,9 +49,9 @@
 				label="No"
 				class="button-red"
 				onClick={() => {
-					isModalOpen.set(false);
+					isDialogOpen.set(false);
 				}}
 			/>
 		</div>
 	</div>
-</Modal>
+</Dialog>

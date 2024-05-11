@@ -34,6 +34,7 @@ const config = {
 				6: "6px"
 			},
 			borderRadius: {
+				xs: "0.1rem",
 				"4xl": "32px"
 			},
 			scale: {

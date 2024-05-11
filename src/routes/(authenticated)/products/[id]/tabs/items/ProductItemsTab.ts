@@ -62,7 +62,7 @@ export class ProductItemsContext {
 
 	// Functions
 
-	openProductItemModal() {
+	openProductItemDialog() {
 		if (this.isAddItemOpen.get() == false) this.isAddItemOpen.set(true);
 	}
 }

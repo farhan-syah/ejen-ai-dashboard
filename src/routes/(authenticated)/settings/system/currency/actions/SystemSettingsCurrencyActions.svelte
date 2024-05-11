@@ -3,7 +3,7 @@
 	import { getToastState } from "$applications/toast.state";
 	import { CurrencyRepository } from "$repositories";
 	import { getSystemSettingsCurrencyContext, type _Currency } from "../SystemSettingsCurrency";
-	import SetDefaultCurrencyAction from "./SetDefaultCurrencyAction.svelte";
+	import SetDefaultCurrencyAction from "./SetDefaultCurrencyActionButton.svelte";
 
 	export let data: _Currency;
 	const currency = data;

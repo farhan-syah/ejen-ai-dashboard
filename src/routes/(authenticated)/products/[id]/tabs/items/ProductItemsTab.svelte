@@ -5,7 +5,7 @@
 	import { atom } from "nanostores";
 	import type { _Product } from "../../../Products";
 	import { getProductContext } from "../../Product";
-	import ProductItemAddModal from "./ProductItemAddModal.svelte";
+	import ProductItemAddDialog from "./ProductItemAddDialog.svelte";
 	import { createProductItemContext, type _ProductItem } from "./ProductItemsTab";
 
 	// Context
@@ -40,7 +40,7 @@
 		<div>
 			<Button
 				class="button-cyan p-1.5 text-2xs"
-				onClick={() => productItemsContext.openProductItemModal()}
+				onClick={() => productItemsContext.openProductItemDialog()}
 			>
 				<div slot="label">
 					<div>Add Product Item</div>
@@ -51,4 +51,4 @@
 	<Table context={productItemsContext.table} />
 </div>
 
-<ProductItemAddModal />
+<ProductItemAddDialog />

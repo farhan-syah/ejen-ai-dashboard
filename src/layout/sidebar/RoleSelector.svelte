@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { UserState, getAppState } from "$applications";
-	import Modal from "$lib/components/modal/Modal.svelte";
+	import { Dialog } from "$lib/components";
 	import { RoleRepository, UserSettingRepository } from "$repositories";
 	import { AuthService } from "$services";
 	import Icon from "@iconify/svelte";
@@ -18,7 +18,7 @@
 	const currentRole = atom<Role | undefined>();
 	const roles = atom<Role[]>([]);
 	const groupedRoles = atom<GroupedRole[]>([]);
-	const isModalOpen = atom(false);
+	const isDialogOpen = atom(false);
 
 	currentRole.listen(async (value) => {
 		if (value && $user && $userSetting && $userSetting?.defaultUserRole != value.id) {
@@ -79,13 +79,13 @@
 		currentRole.set(initialRole);
 	}
 
-	function handleOpenModal() {
-		isModalOpen.set(true);
+	function handleOpenDialog() {
+		isDialogOpen.set(true);
 	}
 
 	async function handleChangeRole(role: Role) {
 		currentRole.set(role);
-		isModalOpen.set(false);
+		isDialogOpen.set(false);
 	}
 </script>
 
@@ -95,8 +95,8 @@
 			role="button"
 			tabindex="-1"
 			class="p-2 flex items-center text-xs bg-indigo-950 pointer-light"
-			on:click={handleOpenModal}
-			on:keydown={handleOpenModal}
+			on:click={handleOpenDialog}
+			on:keydown={handleOpenDialog}
 		>
 			<div class="flex-grow">
 				<div>
@@ -115,7 +115,7 @@
 	{/if}
 {/if}
 
-<Modal isOpen={isModalOpen}>
+<Dialog isOpen={isDialogOpen}>
 	<div class=" w-64 md:w-96">
 		<div class="font-semibold mb-2 text-center">Change Role</div>
 		<div class="mb-4 text-center">Choose the role you want to change into</div>
@@ -155,7 +155,7 @@
 			</tbody>
 		</table>
 	</div>
-</Modal>
+</Dialog>
 
 <style lang="postcss">
 	th,

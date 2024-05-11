@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
-	import { Button, FormControl, Image, Modal } from "$lib/components";
+	import { Button, Dialog, FormControl, Image } from "$lib/components";
 	import { UploadService } from "$services";
 	import Icon from "@iconify/svelte";
 	import { fromEvent, type FileWithPath } from "file-selector";
@@ -77,7 +77,7 @@
 
 	function handleImageClick(src: string) {
 		previewImageSrc.set(src);
-		isModalOpen.set(true);
+		isDialogOpen.set(true);
 	}
 
 	function handleImageDelete(event: any, i: number) {
@@ -136,7 +136,7 @@
 	const appState = getAppState();
 	const toastState = getToastState();
 	const previewImageSrc = atom<string | undefined>();
-	const isModalOpen = atom(false);
+	const isDialogOpen = atom(false);
 </script>
 
 <div class="flex flex-col gap-1 {componentClass}">
@@ -275,8 +275,8 @@
 	</div>
 </div>
 
-<Modal isOpen={isModalOpen} class=" max-w-7xl" cardClass="p-2">
+<Dialog isOpen={isDialogOpen} class=" max-w-7xl" cardClass="p-2">
 	{#if $previewImageSrc}
 		<Image src={$previewImageSrc} loadingMessage="Loading image..." />
 	{/if}
-</Modal>
+</Dialog>

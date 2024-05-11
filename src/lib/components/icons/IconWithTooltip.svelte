@@ -7,6 +7,8 @@
 	export let tooltip: string | undefined = undefined;
 	export let link: string | undefined = undefined;
 	export let target: "_self" | "_blank" | "_top" | "_parent" | undefined | null = undefined;
+	export let buttonClass: string = "";
+
 	let isOpen = false;
 	const popperOptions: PopperOptions<any> = {};
 	function handleClick() {
@@ -39,7 +41,7 @@
 								handleClick();
 							}
 						}}
-						class={onClick ? "pointer" : ""}
+						class={onClick ? `pointer ${buttonClass}` : ""}
 					>
 						<Icon {icon} class=" {$$props.iconClass ?? ''}" />
 					</div>
@@ -55,7 +57,7 @@
 							handleClick();
 						}
 					}}
-					class=" {onClick ? 'pointer' : ''}"
+					class=" {onClick ? `pointer ${buttonClass}` : ''}"
 				>
 					<Icon {icon} class=" {$$props.iconClass ?? ''}" />
 				</div>

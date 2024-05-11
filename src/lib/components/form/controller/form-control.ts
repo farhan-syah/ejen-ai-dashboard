@@ -93,6 +93,8 @@ export class FormControl<T = any> {
 
 	resetValue() {
 		this.writableValue.set(this.initialValue);
+		this.touched.set(false);
+		this.dirty.set(false);
 		if (this.onReset) {
 			this.onReset(this);
 		} else {
@@ -100,5 +102,6 @@ export class FormControl<T = any> {
 				this.el.value = this.initialValue?.toString() ?? "";
 			}
 		}
+		this.validate();
 	}
 }

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { flyAndScale } from "$lib/utils";
+	import type { CallbackFunction } from "$types";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
 	import { onMount } from "svelte";
@@ -9,9 +10,13 @@
 	let componentClass = "";
 	export { componentClass as class };
 	export let cardClass = "p-4";
-
+	export let onDismiss: CallbackFunction | undefined = undefined;
 	export let isOpen = atom<boolean>(false);
-	function handleDismiss() {
+
+	async function handleDismiss() {
+		if (onDismiss) {
+			Promise.resolve(onDismiss());
+		}
 		isOpen.set(false);
 	}
 

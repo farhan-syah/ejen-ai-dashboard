@@ -247,3 +247,7 @@ export declare const CurrencyDeleteManySchema: import("@sinclair/typebox").TObje
     }>;
 }>;
 export type CurrencyDeleteMany = Static<typeof CurrencyDeleteManySchema>;
+export declare const CurrencySetDefaultSchema: import("@sinclair/typebox").TObject<{
+    id: import("@sinclair/typebox").TString;
+}>;
+export type CurrencySetDefault = Static<typeof CurrencySetDefaultSchema>;
