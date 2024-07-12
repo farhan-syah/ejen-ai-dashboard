@@ -1,4 +1,6 @@
 <script lang="ts">
+	import MultiSelectField from "../form/select-field/MultiSelectField.svelte";
+
 	import { getAppState } from "$applications";
 
 	import SelectField from "../form/select-field/SelectField.svelte";
@@ -74,7 +76,7 @@
 	optionController.writableValue.listen((value) => {
 		if (value) context.onLimitChange(value);
 	});
-	let columnController = new FormControl<FieldOption[]>({
+	const columnController = new FormControl<FieldOption[]>({
 		name: "column",
 		value: columnOptions
 	});
@@ -181,12 +183,11 @@
 
 		{#if context.showColumnFilter && columnOptions.length > 0}
 			<div class="w-fixed w-36">
-				<!-- <DropdownMultiSelectField
-					control={columnController}
-					input={columnOptions}
+				<MultiSelectField
+					options={columnOptions}
 					placeholder="Columns"
-					usePlaceholder={true}
-				/> -->
+					controller={columnController}
+				/>
 			</div>
 		{/if}
 		{#if toCSV}

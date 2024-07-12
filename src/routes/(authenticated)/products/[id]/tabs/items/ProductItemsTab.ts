@@ -81,7 +81,8 @@ export class ProductItemsContext {
 			onCount: async (f) => {
 				if (f) return ProductItemRepository.count(f);
 				return 0;
-			}
+			},
+			showColumnFilter: true
 		});
 	}
 
