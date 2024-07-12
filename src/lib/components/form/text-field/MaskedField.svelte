@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { twMerge } from "tailwind-merge";
 	import { FormControl } from "../controller/form-control";
 	export let controller: FormControl<number> = new FormControl<number>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;
+	export let autocomplete: string = "off";
 	export let onInput: (value: string, input: HTMLInputElement, event: any) => any;
 	export let onKeydown: ((e: KeyboardEvent, controller: FormControl) => any) | undefined =
 		undefined;
@@ -93,9 +95,10 @@
 			{disabled}
 			type="text"
 			name={controller.name}
+			{autocomplete}
 			value={controller.writableValue.get()?.toString() ?? ""}
 			id={controller.id}
-			class="p-2 text-sm w-full outline-none {inputClass}"
+			class={twMerge(["p-2 text-sm w-full outline-none"], inputClass)}
 			on:focus={() => {
 				isFocused.set(true);
 				if (!$touched) {

@@ -1,11 +1,6 @@
 import { nanoid } from "nanoid";
 import { atom, computed, type ReadableAtom, type WritableAtom } from "nanostores";
-
-export type Validator<T = any> = {
-	validator: (value: T, options?: any) => boolean;
-	errorMessage: string;
-	options?: any;
-};
+import { type Validator } from "./form-validator";
 
 export class FormControl<T = any> {
 	el?: HTMLInputElement | HTMLTextAreaElement;

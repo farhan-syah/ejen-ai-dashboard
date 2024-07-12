@@ -7,6 +7,7 @@
 	export let decimalPlaces: number = 2;
 	export let allowNegativeValue: boolean = false;
 	export let disabled: boolean = false;
+	export let autocomplete: string = "off";
 	let componentClass = "";
 	export { componentClass as class };
 	function handleKeydown(e: KeyboardEvent) {
@@ -45,4 +46,5 @@
 	class={componentClass}
 	onKeydown={handleKeydown}
 	onInput={() => {}}
+	{autocomplete}
 />

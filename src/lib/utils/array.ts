@@ -27,3 +27,16 @@ export function mergeArray<T = any>(a: Array<T>, b: Array<T>) {
 export function arrayIncludesEvery<T = any>(a: Array<T>, b: Array<T>) {
 	return b.every((bItem) => a.includes(bItem));
 }
+
+export function getDuplicates<T = any>(arr: T[]): T[] {
+	const seen = new Set<T>();
+	const duplicates = new Set<T>();
+	for (const obj of arr) {
+		if (seen.has(obj)) {
+			duplicates.add(obj);
+		} else {
+			seen.add(obj);
+		}
+	}
+	return Array.from(duplicates);
+}

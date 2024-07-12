@@ -40,7 +40,7 @@
 		<div>
 			<Button
 				class="button-cyan p-1.5 text-2xs"
-				onClick={() => productItemsContext.openProductItemDialog()}
+				onClick={() => productItemsContext.openProductItemAddDialog()}
 			>
 				<div slot="label">
 					<div>Add Product Item</div>

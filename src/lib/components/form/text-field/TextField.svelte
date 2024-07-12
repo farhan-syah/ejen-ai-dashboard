@@ -6,6 +6,7 @@
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;
+	export let autocomplete: string = "off";
 	export let onChange: (inputValue: string, input: HTMLInputElement, e: any) => any = (
 		inputValue
 	) => {
@@ -98,6 +99,7 @@
 			value={controller.writableValue.get() ?? ""}
 			id={controller.id}
 			class="p-2 text-sm w-full outline-none text-gray600"
+			{autocomplete}
 			on:focus={() => {
 				isFocused.set(true);
 				if (!$touched) {

@@ -23,7 +23,7 @@
 
 <tr class="{stripe} {hover} align-top">
 	{#if $selectable && selectKey != null}
-		<td class="pl-2 pt-2">
+		<td class="p-2">
 			<input
 				type="checkbox"
 				on:click={() => {

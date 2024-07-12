@@ -12,6 +12,10 @@ export declare const ProductItemCreateInputSchema: import("@sinclair/typebox").T
     sku: import("@sinclair/typebox").TString;
     price: import("@sinclair/typebox").TInteger;
     productId: import("@sinclair/typebox").TString;
+    gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;
 export type ProductItemCreateInput = Static<typeof ProductItemCreateInputSchema>;
 export declare const ProductItemUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
@@ -116,6 +120,10 @@ export declare const ProductItemCreateDataSchema: import("@sinclair/typebox").TO
     sku: import("@sinclair/typebox").TString;
     price: import("@sinclair/typebox").TInteger;
     productId: import("@sinclair/typebox").TString;
+    gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;
 export type ProductItemCreateData = Static<typeof ProductItemCreateDataSchema>;
 export declare const ProductItemCreateSchema: import("@sinclair/typebox").TObject<{
@@ -124,6 +132,10 @@ export declare const ProductItemCreateSchema: import("@sinclair/typebox").TObjec
         sku: import("@sinclair/typebox").TString;
         price: import("@sinclair/typebox").TInteger;
         productId: import("@sinclair/typebox").TString;
+        gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;

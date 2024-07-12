@@ -11,6 +11,7 @@
 		PriceField,
 		TextField
 	} from "$lib/components";
+	import { FormValidator } from "$lib/components/form/controller/form-validator";
 	import { ProductItemRepository } from "$repositories";
 	import { getProductItemsContext } from "./ProductItemsTab";
 
@@ -32,12 +33,12 @@
 		value: productItemsContext.product.id
 	});
 
-	const nameController = new FormControl({
+	const nameController = new FormControl<string>({
 		name: "name",
 		required: true
 	});
 
-	const skuController = new FormControl({
+	const skuController = new FormControl<string>({
 		name: "sku",
 		required: true
 	});
@@ -47,11 +48,35 @@
 		required: true
 	});
 
+	const gtin8Controller = new FormControl<string>({
+		name: "gtin8",
+		validators: [FormValidator.length(8)]
+	});
+
+	const gtin12Controller = new FormControl<string>({
+		name: "gtin12",
+		validators: [FormValidator.length(12)]
+	});
+
+	const gtin13Controller = new FormControl<string>({
+		name: "gtin13",
+		validators: [FormValidator.length(13)]
+	});
+
+	const gtin14Controller = new FormControl<string>({
+		name: "gtin14",
+		validators: [FormValidator.length(14)]
+	});
+
 	const form = new FormGroup<ProductItemCreateInput>([
 		productIdController,
 		nameController,
 		skuController,
-		retailPriceController
+		retailPriceController,
+		gtin8Controller,
+		gtin12Controller,
+		gtin13Controller,
+		gtin14Controller
 	]);
 	const valid = form.valid;
 
@@ -62,6 +87,7 @@
 			appState.loading.set(true);
 
 			const data = form.value.get();
+			console.log(data);
 
 			await ProductItemRepository.create({
 				data: data
@@ -79,6 +105,12 @@
 			appState.loading.set(false);
 		}
 	}
+
+	// Listeners
+
+	isDialogOpen.listen(() => {
+		form.resetValue();
+	});
 </script>
 
 <Dialog isOpen={isDialogOpen}>
@@ -99,6 +131,15 @@
 			class="col-dialog-1/2"
 			decimalPlaces={2}
 		/>
+		<hr class="col-span-full my-2" />
+		<TextField controller={gtin8Controller} label="GTIN-8 (EAN-8)" class="col-dialog-1/2" />
+		<TextField controller={gtin12Controller} label="GTIN-12 (UPC-12)" class="col-dialog-1/2" />
+		<TextField
+			controller={gtin13Controller}
+			label="GTIN-13 (EAN-13 / UCC-13)"
+			class="col-dialog-1/2"
+		/>
+		<TextField controller={gtin14Controller} label="GTIN-14 (ITF-14 )" class="col-dialog-1/2" />
 		<div class="col-span-full">
 			<Button valid={$valid} onClick={handleSaveForm} />
 		</div>

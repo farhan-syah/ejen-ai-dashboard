@@ -14,7 +14,8 @@ const ProductItemsColumns: TableColumn<_ProductItem>[] = [
 		key: "id",
 		label: "ID",
 		visible: true,
-		sortable: true
+		sortable: true,
+		shrink: true
 	},
 	{
 		key: "name",
@@ -31,6 +32,30 @@ const ProductItemsColumns: TableColumn<_ProductItem>[] = [
 	{
 		key: "price",
 		label: "Price",
+		visible: true,
+		sortable: true
+	},
+	{
+		key: "gtin8",
+		label: "GTIN-8",
+		visible: true,
+		sortable: true
+	},
+	{
+		key: "gtin12",
+		label: "GTIN-12",
+		visible: true,
+		sortable: true
+	},
+	{
+		key: "gtin13",
+		label: "GTIN-13",
+		visible: true,
+		sortable: true
+	},
+	{
+		key: "gtin14",
+		label: "GTIN-14",
 		visible: true,
 		sortable: true
 	}
@@ -62,7 +87,7 @@ export class ProductItemsContext {
 
 	// Functions
 
-	openProductItemDialog() {
+	openProductItemAddDialog() {
 		if (this.isAddItemOpen.get() == false) this.isAddItemOpen.set(true);
 	}
 }
