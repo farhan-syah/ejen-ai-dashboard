@@ -6,8 +6,8 @@
 	import { ProductRepository } from "$repositories";
 	import { onMount } from "svelte";
 	import { ProductTab, createProductContext, productKeys, productTabs } from "./Product";
-	import ProductInfoTab from "./tabs/info/ProductInfoTab.svelte";
-	import ProductItemsTab from "./tabs/items/ProductItemsTab.svelte";
+	import ProductInfoTab from "./_tabs/info/ProductInfoTab.svelte";
+	import ProductItemsTab from "./_tabs/items/ProductItemsTab.svelte";
 
 	const id = $page.params.id;
 	const initialPage = $page.url.searchParams.get("page");

@@ -19,8 +19,10 @@
 			: ''}"
 	>
 		<TopMenu />
-		<div class="flex-grow overflow-auto main p-2 sm:p-4">
-			<slot />
+		<div class="flex-grow overflow-auto main relative w-full">
+			<div class="absolute p-2 sm:p-4 w-full">
+				<slot />
+			</div>
 		</div>
 	</div>
 {/if}

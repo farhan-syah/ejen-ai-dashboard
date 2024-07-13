@@ -1,10 +1,11 @@
 import type { ProductItemSearch } from "$api/routes/product-item/product-item.schema";
 import { TableContext, createTableContext, type TableColumn } from "$lib/components";
 import { ProductItemRepository } from "$repositories";
-import type { ProductItem } from "@prisma/client";
+import { type ProductItem } from "@prisma/client";
 import { atom, type WritableAtom } from "nanostores";
 import { getContext, setContext } from "svelte";
 import type { _Product } from "../../../Products";
+import ProductItemActions from "./_/actions/ProductItemActions.svelte";
 
 export type _ProductItem = ProductItem & {};
 export type ProductItemsContextOption = { product: _Product };
@@ -58,6 +59,12 @@ const ProductItemsColumns: TableColumn<_ProductItem>[] = [
 		label: "GTIN-14",
 		visible: true,
 		sortable: true
+	},
+	{
+		key: "id",
+		label: "Action",
+		visible: true,
+		content: ProductItemActions
 	}
 ];
 

@@ -135,3 +135,11 @@ input:disabled {
 	@apply prose-blockquote:m-0 prose-blockquote:my-2 prose-hr:m-0 prose-hr:my-2 prose-hr:border-slate-300;
 	@apply max-w-full;
 }
+
+@media (prefers-reduced-motion) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}

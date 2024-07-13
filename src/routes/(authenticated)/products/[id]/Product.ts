@@ -1,14 +1,14 @@
 import { UserState } from "$applications";
 import { validatePermissions, type TabItem } from "$lib/components";
-import Prisma from "@prisma/client";
+import { type Product, type ProductCategory } from "@prisma/client";
 import { atom, computed, type WritableAtom } from "nanostores";
 import { getContext, setContext } from "svelte";
 
-export type Product = Prisma.Product & {
-	categories?: ProductCategory[];
+export type _Product = Product & {
+	categories?: _ProductCategory[];
 	images?: { path: string; id: string }[];
 };
-export type ProductCategory = Pick<Prisma.ProductCategory, "id" | "name">;
+export type _ProductCategory = Pick<ProductCategory, "id" | "name">;
 
 export const ProductTab = {
 	info: "Info",
@@ -33,15 +33,15 @@ export const productTabs: TabItem[] = Object.entries(ProductTab).map((e) => {
 export const productKeys = Object.keys(ProductTab);
 
 export type ProductContextOption = {
-	fetchProductCallback: (context: ProductContext) => Promise<Product | void>;
+	fetchProductCallback: (context: ProductContext) => Promise<_Product | void>;
 	index?: number;
 };
 
 export class ProductContext {
 	index: WritableAtom<number>;
-	product: WritableAtom<Product> = atom(undefined);
+	product: WritableAtom<_Product> = atom(undefined);
 
-	private readonly fetchProductCallback: (context: this) => Promise<Product | void>;
+	private readonly fetchProductCallback: (context: this) => Promise<_Product | void>;
 
 	constructor(obj: ProductContextOption) {
 		this.index = atom(obj.index ?? 0);

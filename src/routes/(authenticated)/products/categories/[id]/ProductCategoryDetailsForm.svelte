@@ -16,12 +16,12 @@
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
 	import type { ProductCategoryUpdateData } from "../../../../$api/routes/product-category/product-category.schema";
-	import type { ProductCategory } from "../product-categories";
+	import type { _ProductCategory } from "../ProductCategories";
 	import ProductCategoryDeleteButton from "./ProductCategoryDeleteButton.svelte";
 
 	// Variables
 
-	export let productCategory: ProductCategory;
+	export let productCategory: _ProductCategory;
 	export let fetchProductCategory: () => Promise<any>;
 
 	// States

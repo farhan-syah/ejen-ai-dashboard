@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { ProductCategory } from "../../product-categories";
+	import type { _ProductCategory } from "../../ProductCategories";
 	import ViewProductCategoryAction from "./ViewProductCategoryAction.svelte";
 
-	export let data: ProductCategory;
+	export let data: _ProductCategory;
 	const productCategory = data;
 </script>
 

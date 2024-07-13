@@ -1,17 +1,17 @@
 <script lang="ts">
+	import type { ProductCategorySearch } from "$api/routes/product-category/product-category.schema";
 	import { goto } from "$app/navigation";
 	import { Button, PageTitle, Table, createTableContext } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { delay } from "$lib/utils";
 	import { ProductCategoryRepository } from "$repositories";
-	import type { ProductCategorySearch } from "../../../$api/routes/product-category/product-category.schema";
 	import {
 		productCategoryColumns,
 		toProductCategoryCSV,
-		type ProductCategory
-	} from "./product-categories";
+		type _ProductCategory
+	} from "./ProductCategories";
 
-	const tableContext = createTableContext<ProductCategory, ProductCategorySearch>({
+	const tableContext = createTableContext<_ProductCategory, ProductCategorySearch>({
 		filter: { where: {}, query: { limit: 20 } },
 		columns: productCategoryColumns,
 		limit: 20,

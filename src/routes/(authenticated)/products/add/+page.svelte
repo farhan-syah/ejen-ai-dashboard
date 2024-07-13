@@ -3,6 +3,6 @@
 	import ProductAdd from "./ProductAdd.svelte";
 </script>
 
-<Guard requiredPermissions={["Product.manage", "Productadd"]} redirect redirectPath="/products">
+<Guard requiredPermissions={["Product.manage", "Product.add"]} redirect redirectPath="/products">
 	<ProductAdd />
 </Guard>

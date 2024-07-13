@@ -16,7 +16,7 @@
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
-	import { getProductContext, type ProductCategory } from "../../Product";
+	import { getProductContext, type _ProductCategory } from "../../Product";
 	import ProductDeleteButton from "./ProductDeleteButton.svelte";
 
 	// Context
@@ -50,7 +50,7 @@
 		required: true
 	});
 
-	const productCategoryController = new FormControl<ProductCategory[]>({
+	const productCategoryController = new FormControl<_ProductCategory[]>({
 		name: "categories",
 		value: $product.categories
 	});

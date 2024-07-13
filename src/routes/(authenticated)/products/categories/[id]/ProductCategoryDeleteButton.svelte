@@ -6,9 +6,9 @@
 	import { ProductCategoryRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
-	import type { ProductCategory } from "../product-categories";
+	import type { _ProductCategory } from "../ProductCategories";
 
-	export let productCategory: ProductCategory;
+	export let productCategory: _ProductCategory;
 	const isDialogOpen = atom(false);
 	const appState = getAppState();
 	const toastState = getToastState();

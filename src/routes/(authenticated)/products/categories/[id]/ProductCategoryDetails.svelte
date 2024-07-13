@@ -4,11 +4,11 @@
 	import { ProductCategoryRepository } from "$repositories";
 	import { atom, type WritableAtom } from "nanostores";
 	import { onMount } from "svelte";
-	import type { ProductCategory } from "../product-categories";
+	import type { _ProductCategory } from "../ProductCategories";
 	import ProductCategoryDetailsForm from "./ProductCategoryDetailsForm.svelte";
 
 	const id = $page.params.id;
-	const productCategory: WritableAtom<ProductCategory | undefined> = atom();
+	const productCategory: WritableAtom<_ProductCategory | undefined> = atom();
 
 	onMount(() => {
 		fetchData();
