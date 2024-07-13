@@ -2,6 +2,8 @@ import { nanoid } from "nanoid";
 import { atom, computed, type ReadableAtom, type WritableAtom } from "nanostores";
 import { type Validator } from "./form-validator";
 
+type Nullable<T> = T | null | undefined;
+
 export class FormControl<T = any> {
 	el?: HTMLInputElement | HTMLTextAreaElement;
 	id: string;
@@ -20,6 +22,7 @@ export class FormControl<T = any> {
 	onReset?: (control: FormControl<T>) => any;
 	faker?: (() => T) | undefined;
 	generator?: (() => T) | undefined;
+	transformOutput?: (value?: Nullable<T>) => any;
 	constructor({
 		id,
 		name,
@@ -28,7 +31,9 @@ export class FormControl<T = any> {
 		required,
 		onReset,
 		allowNull,
-		faker
+		faker,
+		generator,
+		transformOutput
 	}: {
 		id?: string;
 		name?: string;
@@ -39,6 +44,7 @@ export class FormControl<T = any> {
 		allowNull?: boolean;
 		faker?: (() => T) | undefined;
 		generator?: (() => T) | undefined;
+		transformOutput?: (value?: Nullable<T>) => any;
 	} = {}) {
 		this.id = id ?? nanoid(6);
 		this.name = name ?? nanoid(6);
@@ -48,7 +54,8 @@ export class FormControl<T = any> {
 		this.required = required ?? false;
 		this.allowNull = allowNull ?? false;
 		this.faker = faker;
-		this.generator = this.generator;
+		this.generator = generator;
+		this.transformOutput = transformOutput;
 		this.writableValue.listen(() => {
 			this.validate();
 		});

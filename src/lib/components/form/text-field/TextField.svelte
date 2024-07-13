@@ -156,7 +156,7 @@
 			name={controller.name}
 			value={controller.writableValue.get() ?? ""}
 			id={controller.id}
-			class="p-2 text-sm w-full outline-none text-gray600"
+			class="p-2 text-sm w-full outline-none text-gray-600"
 			{autocomplete}
 			on:focus={() => {
 				isFocused.set(true);

@@ -5,9 +5,10 @@
 
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
+	export let disabled: boolean = false;
 	export let decimalPlaces: number = 0;
 	export let allowNegativeValue: boolean = false;
-	export let onInput: (value: string, input: HTMLInputElement, event: any) => any = (
+	export let onChange: (value: string, input: HTMLInputElement, event: any) => any = (
 		inputValue
 	) => {
 		const el = controller.el as HTMLInputElement;
@@ -18,6 +19,7 @@
 
 			const regex: RegExp = new RegExp(regexPattern);
 			const validInput = regex.test(inputValue);
+
 			if (validInput) {
 				controller.writableValue.set(tryParseNum(inputValue));
 			} else {
@@ -97,7 +99,7 @@
 
 	function handleInput(e: any) {
 		const el = controller.el as HTMLInputElement;
-		onInput(el.value, el, e);
+		onChange(el.value, el, e);
 	}
 
 	function handleKeydown(e: any) {
@@ -127,6 +129,7 @@
 	<div class="flex rounded outline {outlineClass}">
 		<input
 			bind:this={controller.el}
+			{disabled}
 			type="number"
 			name={controller.name}
 			value={controller.writableValue.get()?.toString() ?? ""}

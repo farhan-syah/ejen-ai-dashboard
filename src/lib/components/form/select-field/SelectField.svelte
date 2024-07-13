@@ -16,6 +16,7 @@
 	export let options: readonly FieldOption<T>[] = [];
 	export let placeholder: string = "Select";
 	export let showSelectedIcon: boolean = false;
+	export let disabled: boolean = false;
 
 	export let valueTransform: (value?: T | null) => string | undefined = (value) => {
 		return value?.toString() ?? undefined;
@@ -119,9 +120,11 @@
 		tabindex="0"
 		class=" outline-none"
 		on:focus={() => {
-			isFocused.set(true);
-			if (!$touched) {
-				touched.set(true);
+			if (!disabled) {
+				isFocused.set(true);
+				if (!$touched) {
+					touched.set(true);
+				}
 			}
 		}}
 		on:blur={() => {
@@ -164,11 +167,13 @@
 			}
 		}}
 	>
-		<Popper bind:isOpen={$isOpen} {popperOptions}>
+		<Popper bind:isOpen={$isOpen} {popperOptions} {disabled}>
 			<!-- Main Component -->
 			<div
 				slot="main"
-				class="flex text-center rounded outline p-2 cursor-pointer {outlineClass} {optionClass}"
+				class="flex text-center rounded outline p-2 {!disabled
+					? 'cursor-pointer'
+					: ' bg-gray-50'} {outlineClass} {optionClass}"
 			>
 				<div class="w-full">{valueTransform($value) ?? placeholder}</div>
 			</div>

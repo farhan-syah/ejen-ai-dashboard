@@ -20,7 +20,13 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> {
 			validReadables.push(controller.valid);
 			controller.writableValue.subscribe((v) => {
 				const newRecord: Record<string, any> = {};
-				newRecord[controller.name] = controller.allowNull && !v ? null : v;
+
+				if (controller.transformOutput) {
+					newRecord[controller.name] = controller.transformOutput(v);
+				} else {
+					newRecord[controller.name] = controller.allowNull && !v ? null : v;
+				}
+
 				const currentValue = this.value.get();
 
 				const newValue = { ...currentValue, ...newRecord };
