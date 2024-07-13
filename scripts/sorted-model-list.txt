@@ -71,6 +71,7 @@ TaskReview
 TaxConfiguration
 TieredPricing
 TimeInterval
+Unit
 User
 UserAddress
 UserSetting

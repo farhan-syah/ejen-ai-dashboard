@@ -17,7 +17,7 @@
 	export let placeholder: string = "Select";
 	export let showSelectedIcon: boolean = false;
 
-	export let valueTransform: (value?: T) => string | undefined = (value) => {
+	export let valueTransform: (value?: T | null) => string | undefined = (value) => {
 		return value?.toString() ?? undefined;
 	};
 

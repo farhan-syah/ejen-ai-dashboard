@@ -42,6 +42,16 @@ export declare const UnitSearchWhereSchema: import("@sinclair/typebox").TObject<
         gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
         not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
     }>, import("@sinclair/typebox").TString]>>>;
+    type: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+        Weight: "Weight";
+        Duration: "Duration";
+        Packaging: "Packaging";
+        Quantity: "Quantity";
+        Activity: "Activity";
+        Length: "Length";
+        Volume: "Volume";
+        Area: "Area";
+    }>>;
 }>;
 export type UnitSearchWhere = Static<typeof UnitSearchWhereSchema>;
 export declare const UnitSearchSchema: import("@sinclair/typebox").TObject<{
@@ -76,6 +86,16 @@ export declare const UnitSearchSchema: import("@sinclair/typebox").TObject<{
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
+        type: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+            Weight: "Weight";
+            Duration: "Duration";
+            Packaging: "Packaging";
+            Quantity: "Quantity";
+            Activity: "Activity";
+            Length: "Length";
+            Volume: "Volume";
+            Area: "Area";
+        }>>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -151,6 +171,16 @@ export declare const UnitUpdateManySchema: import("@sinclair/typebox").TObject<{
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
+        type: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+            Weight: "Weight";
+            Duration: "Duration";
+            Packaging: "Packaging";
+            Quantity: "Quantity";
+            Activity: "Activity";
+            Length: "Length";
+            Volume: "Volume";
+            Area: "Area";
+        }>>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -202,6 +232,16 @@ export declare const UnitDeleteManySchema: import("@sinclair/typebox").TObject<{
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
+        type: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+            Weight: "Weight";
+            Duration: "Duration";
+            Packaging: "Packaging";
+            Quantity: "Quantity";
+            Activity: "Activity";
+            Length: "Length";
+            Volume: "Volume";
+            Area: "Area";
+        }>>;
     }>;
 }>;
 export type UnitDeleteMany = Static<typeof UnitDeleteManySchema>;
