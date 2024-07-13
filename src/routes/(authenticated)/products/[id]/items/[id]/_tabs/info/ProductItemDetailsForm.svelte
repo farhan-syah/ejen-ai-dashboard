@@ -177,7 +177,7 @@
 <TextField
 	controller={gtin13Controller}
 	label="GTIN-13 (EAN-13 / UCC-13)"
-	class="col-dialog-1/2"
+	class="col-span-2"
 	allowKeys="numbersOnly"
 	preventKeys={[" "]}
 	disabled={!$editable}

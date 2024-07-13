@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { page } from "$app/stores";
 	import { getAppState, UserState } from "$applications";
 	import { Overlay } from "$lib/components";
-	import { cubicInOut } from "svelte/easing";
-	import { fly } from "svelte/transition";
 	import Sidebar from "../../layout/sidebar/Sidebar.svelte";
 	import TopMenu from "../../layout/top-menu/TopMenu.svelte";
 	const appState = getAppState();
@@ -23,14 +20,14 @@
 	>
 		<TopMenu />
 		<div class="flex-grow overflow-auto main relative w-full">
-			{#key $page.url.pathname}
-				<div
-					class="absolute p-2 sm:p-4 w-full"
-					transition:fly={{ duration: 100, easing: cubicInOut }}
-				>
+			<div class="absolute p-2 sm:p-4 w-full">
+				<slot />
+			</div>
+			<!-- {#key $page.url.pathname}
+				<div class="absolute p-2 sm:p-4 w-full" in:fly={{ duration: 0, easing: quartIn }}>
 					<slot />
 				</div>
-			{/key}
+			{/key} -->
 		</div>
 	</div>
 {/if}

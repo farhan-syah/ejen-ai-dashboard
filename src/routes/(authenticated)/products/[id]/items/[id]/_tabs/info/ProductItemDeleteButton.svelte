@@ -18,7 +18,7 @@
 			isDialogOpen.set(false);
 			appState.loading.set(true);
 			await ProductItemRepository.delete(productItem.id);
-			await goto("/productItems/categories", { replaceState: true });
+			await goto("/products/" + productItem.productId + "?page=items", { replaceState: true });
 			toastState.success({ key: productItem.id, message: "Object has been deleted" });
 		} catch (error) {
 			appState.error.set(error);
