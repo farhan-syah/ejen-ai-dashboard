@@ -14,11 +14,11 @@
 	} from "$lib/components";
 	import { FormValidator } from "$lib/components/form/controller/form-validator";
 	import { ProductItemRepository } from "$repositories";
+	import { faker } from "@faker-js/faker";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
 	import { getProductItemContext } from "../../ProductItem";
 	import ProductItemDeleteButton from "./ProductItemDeleteButton.svelte";
-
 	// Context
 
 	const context = getProductItemContext();
@@ -41,7 +41,8 @@
 	const nameController = new FormControl({
 		name: "name",
 		value: $productItem.name,
-		required: true
+		required: true,
+		faker: faker.commerce.productName
 	});
 
 	const skuController = new FormControl<string>({
@@ -60,28 +61,32 @@
 		name: "gtin8",
 		value: $productItem.gtin8,
 		validators: [FormValidator.length(8)],
-		allowNull: true
+		allowNull: true,
+		faker: () => faker.string.numeric(8)
 	});
 
 	const gtin12Controller = new FormControl<string>({
 		name: "gtin12",
 		value: $productItem.gtin12,
 		validators: [FormValidator.length(12)],
-		allowNull: true
+		allowNull: true,
+		faker: () => faker.string.numeric(12)
 	});
 
 	const gtin13Controller = new FormControl<string>({
 		name: "gtin13",
 		value: $productItem.gtin13,
 		validators: [FormValidator.length(13)],
-		allowNull: true
+		allowNull: true,
+		faker: () => faker.string.numeric(13)
 	});
 
 	const gtin14Controller = new FormControl<string>({
 		name: "gtin14",
 		value: $productItem.gtin14,
 		validators: [FormValidator.length(14)],
-		allowNull: true
+		allowNull: true,
+		faker: () => faker.string.numeric(14)
 	});
 
 	const form = new FormGroup<ProductItemUpdateInput>([

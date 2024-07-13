@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { PUBLIC_ENV } from "$env/static/public";
+	import Icon from "@iconify/svelte";
 	import { twMerge } from "tailwind-merge";
 	import { FormControl } from "../controller/form-control";
 	export let controller: FormControl<number> = new FormControl<number>();
@@ -70,6 +72,15 @@
 			onKeydown(e, controller);
 		}
 	}
+
+	function handleGenerateFakeData() {
+		if (controller.faker != null) {
+			const el = controller.el as HTMLInputElement;
+			const fakeValue = controller.faker();
+			controller.writableValue.set(fakeValue);
+			el.value = fakeValue.toString();
+		}
+	}
 </script>
 
 <div class="text-gray-400 {componentClass}">
@@ -115,6 +126,11 @@
 			on:input={handleInput}
 			on:keydown={handleKeydown}
 		/>
+		{#if controller.faker != null && PUBLIC_ENV === "DEV"}
+			<button class="button button-inverse p-2 mr-1" on:click={handleGenerateFakeData}>
+				<Icon icon="fe:random" />
+			</button>
+		{/if}
 	</div>
 	<div class="text-red-500 text-xs">
 		{#each $errors as error, index}

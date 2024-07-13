@@ -18,6 +18,8 @@ export class FormControl<T = any> {
 	dirty = atom(false);
 	allowNull: boolean;
 	onReset?: (control: FormControl<T>) => any;
+	faker?: (() => T) | undefined;
+	generator?: (() => T) | undefined;
 	constructor({
 		id,
 		name,
@@ -25,7 +27,8 @@ export class FormControl<T = any> {
 		validators,
 		required,
 		onReset,
-		allowNull
+		allowNull,
+		faker
 	}: {
 		id?: string;
 		name?: string;
@@ -34,6 +37,8 @@ export class FormControl<T = any> {
 		required?: boolean;
 		onReset?: (control: FormControl<T>) => any;
 		allowNull?: boolean;
+		faker?: (() => T) | undefined;
+		generator?: (() => T) | undefined;
 	} = {}) {
 		this.id = id ?? nanoid(6);
 		this.name = name ?? nanoid(6);
@@ -42,6 +47,8 @@ export class FormControl<T = any> {
 		this.validators = validators ?? [];
 		this.required = required ?? false;
 		this.allowNull = allowNull ?? false;
+		this.faker = faker;
+		this.generator = this.generator;
 		this.writableValue.listen(() => {
 			this.validate();
 		});
@@ -49,7 +56,6 @@ export class FormControl<T = any> {
 		this.errors.listen((errors) => {
 			this.validateErrors([...errors]);
 		});
-
 		this.valid = computed([this.writableValue, this.hasError], (value, hasError) => {
 			if (!required) {
 				return !hasError;

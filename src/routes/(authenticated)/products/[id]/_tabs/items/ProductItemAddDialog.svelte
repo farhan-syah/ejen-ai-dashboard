@@ -13,8 +13,8 @@
 	} from "$lib/components";
 	import { FormValidator } from "$lib/components/form/controller/form-validator";
 	import { ProductItemRepository } from "$repositories";
+	import { faker } from "@faker-js/faker";
 	import { getProductItemsContext } from "./ProductItemsTab";
-
 	// Context
 
 	const productItemsContext = getProductItemsContext();
@@ -35,37 +35,44 @@
 
 	const nameController = new FormControl<string>({
 		name: "name",
-		required: true
+		required: true,
+		faker: faker.commerce.productName
 	});
 
 	const skuController = new FormControl<string>({
 		name: "sku",
-		required: true
+		required: true,
+		faker: () => faker.string.alphanumeric(10)
 	});
 
 	const retailPriceController = new FormControl<number>({
 		name: "price",
-		required: true
+		required: true,
+		faker: () => faker.number.int({ min: 1000, max: 10000 })
 	});
 
 	const gtin8Controller = new FormControl<string>({
 		name: "gtin8",
-		validators: [FormValidator.length(8)]
+		validators: [FormValidator.length(8)],
+		faker: () => faker.string.numeric(8)
 	});
 
 	const gtin12Controller = new FormControl<string>({
 		name: "gtin12",
-		validators: [FormValidator.length(12)]
+		validators: [FormValidator.length(12)],
+		faker: () => faker.string.numeric(12)
 	});
 
 	const gtin13Controller = new FormControl<string>({
 		name: "gtin13",
-		validators: [FormValidator.length(13)]
+		validators: [FormValidator.length(13)],
+		faker: () => faker.string.numeric(13)
 	});
 
 	const gtin14Controller = new FormControl<string>({
 		name: "gtin14",
-		validators: [FormValidator.length(14)]
+		validators: [FormValidator.length(14)],
+		faker: () => faker.string.numeric(14)
 	});
 
 	const form = new FormGroup<ProductItemCreateInput>([
