@@ -2,13 +2,23 @@
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
 	import { getToastState } from "$applications/toast.state";
-	import { PageTitle } from "$lib/components";
+	import { PageTitle, Tab, type TabItem } from "$lib/components";
 	import { ProductItemRepository } from "$repositories";
 	import { onMount } from "svelte";
-	import { createProductItemContext, type _ProductItem } from "./ProductItem";
-	import ProductItemDetailsForm from "./ProductItemDetailsForm.svelte";
+	import {
+		ProductItemTab,
+		createProductItemContext,
+		productItemKeys,
+		productItemTabs,
+		type _ProductItem
+	} from "./ProductItem";
+	import ProductItemInfoTab from "./_tabs/info/ProductItemInfoTab.svelte";
 
 	const id = $page.params.id;
+	const initialPage = $page.url.searchParams.get("page");
+	const tabs: TabItem[] = productItemTabs;
+	const keys = productItemKeys;
+	const initialIndex = keys.findIndex((key) => key === initialPage);
 
 	const context = createProductItemContext({
 		fetchProductItemCallback: async (ctx) => {
@@ -21,14 +31,26 @@
 			}
 		}
 	});
+
+	const index = context.index;
 	const productItem = context.productItem;
 
 	onMount(() => {
-		context.fetchProduct();
+		context.fetchProductItem();
 	});
 
 	// States
 	const toast = getToastState();
+
+	// Functions
+
+	function handleSwitchTab(i: number) {
+		if ($index != i) {
+			index.set(i);
+			$page.url.searchParams.set("page", keys[i]);
+			goto($page.url, { replaceState: true });
+		}
+	}
 </script>
 
 {#if $productItem}
@@ -42,9 +64,12 @@
 			{ label: "Edit Product Item", path: "/products/items/" + $productItem.id, currentPage: true }
 		]}
 	/>
-	<div class="p-5 border-slate-200 border-t-0 bg-white rounded-md shadow-md">
-		<div class="grid grid-cols-5 gap-4">
-			<ProductItemDetailsForm />
+
+	<Tab {tabs} index={$index} onClick={handleSwitchTab}>
+		<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">
+			{#if tabs[$index].label === ProductItemTab.info}
+				<ProductItemInfoTab />
+			{/if}
 		</div>
-	</div>
+	</Tab>
 {/if}

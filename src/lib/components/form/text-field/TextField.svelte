@@ -7,6 +7,22 @@
 	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;
 	export let autocomplete: string = "off";
+	export let allowKeys: RegExp | "lettersOnly" | "numbersOnly" | undefined = undefined;
+	export let specialKeys: string[] = [
+		"Tab",
+		"ArrowUp",
+		"ArrowDown",
+		"ArrowLeft",
+		"ArrowRight",
+		"Backspace",
+		"Delete",
+		"Home",
+		"End",
+		" "
+	];
+	export let preventKeys: string[] = [];
+	export let onKeydown: ((e: KeyboardEvent, controller: FormControl) => any) | undefined =
+		undefined;
 	export let onChange: (inputValue: string, input: HTMLInputElement, e: any) => any = (
 		inputValue
 	) => {
@@ -72,6 +88,37 @@
 		const el = controller.el as HTMLInputElement;
 		onChange(el.value, el, e);
 	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (onKeydown) {
+			onKeydown(e, controller);
+		} else {
+			if (preventKeys.includes(e.key)) {
+				e.preventDefault();
+				return;
+			}
+
+			if (specialKeys.includes(e.key)) {
+				return;
+			}
+
+			if (allowKeys === "lettersOnly") {
+				const alphabetsOnlyRegex = /^[A-Za-z]+$/;
+				if (!alphabetsOnlyRegex.test(e.key)) {
+					e.preventDefault();
+				}
+			} else if (allowKeys === "numbersOnly") {
+				const numbersOnlyRegex = /^[0-9]+$/;
+				if (!numbersOnlyRegex.test(e.key)) {
+					e.preventDefault();
+				}
+			} else if (allowKeys instanceof RegExp) {
+				if (!allowKeys.test(e.key)) {
+					e.preventDefault();
+				}
+			}
+		}
+	}
 </script>
 
 <div class="text-gray-400 {componentClass}">
@@ -114,6 +161,7 @@
 				controller.validate();
 			}}
 			on:input={handleInput}
+			on:keydown={handleKeydown}
 		/>
 		{#if $$slots.postfix}
 			<div class="absolute right-0 h-full">

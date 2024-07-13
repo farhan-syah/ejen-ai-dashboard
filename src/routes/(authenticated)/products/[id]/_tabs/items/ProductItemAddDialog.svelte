@@ -132,14 +132,34 @@
 			decimalPlaces={2}
 		/>
 		<hr class="col-span-full my-2" />
-		<TextField controller={gtin8Controller} label="GTIN-8 (EAN-8)" class="col-dialog-1/2" />
-		<TextField controller={gtin12Controller} label="GTIN-12 (UPC-12)" class="col-dialog-1/2" />
+		<TextField
+			controller={gtin8Controller}
+			label="GTIN-8 (EAN-8)"
+			class="col-dialog-1/2"
+			allowKeys="numbersOnly"
+			preventKeys={[" "]}
+		/>
+		<TextField
+			controller={gtin12Controller}
+			label="GTIN-12 (UPC-12)"
+			class="col-dialog-1/2"
+			allowKeys="numbersOnly"
+			preventKeys={[" "]}
+		/>
 		<TextField
 			controller={gtin13Controller}
 			label="GTIN-13 (EAN-13 / UCC-13)"
 			class="col-dialog-1/2"
+			allowKeys="numbersOnly"
+			preventKeys={[" "]}
 		/>
-		<TextField controller={gtin14Controller} label="GTIN-14 (ITF-14 )" class="col-dialog-1/2" />
+		<TextField
+			controller={gtin14Controller}
+			label="GTIN-14 (ITF-14 )"
+			class="col-dialog-1/2"
+			allowKeys="numbersOnly"
+			preventKeys={[" "]}
+		/>
 		<div class="col-span-full">
 			<Button valid={$valid} onClick={handleSaveForm} />
 		</div>
