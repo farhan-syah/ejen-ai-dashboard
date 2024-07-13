@@ -12,10 +12,6 @@ export declare const PrismaStringFilterSchema: import("@sinclair/typebox").TRecu
     equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
     notIn: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
-    lt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    lte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    gt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     contains: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     startsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     endsWith: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -35,9 +31,8 @@ export declare const PrismaDateTimeFilterSchema: import("@sinclair/typebox").TRe
 }>, import("@sinclair/typebox").TString]>>;
 export type PrismaDateTimeFilter = Static<typeof PrismaDateTimeFilterSchema>;
 export declare const PrismaListFilter: <T extends TSchema>(schema: T) => import("@sinclair/typebox").TObject<{
-    every: import("@sinclair/typebox").TOptional<T>;
-    some: import("@sinclair/typebox").TOptional<T>;
-    none: import("@sinclair/typebox").TOptional<T>;
+    every: T extends import("@sinclair/typebox").TOptional<infer S extends TSchema> ? import("@sinclair/typebox").TOptional<S> : import("@sinclair/typebox").Ensure<import("@sinclair/typebox").TOptional<T>>;
+    some: T extends import("@sinclair/typebox").TOptional<infer S extends TSchema> ? import("@sinclair/typebox").TOptional<S> : import("@sinclair/typebox").Ensure<import("@sinclair/typebox").TOptional<T>>;
+    none: T extends import("@sinclair/typebox").TOptional<infer S extends TSchema> ? import("@sinclair/typebox").TOptional<S> : import("@sinclair/typebox").Ensure<import("@sinclair/typebox").TOptional<T>>;
 }>;
-export { };
-
+export {};

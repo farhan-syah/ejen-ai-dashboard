@@ -12,13 +12,22 @@ export declare const ProductItemCreateInputSchema: import("@sinclair/typebox").T
     sku: import("@sinclair/typebox").TString;
     price: import("@sinclair/typebox").TInteger;
     productId: import("@sinclair/typebox").TString;
-    gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
 }>;
 export type ProductItemCreateInput = Static<typeof ProductItemCreateInputSchema>;
-export declare const ProductItemUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const ProductItemUpdateInputSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+    sku: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+}>;
 export type ProductItemUpdateInput = Static<typeof ProductItemUpdateInputSchema>;
 export declare const ProductItemSearchWhereSchema: import("@sinclair/typebox").TObject<{
     id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
@@ -120,10 +129,10 @@ export declare const ProductItemCreateDataSchema: import("@sinclair/typebox").TO
     sku: import("@sinclair/typebox").TString;
     price: import("@sinclair/typebox").TInteger;
     productId: import("@sinclair/typebox").TString;
-    gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
 }>;
 export type ProductItemCreateData = Static<typeof ProductItemCreateDataSchema>;
 export declare const ProductItemCreateSchema: import("@sinclair/typebox").TObject<{
@@ -132,10 +141,10 @@ export declare const ProductItemCreateSchema: import("@sinclair/typebox").TObjec
         sku: import("@sinclair/typebox").TString;
         price: import("@sinclair/typebox").TInteger;
         productId: import("@sinclair/typebox").TString;
-        gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
@@ -143,10 +152,28 @@ export declare const ProductItemCreateSchema: import("@sinclair/typebox").TObjec
     }>>;
 }>;
 export type ProductItemCreate = Static<typeof ProductItemCreateSchema>;
-export declare const ProductItemUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const ProductItemUpdateDataSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+    sku: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+}>;
 export type ProductItemUpdateData = Static<typeof ProductItemUpdateDataSchema>;
 export declare const ProductItemUpdateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        sku: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -157,7 +184,16 @@ export declare const ProductItemUpdateSchema: import("@sinclair/typebox").TObjec
 }>;
 export type ProductItemUpdate = Static<typeof ProductItemUpdateSchema>;
 export declare const ProductItemUpdateManySchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        sku: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        gtin8: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin12: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin13: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+        gtin14: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNull]>>;
+    }>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

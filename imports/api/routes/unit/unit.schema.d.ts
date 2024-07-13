@@ -1,17 +1,17 @@
 import type { Static } from "@sinclair/typebox";
-export declare const CurrencyQuerySchema: import("@sinclair/typebox").TObject<{
+export declare const UnitQuerySchema: import("@sinclair/typebox").TObject<{
     limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
-export type CurrencyQuery = Static<typeof CurrencyQuerySchema>;
-export declare const CurrencyCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
-export type CurrencyCreateInput = Static<typeof CurrencyCreateInputSchema>;
-export declare const CurrencyUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
-export type CurrencyUpdateInput = Static<typeof CurrencyUpdateInputSchema>;
-export declare const CurrencySearchWhereSchema: import("@sinclair/typebox").TObject<{
+export type UnitQuery = Static<typeof UnitQuerySchema>;
+export declare const UnitCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export type UnitCreateInput = Static<typeof UnitCreateInputSchema>;
+export declare const UnitUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export type UnitUpdateInput = Static<typeof UnitUpdateInputSchema>;
+export declare const UnitSearchWhereSchema: import("@sinclair/typebox").TObject<{
     id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
         equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
@@ -43,8 +43,8 @@ export declare const CurrencySearchWhereSchema: import("@sinclair/typebox").TObj
         not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
     }>, import("@sinclair/typebox").TString]>>>;
 }>;
-export type CurrencySearchWhere = Static<typeof CurrencySearchWhereSchema>;
-export declare const CurrencySearchSchema: import("@sinclair/typebox").TObject<{
+export type UnitSearchWhere = Static<typeof UnitSearchWhereSchema>;
+export declare const UnitSearchSchema: import("@sinclair/typebox").TObject<{
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -85,20 +85,20 @@ export declare const CurrencySearchSchema: import("@sinclair/typebox").TObject<{
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type CurrencySearch = Static<typeof CurrencySearchSchema>;
-export declare const CurrencyCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
-export type CurrencyCreateData = Static<typeof CurrencyCreateDataSchema>;
-export declare const CurrencyCreateSchema: import("@sinclair/typebox").TObject<{
+export type UnitSearch = Static<typeof UnitSearchSchema>;
+export declare const UnitCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export type UnitCreateData = Static<typeof UnitCreateDataSchema>;
+export declare const UnitCreateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type CurrencyCreate = Static<typeof CurrencyCreateSchema>;
-export declare const CurrencyUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
-export type CurrencyUpdateData = Static<typeof CurrencyUpdateDataSchema>;
-export declare const CurrencyUpdateSchema: import("@sinclair/typebox").TObject<{
+export type UnitCreate = Static<typeof UnitCreateSchema>;
+export declare const UnitUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export type UnitUpdateData = Static<typeof UnitUpdateDataSchema>;
+export declare const UnitUpdateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -108,8 +108,8 @@ export declare const CurrencyUpdateSchema: import("@sinclair/typebox").TObject<{
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type CurrencyUpdate = Static<typeof CurrencyUpdateSchema>;
-export declare const CurrencyUpdateManySchema: import("@sinclair/typebox").TObject<{
+export type UnitUpdate = Static<typeof UnitUpdateSchema>;
+export declare const UnitUpdateManySchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
@@ -160,8 +160,8 @@ export declare const CurrencyUpdateManySchema: import("@sinclair/typebox").TObje
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type CurrencyUpdateMany = Static<typeof CurrencyUpdateManySchema>;
-export declare const CurrencyDeleteManySchema: import("@sinclair/typebox").TObject<{
+export type UnitUpdateMany = Static<typeof UnitUpdateManySchema>;
+export declare const UnitDeleteManySchema: import("@sinclair/typebox").TObject<{
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -204,4 +204,4 @@ export declare const CurrencyDeleteManySchema: import("@sinclair/typebox").TObje
         }>, import("@sinclair/typebox").TString]>>>;
     }>;
 }>;
-export type CurrencyDeleteMany = Static<typeof CurrencyDeleteManySchema>;
+export type UnitDeleteMany = Static<typeof UnitDeleteManySchema>;
