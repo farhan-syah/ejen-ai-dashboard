@@ -27,33 +27,46 @@
 
 	// Forms
 
-	const lengthController = new FormControl<number>({
-		name: "length",
-		required: true
+	const depthController = new FormControl<number>({
+		name: "depth",
+		required: true,
+		value: $productItem.depth
 	});
 
 	const widthController = new FormControl<number>({
 		name: "width",
-		required: true
+		allowNull: true,
+		value: $productItem.width
 	});
 
 	const heightController = new FormControl<number>({
 		name: "height",
-		allowNull: true
+		allowNull: true,
+		value: $productItem.height
+	});
+	const diameterController = new FormControl<number>({
+		name: "diameter",
+		allowNull: true,
+		value: $productItem.diameter
 	});
 
 	const unitOptions = writable<FieldOption[]>([]);
 	const unitController = new FormControl<Unit>({
-		name: "statusCode",
+		name: "dimensionUnitId",
 		required: true,
-		transformOutput: (value) => value?.code
+		value:
+			$productItem.dimensionUnit != null
+				? ($productItem.dimensionUnit as unknown as Unit)
+				: undefined,
+		transformOutput: (value) => value?.id
 	});
 
 	const form = new FormGroup<ProductItemUpdateInput>([
-		lengthController,
+		depthController,
 		widthController,
 		heightController,
-		unitController
+		unitController,
+		diameterController
 	]);
 
 	const valid = form.valid;
@@ -74,7 +87,7 @@
 		try {
 			appState.loading.set(true);
 
-			const data = form.value.get() as ProductItemUpdateInput;
+			const data = form.value.get();
 
 			await ProductItemRepository.update($productItem.id, {
 				data: data
@@ -97,15 +110,23 @@
 </script>
 
 <div class="grid grid-cols-3 gap-4">
-	<div>Dimension</div>
-	<div class=" col-span-full mx-auto flex">
-		<img src="/images/box-dimension.webp" alt="BoxDimension" class=" h-40" />
-		<img src="/images/shirt-dimension.png" alt="ShirtDimension" class=" h-40" />
+	<div class="col-span-full">
+		<div class="font-semibold">Product Dimension</div>
+		<li>
+			Dimension is optional, but it will help your customer learn the real product dimension
+			dimension
+		</li>
+		<li>This is not the packaging dimension, for packaging dimension, go to the packaging tab</li>
 	</div>
-	<div class=" col-span-full grid grid-cols-4 gap-4">
+	<div class=" col-span-full mx-auto flex gap-2">
+		<img src="/images/box-dimension.webp" alt="BoxDimension" class=" h-28" />
+		<img src="/images/shirt-dimension.png" alt="ShirtDimension" class=" h-28" />
+		<img src="/images/cylinder-dimension.jpg" alt="CylinderDimension" class=" h-24" />
+	</div>
+	<div class=" col-span-full grid grid-cols-5 gap-4">
 		<NumField
-			controller={lengthController}
-			label="Length"
+			controller={depthController}
+			label="Length / Depth"
 			disabled={!$editable}
 			decimalPlaces={5}
 		/>
@@ -113,6 +134,12 @@
 		<NumField
 			controller={heightController}
 			label="Height"
+			disabled={!$editable}
+			decimalPlaces={5}
+		/>
+		<NumField
+			controller={diameterController}
+			label="Diameter"
 			disabled={!$editable}
 			decimalPlaces={5}
 		/>

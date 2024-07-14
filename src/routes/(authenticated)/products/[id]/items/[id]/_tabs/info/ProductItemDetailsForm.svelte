@@ -130,97 +130,106 @@
 	}
 </script>
 
-<TextField controller={idController} label="ID" class="col-span-2" disabled>
-	<div slot="postfix" class="text-blue-500 h-full border-l bg-white rounded-r pointer">
-		<Tooltip
-			tooltip="Copy"
-			class="h-full flex items-center p-2 "
-			onClick={async () => {
-				if (idController.value) {
-					await navigator.clipboard.writeText(idController.value);
-					toastState.add({
-						type: "info",
-						key: "id",
-						message: "Copied"
-					});
-				}
-			}}
-		>
-			<Icon icon="bx:copy" />
-		</Tooltip>
-	</div>
-</TextField>
-<TextField
-	controller={nameController}
-	label="Product Item Name"
-	class="col-span-2"
-	disabled={!$editable}
-/>
-<PriceField
-	controller={priceController}
-	label="Retail Price (RRSP)"
-	class="col-span-2"
-	decimalPlaces={0}
-	disabled={!$editable}
-/>
-<TextField
-	controller={gtin8Controller}
-	label="GTIN-8 (EAN-8)"
-	class="col-span-2"
-	allowKeys="numbersOnly"
-	preventKeys={[" "]}
-	disabled={!$editable}
-/>
-<TextField
-	controller={gtin12Controller}
-	label="GTIN-12 (UPC-12)"
-	class="col-span-2"
-	allowKeys="numbersOnly"
-	preventKeys={[" "]}
-	disabled={!$editable}
-/>
-<TextField
-	controller={gtin13Controller}
-	label="GTIN-13 (EAN-13 / UCC-13)"
-	class="col-span-2"
-	allowKeys="numbersOnly"
-	preventKeys={[" "]}
-	disabled={!$editable}
-/>
-<TextField
-	controller={gtin14Controller}
-	label="GTIN-14 (ITF-14 )"
-	class="col-span-2"
-	allowKeys="numbersOnly"
-	preventKeys={[" "]}
-	disabled={!$editable}
-/>
-<div class="col-span-2">
-	{#if $hasEditPermission}
-		<div class="flex gap-2">
-			{#if $editable}
-				<Button valid={$valid} label="Save Changes" class="button-green" onClick={handleSaveForm} />
-				<Button
-					label="Cancel"
-					class="button-red"
-					onClick={() => {
-						editable.set(false);
-						form.resetValue();
-					}}
-				/>
-				<Guard requiredPermissions={["ProductItem.manage", "ProductItem.delete"]}>
-					<ProductItemDeleteButton productItem={$productItem} />
-				</Guard>
-			{:else}
-				<Button
-					label="Edit"
-					class="button-cyan"
-					onClick={() => {
-						editable.set(true);
-					}}
-				/>
-			{/if}
+<div class="grid grid-cols-2 gap-4 content-start">
+	<div class="font-semibold">Basic Information</div>
+	<TextField controller={idController} label="ID" class="col-span-2" disabled>
+		<div slot="postfix" class="text-blue-500 h-full border-l bg-white rounded-r pointer">
+			<Tooltip
+				tooltip="Copy"
+				class="h-full flex items-center p-2 "
+				onClick={async () => {
+					if (idController.value) {
+						await navigator.clipboard.writeText(idController.value);
+						toastState.add({
+							type: "info",
+							key: "id",
+							message: "Copied"
+						});
+					}
+				}}
+			>
+				<Icon icon="bx:copy" />
+			</Tooltip>
 		</div>
-	{/if}
-	<FormDebugger formGroup={form} />
+	</TextField>
+	<TextField
+		controller={nameController}
+		label="Product Item Name"
+		class="col-span-2 "
+		disabled={!$editable}
+	/>
+	<PriceField
+		controller={priceController}
+		label="Retail Price (RRSP)"
+		class="col-span-2"
+		decimalPlaces={0}
+		disabled={!$editable}
+	/>
+
+	<TextField
+		controller={gtin8Controller}
+		label="GTIN-8 (EAN-8)"
+		class="col-span-1"
+		allowKeys="numbersOnly"
+		preventKeys={[" "]}
+		disabled={!$editable}
+	/>
+	<TextField
+		controller={gtin12Controller}
+		label="GTIN-12 (UPC-12)"
+		class="col-span-1"
+		allowKeys="numbersOnly"
+		preventKeys={[" "]}
+		disabled={!$editable}
+	/>
+	<TextField
+		controller={gtin13Controller}
+		label="GTIN-13 (EAN-13 / UCC-13)"
+		class="col-span-1"
+		allowKeys="numbersOnly"
+		preventKeys={[" "]}
+		disabled={!$editable}
+	/>
+	<TextField
+		controller={gtin14Controller}
+		label="GTIN-14 (ITF-14 )"
+		class="col-span-1"
+		allowKeys="numbersOnly"
+		preventKeys={[" "]}
+		disabled={!$editable}
+	/>
+	<div class="col-span-full">
+		{#if $hasEditPermission}
+			<div class="flex gap-2">
+				{#if $editable}
+					<Button
+						valid={$valid}
+						label="Save Changes"
+						class="button-green"
+						onClick={handleSaveForm}
+					/>
+					<Button
+						label="Cancel"
+						class="button-red"
+						onClick={() => {
+							editable.set(false);
+							form.resetValue();
+						}}
+					/>
+					<Guard requiredPermissions={["ProductItem.manage", "ProductItem.delete"]}>
+						<ProductItemDeleteButton productItem={$productItem} />
+					</Guard>
+				{:else}
+					<Button
+						label="Edit"
+						class="button-cyan"
+						onClick={() => {
+							editable.set(true);
+						}}
+					/>
+				{/if}
+			</div>
+		{/if}
+		<FormDebugger formGroup={form} />
+	</div>
 </div>

@@ -6,7 +6,18 @@ import { getContext, setContext } from "svelte";
 
 export type _ProductItem = ProductItem & {
 	product: { id: string; name: string };
-	images?: { path: string; id: string }[];
+	images: { path: string; id: string }[];
+	depth?: number;
+	width?: number;
+	height?: number;
+	diameter?: number;
+	dimensionUnit: {
+		id: string;
+		code: string;
+		symbol: string;
+		conversionRatio: number;
+		baseUnit: true;
+	};
 };
 
 export type ProductItemContextOption = {

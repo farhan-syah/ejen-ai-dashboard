@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { tryParseNum } from "$lib/utils";
 	import { FormControl } from "../controller/form-control";
+
 	export let controller: FormControl<number> = new FormControl<number>();
 
 	export let label: string | undefined = undefined;

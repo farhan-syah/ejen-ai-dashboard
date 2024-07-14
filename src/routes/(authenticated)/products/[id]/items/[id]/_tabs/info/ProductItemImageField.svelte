@@ -31,9 +31,13 @@
 	}
 </script>
 
+<div>
+	<div class="font-semibold">Images</div>
+	<li>Image for this variation</li>
+</div>
+
 <ImageField
 	controller={imageController}
-	label="Images"
 	onSave={handleSaveImage}
 	pathPrefix="product-items/{$productItem.id}"
 	disabled={!$hasEditPermission}

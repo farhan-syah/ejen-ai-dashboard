@@ -36,9 +36,9 @@
 		AuthService.checkTokenExpiry();
 	}}
 	on:keydown={(e) => {
-		if (e.key === "F11") {
-			e.preventDefault();
-		}
+		// if (e.key === "F11") {
+		// 	e.preventDefault();
+		// }
 	}}
 	on:fullscreenchange={(e) => {
 		appState.fullScreenElement.set(document.fullscreenElement);
