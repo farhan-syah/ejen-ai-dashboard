@@ -7,11 +7,12 @@
 	import SelectField from "$lib/components/form/select-field/SelectField.svelte";
 	import PriceField from "$lib/components/form/text-field/PriceField.svelte";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
+	import { formatNumber } from "$lib/utils/number";
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
 	import type { FieldOption } from "$types";
+	import { faker } from "@faker-js/faker";
 	import { PublishStatus } from "@prisma/client";
 	import type { _ProductCategory } from "../Products";
-
 	// States
 
 	const appState = getAppState();
@@ -33,12 +34,15 @@
 
 	const nameController = new FormControl({
 		name: "name",
-		required: true
+		required: true,
+		faker: faker.commerce.productName
 	});
 
 	const retailPriceController = new FormControl<number>({
 		name: "price",
-		required: true
+		required: true,
+		faker: () => faker.number.int({ max: 10000 }),
+		inputTransformer: (value) => formatNumber(value ? value / 100 : undefined, 2)
 	});
 
 	const statusController = new FormControl<PublishStatus>({

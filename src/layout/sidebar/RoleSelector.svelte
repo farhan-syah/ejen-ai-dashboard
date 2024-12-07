@@ -3,7 +3,6 @@
 	import { Dialog } from "$lib/components";
 	import { RoleRepository, UserSettingRepository } from "$repositories";
 	import { AuthService } from "$services";
-	import Icon from "@iconify/svelte";
 	import { type Role as PrismaRole } from "@prisma/client";
 	import { atom } from "nanostores";
 	import { onMount } from "svelte";

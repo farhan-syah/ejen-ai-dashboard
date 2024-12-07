@@ -13,6 +13,7 @@
 		TextField,
 		Tooltip
 	} from "$lib/components";
+	import { formatNumber } from "$lib/utils/number";
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
 	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
@@ -47,7 +48,8 @@
 	const priceController = new FormControl<number>({
 		name: "price",
 		value: $product.price,
-		required: true
+		required: true,
+		inputTransformer: (value) => formatNumber(value ? value / 100 : undefined, 2)
 	});
 
 	const productCategoryController = new FormControl<_ProductCategory[]>({
@@ -148,7 +150,7 @@
 	controller={priceController}
 	label="Retail Price (RRSP)"
 	class="col-span-2"
-	decimalPlaces={0}
+	decimalPlaces={2}
 	disabled={!$editable}
 />
 

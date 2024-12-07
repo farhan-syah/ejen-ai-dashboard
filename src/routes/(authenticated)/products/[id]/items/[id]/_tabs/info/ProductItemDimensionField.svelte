@@ -58,7 +58,7 @@
 			$productItem.dimensionUnit != null
 				? ($productItem.dimensionUnit as unknown as Unit)
 				: undefined,
-		transformOutput: (value) => value?.id
+		outputTransformer: (value) => value?.id
 	});
 
 	const form = new FormGroup<ProductItemUpdateInput>([

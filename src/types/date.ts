@@ -1,13 +1,5 @@
 import * as d from "date-fns";
 
-export interface DateOptions {
-	locale?: Locale;
-	weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-	firstWeekContainsDate?: number;
-	useAdditionalWeekYearTokens?: boolean;
-	useAdditionalDayOfYearTokens?: boolean;
-}
-
 export interface DateInterval {
 	label: string;
 	startDate: Date;

@@ -22,7 +22,8 @@ export class FormControl<T = any> {
 	onReset?: (control: FormControl<T>) => any;
 	faker?: (() => T) | undefined;
 	generator?: (() => T) | undefined;
-	transformOutput?: (value?: Nullable<T>) => any;
+	inputTransformer?: ((vvalue?: Nullable<T>) => string) | undefined;
+	outputTransformer?: (value?: Nullable<T>) => any;
 	constructor({
 		id,
 		name,
@@ -33,7 +34,8 @@ export class FormControl<T = any> {
 		allowNull,
 		faker,
 		generator,
-		transformOutput
+		inputTransformer: inputTransformer,
+		outputTransformer: outputTransformer
 	}: {
 		id?: string;
 		name?: string;
@@ -44,7 +46,8 @@ export class FormControl<T = any> {
 		allowNull?: boolean;
 		faker?: (() => T) | undefined;
 		generator?: (() => T) | undefined;
-		transformOutput?: (value?: Nullable<T>) => any;
+		inputTransformer?: ((value?: Nullable<T>) => string) | undefined;
+		outputTransformer?: (value?: Nullable<T>) => any;
 	} = {}) {
 		this.id = id ?? nanoid(6);
 		this.name = name ?? nanoid(6);
@@ -54,8 +57,8 @@ export class FormControl<T = any> {
 		this.required = required ?? false;
 		this.allowNull = allowNull ?? false;
 		this.faker = faker;
-		this.generator = generator;
-		this.transformOutput = transformOutput;
+		(this.inputTransformer = inputTransformer), (this.generator = generator);
+		this.outputTransformer = outputTransformer;
 		this.writableValue.listen(() => {
 			this.validate();
 		});

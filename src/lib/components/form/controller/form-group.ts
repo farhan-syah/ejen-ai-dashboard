@@ -21,8 +21,8 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> {
 			controller.writableValue.subscribe((v) => {
 				const newRecord: Record<string, any> = {};
 
-				if (controller.transformOutput) {
-					newRecord[controller.name] = controller.transformOutput(v);
+				if (controller.outputTransformer) {
+					newRecord[controller.name] = controller.outputTransformer(v);
 				} else {
 					newRecord[controller.name] = controller.allowNull && !v ? null : v;
 				}

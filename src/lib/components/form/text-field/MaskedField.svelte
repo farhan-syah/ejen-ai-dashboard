@@ -78,8 +78,18 @@
 			const el = controller.el as HTMLInputElement;
 			const fakeValue = controller.faker();
 			controller.writableValue.set(fakeValue);
-			el.value = fakeValue.toString();
+			if (controller.inputTransformer != null) {
+				el.value = controller.inputTransformer(fakeValue);
+			} else {
+				el.value = fakeValue.toString();
+			}
 		}
+	}
+
+	function getInput(): string {
+		if (controller.inputTransformer) {
+			return controller.inputTransformer(controller.writableValue.get());
+		} else return controller.writableValue.get()?.toString() ?? "";
 	}
 </script>
 
@@ -107,7 +117,7 @@
 			type="text"
 			name={controller.name}
 			{autocomplete}
-			value={controller.writableValue.get()?.toString() ?? ""}
+			value={getInput()}
 			id={controller.id}
 			class={twMerge(["p-2 text-sm w-full outline-none"], inputClass)}
 			on:focus={() => {

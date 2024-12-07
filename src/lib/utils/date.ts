@@ -1,6 +1,6 @@
-import type { DateInterval, DateOptions, DateRange } from "$types";
+import type { DateInterval, DateRange } from "$types";
 import * as d from "date-fns";
-import ms from "date-fns/locale/ms/index.js";
+import { ms } from "date-fns/locale";
 
 export const defaultFormat = "yyyy-MM-dd h:mm a";
 export const shortFormat = "yyyy-MM-dd";
@@ -58,7 +58,11 @@ export class DateSelection {
 	];
 }
 
-export function formatLocalDate(date: Date | number, format?: string, options: DateOptions = {}) {
+export function formatLocalDate(
+	date: Date | number,
+	format?: string,
+	options: d.FormatOptions = {}
+) {
 	if (!options.locale) options.locale = ms;
 	return d.format(date, format ?? defaultFormat, options);
 }

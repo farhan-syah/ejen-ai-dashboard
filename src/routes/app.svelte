@@ -30,6 +30,11 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Mushrif ERP</title>
+	<meta name="robots" content="noindex nofollow" />
+</svelte:head>
+
 <svelte:window
 	on:resize={handleResize}
 	on:focus={() => {

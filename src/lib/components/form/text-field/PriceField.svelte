@@ -13,7 +13,6 @@
 	function handleKeydown(e: KeyboardEvent) {
 		const el = controller.el as HTMLInputElement;
 		const acceptedKeys: string[] = ["Delete", "Backspace", "ArrowRight", "ArrowLeft"];
-
 		if (!acceptedKeys.includes(e.key)) {
 			e.preventDefault();
 			if (e.key === "." && decimalPlaces === 0) {
@@ -33,9 +32,14 @@
 				}
 			}
 		}
-		const num = tryParseNum(el.value, 0);
-		const newValue = +(num * Math.pow(10, decimalPlaces)).toFixed(decimalPlaces);
-		controller.writableValue.set(newValue);
+
+		// Delay reading the updated value until after the input is processed
+		requestAnimationFrame(() => {
+			const updatedValue = el.value;
+			const num = tryParseNum(updatedValue, 0);
+			const newValue = +(num * Math.pow(10, decimalPlaces)).toFixed(decimalPlaces);
+			controller.writableValue.set(newValue);
+		});
 	}
 </script>
 
