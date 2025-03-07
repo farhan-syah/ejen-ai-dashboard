@@ -15,7 +15,7 @@
 	} from "$lib/components";
 	import { formatNumber } from "$lib/utils/number";
 	import { ProductCategoryRepository, ProductRepository } from "$repositories";
-	import Icon from "@iconify/svelte";
+
 	import { atom } from "nanostores";
 	import { getProductContext, type _ProductCategory } from "../../Product";
 	import ProductDeleteButton from "./ProductDeleteButton.svelte";
@@ -136,7 +136,7 @@
 				}
 			}}
 		>
-			<Icon icon="bx:copy" />
+			<iconify-icon icon="bx:copy"></iconify-icon>
 		</Tooltip>
 	</div>
 </TextField>

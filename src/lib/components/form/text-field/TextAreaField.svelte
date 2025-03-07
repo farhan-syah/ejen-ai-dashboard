@@ -91,6 +91,7 @@
 		</div>
 	{/if}
 	<div class="flex rounded outline {inputClass}">
+		<!-- svelte-ignore element_invalid_self_closing_tag -->
 		<textarea
 			bind:this={controller.el}
 			{disabled}
@@ -112,7 +113,7 @@
 				controller.validate();
 			}}
 			on:input={handleInput}
-		/>
+		></textarea>
 	</div>
 	<div class="text-red-500 text-xs">
 		{#each $errors as error, index}

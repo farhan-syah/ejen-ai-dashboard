@@ -42,13 +42,14 @@
 		on:click={handleToggle}
 		aria-checked={$selected}
 		tabindex="0"
+		aria-label="toggle"
 	>
 		<span
 			class="toggle-bg w-full h-full {$selected ? 'bg-blue-500' : 'bg-gray-200'} {disabled
 				? 'bg-opacity-50'
 				: ''}"
-		/>
-		<span class="toggle-circle bg-white left-0.5 {$selected ? 'translate-x-[19px]' : ''}" />
+		></span>
+		<span class="toggle-circle bg-white left-0.5 {$selected ? 'translate-x-[19px]' : ''}"></span>
 	</button>
 </div>
 

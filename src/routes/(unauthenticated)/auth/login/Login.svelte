@@ -1,11 +1,11 @@
 <script lang="ts">
+	import type { LoginInput } from "$api/routes/auth/auth.schema";
 	import { getAppState } from "$applications";
 	import { Button, FormControl, Link, TextField } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { AuthService } from "$services/auth.service";
 	import { computed } from "nanostores";
 	import validator from "validator";
-	import type { LoginInput } from "../../../$api/routes/auth/auth.schema";
 	const appState = getAppState();
 
 	const emailController = new FormControl({
@@ -70,6 +70,4 @@
 
 		<Button class="w-32 " valid={$formValid} onClick={handleSubmit} />
 	</div>
-
-	<div />
 </Card>

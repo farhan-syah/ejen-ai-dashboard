@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Popper } from "$lib/components";
 	import type { FieldOption } from "$types";
-	import Icon from "@iconify/svelte";
+
 	import type { ModifierPhases } from "@popperjs/core";
 	import { atom } from "nanostores";
 	import type { PopperOptions } from "svelte-popperjs";
@@ -14,8 +14,9 @@
 	export let options: readonly FieldOption<T>[] = [];
 	export let placeholder: string = "Select";
 
-	export let valueTransform: (value?: readonly FieldOption<T>[]) => string | undefined = (value) =>
-		undefined;
+	export let valueTransform: (value?: readonly FieldOption<T>[] | null) => string | undefined = (
+		value
+	) => undefined;
 
 	let required = controller.required;
 	let inputClass = "";
@@ -195,7 +196,7 @@
 							</div>
 							{#if isSelected(i)}
 								<div class="text-lg -m-1 text-green-500">
-									<Icon icon="bx:check" />
+									<iconify-icon icon="bx:check"></iconify-icon>
 								</div>
 							{/if}
 						</div>

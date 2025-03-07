@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getAppState } from "$applications";
-	import IconWithTooltip from "$lib/components/icons/IconWithTooltip.svelte";
+	import { IconWithTooltip } from "$lib/components";
 	const appState = getAppState();
 	const fullScreenElement = appState.fullScreenElement;
 

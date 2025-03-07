@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
 	import { Editor } from "@tiptap/core";
 	import Highlight from "@tiptap/extension-highlight";
 	import TextAlign from "@tiptap/extension-text-align";
@@ -89,7 +88,7 @@
 			>
 				P
 			</button>
-			<div class="separator" />
+			<div class="separator"></div>
 			<button
 				tabindex="-1"
 				on:click={() => editor.chain().focus().toggleBold().run()}
@@ -100,84 +99,93 @@
 				B
 			</button>
 			<button
+				aria-label="toggle italic"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().toggleItalic().run()}
 				disabled={!editor.can().chain().focus().toggleItalic().run()}
 				class:active={editor.isActive("italic")}
 			>
-				<Icon icon="ic:round-format-italic" class="text-sm" />
+				<iconify-icon icon="ic:round-format-italic" class="text-sm"></iconify-icon>
 			</button>
 			<button
+				aria-label="toggle strike"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().toggleStrike().run()}
 				disabled={!editor.can().chain().focus().toggleStrike().run()}
 				class:active={editor.isActive("strike")}
 			>
-				<Icon icon="ic:round-format-strikethrough" class="text-sm" />
+				<iconify-icon icon="ic:round-format-strikethrough" class="text-sm"></iconify-icon>
 			</button>
 			<button
+				aria-label="toggle highlight"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().toggleHighlight().run()}
 				disabled={!editor.can().chain().focus().toggleHighlight().run()}
 				class:active={editor.isActive("highlight")}
 			>
-				<Icon
+				<iconify-icon
 					icon="material-symbols-light:format-ink-highlighter-outline-rounded"
 					class="text-sm"
-				/>
+				></iconify-icon>
 			</button>
 
-			<div class="separator" />
+			<div class="separator"></div>
 			<button
+				aria-label="toggle bullet list"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().toggleBulletList().run()}
 				disabled={!editor.can().chain().focus().toggleBulletList().run()}
 				class:active={editor.isActive("bulletList")}
 			>
-				<Icon icon="ic:sharp-format-list-bulleted" class="text-base" />
+				<iconify-icon icon="ic:sharp-format-list-bulleted" class="text-base"></iconify-icon>
 			</button>
 			<button
+				aria-label="toggle ordered list"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().toggleOrderedList().run()}
 				disabled={!editor.can().chain().focus().toggleOrderedList().run()}
 				class:active={editor.isActive("orderedList")}
 			>
-				<Icon icon="ic:sharp-format-list-numbered" class="text-base" />
+				<iconify-icon icon="ic:sharp-format-list-numbered" class="text-base"></iconify-icon>
 			</button>
-			<div class="separator" />
+			<div class="separator"></div>
 			<button
+				aria-label="set text align left"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().setTextAlign("left").run()}
 				disabled={!editor.can().chain().focus().setTextAlign("left").run()}
 				class:active={editor.isActive({ textAlign: "left" })}
 			>
-				<Icon icon="ic:round-format-align-left" class="text-base" />
+				<iconify-icon icon="ic:round-format-align-left" class="text-base"></iconify-icon>
 			</button>
 			<button
+				aria-label="set text align center"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().setTextAlign("center").run()}
 				disabled={!editor.can().chain().focus().setTextAlign("center").run()}
 				class:active={editor.isActive({ textAlign: "center" })}
 			>
-				<Icon icon="ic:round-format-align-center" class="text-base" />
+				<iconify-icon icon="ic:round-format-align-center" class="text-base"></iconify-icon>
 			</button>
 			<button
+				aria-label="set text align right"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().setTextAlign("right").run()}
 				disabled={!editor.can().chain().focus().setTextAlign("right").run()}
 				class:active={editor.isActive({ textAlign: "right" })}
 			>
-				<Icon icon="ic:round-format-align-right" class="text-base" />
+				<iconify-icon icon="ic:round-format-align-right" class="text-base"></iconify-icon>
 			</button>
 			<button
+				aria-label="set text align justify"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().setTextAlign("justify").run()}
 				disabled={!editor.can().chain().focus().setTextAlign("justify").run()}
 				class:active={editor.isActive({ textAlign: "justify" })}
 			>
-				<Icon icon="ic:round-format-align-justify" class="text-base" />
+				<iconify-icon icon="ic:round-format-align-justify" class="text-base"></iconify-icon>
 			</button>
-			<div class="separator" />
+			<div class="separator"></div>
 			<button
 				tabindex="-1"
 				on:click={() => editor.chain().focus().toggleCode().run()}
@@ -202,28 +210,38 @@
 			>
 				quote
 			</button>
-			<div class="separator" />
-			<button tabindex="-1" on:click={() => editor.chain().focus().setHardBreak().run()}>
-				<Icon icon="ic:round-keyboard-return" class="text-sm" />
+			<div class="separator"></div>
+			<button
+				aria-label="set  hard break"
+				tabindex="-1"
+				on:click={() => editor.chain().focus().setHardBreak().run()}
+			>
+				<iconify-icon icon="ic:round-keyboard-return" class="text-sm"></iconify-icon>
 			</button>
-			<button tabindex="-1" on:click={() => editor.chain().focus().setHorizontalRule().run()}>
-				<Icon icon="ic:round-horizontal-rule" class="text-sm" />
+			<button
+				aria-label="set horizontal rule"
+				tabindex="-1"
+				on:click={() => editor.chain().focus().setHorizontalRule().run()}
+			>
+				<iconify-icon icon="ic:round-horizontal-rule" class="text-sm"></iconify-icon>
 			</button>
-			<div class="separator" />
+			<div class="separator"></div>
 
 			<button
+				aria-label="undo"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().undo().run()}
 				disabled={!editor.can().chain().focus().undo().run()}
 			>
-				<Icon icon="ic:baseline-undo" class="text-sm" />
+				<iconify-icon icon="ic:baseline-undo" class="text-sm"></iconify-icon>
 			</button>
 			<button
+				aria-label="redo"
 				tabindex="-1"
 				on:click={() => editor.chain().focus().redo().run()}
 				disabled={!editor.can().chain().focus().redo().run()}
 			>
-				<Icon icon="ic:baseline-redo" class="text-sm" />
+				<iconify-icon icon="ic:baseline-redo" class="text-sm"></iconify-icon>
 			</button>
 		</div>
 	{/if}
@@ -236,7 +254,7 @@
 				e.preventDefault();
 			}
 		}}
-	/>
+	></div>
 </div>
 
 <style lang="postcss">

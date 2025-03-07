@@ -43,7 +43,7 @@
 			</div>
 		{/each}
 	</div>
-	<div class="relative bg-slate-300 w-full h-1 z-1" />
+	<div class="relative bg-slate-300 w-full h-1 z-1"></div>
 	<div class="relative w-full">
 		{#key index}
 			<div

@@ -107,7 +107,7 @@
 			</div>
 			{#if $roles.length > 0}
 				<div class="p-2">
-					<Icon icon="icon-park-outline:switch" class="text-base"></Icon>
+					<iconify-icon icon="icon-park-outline:switch" class="text-base"></iconify-icon>
 				</div>
 			{/if}
 		</div>

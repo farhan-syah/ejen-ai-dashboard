@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
 	import { atom } from "nanostores";
 	import { twMerge } from "tailwind-merge";
 	import { Loader } from "..";
@@ -47,10 +46,10 @@
 		/>
 	{:else}
 		<div class="w-full h-full flex flex-col p-4 text-slate-400">
-			<Icon
+			<iconify-icon
 				icon="material-symbols-light:image-not-supported-outline-rounded"
 				class="m-auto w-full h-full"
-			/>
+			></iconify-icon>
 			<div>Image Not Found</div>
 		</div>
 	{/if}
@@ -61,6 +60,6 @@
 				<div class="w-full">{loadingMessage}</div>
 			{/if}
 		</div>
-		<div class=" w-16 h-16" />
+		<div class=" w-16 h-16"></div>
 	{/if}
 </div>

@@ -1,9 +1,5 @@
 <script lang="ts">
-	import { fly } from "svelte/transition";
-
 	import { Popover } from "bits-ui";
-
-	import Icon from "@iconify/svelte";
 
 	import { asyncDebounce, deepEqual } from "$lib/utils";
 
@@ -187,7 +183,7 @@
 											}}
 										>
 											{#if !disabled}
-												<Icon icon="bx:x"></Icon>
+												<iconify-icon icon="bx:x"></iconify-icon>
 											{/if}
 										</div>
 									</div>
@@ -199,12 +195,13 @@
 					{/if}
 				</div>
 			</Popover.Trigger>
-			<Popover.Content
+			<!-- <Popover.Content
 				transition={fly}
 				transitionConfig={{ duration: 100, delay: 0 }}
 				sameWidth
 				class="cursor-pointer bg-white mt-1.5 w-full"
-			>
+			> -->
+			<Popover.Content class="cursor-pointer bg-white mt-1.5 w-full">
 				<div class="w-full shadow-lg rounded border">
 					<input
 						placeholder={searchPlaceholder}

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { getToastState } from "$applications/toast.state";
-	import Icon from "@iconify/svelte";
+
 	import type { BreadcrumbItem } from ".";
-	import IconWithTooltip from "../icons/IconWithTooltip.svelte";
+	import { IconWithTooltip } from "../icons";
 	let componentClass = "";
 	export { componentClass as class };
 
@@ -80,7 +80,7 @@
 				</div>
 
 				{#if i < breadcrumbs.length - 1}
-					<Icon icon="tabler:chevron-right" class="text-base mb-0.5 "></Icon>
+					<iconify-icon icon="tabler:chevron-right" class="text-base mb-0.5"></iconify-icon>
 				{/if}
 			{/each}
 		</div>

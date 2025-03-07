@@ -30,15 +30,17 @@
 				<TableHeader />
 			{/if}
 			<TableBody data={$data} />
-			<tr>
-				<td colspan={$visibleColumns.length + (selectable ? 1 : 0)}>
-					{#if $data.length === 0}
-						<div class="flex h-28 bg-gray-50 justify-center items-center text-gray-400">
-							<p>{context.noDataText ?? "No data available"}</p>
-						</div>
-					{/if}
-				</td>
-			</tr>
+			<tbody>
+				<tr>
+					<td colspan={$visibleColumns.length + (selectable ? 1 : 0)}>
+						{#if $data.length === 0}
+							<div class="flex h-28 bg-gray-50 justify-center items-center text-gray-400">
+								<p>{context.noDataText ?? "No data available"}</p>
+							</div>
+						{/if}
+					</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 	{#if showFooter}

@@ -2,7 +2,7 @@
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import { Button } from "$lib/components";
-	import Icon from "@iconify/svelte";
+
 	import { atom } from "nanostores";
 	import { dndzone } from "svelte-dnd-action";
 	import { FormControl, type ListItem } from "..";
@@ -140,7 +140,7 @@
 						<Button>
 							<div slot="label" class="w-full">
 								<div class=" flex gap-1 items-center justify-center">
-									<Icon icon="bx:image-add" class="text-lg " />
+									<iconify-icon icon="bx:image-add" class="text-lg"></iconify-icon>
 									<div>Add Item</div>
 								</div>
 							</div>
@@ -148,7 +148,7 @@
 						<Button class="button-green " onClick={handleSave}>
 							<div slot="label" class="w-full">
 								<div class=" w-full flex gap-1 items-center justify-center">
-									<Icon icon="bx:save" class="text-lg" />
+									<iconify-icon icon="bx:save" class="text-lg"></iconify-icon>
 									<div>Save</div>
 								</div>
 							</div>
@@ -156,7 +156,7 @@
 						<Button class=" button-red " onClick={handleCancel}>
 							<div slot="label" class="w-full">
 								<div class=" w-full flex gap-1 items-center justify-center">
-									<Icon icon="bx:undo" class="text-lg " />
+									<iconify-icon icon="bx:undo" class="text-lg"></iconify-icon>
 									<div>Cancel</div>
 								</div>
 							</div>
@@ -170,7 +170,7 @@
 						>
 							<div slot="label" class="w-full">
 								<div class=" w-full flex gap-1 items-center justify-center">
-									<Icon icon="bx:edit-alt" class="text-lg " />
+									<iconify-icon icon="bx:edit-alt" class="text-lg"></iconify-icon>
 									<div>Edit List</div>
 								</div>
 							</div></Button

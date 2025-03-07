@@ -13,7 +13,7 @@
 	} from "$lib/components";
 	import TextField from "$lib/components/form/text-field/TextField.svelte";
 	import { ProductCategoryRepository } from "$repositories";
-	import Icon from "@iconify/svelte";
+
 	import { atom } from "nanostores";
 	import type { ProductCategoryUpdateData } from "../../../../$api/routes/product-category/product-category.schema";
 	import type { _ProductCategory } from "../ProductCategories";
@@ -96,7 +96,7 @@
 					}
 				}}
 			>
-				<Icon icon="bx:copy" />
+				<iconify-icon icon="bx:copy"></iconify-icon>
 			</Tooltip>
 		</div>
 	</TextField>

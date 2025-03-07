@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { PUBLIC_ENV } from "$env/static/public";
-	import Icon from "@iconify/svelte";
-	import type { HTMLInputTypeAttribute } from "svelte/elements";
+
+	import type { FullAutoFill, HTMLInputTypeAttribute } from "svelte/elements";
 	import { FormControl } from "../controller/form-control";
 	export let type: HTMLInputTypeAttribute | undefined | null = "text";
 	export let controller: FormControl = new FormControl<string>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;
-	export let autocomplete: string = "off";
+	export let autocomplete: FullAutoFill = "off";
 	export let allowKeys: RegExp | "lettersOnly" | "numbersOnly" | undefined = undefined;
 	export let specialKeys: string[] = [
 		"Tab",
@@ -176,8 +176,12 @@
 		/>
 
 		{#if !disabled && controller.faker != null && PUBLIC_ENV === "DEV"}
-			<button class="button button-inverse p-2 mr-1" on:click={handleGenerateFakeData}>
-				<Icon icon="fe:random" />
+			<button
+				class="button button-inverse p-2 mr-1"
+				on:click={handleGenerateFakeData}
+				aria-label="Generate Random"
+			>
+				<iconify-icon icon="fe:random"></iconify-icon>
 			</button>
 		{/if}
 		{#if $$slots.postfix}

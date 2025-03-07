@@ -4,7 +4,7 @@
 	import { getToastState } from "$applications/toast.state";
 	import { Button, Dialog } from "$lib/components";
 	import { ProductCategoryRepository } from "$repositories";
-	import Icon from "@iconify/svelte";
+
 	import { atom } from "nanostores";
 	import type { _ProductCategory } from "../ProductCategories";
 
@@ -35,7 +35,7 @@
 	}}
 >
 	<div slot="label">
-		<Icon icon="bx:trash" />
+		<iconify-icon icon="bx:trash"></iconify-icon>
 	</div>
 </Button>
 

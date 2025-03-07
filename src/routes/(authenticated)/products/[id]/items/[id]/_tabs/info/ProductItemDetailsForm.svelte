@@ -15,7 +15,7 @@
 	import { FormValidator } from "$lib/components/form/controller/form-validator";
 	import { ProductItemRepository } from "$repositories";
 	import { faker } from "@faker-js/faker";
-	import Icon from "@iconify/svelte";
+
 	import { atom } from "nanostores";
 	import { getProductItemContext } from "../../ProductItem";
 	import ProductItemDeleteButton from "./ProductItemDeleteButton.svelte";
@@ -148,7 +148,7 @@
 					}
 				}}
 			>
-				<Icon icon="bx:copy" />
+				<iconify-icon icon="bx:copy"></iconify-icon>
 			</Tooltip>
 		</div>
 	</TextField>

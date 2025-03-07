@@ -7,7 +7,7 @@
 
 	import { FileType, saveAsFile } from "$lib/utils/file-saver";
 	import { FieldOption } from "$types";
-	import Icon from "@iconify/svelte";
+
 	import { json2csv } from "json-2-csv";
 	import { getTableContext, type BulkActionCallback, type TableColumn } from ".";
 	import { Button, FormControl } from "..";
@@ -155,7 +155,7 @@
 					}}
 				>
 					<div>Clear</div>
-					<Icon icon="bx:x" class="text-slate-500 text-sm"></Icon>
+					<iconify-icon icon="bx:x" class="text-slate-500 text-sm"></iconify-icon>
 				</button>
 			</div>
 			{#if bulkActionOptions.length > 0}
@@ -198,7 +198,7 @@
 				valid={$selected.length > 0}
 			>
 				<div slot="prefix">
-					<Icon icon="mdi:download" class="text-2xs -mt-0.5" />
+					<iconify-icon icon="mdi:download" class="text-2xs -mt-0.5"></iconify-icon>
 				</div>
 			</Button>{/if}
 		{#if toCSV}
@@ -208,7 +208,7 @@
 				onClick={() => handleDownloadAll()}
 			>
 				<div slot="prefix">
-					<Icon icon="mdi:download" class="text-2xs -mt-0.5" />
+					<iconify-icon icon="mdi:download" class="text-2xs -mt-0.5"></iconify-icon>
 				</div>
 			</Button>{/if}
 	</div>

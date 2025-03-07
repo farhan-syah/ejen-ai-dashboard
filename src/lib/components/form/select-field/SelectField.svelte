@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Popper } from "$lib/components";
 	import type { FieldOption } from "$types";
-	import Icon from "@iconify/svelte";
+
 	import type { ModifierPhases } from "@popperjs/core";
 	import { atom } from "nanostores";
 	import type { PopperOptions } from "svelte-popperjs";
@@ -201,7 +201,7 @@
 							</div>
 							{#if showSelectedIcon && $value == option.value}
 								<div class="text-xl text-green-500">
-									<Icon icon="bx:check" />
+									<iconify-icon icon="bx:check"></iconify-icon>
 								</div>
 							{/if}
 						</div>

@@ -31,6 +31,7 @@ class _AuthService {
 		});
 
 		const cookie = token.cookie;
+
 		if (cookie) {
 			cookie.forEach((c) => {
 				document.cookie = c;
@@ -116,6 +117,7 @@ class _AuthService {
 					userId: decodedToken.sub
 				}
 			});
+
 			const setting = searchSettingResults.at(0);
 			if (setting?.defaultUserRole) {
 				const permissions = await this.getPermissions(setting.defaultUserRole);

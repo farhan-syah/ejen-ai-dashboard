@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { PUBLIC_ENV } from "$env/static/public";
-	import Icon from "@iconify/svelte";
+
+	import { type FullAutoFill } from "svelte/elements";
 	import { twMerge } from "tailwind-merge";
 	import { FormControl } from "../controller/form-control";
 	export let controller: FormControl<number> = new FormControl<number>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;
-	export let autocomplete: string = "off";
+	export let autocomplete: FullAutoFill | null | undefined = "off";
 	export let onInput: (value: string, input: HTMLInputElement, event: any) => any;
 	export let onKeydown: ((e: KeyboardEvent, controller: FormControl) => any) | undefined =
 		undefined;
@@ -137,8 +138,12 @@
 			on:keydown={handleKeydown}
 		/>
 		{#if controller.faker != null && PUBLIC_ENV === "DEV"}
-			<button class="button button-inverse p-2 mr-1" on:click={handleGenerateFakeData}>
-				<Icon icon="fe:random" />
+			<button
+				aria-label="randomize"
+				class="button button-inverse p-2 mr-1"
+				on:click={handleGenerateFakeData}
+			>
+				<iconify-icon icon="fe:random"></iconify-icon>
 			</button>
 		{/if}
 	</div>

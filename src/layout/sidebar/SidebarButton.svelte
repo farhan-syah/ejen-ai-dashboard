@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { getAppState } from "$applications";
-	import Icon from "@iconify/svelte";
 	import { writable } from "svelte/store";
 	import SidebarChildButton from "./SidebarChildButton.svelte";
 	import type { SidebarItem } from "./sidebar.config";
-
 	export let sidebarItem: SidebarItem;
 	const childItems = sidebarItem.items;
 	const pattern = RegExp(`^${sidebarItem.link}`);
@@ -33,7 +31,7 @@
 {#if $layout === "desktop" && !$isSidebarOpen}
 	{#if sidebarItem.icon}
 		<div class=" px-2 py-1.5">
-			<Icon icon={sidebarItem.icon} class="text-base"></Icon>
+			<iconify-icon icon={sidebarItem.icon} class="text-base"></iconify-icon>
 		</div>
 	{/if}
 {:else if childItems && childItems.length > 0}
@@ -47,13 +45,15 @@
 		tabindex="-1"
 	>
 		{#if sidebarItem.icon}
-			<Icon icon={sidebarItem.icon} class="text-base {$active ? 'text-white' : ''}"></Icon>
+			<iconify-icon icon={sidebarItem.icon} class="text-base {$active ? 'text-white' : ''}"
+			></iconify-icon>
 		{/if}
 		<div class="pt-0.5 flex-grow">
 			{sidebarItem.title}
 		</div>
 		{#if childItems && childItems.length > 0 && isOpen}
-			<Icon icon="bx:chevron-right" class="transition text-xl {$isOpen ? 'rotate-90' : ''}" />
+			<iconify-icon icon="bx:chevron-right" class="transition text-xl {$isOpen ? 'rotate-90' : ''}"
+			></iconify-icon>
 		{/if}
 	</div>
 
@@ -71,10 +71,10 @@
 		tabindex="-1"
 	>
 		{#if sidebarItem.icon}
-			<Icon
+			<iconify-icon
 				icon={sidebarItem.icon}
 				class="text-base group-hover:text-white {$active ? 'text-white' : ''}"
-			></Icon>
+			></iconify-icon>
 		{/if}
 		<div class="pt-0.5 flex-grow">
 			{sidebarItem.title}
