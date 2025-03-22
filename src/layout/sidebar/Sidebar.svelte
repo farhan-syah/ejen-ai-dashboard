@@ -69,12 +69,14 @@
 			{/each}
 		{/key}
 
-		<div class=" px-2">
-			<div class="my-2 w-full h-0.25 bg-white/20"></div>
-		</div>
-		{#each commonSidebarItems as sidebarItem}
-			<SidebarButton {sidebarItem}></SidebarButton>
-		{/each}
+		{#if commonSidebarItems.length > 0}
+			<div class=" px-2">
+				<div class="my-2 w-full h-0.25 bg-white/20"></div>
+			</div>
+			{#each commonSidebarItems as sidebarItem}
+				<SidebarButton {sidebarItem}></SidebarButton>
+			{/each}
+		{/if}
 	</div>
 </div>
 

@@ -56,7 +56,7 @@ class _AuthService {
 			if (token) this.saveToken(token);
 		} else {
 			if (UserState.user.get()) {
-				this.logout;
+				this.logout();
 			}
 		}
 	}
@@ -119,8 +119,8 @@ class _AuthService {
 			});
 
 			const setting = searchSettingResults.at(0);
-			if (setting?.defaultUserRole) {
-				const permissions = await this.getPermissions(setting.defaultUserRole);
+			if (setting?.defaultUserRoleId) {
+				const permissions = await this.getPermissions(setting.defaultUserRoleId);
 				UserState.permissions.set(permissions);
 			}
 			UserState.setting.set(setting);

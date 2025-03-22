@@ -31,7 +31,7 @@
 </script>
 
 <svelte:head>
-	<title>Mushrif ERP</title>
+	<title>Ejen AI</title>
 	<meta name="robots" content="noindex nofollow" />
 </svelte:head>
 

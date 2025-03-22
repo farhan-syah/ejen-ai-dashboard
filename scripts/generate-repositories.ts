@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const overrideFiles = false;
+const overrideFiles = true;
 
 const generateRepositoryFile = (modelName: string, kebabCaseName: string) => {
 	const template = `import type {

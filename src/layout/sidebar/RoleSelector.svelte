@@ -20,8 +20,10 @@
 	const isDialogOpen = atom(false);
 
 	currentRole.listen(async (value) => {
-		if (value && $user && $userSetting && $userSetting?.defaultUserRole != value.id) {
-			await UserSettingRepository.update($userSetting.id, { data: { defaultUserRole: value.id } });
+		if (value && $user && $userSetting && $userSetting?.defaultUserRoleId != value.id) {
+			await UserSettingRepository.update($userSetting.id, {
+				data: { defaultUserRoleId: value.id }
+			});
 		}
 
 		AuthService.refreshUser();
@@ -70,10 +72,10 @@
 			groupedRoles.set(Object.values(groups));
 		}
 
-		const defaultUserRole = $userSetting?.defaultUserRole;
+		const defaultUserRoleId = $userSetting?.defaultUserRoleId;
 		const initialRole =
 			result.find((role) => {
-				return role.id === defaultUserRole;
+				return role.id === defaultUserRoleId;
 			}) ?? result.at(0);
 		currentRole.set(initialRole);
 	}

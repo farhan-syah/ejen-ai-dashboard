@@ -41,7 +41,8 @@
 		>
 			<div class="p-2">
 				{#if column.content}
-					<svelte:component this={column.content} {data} />
+					{@const Component = column.content}
+					<svelte:component this={Component} {data} />
 				{:else if column.transform}
 					{column.transform(data[column.key], data)}
 				{:else}
