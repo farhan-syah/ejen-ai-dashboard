@@ -6,6 +6,7 @@
 	import { AgentTypeRepository } from "$repositories";
 	import { onMount } from "svelte";
 	import { createAgentTypeContext } from "./AgentType";
+	import AgentTypeDetails from "./AgentTypeDetails.svelte";
 
 	// Constants
 
@@ -44,5 +45,7 @@
 			{ label: "Edit Agent", path: "/agent-types/" + id, currentPage: true }
 		]}
 	/>
-	<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">body</div>
+	<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">
+		<AgentTypeDetails />
+	</div>
 {/if}

@@ -2,7 +2,8 @@ import type { TableColumn } from "$lib/components";
 import { formatLocalDate } from "$lib/utils/date";
 import { CSV } from "$types";
 import type { AgentType } from "@prisma/client";
-import AgentTypeActions from "./actions/AgentTypeActions.svelte";
+import AgentTypeActions from "./_/actions/AgentTypeActions.svelte";
+import AgentTypesIconColumn from "./_/columns/AgentTypesIconColumn.svelte";
 
 export type _AgentType = AgentType & {};
 export const agentTypeColumns: TableColumn<AgentType>[] = [
@@ -11,6 +12,12 @@ export const agentTypeColumns: TableColumn<AgentType>[] = [
 		label: "ID",
 		// visible: true,
 		sortable: true
+	},
+	{
+		key: "icon",
+		label: "Icon",
+		visible: true,
+		content: AgentTypesIconColumn
 	},
 	{
 		key: "name",

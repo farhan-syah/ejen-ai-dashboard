@@ -32,6 +32,6 @@ export function createAgentTypeContext(option: AgentTypeContextOption) {
 	return setContext("agentTypeContext", new AgentTypeContext(option));
 }
 
-export function getAgentContext() {
+export function getAgentTypeContext() {
 	return getContext<AgentTypeContext>("agentTypeContext");
 }

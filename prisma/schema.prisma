@@ -321,11 +321,16 @@ model Agent {
   createdAt      DateTime             @default(now())
   updatedAt      DateTime             @updatedAt
   name           String
+  agentType      AgentType            @relation(fields: [agentTypeId], references: [id])
+  agentTypeId    String //Link to the `AgentType`
   organization   Organization         @relation(fields: [organizationId], references: [id])
   organizationId String
   status         AgentStatus          @default(Pending)
   statusHistory  AgentStatusHistory[]
   credentials    Credential[]
+  integrations   AgentIntegration[]
+  Usage          Usage[]
+  UsageEvent     UsageEvent[]
 }
 
 model AgentStatusHistory {
@@ -345,19 +350,75 @@ enum AgentStatus {
 }
 
 model AgentType {
-  id          String          @id @default(cuid())
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
-  name        String
-  description String
-  status      AgentTypeStatus
-  credentials Credential[]
+  id           String             @id @default(cuid())
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  key          String             @unique()
+  name         String
+  description  String
+  icon         String             @default("carbon:ai")
+  status       AgentTypeStatus    @default(Preview)
+  price        Int // Price in cents - Base price of the **agent itself**
+  tags         String[]           @default([])
+  integrations AgentIntegration[]
+  Agent        Agent[]
 }
 
 enum AgentTypeStatus {
   Preview
   Active
   Disabled
+}
+
+model Integration {
+  id                String             @id @default(cuid())
+  name              String // e.g., "WhatsApp", "Telegram", "Web Integration"
+  key               String             @unique // e.g., "whatsapp", "telegram", "web" - to identify in code
+  description       String? // Optional Description
+  agentIntegrations AgentIntegration[]
+  usages            Usage[]
+  UsageEvent        UsageEvent[]
+}
+
+model AgentIntegration {
+  id            String      @id @default(cuid())
+  agentType     AgentType   @relation(fields: [agentTypeId], references: [id])
+  agentTypeId   String
+  integration   Integration @relation(fields: [integrationId], references: [id])
+  integrationId String
+  price         Int // Price in cents - **Specific to the agent + integration combo**
+  agent         Agent       @relation(fields: [agentId], references: [id])
+  agentId       String
+
+  @@unique([agentTypeId, integrationId]) // Prevent duplicate agent/integration combos
+}
+
+model Usage {
+  id            String      @id @default(cuid())
+  agent         Agent       @relation(fields: [agentId], references: [id])
+  agentId       String
+  integration   Integration @relation(fields: [integrationId], references: [id])
+  integrationId String // To track which integration this usage is for
+  units         Int         @default(0) // Number of "units" used (e.g., messages, API calls)
+  cost          Int         @default(0) // Pre-calculated cost (in cents)
+  startTime     DateTime    @default(now()) // Start of the usage period (e.g., start of day)
+  endTime       DateTime    @default(now()) // End of the usage period (e.g., end of day)
+
+  @@unique([agentId, integrationId, startTime, endTime]) // Ensure only one record per period+agent+integration
+  @@index([agentId, integrationId, startTime, endTime]) //Index for fast query
+}
+
+model UsageEvent {
+  id            String      @id @default(cuid())
+  agent         Agent       @relation(fields: [agentId], references: [id])
+  agentId       String
+  integration   Integration @relation(fields: [integrationId], references: [id])
+  integrationId String // To track which integration this usage is for
+  units         Int         @default(0) // Number of "units" used (e.g., messages, API calls)
+  cost          Int         @default(0) // Total cost for this usage, pre-calculated (in cents)
+  createdAt     DateTime    @default(now())
+
+  @@index([agentId, integrationId, createdAt]) // For efficient querying
 }
 
 model Credential {
@@ -369,8 +430,6 @@ model Credential {
   credentialType   CredentialType @relation(fields: [credentialTypeId], references: [id])
   credentialTypeId String
   value            String // Store API keys, tokens, or credentials
-  agentType        AgentType?     @relation(fields: [agentTypeId], references: [id])
-  agentTypeId      String?
 }
 
 model CredentialType {

@@ -12,6 +12,7 @@
 	export let title: string;
 	export let id: string | undefined = undefined;
 	export let breadcrumbs: BreadcrumbItem[] = [];
+	export let showMetadata: boolean = true;
 </script>
 
 <div class="flex flex-wrap items-center text-gray-800 mb-2 {componentClass}">
@@ -28,40 +29,42 @@
 					</div>
 				</div>
 			{/if}
-			<div class="flex items-center">
-				<div class="ml-1">|</div>
-				{#if id}
+			{#if showMetadata}
+				<div class="flex items-center">
+					<div class="ml-1">|</div>
+					{#if id}
+						<IconWithTooltip
+							icon="bx:copy"
+							iconClass="text-cyan-600 p-1 text-2xl"
+							tooltip="Copy ID"
+							onClick={async () => {
+								if (id) {
+									await navigator.clipboard.writeText(id);
+									toastState.add({
+										type: "info",
+										key: "id",
+										message: "ID has been copied"
+									});
+								}
+							}}
+						/>
+					{/if}
 					<IconWithTooltip
-						icon="bx:copy"
-						iconClass="text-cyan-600 p-1 text-2xl"
-						tooltip="Copy ID"
+						icon="bx:link"
+						iconClass="text-blue-600 p-1 text-2xl"
+						tooltip="Copy URL"
 						onClick={async () => {
-							if (id) {
-								await navigator.clipboard.writeText(id);
-								toastState.add({
-									type: "info",
-									key: "id",
-									message: "ID has been copied"
-								});
-							}
+							const url = $page.url.toString();
+							await navigator.clipboard.writeText(url);
+							toastState.add({
+								type: "info",
+								// key: url,
+								message: "URL has been copied"
+							});
 						}}
 					/>
-				{/if}
-				<IconWithTooltip
-					icon="bx:link"
-					iconClass="text-blue-600 p-1 text-2xl"
-					tooltip="Copy URL"
-					onClick={async () => {
-						const url = $page.url.toString();
-						await navigator.clipboard.writeText(url);
-						toastState.add({
-							type: "info",
-							// key: url,
-							message: "URL has been copied"
-						});
-					}}
-				/>
-			</div>
+				</div>
+			{/if}
 		</div>
 		<slot name="action" />
 	</div>
