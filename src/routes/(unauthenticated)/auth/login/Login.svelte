@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { LoginInput } from "$api/routes/auth/auth.schema";
 	import { getAppState } from "$applications";
-	import { Button, FormControl, Link, TextField } from "$lib/components";
+	import { Button, CheckboxField, FormControl, Link, TextField } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { AuthService } from "$services/auth.service";
 	import { computed } from "nanostores";
@@ -21,6 +21,10 @@
 		validators: []
 	});
 
+	const isPersistantController = new FormControl<boolean>({
+		name: "isPersistant"
+	});
+
 	const formValid = computed(
 		[emailController.valid, passwordController.valid],
 		(emailValid, passwordValid) => {
@@ -31,11 +35,12 @@
 	async function handleSubmit() {
 		const email = emailController.writableValue.get();
 		const password = passwordController.writableValue.get();
+		const isPersistant = isPersistantController.writableValue.get();
 		if (!email || !password) return;
 		const loginInput: LoginInput = {
 			email: email,
 			password: password,
-			includeCookie: true
+			isPersistant: !!isPersistant
 		};
 
 		appState.loading.set(true);
@@ -47,27 +52,22 @@
 
 		appState.loading.set(false);
 	}
-
-	// async function handleRefresh() {
-	// 	appState.loading.set(true);
-	// 	await AuthService.refreshToken().catch((e) => {
-	// 		appState.error.set(e);
-	// 	});
-	// 	appState.loading.set(false);
-	// }
 </script>
 
 <Card class="p-6 w-96">
 	<div class="flex flex-col gap-3">
 		<TextField controller={emailController} label="Email" type="email" />
-		<TextField controller={passwordController} label="Password">
-			<div slot="labelPostfix" class="text-xs">
+		<TextField controller={passwordController} label="Password"></TextField>
+		<div class="flex">
+			<CheckboxField controller={isPersistantController} class="w-full">
+				<div>Remember me</div>
+			</CheckboxField>
+			<div class="text-xs whitespace-nowrap mt-0.5">
 				<Link link="/forgot-password" class="text-blue-500 hover:bg-blue-50 px-0.5">
 					Forgot password
 				</Link>
 			</div>
-		</TextField>
-
+		</div>
 		<Button class="w-32 " valid={$formValid} onClick={handleSubmit} />
-	</div>
-</Card>
+	</div></Card
+>

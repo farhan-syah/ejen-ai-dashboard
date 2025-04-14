@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { Button, getStepperContext } from "$lib/components";
 
 	const context = getStepperContext();
@@ -37,4 +37,4 @@
 			stepperContext.handleNextClick();
 		}}
 	/>
-</div>
+</div> -->

@@ -4,3 +4,4 @@ export * from "./list-field";
 export * from "./search-field";
 export * from "./select-field";
 export * from "./text-field";
+export * from "./checkbox-field";

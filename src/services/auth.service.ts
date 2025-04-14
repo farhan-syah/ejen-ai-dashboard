@@ -6,9 +6,11 @@ import { UserRepository, UserSettingRepository } from "$repositories";
 import type { DecodedToken, ReceivedToken } from "$types";
 import { jwtDecode } from "jwt-decode";
 import { HttpService } from "./http.service";
+import { navigating } from "$app/stores"; // SvelteKit navigation store
 
 class _AuthService {
 	path = PUBLIC_API_BASE_PATH + "/auth";
+	sessionCookieName = "sessionId";
 
 	constructor() {
 		UserState.accessToken.subscribe((token) => {
@@ -20,6 +22,52 @@ class _AuthService {
 				}
 			}
 		});
+
+		this.setupCookieMonitoring();
+	}
+
+	private setupCookieMonitoring() {
+		if (browser) {
+			// Initial check on load
+			this.checkSessionCookie();
+
+			// More frequent checks (every 10 seconds)
+			setInterval(() => this.checkSessionCookie(), 10000);
+
+			// Check on navigation events
+			navigating.subscribe((navigation) => {
+				if (navigation) {
+					this.checkSessionCookie();
+				}
+			});
+
+			// // Check on focus
+			// window.addEventListener('focus', () => this.checkSessionCookie());
+
+			// Listen for storage events (might catch some cookie changes)
+			window.addEventListener("storage", () => this.checkSessionCookie());
+
+			// Check when document becomes visible again
+			document.addEventListener("visibilitychange", () => {
+				if (document.visibilityState === "visible") {
+					this.checkSessionCookie();
+				}
+			});
+		}
+	}
+
+	private checkSessionCookie() {
+		// Only run check if user is logged in
+		if (UserState.user.get() && !this.hasSessionCookie()) {
+			console.log("Session cookie not found, logging out");
+			this.logout();
+		}
+	}
+
+	private hasSessionCookie(): boolean {
+		return document.cookie
+			.split(";")
+			.some((cookie) => cookie.trim().startsWith(`${this.sessionCookieName}=`));
 	}
 
 	async login(input: LoginInput) {
@@ -39,6 +87,8 @@ class _AuthService {
 		}
 
 		this.saveToken(token);
+		// Verify cookie exists after login
+		this.checkSessionCookie();
 	}
 
 	async refreshToken() {
@@ -106,6 +156,8 @@ class _AuthService {
 				this.fetchUserFromLocalAccessToken(token);
 			}
 		}
+		// Check cookie when refreshing user data
+		this.checkSessionCookie();
 	}
 
 	private async fetchUserFromLocalAccessToken(token: string) {
@@ -133,6 +185,16 @@ class _AuthService {
 	async logout() {
 		await this.clearToken();
 		UserState.user.set(undefined);
+		UserState.permissions.set([]);
+		UserState.setting.set(undefined);
+	}
+
+	// Public method to manually check session status
+	// Can be called from layouts or components
+	checkSession() {
+		if (browser) {
+			this.checkSessionCookie();
+		}
 	}
 }
 
