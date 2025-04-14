@@ -7,6 +7,7 @@ import type { DecodedToken, ReceivedToken } from "$types";
 import { jwtDecode } from "jwt-decode";
 import { HttpService } from "./http.service";
 import { navigating } from "$app/stores"; // SvelteKit navigation store
+import { logger } from "$lib/utils/logger";
 
 class _AuthService {
 	path = PUBLIC_API_BASE_PATH + "/auth";
@@ -59,7 +60,7 @@ class _AuthService {
 	private checkSessionCookie() {
 		// Only run check if user is logged in
 		if (UserState.user.get() && !this.hasSessionCookie()) {
-			console.log("Session cookie not found, logging out");
+			logger.info("Session cookie not found, logging out");
 			this.logout();
 		}
 	}
@@ -99,7 +100,7 @@ class _AuthService {
 				auth: "refreshToken",
 				credentials: "include"
 			}).catch((e) => {
-				console.log(e);
+				logger.info(e);
 				this.logout();
 			});
 

@@ -42,7 +42,7 @@
 				}
 			}
 		} catch (e) {
-			console.log(e);
+			logger.error(e);
 		}
 	}
 </script>

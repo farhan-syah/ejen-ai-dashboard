@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-
+import { logger } from "../src/lib/utils/logger";
 const overrideFiles = true;
 
 const generateRepositoryFile = (modelName: string, kebabCaseName: string) => {
@@ -89,9 +89,9 @@ export const ${modelName}Repository = new _${modelName}Repository();
 	// Create the file if it doesn't exist or if override is true
 	if (!fs.existsSync(filePath) || overrideFiles) {
 		fs.writeFileSync(filePath, template);
-		console.log(`Generated repository file for model: ${modelName}`);
+		logger.info(`Generated repository file for model: ${modelName}`);
 	} else {
-		console.log(`Skipped generation for model: ${modelName}`);
+		logger.info(`Skipped generation for model: ${modelName}`);
 	}
 };
 
@@ -117,9 +117,9 @@ export {
 	// Update the file if it doesn't exist or if override is true
 	if (!fs.existsSync(filePath) || overrideFiles) {
 		fs.writeFileSync(filePath, template);
-		console.log(`Updated index file`);
+		logger.info(`Updated index file`);
 	} else {
-		console.log(`Skipped index file update`);
+		logger.info(`Skipped index file update`);
 	}
 };
 
