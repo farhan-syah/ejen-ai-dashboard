@@ -8,12 +8,11 @@
 	import "../app.postcss";
 	import App from "./app.svelte";
 	import { PUBLIC_ENV } from "$env/static/public";
+	import { logger } from "$lib/utils/logger";
 	// Initialize browser stores
 	const userState = UserState;
 	const token = userState.accessToken;
-	if (PUBLIC_ENV === "PROD") {
-		console.log = function () {};
-	}
+
 	if (token) {
 		AuthService;
 	}
