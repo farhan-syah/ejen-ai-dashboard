@@ -17,7 +17,7 @@
 		AuthService;
 	}
 
-	const reserved: string[] = ["/auth"];
+	const reserved: string[] = ["/login", "/register", "/forgot-password"];
 
 	onMount(() => {
 		token.subscribe(async (token) => {
@@ -35,7 +35,7 @@
 				if (reserved.includes($page.url.pathname)) {
 					return;
 				}
-				await goto("/auth/login", { replaceState: true });
+				await goto("/login", { replaceState: true });
 			} else {
 				if ($page.url.pathname == "/") {
 					await goto("/dashboard", { replaceState: true });

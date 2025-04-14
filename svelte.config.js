@@ -11,7 +11,8 @@ const config = {
 			$repositories: "src/repositories",
 			$applications: "src/applications",
 			$api: "imports/api",
-			$types: "src/types"
+			$types: "src/types",
+			$common: "src/common"
 		}
 	},
 	onwarn: (
