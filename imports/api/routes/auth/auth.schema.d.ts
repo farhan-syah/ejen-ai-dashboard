@@ -9,7 +9,6 @@ export type LoginInput = Static<typeof LoginSchema>;
 export declare const RegisterSchema: import("@sinclair/typebox").TObject<{
     email: import("@sinclair/typebox").TString;
     password: import("@sinclair/typebox").TString;
-    userType: import("@sinclair/typebox").TString;
     name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     firstName: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     lastName: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

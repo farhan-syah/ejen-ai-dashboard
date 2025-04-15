@@ -3,6 +3,7 @@
 
 	import type { FullAutoFill, HTMLInputTypeAttribute } from "svelte/elements";
 	import { FormControl } from "../controller/form-control";
+	import { atom } from "nanostores";
 	export let type: HTMLInputTypeAttribute | undefined | null = "text";
 	export let controller: FormControl = new FormControl<string>();
 	export let label: string | undefined = undefined;
@@ -151,6 +152,7 @@
 	{/if}
 	<div class="flex items-center relative rounded outline {outlineClass}">
 		<input
+			{type}
 			bind:this={controller.el}
 			{disabled}
 			name={controller.name}
@@ -185,7 +187,7 @@
 			</button>
 		{/if}
 		{#if $$slots.postfix}
-			<div class="absolute right-0 h-full">
+			<div class="right-0 h-full">
 				<slot name="postfix" />
 			</div>
 		{/if}
