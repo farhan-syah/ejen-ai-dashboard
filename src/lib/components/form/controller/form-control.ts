@@ -75,8 +75,8 @@ export class FormControl<T = any> {
 		});
 	}
 
-	get value() {
-		return this.writableValue.get();
+	get value(): T | undefined {
+		return this.writableValue.get() ?? undefined;
 	}
 
 	validate() {
@@ -104,6 +104,10 @@ export class FormControl<T = any> {
 		} else {
 			this.hasError.set(false);
 		}
+	}
+
+	set value(value: T | null | undefined) {
+		this.writableValue.set(value);
 	}
 
 	resetValue() {

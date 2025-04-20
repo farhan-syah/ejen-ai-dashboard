@@ -19,16 +19,40 @@
 	import { Logo } from "$common";
 	import TaskIcon from "../../../layout/top-menu/task/TaskIcon.svelte";
 	import { FormValidator } from "$lib/components/form/controller/form-validator";
+	import { PUBLIC_ENV } from "$env/static/public";
+	import { faker } from "@faker-js/faker";
+
 	const appState = getAppState();
+
+	const firstNameController = new FormControl<string>({
+		name: "firstName",
+		required: true,
+		validators: [],
+		faker: faker.person.firstName
+	});
+	const lastNameController = new FormControl<string>({
+		name: "lastName",
+		required: true,
+		validators: [],
+		faker: faker.person.lastName
+	});
+
 	const emailController = new FormControl({
 		name: "email",
 		required: true,
-		validators: [{ validator: validator.isEmail, errorMessage: "Invalid email" }]
+		validators: [{ validator: validator.isEmail, errorMessage: "Invalid email" }],
+		faker: () =>
+			faker.internet.email({
+				firstName: firstNameController.value,
+				lastName: lastNameController.value
+			})
 	});
+
 	const passwordController = new FormControl<string>({
 		name: "password",
 		required: true,
-		validators: [FormValidator.isStrongPassword()]
+		validators: [FormValidator.isStrongPassword()],
+		faker: () => "a123456!"
 	});
 
 	const passwordConfirmationController = new FormControl<string>({
@@ -36,18 +60,8 @@
 		required: true,
 		validators: [
 			FormValidator.match(passwordController, { errorMessage: "Password doesn't match" })
-		]
-	});
-
-	const firstNameController = new FormControl<string>({
-		name: "firstName",
-		required: true,
-		validators: []
-	});
-	const lastNameController = new FormControl<string>({
-		name: "lastName",
-		required: true,
-		validators: []
+		],
+		faker: () => "a123456!"
 	});
 
 	const form = new FormGroup([
@@ -89,7 +103,7 @@
 		<TextField controller={emailController} label="Email" type="email" />
 		<PasswordField controller={passwordController} label="Password" />
 		<PasswordField controller={passwordConfirmationController} label="Confirm Password" />
-		<Button class="w-full" label="Sign In" valid={$formValid} onClick={handleSubmit} />
+		<Button class="w-full" label="Register" valid={$formValid} onClick={handleSubmit} />
 		<div class="flex gap-1">
 			<div>Already have an account?</div>
 			<Link link="/login" class="text-blue-500 hover:bg-blue-50 px-0.5">Sign In</Link>
