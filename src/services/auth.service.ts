@@ -1,4 +1,4 @@
-import type { LoginInput } from "$api/routes/auth/auth.schema";
+import type { LoginInput, RegisterInput } from "$api/routes/auth/auth.schema";
 import { browser } from "$app/environment";
 import { UserState } from "$applications";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
@@ -196,6 +196,14 @@ class _AuthService {
 		if (browser) {
 			this.checkSessionCookie();
 		}
+	}
+
+	async register(input: RegisterInput) {
+		const url = this.path + "/register";
+
+		await HttpService.post<ReceivedToken>(url, {
+			body: JSON.stringify(input)
+		});
 	}
 }
 

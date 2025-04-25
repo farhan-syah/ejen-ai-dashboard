@@ -30,6 +30,7 @@
 				{toast.message}
 			</div>
 			<button
+				aria-label="Dismiss"
 				class="cursor-pointer rounded-full p-0.5 bg-blend-soft-light hover:bg-slate-500/20"
 				tabindex="-1"
 				on:click={() => {

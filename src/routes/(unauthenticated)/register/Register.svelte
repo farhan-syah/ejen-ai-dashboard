@@ -1,28 +1,15 @@
 <script lang="ts">
-	import type { LoginInput, RegisterInput } from "$api/routes/auth/auth.schema";
+	import type { RegisterInput } from "$api/routes/auth/auth.schema";
 	import { getAppState } from "$applications";
-	import {
-		Button,
-		CheckboxField,
-		FormControl,
-		FormGroup,
-		Icon,
-		IconWithTooltip,
-		Link,
-		PasswordField,
-		TextField
-	} from "$lib/components";
-	import Card from "$lib/components/card/Card.svelte";
-	import { AuthService } from "$services/auth.service";
-	import { computed } from "nanostores";
-	import validator, { isStrongPassword } from "validator";
-	import { Logo } from "$common";
-	import TaskIcon from "../../../layout/top-menu/task/TaskIcon.svelte";
+	import { Button, FormControl, FormGroup, Link, PasswordField, TextField } from "$lib/components";
 	import { FormValidator } from "$lib/components/form/controller/form-validator";
-	import { PUBLIC_ENV } from "$env/static/public";
+	import { AuthService } from "$services/auth.service";
 	import { faker } from "@faker-js/faker";
+	import validator from "validator";
+	import { getRegistrationState } from "./Register";
 
 	const appState = getAppState();
+	const registrationState = getRegistrationState();
 
 	const firstNameController = new FormControl<string>({
 		name: "firstName",
@@ -75,38 +62,36 @@
 	const formValid = form.valid;
 
 	async function handleSubmit() {
-		const email = emailController.writableValue.get();
-		const password = passwordController.writableValue.get();
-		const firstName = firstNameController.writableValue.get();
-		const lastName = lastNameController.writableValue.get();
-		if (!email || !password || !firstName || !lastName) return;
-		const registerInput: RegisterInput = {
-			email: email,
-			password: password,
-			firstName: firstName,
-			lastName: lastName
-		};
-
-		appState.loading.set(true);
-
-		// TODO : Implement register
-
-		appState.loading.set(false);
+		try {
+			appState.loading.set(false);
+			const email = emailController.writableValue.get();
+			const password = passwordController.writableValue.get();
+			const firstName = firstNameController.writableValue.get();
+			const lastName = lastNameController.writableValue.get();
+			if (!email || !password || !firstName || !lastName) return;
+			const registerInput: RegisterInput = {
+				email: email,
+				password: password,
+				firstName: firstName,
+				lastName: lastName
+			};
+			await AuthService.register(registerInput);
+			registrationState.markAsSuccessful();
+		} catch (e) {
+			appState.error.set(e);
+		} finally {
+			appState.loading.set(false);
+		}
 	}
 </script>
 
-<Card class="p-6 w-96">
-	<div class="flex flex-col gap-4">
-		<Logo class="text-3xl" link="/" />
-		<TextField controller={firstNameController} label="First Name" />
-		<TextField controller={lastNameController} label="Last Name" />
-		<TextField controller={emailController} label="Email" type="email" />
-		<PasswordField controller={passwordController} label="Password" />
-		<PasswordField controller={passwordConfirmationController} label="Confirm Password" />
-		<Button class="w-full" label="Register" valid={$formValid} onClick={handleSubmit} />
-		<div class="flex gap-1">
-			<div>Already have an account?</div>
-			<Link link="/login" class="text-blue-500 hover:bg-blue-50 px-0.5">Sign In</Link>
-		</div>
-	</div>
-</Card>
+<TextField controller={firstNameController} label="First Name" />
+<TextField controller={lastNameController} label="Last Name" />
+<TextField controller={emailController} label="Email" type="email" />
+<PasswordField controller={passwordController} label="Password" />
+<PasswordField controller={passwordConfirmationController} label="Confirm Password" />
+<Button class="w-full" label="Register" valid={$formValid} onClick={handleSubmit} />
+<div class="flex gap-1">
+	<div>Already have an account?</div>
+	<Link link="/login" class="text-blue-500 hover:bg-blue-50 px-0.5">Sign In</Link>
+</div>
