@@ -7,7 +7,7 @@ export enum RegistrationStatus {
 }
 
 class RegistrationState {
-	status = atom(RegistrationStatus.SUCCESS);
+	status = atom(RegistrationStatus.PENDING);
 
 	markAsSuccessful() {
 		this.status.set(RegistrationStatus.SUCCESS);

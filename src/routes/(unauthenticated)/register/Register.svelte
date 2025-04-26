@@ -63,7 +63,7 @@
 
 	async function handleSubmit() {
 		try {
-			appState.loading.set(false);
+			appState.loading.set(true);
 			const email = emailController.writableValue.get();
 			const password = passwordController.writableValue.get();
 			const firstName = firstNameController.writableValue.get();

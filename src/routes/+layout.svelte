@@ -17,7 +17,7 @@
 		AuthService;
 	}
 
-	const reserved: string[] = ["/login", "/register", "/forgot-password"];
+	const reserved: string[] = ["/login", "/register", "/forgot-password", "/verify-email"];
 
 	onMount(() => {
 		token.subscribe(async (token) => {
