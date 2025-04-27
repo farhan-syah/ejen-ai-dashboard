@@ -33,10 +33,11 @@ class _HttpService {
 		if (result.ok) return responseBody as T;
 
 		const error: ErrorResponse = {
-			status: responseBody.status ?? result.status,
-			code: responseBody.code ?? result.status,
-			message: responseBody.message ?? result.statusText
+			status: responseBody?.status ?? result.status,
+			code: responseBody?.code ?? result.status.toString(),
+			message: responseBody?.message ?? result.statusText
 		};
+
 		throw error;
 	}
 

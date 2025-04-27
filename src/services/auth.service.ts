@@ -205,6 +205,12 @@ class _AuthService {
 			body: JSON.stringify(input)
 		});
 	}
+
+	async verifyEmail(token: string) {
+		const url = this.path + `/verify-email?t=${token}`;
+
+		return HttpService.get(url, {});
+	}
 }
 
 export const AuthService = new _AuthService();
