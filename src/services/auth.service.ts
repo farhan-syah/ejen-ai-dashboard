@@ -17,7 +17,6 @@ class _AuthService {
 		UserState.accessToken.subscribe(async (token) => {
 			if (browser) {
 				if (token) {
-					logger.info(token);
 					this.fetchUserFromLocalAccessToken(token).catch((e) => {
 						logger.info(e);
 					});
@@ -25,6 +24,7 @@ class _AuthService {
 			}
 		});
 
+		this.setupTokenMonitoring();
 		this.setupCookieMonitoring();
 	}
 
@@ -55,6 +55,14 @@ class _AuthService {
 					this.checkSessionCookie();
 				}
 			});
+		}
+	}
+
+	private setupTokenMonitoring() {
+		if (browser) {
+			setInterval(() => {
+				this.checkTokenExpiry();
+			}, 60000); // 60,000 ms = 1 minute
 		}
 	}
 
