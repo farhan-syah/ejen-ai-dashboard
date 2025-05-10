@@ -1,28 +1,28 @@
 import type {
-  ImageCreate,
-  ImageDeleteMany,
-  ImageSearch,
-  ImageUpdate,
-  ImageUpdateMany
-} from "$api/routes/image/image.schema";
+  UsageEventCreate,
+  UsageEventDeleteMany,
+  UsageEventSearch,
+  UsageEventUpdate,
+  UsageEventUpdateMany
+} from "$api/routes/usage-event/usage-event.schema";
 import * as Prisma from "@prisma/client";
 import { PUBLIC_API_BASE_PATH } from "$env/static/public";
 import { HttpService } from "$services/http.service";
 
-class _ImageRepository {
-  path = PUBLIC_API_BASE_PATH + "/image";
+class _UsageEventRepository {
+  path = PUBLIC_API_BASE_PATH + "/usage-event";
 
-  async create(input: ImageCreate) {
+  async create(input: UsageEventCreate) {
     const url = this.path;
-    return await HttpService.post<Prisma.Image>(url, {
+    return await HttpService.post<Prisma.UsageEvent>(url, {
       body: JSON.stringify(input),
       auth: "accessToken",
     });
   }
 
-  async update(id: string, input: ImageUpdate) {
+  async update(id: string, input: UsageEventUpdate) {
     const url = `${this.path}/${id}`;
-    return await HttpService.patch<Prisma.Image>(url, {
+    return await HttpService.patch<Prisma.UsageEvent>(url, {
       body: JSON.stringify(input),
       auth: "accessToken",
     });
@@ -30,12 +30,12 @@ class _ImageRepository {
 
   async get(id: string) {
     const url = `${this.path}/${id}`;
-    return await HttpService.get<Prisma.Image>(url, {
+    return await HttpService.get<Prisma.UsageEvent>(url, {
       auth: "accessToken",
     });
   }
 
-  async updateMany(input: ImageUpdateMany) {
+  async updateMany(input: UsageEventUpdateMany) {
     const url = this.path;
     return await HttpService.patch<Prisma.Prisma.BatchPayload>(url, {
       body: JSON.stringify(input),
@@ -45,12 +45,12 @@ class _ImageRepository {
 
   async delete(id: string) {
     const url = `${this.path}/${id}`;
-    return await HttpService.delete<Prisma.Image>(url, {
+    return await HttpService.delete<Prisma.UsageEvent>(url, {
       auth: "accessToken",
     });
   }
 
-  async deleteMany(input: ImageDeleteMany) {
+  async deleteMany(input: UsageEventDeleteMany) {
     const url = this.path;
     return await HttpService.delete<Prisma.Prisma.BatchPayload>(url, {
       body: JSON.stringify(input),
@@ -58,15 +58,15 @@ class _ImageRepository {
     });
   }
 
-  async search(input: ImageSearch) {
+  async search(input: UsageEventSearch) {
     const url = `${this.path}/search`;
-    return await HttpService.post<Prisma.Image[]>(url, {
+    return await HttpService.post<Prisma.UsageEvent[]>(url, {
       body: JSON.stringify(input),
       auth: "accessToken",
     });
   }
 
-  async count(input: ImageSearch) {
+  async count(input: UsageEventSearch) {
     const url = `${this.path}/count`;
     return await HttpService.post<number>(url, {
       body: JSON.stringify(input),
@@ -75,4 +75,4 @@ class _ImageRepository {
   }
 }
 
-export const ImageRepository = new _ImageRepository();
+export const UsageEventRepository = new _UsageEventRepository();

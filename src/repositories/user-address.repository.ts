@@ -68,11 +68,11 @@ class _UserAddressRepository {
 
   async count(input: UserAddressSearch) {
     const url = `${this.path}/count`;
-		return await HttpService.post<number>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+    return await HttpService.post<number>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken"
+    });
+  }
 }
 
 export const UserAddressRepository = new _UserAddressRepository();

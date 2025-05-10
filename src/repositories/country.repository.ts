@@ -68,11 +68,11 @@ class _CountryRepository {
 
   async count(input: CountrySearch) {
     const url = `${this.path}/count`;
-		return await HttpService.post<number>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+    return await HttpService.post<number>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken"
+    });
+  }
 }
 
 export const CountryRepository = new _CountryRepository();

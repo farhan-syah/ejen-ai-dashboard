@@ -1,17 +1,17 @@
 import type { Static } from "@sinclair/typebox";
-export declare const AgentTypeQuerySchema: import("@sinclair/typebox").TObject<{
+export declare const AgentTypeIntegrationQuerySchema: import("@sinclair/typebox").TObject<{
     limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
-export type AgentTypeQuery = Static<typeof AgentTypeQuerySchema>;
-export declare const AgentTypeCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
-export type AgentTypeCreateInput = Static<typeof AgentTypeCreateInputSchema>;
-export declare const AgentTypeUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
-export type AgentTypeUpdateInput = Static<typeof AgentTypeUpdateInputSchema>;
-export declare const AgentTypeSearchWhereSchema: import("@sinclair/typebox").TObject<{
+export type AgentTypeIntegrationQuery = Static<typeof AgentTypeIntegrationQuerySchema>;
+export declare const AgentTypeIntegrationCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export type AgentTypeIntegrationCreateInput = Static<typeof AgentTypeIntegrationCreateInputSchema>;
+export declare const AgentTypeIntegrationUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export type AgentTypeIntegrationUpdateInput = Static<typeof AgentTypeIntegrationUpdateInputSchema>;
+export declare const AgentTypeIntegrationSearchWhereSchema: import("@sinclair/typebox").TObject<{
     id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
         equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
@@ -22,6 +22,7 @@ export declare const AgentTypeSearchWhereSchema: import("@sinclair/typebox").TOb
         mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
         not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
     }>, import("@sinclair/typebox").TString]>>>;
+    agentTypeKey: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     createdAt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
         equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
         in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
@@ -43,8 +44,8 @@ export declare const AgentTypeSearchWhereSchema: import("@sinclair/typebox").TOb
         not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
     }>, import("@sinclair/typebox").TString]>>>;
 }>;
-export type AgentTypeSearchWhere = Static<typeof AgentTypeSearchWhereSchema>;
-export declare const AgentTypeSearchSchema: import("@sinclair/typebox").TObject<{
+export type AgentTypeIntegrationSearchWhere = Static<typeof AgentTypeIntegrationSearchWhereSchema>;
+export declare const AgentTypeIntegrationSearchSchema: import("@sinclair/typebox").TObject<{
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -56,6 +57,7 @@ export declare const AgentTypeSearchSchema: import("@sinclair/typebox").TObject<
             mode: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TLiteral<"default">, import("@sinclair/typebox").TLiteral<"insensitive">]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
+        agentTypeKey: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         createdAt: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TArray<import("@sinclair/typebox").TDate>, import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>]>>;
@@ -85,20 +87,20 @@ export declare const AgentTypeSearchSchema: import("@sinclair/typebox").TObject<
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type AgentTypeSearch = Static<typeof AgentTypeSearchSchema>;
-export declare const AgentTypeCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
-export type AgentTypeCreateData = Static<typeof AgentTypeCreateDataSchema>;
-export declare const AgentTypeCreateSchema: import("@sinclair/typebox").TObject<{
+export type AgentTypeIntegrationSearch = Static<typeof AgentTypeIntegrationSearchSchema>;
+export declare const AgentTypeIntegrationCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export type AgentTypeIntegrationCreateData = Static<typeof AgentTypeIntegrationCreateDataSchema>;
+export declare const AgentTypeIntegrationCreateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type AgentTypeCreate = Static<typeof AgentTypeCreateSchema>;
-export declare const AgentTypeUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
-export type AgentTypeUpdateData = Static<typeof AgentTypeUpdateDataSchema>;
-export declare const AgentTypeUpdateSchema: import("@sinclair/typebox").TObject<{
+export type AgentTypeIntegrationCreate = Static<typeof AgentTypeIntegrationCreateSchema>;
+export declare const AgentTypeIntegrationUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export type AgentTypeIntegrationUpdateData = Static<typeof AgentTypeIntegrationUpdateDataSchema>;
+export declare const AgentTypeIntegrationUpdateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -108,8 +110,8 @@ export declare const AgentTypeUpdateSchema: import("@sinclair/typebox").TObject<
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type AgentTypeUpdate = Static<typeof AgentTypeUpdateSchema>;
-export declare const AgentTypeUpdateManySchema: import("@sinclair/typebox").TObject<{
+export type AgentTypeIntegrationUpdate = Static<typeof AgentTypeIntegrationUpdateSchema>;
+export declare const AgentTypeIntegrationUpdateManySchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
@@ -151,6 +153,7 @@ export declare const AgentTypeUpdateManySchema: import("@sinclair/typebox").TObj
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
+        agentTypeKey: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -160,8 +163,8 @@ export declare const AgentTypeUpdateManySchema: import("@sinclair/typebox").TObj
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type AgentTypeUpdateMany = Static<typeof AgentTypeUpdateManySchema>;
-export declare const AgentTypeDeleteManySchema: import("@sinclair/typebox").TObject<{
+export type AgentTypeIntegrationUpdateMany = Static<typeof AgentTypeIntegrationUpdateManySchema>;
+export declare const AgentTypeIntegrationDeleteManySchema: import("@sinclair/typebox").TObject<{
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -202,6 +205,7 @@ export declare const AgentTypeDeleteManySchema: import("@sinclair/typebox").TObj
             gte: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TDate, import("@sinclair/typebox").TString]>>;
             not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
         }>, import("@sinclair/typebox").TString]>>>;
+        agentTypeKey: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     }>;
 }>;
-export type AgentTypeDeleteMany = Static<typeof AgentTypeDeleteManySchema>;
+export type AgentTypeIntegrationDeleteMany = Static<typeof AgentTypeIntegrationDeleteManySchema>;

@@ -153,7 +153,7 @@ model Role {
   updatedAt      DateTime         @updatedAt
   name           String
   description    String?
-  key            String           @unique
+  key            String
   users          User[]
   permissions    RolePermission[]
   organization   Organization     @relation(fields: [organizationId], references: [id])
@@ -179,15 +179,15 @@ model Permission {
 // ** RolePermission (Join Table) ** //
 
 model RolePermission {
-  id           String     @id @default(cuid())
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  roleId       String
-  permissionId String
-  role         Role       @relation(fields: [roleId], references: [id])
-  permission   Permission @relation(fields: [permissionId], references: [id])
+  id            String     @id @default(cuid())
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  roleId        String
+  permissionKey String
+  role          Role       @relation(fields: [roleId], references: [id])
+  permission    Permission @relation(fields: [permissionKey], references: [key])
 
-  @@unique([roleId, permissionId], name: "unique_role_permission")
+  @@unique([roleId, permissionKey], name: "unique_role_permission")
 }
 
 // ** OrganizationType ** // e.g HQ, Company -> Must create Organization first. At least one organization is required
@@ -317,20 +317,20 @@ model Currency {
 // Agents
 
 model Agent {
-  id             String               @id @default(cuid())
-  createdAt      DateTime             @default(now())
-  updatedAt      DateTime             @updatedAt
-  name           String
-  agentType      AgentType            @relation(fields: [agentTypeId], references: [id])
-  agentTypeId    String //Link to the `AgentType`
-  organization   Organization         @relation(fields: [organizationId], references: [id])
-  organizationId String
-  status         AgentStatus          @default(Pending)
-  statusHistory  AgentStatusHistory[]
-  credentials    Credential[]
-  integrations   AgentIntegration[]
-  Usage          Usage[]
-  UsageEvent     UsageEvent[]
+  id               String               @id @default(cuid())
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  name             String
+  agentType        AgentType            @relation(fields: [agentTypeId], references: [id])
+  agentTypeId      String //Link to the `AgentType`
+  organization     Organization         @relation(fields: [organizationId], references: [id])
+  organizationId   String
+  status           AgentStatus          @default(Pending)
+  statusHistory    AgentStatusHistory[]
+  credentials      Credential[]
+  usage            Usage[]
+  usageEvent       UsageEvent[]
+  AgentIntegration AgentIntegration[]
 }
 
 model AgentStatusHistory {
@@ -350,18 +350,19 @@ enum AgentStatus {
 }
 
 model AgentType {
-  id           String             @id @default(cuid())
-  createdAt    DateTime           @default(now())
-  updatedAt    DateTime           @updatedAt
-  key          String             @unique()
+  id           String                 @id @default(cuid())
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  key          String                 @unique()
   name         String
   description  String
-  icon         String             @default("carbon:ai")
-  status       AgentTypeStatus    @default(Preview)
+  icon         String                 @default("carbon:ai")
+  status       AgentTypeStatus        @default(Preview)
   price        Int // Price in cents - Base price of the **agent itself**
-  tags         String[]           @default([])
-  integrations AgentIntegration[]
-  Agent        Agent[]
+  tags         String[]               @default([])
+  integrations AgentTypeIntegration[]
+  agents       Agent[]
+  priority     Int                    @default(0)
 }
 
 enum AgentTypeStatus {
@@ -371,26 +372,35 @@ enum AgentTypeStatus {
 }
 
 model Integration {
-  id                String             @id @default(cuid())
+  id                String                 @id @default(cuid())
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
   name              String // e.g., "WhatsApp", "Telegram", "Web Integration"
-  key               String             @unique // e.g., "whatsapp", "telegram", "web" - to identify in code
+  key               String                 @unique // e.g., "whatsapp", "telegram", "web" - to identify in code
   description       String? // Optional Description
-  agentIntegrations AgentIntegration[]
+  agentIntegrations AgentTypeIntegration[]
   usages            Usage[]
   UsageEvent        UsageEvent[]
 }
 
 model AgentIntegration {
-  id            String      @id @default(cuid())
-  agentType     AgentType   @relation(fields: [agentTypeId], references: [id])
-  agentTypeId   String
-  integration   Integration @relation(fields: [integrationId], references: [id])
-  integrationId String
-  price         Int // Price in cents - **Specific to the agent + integration combo**
-  agent         Agent       @relation(fields: [agentId], references: [id])
-  agentId       String
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  agent     Agent    @relation(fields: [agentId], references: [id])
+  agentId   String
+}
 
-  @@unique([agentTypeId, integrationId]) // Prevent duplicate agent/integration combos
+model AgentTypeIntegration {
+  id             String      @id @default(cuid())
+  agentType      AgentType   @relation(fields: [agentTypeKey], references: [key])
+  agentTypeKey   String
+  integration    Integration @relation(fields: [integrationKey], references: [key])
+  integrationKey String
+  price          Int         @default(0) // Price in cents - **Specific to the agent + integration combo**
+  pricePerUsage  Int         @default(0)
+
+  @@unique([agentTypeKey, integrationKey]) // Prevent duplicate agent/integration combos
 }
 
 model Usage {

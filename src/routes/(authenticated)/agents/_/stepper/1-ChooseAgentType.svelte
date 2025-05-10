@@ -10,19 +10,18 @@
 
 	const agentTypes: WritableAtom<_AgentType[]> = atom();
 
-	async function fetchAgentTyypes() {
+	async function fetchAgentTypes() {
 		const result = (await AgentTypeRepository.search({
 			where: {},
 			query: {
 				orderBy: { priority: "asc" }
 			}
 		})) as _AgentType[];
-
 		agentTypes.set(result);
 	}
 
 	onMount(() => {
-		fetchAgentTyypes();
+		fetchAgentTypes();
 	});
 
 	const selectedAgentType = addAgentContext.selectedAgentType;
@@ -30,7 +29,7 @@
 
 <div class="flex flex-col gap-2 items-center mt-4 px-8">
 	<h2 class="text-xl">Choose Agent Type</h2>
-	<div class="text-base">Select the type of agent you want to create</div>
+	<div class="text-base">Select an agent to get started</div>
 	{#if $agentTypes}
 		<div class="flex flex-wrap gap-4 mt-8 items-center justify-center">
 			{#each $agentTypes as agentType}

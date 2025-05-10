@@ -1,13 +1,16 @@
 Address
 Agent
+AgentIntegration
 AgentStatusHistory
 AgentType
+AgentTypeIntegration
 Country
 Credential
 CredentialType
 Currency
 Files
 Image
+Integration
 KnowledgeBase
 KnowledgeEntry
 Organization
@@ -20,6 +23,8 @@ Role
 RolePermission
 Session
 SystemSettings
+Usage
+UsageEvent
 User
 UserAddress
 UserSetting

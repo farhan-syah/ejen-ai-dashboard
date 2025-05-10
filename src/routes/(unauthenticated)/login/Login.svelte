@@ -7,18 +7,21 @@
 	import { computed } from "nanostores";
 	import validator from "validator";
 	import { Logo } from "$common";
+	import { env } from "$env/dynamic/public";
+	import { PUBLIC_DEFAULT_PASSWORD, PUBLIC_DEFAULT_USERNAME } from "$env/static/public";
+	import PasswordField from "$lib/components/form/text-field/PasswordField.svelte";
 	const appState = getAppState();
 
 	const emailController = new FormControl({
 		name: "email",
 		required: true,
-		value: "admin@admin.com",
+		value: PUBLIC_DEFAULT_USERNAME,
 		validators: [{ validator: validator.isEmail, errorMessage: "Invalid email" }]
 	});
 	const passwordController = new FormControl({
 		name: "password",
 		required: true,
-		value: "12345678",
+		value: PUBLIC_DEFAULT_PASSWORD,
 		validators: []
 	});
 
@@ -34,24 +37,23 @@
 	);
 
 	async function handleSubmit() {
-		const email = emailController.writableValue.get();
-		const password = passwordController.writableValue.get();
-		const isPersistant = isPersistantController.writableValue.get();
-		if (!email || !password) return;
-		const loginInput: LoginInput = {
-			email: email,
-			password: password,
-			isPersistant: !!isPersistant
-		};
-
-		appState.loading.set(true);
-
-		await AuthService.login(loginInput).catch((e) => {
-			e.message = "Unable to login. Please check if you are using the correct credential";
+		try {
+			appState.loading.set(true);
+			const email = emailController.writableValue.get();
+			const password = passwordController.writableValue.get();
+			const isPersistant = isPersistantController.writableValue.get();
+			if (!email || !password) return;
+			const loginInput: LoginInput = {
+				email: email,
+				password: password,
+				isPersistant: !!isPersistant
+			};
+			await AuthService.login(loginInput);
+		} catch (e) {
 			appState.error.set(e);
-		});
-
-		appState.loading.set(false);
+		} finally {
+			appState.loading.set(false);
+		}
 	}
 </script>
 
@@ -59,7 +61,7 @@
 	<div class="flex flex-col gap-4">
 		<Logo class="text-3xl" link="/" />
 		<TextField controller={emailController} label="Email" type="email" />
-		<TextField controller={passwordController} label="Password"></TextField>
+		<PasswordField controller={passwordController} label="Password" />
 		<div class="flex">
 			<CheckboxField controller={isPersistantController} class="w-full">
 				<div>Remember me</div>

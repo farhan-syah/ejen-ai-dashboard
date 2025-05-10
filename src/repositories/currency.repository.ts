@@ -68,11 +68,11 @@ class _CurrencyRepository {
 
   async count(input: CurrencySearch) {
     const url = `${this.path}/count`;
-		return await HttpService.post<number>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+    return await HttpService.post<number>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken"
+    });
+  }
 }
 
 export const CurrencyRepository = new _CurrencyRepository();

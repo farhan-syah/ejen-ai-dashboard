@@ -52,7 +52,7 @@ export const sidebarItems: SidebarItem[] = [
 	{
 		title: "Agent Types",
 		icon: "material-symbols:manage-accounts",
-		requiredPermissions: [],
+		requiredPermissions: ["AgentType.manage"],
 		link: "/agent-types",
 		isParent: true,
 		isOpen: atom(false),

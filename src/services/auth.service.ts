@@ -14,11 +14,12 @@ class _AuthService {
 	sessionCookieName = "sessionId";
 
 	constructor() {
-		UserState.accessToken.subscribe((token) => {
+		UserState.accessToken.subscribe(async (token) => {
 			if (browser) {
 				if (token) {
-					this.fetchUserFromLocalAccessToken(token).catch(() => {
-						this.logout();
+					logger.info(token);
+					this.fetchUserFromLocalAccessToken(token).catch((e) => {
+						logger.info(e);
 					});
 				}
 			}

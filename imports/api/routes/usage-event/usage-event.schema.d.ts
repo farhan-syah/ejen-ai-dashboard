@@ -1,17 +1,17 @@
 import type { Static } from "@sinclair/typebox";
-export declare const AgentTypeQuerySchema: import("@sinclair/typebox").TObject<{
+export declare const UsageEventQuerySchema: import("@sinclair/typebox").TObject<{
     limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
     select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
-export type AgentTypeQuery = Static<typeof AgentTypeQuerySchema>;
-export declare const AgentTypeCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
-export type AgentTypeCreateInput = Static<typeof AgentTypeCreateInputSchema>;
-export declare const AgentTypeUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
-export type AgentTypeUpdateInput = Static<typeof AgentTypeUpdateInputSchema>;
-export declare const AgentTypeSearchWhereSchema: import("@sinclair/typebox").TObject<{
+export type UsageEventQuery = Static<typeof UsageEventQuerySchema>;
+export declare const UsageEventCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export type UsageEventCreateInput = Static<typeof UsageEventCreateInputSchema>;
+export declare const UsageEventUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export type UsageEventUpdateInput = Static<typeof UsageEventUpdateInputSchema>;
+export declare const UsageEventSearchWhereSchema: import("@sinclair/typebox").TObject<{
     id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
         equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         in: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>>;
@@ -43,8 +43,8 @@ export declare const AgentTypeSearchWhereSchema: import("@sinclair/typebox").TOb
         not: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TThis>;
     }>, import("@sinclair/typebox").TString]>>>;
 }>;
-export type AgentTypeSearchWhere = Static<typeof AgentTypeSearchWhereSchema>;
-export declare const AgentTypeSearchSchema: import("@sinclair/typebox").TObject<{
+export type UsageEventSearchWhere = Static<typeof UsageEventSearchWhereSchema>;
+export declare const UsageEventSearchSchema: import("@sinclair/typebox").TObject<{
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -85,20 +85,20 @@ export declare const AgentTypeSearchSchema: import("@sinclair/typebox").TObject<
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type AgentTypeSearch = Static<typeof AgentTypeSearchSchema>;
-export declare const AgentTypeCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
-export type AgentTypeCreateData = Static<typeof AgentTypeCreateDataSchema>;
-export declare const AgentTypeCreateSchema: import("@sinclair/typebox").TObject<{
+export type UsageEventSearch = Static<typeof UsageEventSearchSchema>;
+export declare const UsageEventCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export type UsageEventCreateData = Static<typeof UsageEventCreateDataSchema>;
+export declare const UsageEventCreateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type AgentTypeCreate = Static<typeof AgentTypeCreateSchema>;
-export declare const AgentTypeUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
-export type AgentTypeUpdateData = Static<typeof AgentTypeUpdateDataSchema>;
-export declare const AgentTypeUpdateSchema: import("@sinclair/typebox").TObject<{
+export type UsageEventCreate = Static<typeof UsageEventCreateSchema>;
+export declare const UsageEventUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export type UsageEventUpdateData = Static<typeof UsageEventUpdateDataSchema>;
+export declare const UsageEventUpdateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -108,8 +108,8 @@ export declare const AgentTypeUpdateSchema: import("@sinclair/typebox").TObject<
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type AgentTypeUpdate = Static<typeof AgentTypeUpdateSchema>;
-export declare const AgentTypeUpdateManySchema: import("@sinclair/typebox").TObject<{
+export type UsageEventUpdate = Static<typeof UsageEventUpdateSchema>;
+export declare const UsageEventUpdateManySchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{}>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
@@ -160,8 +160,8 @@ export declare const AgentTypeUpdateManySchema: import("@sinclair/typebox").TObj
         orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
-export type AgentTypeUpdateMany = Static<typeof AgentTypeUpdateManySchema>;
-export declare const AgentTypeDeleteManySchema: import("@sinclair/typebox").TObject<{
+export type UsageEventUpdateMany = Static<typeof UsageEventUpdateManySchema>;
+export declare const UsageEventDeleteManySchema: import("@sinclair/typebox").TObject<{
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -204,4 +204,4 @@ export declare const AgentTypeDeleteManySchema: import("@sinclair/typebox").TObj
         }>, import("@sinclair/typebox").TString]>>>;
     }>;
 }>;
-export type AgentTypeDeleteMany = Static<typeof AgentTypeDeleteManySchema>;
+export type UsageEventDeleteMany = Static<typeof UsageEventDeleteManySchema>;

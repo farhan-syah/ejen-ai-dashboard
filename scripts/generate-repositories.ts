@@ -1,7 +1,15 @@
 import * as fs from "fs";
 import * as path from "path";
-import { logger } from "../src/lib/utils/logger";
+import pino from "pino";
+
 const overrideFiles = true;
+
+const logger = pino({
+	transport: {
+		target: "pino-pretty"
+	},
+	base: null // Remove pid, hostname and name from output
+});
 
 const generateRepositoryFile = (modelName: string, kebabCaseName: string) => {
 	const template = `import type {
@@ -74,11 +82,11 @@ class _${modelName}Repository {
 
   async count(input: ${modelName}Search) {
     const url = \`\${this.path}/count\`;
-		return await HttpService.post<number>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+    return await HttpService.post<number>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken"
+    });
+  }
 }
 
 export const ${modelName}Repository = new _${modelName}Repository();

@@ -68,11 +68,11 @@ class _KnowledgeEntryRepository {
 
   async count(input: KnowledgeEntrySearch) {
     const url = `${this.path}/count`;
-		return await HttpService.post<number>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+    return await HttpService.post<number>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken"
+    });
+  }
 }
 
 export const KnowledgeEntryRepository = new _KnowledgeEntryRepository();
