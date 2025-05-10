@@ -2,7 +2,7 @@
 	import { Stepper, StepperComponent } from "$lib/components";
 	import Step1 from "./1-ChooseAgentType.svelte";
 	import Step2 from "./2-SelectIntegration.svelte";
-	import Step3 from "./AddAgentStep3.svelte";
+	import Step3 from "./3-Summary.svelte";
 	import { createAddAgentContext } from "./AddAgentSteps";
 
 	const stepperItems: StepperComponent[] = [

@@ -4,7 +4,9 @@
 	import { onMount } from "svelte";
 	import { getAddAgentContext, type _AgentType, type _AgentTypeIntegration } from "./AddAgentSteps";
 	import { toCurrencyFromCent } from "$lib/utils";
+	import { Button, getStepperContext } from "$lib/components";
 
+	const stepperContext = getStepperContext();
 	const addAgentContext = getAddAgentContext();
 
 	const selectedAgentType: WritableAtom<_AgentType> = addAgentContext.selectedAgentType;
@@ -31,10 +33,10 @@
 
 	function toggleIntegrationSelection(integrationToToggle: _AgentTypeIntegration) {
 		const currentSelection = selectedAgentTypeIntegration.get();
-		if (currentSelection.includes(integrationToToggle)) {
+		if (currentSelection.some(item => item.id === integrationToToggle.id)) {
 			// Remove the integration
 			selectedAgentTypeIntegration.set(
-				currentSelection.filter((item) => item !== integrationToToggle)
+				currentSelection.filter((item) => item.id !== integrationToToggle.id)
 			);
 		} else {
 			// Add the integration
@@ -53,7 +55,7 @@
 	<div class="grid gap-4 mt-8 items-center justify-center">
 		{#each $agentTypeIntegrations as agentTypeIntegration}
 			{@const { selected } = {
-				selected: $selectedAgentTypeIntegration.includes(agentTypeIntegration)
+				selected: $selectedAgentTypeIntegration.some(item => item.id === agentTypeIntegration.id)
 			}}
 			<button
 				class="group border-2 p-4 h-26 rounded flex gap-4 items-center justify-center cursor-pointer hover:border-blue-500 {selected
@@ -94,4 +96,12 @@
 			</button>
 		{/each}
 	</div>
+	<Button
+		label="Continue"
+		class="my-8 w-full sm:w-48 py-2"
+		valid={$selectedAgentType != null}
+		onClick={() => {
+			stepperContext.handleNextClick();
+		}}
+	/>
 </div>
