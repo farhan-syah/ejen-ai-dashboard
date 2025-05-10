@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { Button, getStepperContext } from "$lib/components";
-	import { AgentTypeIntegrationRepository, IntegrationRepository } from "$repositories";
+	import { AgentTypeIntegrationRepository } from "$repositories";
 	import { atom, type WritableAtom } from "nanostores";
-	import { getAddAgentContext, type _AgentTypeIntegration } from "./AddAgentSteps";
 	import { onMount } from "svelte";
-	import { logger } from "$lib/utils/logger";
+	import { getAddAgentContext, type _AgentType, type _AgentTypeIntegration } from "./AddAgentSteps";
+	import { toCurrencyFromCent } from "$lib/utils";
 
 	const addAgentContext = getAddAgentContext();
 
-	const selectedAgentType = addAgentContext.selectedAgentType;
-	const selectedAgentTypeIntegration = addAgentContext.selectedAgentTypeIntegration;
+	const selectedAgentType: WritableAtom<_AgentType> = addAgentContext.selectedAgentType;
+	const selectedAgentTypeIntegration: WritableAtom<_AgentTypeIntegration[]> =
+		addAgentContext.selectedAgentTypeIntegrations;
 
 	const agentTypeIntegrations: WritableAtom<_AgentTypeIntegration[]> = atom();
 
@@ -29,6 +29,19 @@
 		agentTypeIntegrations.set(result);
 	}
 
+	function toggleIntegrationSelection(integrationToToggle: _AgentTypeIntegration) {
+		const currentSelection = selectedAgentTypeIntegration.get();
+		if (currentSelection.includes(integrationToToggle)) {
+			// Remove the integration
+			selectedAgentTypeIntegration.set(
+				currentSelection.filter((item) => item !== integrationToToggle)
+			);
+		} else {
+			// Add the integration
+			selectedAgentTypeIntegration.set([...currentSelection, integrationToToggle]);
+		}
+	}
+
 	onMount(() => {
 		fetchAgentTypeIntegrations();
 	});
@@ -40,28 +53,43 @@
 	<div class="grid gap-4 mt-8 items-center justify-center">
 		{#each $agentTypeIntegrations as agentTypeIntegration}
 			{@const { selected } = {
-				selected: $selectedAgentTypeIntegration?.id === agentTypeIntegration.id
+				selected: $selectedAgentTypeIntegration.includes(agentTypeIntegration)
 			}}
 			<button
-				class="border p-4 h-26 rounded flex gap-4 items-center justify-center cursor-pointer hover:border-blue-500 {selected
+				class="group border-2 p-4 h-26 rounded flex gap-4 items-center justify-center cursor-pointer hover:border-blue-500 {selected
 					? 'text-blue-500 border-blue-500'
-					: ''} hover:text-blue-500"
+					: ''} hover:text-blue-500 relative"
 				on:click={() => {
-					addAgentContext.selectedAgentTypeIntegration.set(agentTypeIntegration);
+					toggleIntegrationSelection(agentTypeIntegration);
 				}}
 			>
 				<div class="w-14 flex items-center justify-center">
 					<iconify-icon
 						icon={agentTypeIntegration.integration.icon ?? "uil:channel"}
-						height="36"
-						width="36"
+						height="42"
+						width="42"
 					></iconify-icon>
 				</div>
-				<div class="grid w-full text-start gap-1">
+				<div class="grid w-full text-start gap-0.5">
 					<div class="font-bold">
-						{agentTypeIntegration.integration.name}
+						<div>
+							{agentTypeIntegration.integration.name}
+						</div>
 					</div>
-					{agentTypeIntegration.integration.description}
+					<div>
+						{agentTypeIntegration.integration.description}
+					</div>
+					<div class="text-xs opacity-80">
+						<div>{`Base Price : ${toCurrencyFromCent(agentTypeIntegration.price)}`}</div>
+						<div>{`Per Message : ${toCurrencyFromCent(agentTypeIntegration.pricePerUsage)}`}</div>
+					</div>
+				</div>
+				<div class="w-12">
+					{#if selected}
+						<div class=" text-green-500">
+							<iconify-icon icon="uil:check-circle" height="32" width="32"></iconify-icon>
+						</div>
+					{/if}
 				</div>
 			</button>
 		{/each}

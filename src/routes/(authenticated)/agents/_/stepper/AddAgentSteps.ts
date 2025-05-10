@@ -18,8 +18,8 @@ export type _AgentType = AgentType & {};
 
 export class AddAgentContext {
 	static name: string = "addAgentContext";
-	selectedAgentType: WritableAtom<_AgentType | undefined> = atom(undefined);
-	selectedAgentTypeIntegration: WritableAtom<_AgentTypeIntegration | undefined> = atom(undefined);
+	selectedAgentType: WritableAtom<_AgentType> = atom();
+	selectedAgentTypeIntegrations: WritableAtom<_AgentTypeIntegration[]> = atom([]);
 }
 
 export function createAddAgentContext() {
