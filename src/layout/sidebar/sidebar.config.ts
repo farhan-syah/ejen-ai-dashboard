@@ -57,5 +57,14 @@ export const sidebarItems: SidebarItem[] = [
 		isParent: true,
 		isOpen: atom(false),
 		items: []
+	},
+	{
+		title: "Knowledge Base",
+		icon: "solar:library-outline",
+		requiredPermissions: ["KnowledgeBase.manage, KnowledgeBase.view"],
+		link: "/knowledge-bases",
+		isParent: true,
+		isOpen: atom(false),
+		items: []
 	}
 ];

@@ -10,6 +10,7 @@
 	import { env } from "$env/dynamic/public";
 	import { PUBLIC_DEFAULT_PASSWORD, PUBLIC_DEFAULT_USERNAME } from "$env/static/public";
 	import PasswordField from "$lib/components/form/text-field/PasswordField.svelte";
+	import { logger } from "$lib/utils/logger";
 	const appState = getAppState();
 
 	const emailController = new FormControl({

@@ -95,7 +95,6 @@ class _AuthService {
 				document.cookie = c;
 			});
 		}
-
 		this.saveToken(token);
 		// Verify cookie exists after login
 		this.checkSessionCookie();
@@ -197,6 +196,7 @@ class _AuthService {
 		UserState.user.set(undefined);
 		UserState.permissions.set([]);
 		UserState.setting.set(undefined);
+		this.clearCookies();
 	}
 
 	// Public method to manually check session status
@@ -219,6 +219,13 @@ class _AuthService {
 		const url = this.path + `/verify-email?t=${token}`;
 
 		return HttpService.get(url, {});
+	}
+
+	clearCookies() {
+		if (browser) {
+			const cookieName = this.sessionCookieName;
+			document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+		}
 	}
 }
 
