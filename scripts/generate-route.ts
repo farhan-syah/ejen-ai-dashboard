@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { input } from "@inquirer/prompts"; // Added for interactive prompts
+import { input } from "@inquirer/prompts";
 
 // --- Helper Functions ---
 function toKebabCase(str: string): string {
@@ -13,9 +13,7 @@ function toCamelCase(str: string): string {
 }
 
 function toTitleCase(str: string): string {
-	// Add space before capital letters, then capitalize first letter of each word if needed
 	let title = str.replace(/([A-Z])/g, " $1").trim();
-	// Ensure first letter is capitalized even if input was camelCase initially
 	return title.charAt(0).toUpperCase() + title.slice(1);
 }
 
@@ -37,7 +35,7 @@ const TPL_ENTITY_PLURAL_SVELTE = `
   import { goto } from "$app/navigation";
   import { Button, PageTitle, Table, createTableContext } from "$lib/components";
   import Card from "$lib/components/card/Card.svelte";
-  import { delay } from "$lib/utils"; // Assuming delay is a general utility
+  import { delay } from "$lib/utils";
   import { %%SINGULAR_PASCAL%%Repository } from "$repositories";
   import { %%SINGULAR_CAMEL%%Columns, to%%SINGULAR_PASCAL%%CSV, type _%%SINGULAR_PASCAL%% } from "./%%PLURAL_PASCAL%%";
 
@@ -99,10 +97,10 @@ const TPL_ENTITY_PLURAL_TS = `
 import type { TableColumn } from "$lib/components";
 import { formatLocalDate } from "$lib/utils/date";
 import { CSV } from "$types";
-import type { %%SINGULAR_PASCAL%% } from "@prisma/client"; // Assuming Prisma client type
+import type { %%SINGULAR_PASCAL%% } from "@prisma/client";
 import %%SINGULAR_PASCAL%%Actions from "./_/actions/%%SINGULAR_PASCAL%%Actions.svelte";
 
-export type _%%SINGULAR_PASCAL%% = %%SINGULAR_PASCAL%% & {}; // Extend if needed
+export type _%%SINGULAR_PASCAL%% = %%SINGULAR_PASCAL%% & {};
 
 export const %%SINGULAR_CAMEL%%Columns: TableColumn<%%SINGULAR_PASCAL%%>[] = [
   {
@@ -112,19 +110,19 @@ export const %%SINGULAR_CAMEL%%Columns: TableColumn<%%SINGULAR_PASCAL%%>[] = [
     sortable: true
   },
   {
-    key: "name", // Assuming a 'name' field
+    key: "name",
     label: "Name",
     visible: true,
     sortable: true
   },
   {
-    key: "description", // Assuming a 'description' field
+    key: "description",
     label: "Description",
     visible: true,
     sortable: true
   },
   {
-    key: "id", // Or another key for actions
+    key: "id",
     label: "Action",
     visible: true,
     content: %%SINGULAR_PASCAL%%Actions
@@ -135,7 +133,6 @@ type CSVRow = {
   ID: string;
   name: string;
   description?: string | null;
-  // Add other fields from %%SINGULAR_PASCAL%% that you want in the CSV
 };
 
 const row: CSVRow = {
@@ -154,8 +151,8 @@ export function to%%SINGULAR_PASCAL%%CSV(%%PLURAL_CAMEL%%: %%SINGULAR_PASCAL%%[]
   %%PLURAL_CAMEL%%.forEach((item) => {
     const csv: CSVRow = {
       ID: item.id,
-      name: item.name, // Assuming 'name' field
-      description: item.description // Assuming 'description' field
+      name: item.name,
+      description: item.description
     };
     data.push(csv);
   });
@@ -313,6 +310,340 @@ const TPL_ADD_FORM_SVELTE = `
 <FormDebugger formGroup={form} class="mt-4" />
 `;
 
+// --- [id] Route Templates ---
+
+// Template for: src/routes/(authenticated)/{plural-kebab-case}/[id]/+page.svelte
+const TPL_ID_ROOT_PAGE_SVELTE = `
+<script lang="ts">
+  import { Guard } from "$lib/components";
+  import %%SINGULAR_PASCAL%% from "./%%SINGULAR_PASCAL%%.svelte";
+</script>
+
+<Guard
+  requiredPermissions={[
+    "%%SINGULAR_PASCAL%%.manage",
+    "%%SINGULAR_PASCAL%%.view",
+    "%%SINGULAR_PASCAL%%.update",
+    "%%SINGULAR_PASCAL%%.delete"
+  ]}
+  redirect
+  redirectPath="/%%PLURAL_KEBAB%%"
+>
+  <%%SINGULAR_PASCAL%% />
+</Guard>
+`;
+
+// Template for: src/routes/(authenticated)/{plural-kebab-case}/[id]/{SingularName}.svelte
+const TPL_ID_ENTITY_SVELTE = `
+<script lang="ts">
+  import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
+  import { getToastState } from "$applications/toast.state";
+  import { PageTitle } from "$lib/components";
+  import { %%SINGULAR_PASCAL%%Repository } from "$repositories";
+  import { onMount } from "svelte";
+  import { create%%SINGULAR_PASCAL%%Context } from "./%%SINGULAR_PASCAL%%";
+  import %%SINGULAR_PASCAL%%Details from "./%%SINGULAR_PASCAL%%Details.svelte";
+
+  const id = $page.params.id;
+  const toast = getToastState();
+  const context = create%%SINGULAR_PASCAL%%Context({
+    fetch%%SINGULAR_PASCAL%%Callback: async (ctx) => {
+      const result = await %%SINGULAR_PASCAL%%Repository.get(id).catch(async (e) => {
+        await goto("/%%PLURAL_KEBAB%%"); // Redirect to plural list page
+        toast.error({ message: "%%SINGULAR_TITLE%% not found" });
+      });
+      if (result) {
+        ctx.%%SINGULAR_CAMEL%%.set(result);
+      }
+    }
+  });
+
+  const %%SINGULAR_CAMEL%% = context.%%SINGULAR_CAMEL%%;
+
+  onMount(() => {
+    context.fetch%%SINGULAR_PASCAL%%();
+  });
+</script>
+
+{#if $%%SINGULAR_CAMEL%%}
+  <PageTitle
+    title="%%SINGULAR_TITLE%% - {$%%SINGULAR_CAMEL%%.name}"
+    id={$%%SINGULAR_CAMEL%%.id}
+    breadcrumbs={[
+      { label: "%%PLURAL_TITLE%%", path: "/%%PLURAL_KEBAB%%" },
+      { label: \`Edit \${$%%SINGULAR_CAMEL%%.name}\`, path: "/%%PLURAL_KEBAB%%/" + id, currentPage: true }
+    ]}
+  />
+  <div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">
+    <%%SINGULAR_PASCAL%%Details />
+  </div>
+{/if}
+`;
+
+// Template for: src/routes/(authenticated)/{plural-kebab-case}/[id]/{SingularName}.ts
+const TPL_ID_ENTITY_TS = `
+import { UserState } from "$applications";
+import { validatePermissions } from "$lib/components";
+import type { %%SINGULAR_PASCAL%% } from "@prisma/client";
+import { atom, computed, type WritableAtom } from "nanostores";
+import { getContext, setContext } from "svelte";
+
+export type _%%SINGULAR_PASCAL%% = %%SINGULAR_PASCAL%% & {};
+
+export type %%SINGULAR_PASCAL%%ContextOption = {
+  fetch%%SINGULAR_PASCAL%%Callback: (context: %%SINGULAR_PASCAL%%Context) => Promise<_%%SINGULAR_PASCAL%% | void>;
+};
+
+export class %%SINGULAR_PASCAL%%Context {
+  %%SINGULAR_CAMEL%%: WritableAtom<_%%SINGULAR_PASCAL%% | undefined> = atom(undefined); // Ensure it can be undefined initially
+
+  private readonly fetch%%SINGULAR_PASCAL%%Callback: (context: this) => Promise<_%%SINGULAR_PASCAL%% | void>;
+
+  constructor(obj: %%SINGULAR_PASCAL%%ContextOption) {
+    this.fetch%%SINGULAR_PASCAL%%Callback = obj.fetch%%SINGULAR_PASCAL%%Callback;
+  }
+
+  hasEditPermission = computed([UserState.permissions], (permissions) => {
+    return validatePermissions(["%%SINGULAR_PASCAL%%.manage", "%%SINGULAR_PASCAL%%.update"], permissions);
+  });
+
+  async fetch%%SINGULAR_PASCAL%%() {
+    this.fetch%%SINGULAR_PASCAL%%Callback(this);
+  }
+}
+
+export function create%%SINGULAR_PASCAL%%Context(option: %%SINGULAR_PASCAL%%ContextOption) {
+  return setContext("%%SINGULAR_CAMEL%%Context", new %%SINGULAR_PASCAL%%Context(option));
+}
+
+export function get%%SINGULAR_PASCAL%%Context() {
+  return getContext<%%SINGULAR_PASCAL%%Context>("%%SINGULAR_CAMEL%%Context");
+}
+`;
+
+// Template for: src/routes/(authenticated)/{plural-kebab-case}/[id]/{SingularName}DeleteButton.svelte
+const TPL_ID_DELETE_BUTTON_SVELTE = `
+<script lang="ts">
+  import { goto } from "$app/navigation";
+  import { getAppState } from "$applications";
+  import { getToastState } from "$applications/toast.state";
+  import { Button, Dialog } from "$lib/components";
+  import { %%SINGULAR_PASCAL%%Repository } from "$repositories";
+  import { atom } from "nanostores";
+  import type { _%%SINGULAR_PASCAL%% } from "./%%SINGULAR_PASCAL%%";
+
+  export let %%SINGULAR_CAMEL%%: _%%SINGULAR_PASCAL%%; // Changed from 'product'
+  const isDialogOpen = atom(false);
+  const appState = getAppState();
+  const toastState = getToastState();
+
+  async function handleDelete%%SINGULAR_PASCAL%%() {
+    try {
+      isDialogOpen.set(false);
+      appState.loading.set(true);
+      await %%SINGULAR_PASCAL%%Repository.delete(%%SINGULAR_CAMEL%%.id);
+      await goto("/%%PLURAL_KEBAB%%", { replaceState: true }); // Redirect to plural list
+      toastState.success({ key: %%SINGULAR_CAMEL%%.id, message: "%%SINGULAR_TITLE%% has been deleted" });
+    } catch (error) {
+      appState.error.set(error);
+    } finally {
+      appState.loading.set(false);
+    }
+  }
+</script>
+
+<Button
+  class="button-slate"
+  onClick={() => {
+    isDialogOpen.set(true);
+  }}
+>
+  <div slot="label">
+    <iconify-icon icon="bx:trash"></iconify-icon>
+  </div>
+</Button>
+
+<Dialog isOpen={isDialogOpen}>
+  <div class="w-96 flex flex-col gap-3">
+    <div class="font-semibold">Delete Confirmation</div>
+    <div>Are you sure you want to delete this %%SINGULAR_CAMEL%%? This action is irreversible.</div>
+    <div class="flex gap-2">
+      <Button label="Yes" onClick={handleDelete%%SINGULAR_PASCAL%%} />
+      <Button
+        label="No"
+        class="button-red"
+        onClick={() => {
+          isDialogOpen.set(false);
+        }}
+      />
+    </div>
+  </div>
+</Dialog>
+`;
+
+// Template for: src/routes/(authenticated)/{plural-kebab-case}/[id]/{SingularName}Details.svelte
+const TPL_ID_DETAILS_SVELTE = `
+<script lang="ts">
+  import type { %%SINGULAR_PASCAL%%UpdateInput } from "$api/routes/%%SINGULAR_KEBAB%%/%%SINGULAR_KEBAB%%.schema";
+  import { getAppState } from "$applications";
+  import { getToastState } from "$applications/toast.state";
+  import {
+    Button,
+    FormControl,
+    FormDebugger,
+    FormGroup,
+    Guard,
+    TextAreaField,
+    TextField,
+    Tooltip
+  } from "$lib/components";
+  import { %%SINGULAR_PASCAL%%Repository } from "$repositories";
+  import { atom } from "nanostores";
+  import { get%%SINGULAR_PASCAL%%Context } from "./%%SINGULAR_PASCAL%%";
+  import %%SINGULAR_PASCAL%%DeleteButton from "./%%SINGULAR_PASCAL%%DeleteButton.svelte";
+
+  const context = get%%SINGULAR_PASCAL%%Context();
+  const %%SINGULAR_CAMEL%% = context.%%SINGULAR_CAMEL%%;
+  const hasEditPermission = context.hasEditPermission;
+
+  const appState = getAppState();
+  const toastState = getToastState();
+  const editable = atom(false);
+
+  const idController = new FormControl({
+    name: "id",
+    value: $%%SINGULAR_CAMEL%%?.id // Add optional chaining as %%SINGULAR_CAMEL%% can be undefined initially
+  });
+
+  const nameController = new FormControl({
+    name: "name",
+    value: $%%SINGULAR_CAMEL%%?.name,
+    required: true
+  });
+
+  const descriptionController = new FormControl({
+    name: "description",
+    value: $%%SINGULAR_CAMEL%%?.description
+  });
+
+  // Update form controllers when %%SINGULAR_CAMEL%% data is loaded
+  $: if ($%%SINGULAR_CAMEL%%) {
+    idController.value = $%%SINGULAR_CAMEL%%.id;
+    nameController.value = $%%SINGULAR_CAMEL%%.name;
+    descriptionController.value = $%%SINGULAR_CAMEL%%.description;
+    form.resetValue(); // Reset form with new initial values
+  }
+
+
+  const form = new FormGroup<%%SINGULAR_PASCAL%%UpdateInput>([nameController, descriptionController]); // Added descriptionController
+  const valid = form.valid;
+
+  async function handleSaveForm() {
+    if (!$%%SINGULAR_CAMEL%%) return; // Guard against undefined %%SINGULAR_CAMEL%%
+    try {
+      appState.loading.set(true);
+      const data = form.value.get() as %%SINGULAR_PASCAL%%UpdateInput;
+      await %%SINGULAR_PASCAL%%Repository.update($%%SINGULAR_CAMEL%%.id, {
+        data: data
+      });
+      await context.fetch%%SINGULAR_PASCAL%%();
+      editable.set(false);
+      toastState.add({
+        type: "success",
+        message: "Changes have been saved"
+      });
+    } catch (error) {
+      appState.error.set(error);
+    } finally {
+      appState.loading.set(false);
+    }
+  }
+</script>
+
+{#if $%%SINGULAR_CAMEL%%}
+  <div class="flex flex-col gap-4">
+    <div class="grid grid-cols-5 gap-4 gap-x-6">
+      <div class="col-span-5 lg:col-span-2 grid gap-4 auto-rows-min">
+        <TextField controller={idController} label="ID" class="col-span-2" disabled>
+          <div slot="postfix" class="text-blue-500 h-full border-l bg-white rounded-r pointer">
+            <Tooltip
+              tooltip="Copy"
+              class="h-full flex items-center p-2 "
+              onClick={async () => {
+                if (idController.value) {
+                  await navigator.clipboard.writeText(idController.value);
+                  toastState.add({
+                    type: "info",
+                    key: "id",
+                    message: "Copied"
+                  });
+                }
+              }}
+            >
+              <iconify-icon icon="bx:copy"></iconify-icon>
+            </Tooltip>
+          </div>
+        </TextField>
+
+        <TextField
+          controller={nameController}
+          label="Name"
+          class="col-span-2"
+          disabled={!$editable}
+        />
+        <TextAreaField
+          controller={descriptionController}
+          label="Description"
+          class="col-span-2"
+          textareaClass="h-32"
+          resizable={false}
+          disabled={!$editable}
+        />
+      </div>
+    </div>
+    <div class="col-span-2">
+      {#if $hasEditPermission}
+        <div class="flex gap-2">
+          {#if $editable}
+            <Button
+              valid={$valid}
+              label="Save Changes"
+              class="button-green"
+              onClick={handleSaveForm}
+            />
+            <Button
+              label="Cancel"
+              class="button-red"
+              onClick={() => {
+                editable.set(false);
+                if ($%%SINGULAR_CAMEL%%) { // Ensure %%SINGULAR_CAMEL%% exists before resetting
+                  nameController.value = $%%SINGULAR_CAMEL%%.name;
+                  descriptionController.value = $%%SINGULAR_CAMEL%%.description;
+                }
+                form.resetValue();
+              }}
+            />
+            <Guard requiredPermissions={["%%SINGULAR_PASCAL%%.manage", "%%SINGULAR_PASCAL%%.delete"]}>
+              <%%SINGULAR_PASCAL%%DeleteButton %%SINGULAR_CAMEL%%={$%%SINGULAR_CAMEL%%} />
+            </Guard>
+          {:else}
+            <Button
+              label="Edit"
+              class="button-cyan"
+              onClick={() => {
+                editable.set(true);
+              }}
+            />
+          {/if}
+        </div>
+      {/if}
+      <FormDebugger formGroup={form} />
+    </div>
+  </div>
+{/if}
+`;
+
 // --- Core Generation Function ---
 function generateRoute(singularNamePascal: string, pluralNamePascal: string) {
 	const singularCamel = toCamelCase(singularNamePascal);
@@ -323,6 +654,7 @@ function generateRoute(singularNamePascal: string, pluralNamePascal: string) {
 	const pluralTitle = toTitleCase(pluralNamePascal);
 
 	const basePath = path.join("src", "routes", "(authenticated)", pluralKebab);
+	const idPath = path.join(basePath, "[id]");
 
 	const replacements = {
 		"%%SINGULAR_PASCAL%%": singularNamePascal,
@@ -338,12 +670,16 @@ function generateRoute(singularNamePascal: string, pluralNamePascal: string) {
 	function processTemplate(template: string): string {
 		let processed = template;
 		for (const key in replacements) {
-			processed = processed.replace(new RegExp(key, "g"), (replacements as any)[key]);
+			processed = processed.replace(
+				new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"),
+				(replacements as any)[key]
+			);
 		}
 		return processed.trim();
 	}
 
 	const filesToCreate = [
+		// Root of the plural entity
 		{
 			filePath: path.join(basePath, "+page.svelte"),
 			content: processTemplate(TPL_ROOT_PAGE_SVELTE)
@@ -356,6 +692,7 @@ function generateRoute(singularNamePascal: string, pluralNamePascal: string) {
 			filePath: path.join(basePath, `${pluralNamePascal}.ts`),
 			content: processTemplate(TPL_ENTITY_PLURAL_TS)
 		},
+		// _/actions
 		{
 			filePath: path.join(basePath, "_", "actions", `${singularNamePascal}Actions.svelte`),
 			content: processTemplate(TPL_ACTIONS_SVELTE)
@@ -364,6 +701,7 @@ function generateRoute(singularNamePascal: string, pluralNamePascal: string) {
 			filePath: path.join(basePath, "_", "actions", `${singularNamePascal}ActionView.svelte`),
 			content: processTemplate(TPL_ACTION_VIEW_SVELTE)
 		},
+		// add route
 		{
 			filePath: path.join(basePath, "add", `+page.svelte`),
 			content: processTemplate(TPL_ADD_ROOT_PAGE_SVELTE)
@@ -375,15 +713,35 @@ function generateRoute(singularNamePascal: string, pluralNamePascal: string) {
 		{
 			filePath: path.join(basePath, "add", `${singularNamePascal}AddForm.svelte`),
 			content: processTemplate(TPL_ADD_FORM_SVELTE)
+		},
+		// [id] route
+		{
+			filePath: path.join(idPath, `+page.svelte`),
+			content: processTemplate(TPL_ID_ROOT_PAGE_SVELTE)
+		},
+		{
+			filePath: path.join(idPath, `${singularNamePascal}.svelte`),
+			content: processTemplate(TPL_ID_ENTITY_SVELTE)
+		},
+		{
+			filePath: path.join(idPath, `${singularNamePascal}.ts`),
+			content: processTemplate(TPL_ID_ENTITY_TS)
+		},
+		{
+			filePath: path.join(idPath, `${singularNamePascal}DeleteButton.svelte`),
+			content: processTemplate(TPL_ID_DELETE_BUTTON_SVELTE)
+		},
+		{
+			filePath: path.join(idPath, `${singularNamePascal}Details.svelte`),
+			content: processTemplate(TPL_ID_DETAILS_SVELTE)
 		}
 	];
 
 	const directoriesToCreate = [
 		basePath,
-		path.join(basePath, "[id]"),
+		idPath, // Ensure [id] directory is created
 		path.join(basePath, "_"),
 		path.join(basePath, "_", "actions"),
-		// path.join(basePath, '_', 'columns'), // Removed as per icon column absence
 		path.join(basePath, "add")
 	];
 
@@ -397,6 +755,12 @@ function generateRoute(singularNamePascal: string, pluralNamePascal: string) {
 	}
 
 	for (const file of filesToCreate) {
+		// Ensure parent directory exists before writing file, especially for [id] files
+		const parentDir = path.dirname(file.filePath);
+		if (!fs.existsSync(parentDir)) {
+			fs.mkdirSync(parentDir, { recursive: true });
+			console.log(`Created directory (implicit): ${parentDir}`);
+		}
 		fs.writeFileSync(file.filePath, file.content);
 		console.log(`Created file: ${file.filePath}`);
 	}
@@ -404,10 +768,10 @@ function generateRoute(singularNamePascal: string, pluralNamePascal: string) {
 	console.log("Route generation complete!");
 	console.log(`\nNext steps:
 1. Update Prisma schema for "${singularNamePascal}" if not already done.
-2. Create/update "$api/routes/${singularKebab}/${singularKebab}.schema" (e.g., ${singularNamePascal}Search, ${singularNamePascal}CreateInput types).
-3. Implement "${singularNamePascal}Repository" in "$repositories".
-4. Implement the '[id]' route details (view/edit page, form) under "src/routes/(authenticated)/${pluralKebab}/[id]/".
-5. Review all generated files for any entity-specific adjustments (e.g., form fields, API calls, table columns).`);
+2. Create/update "$api/routes/${singularKebab}/${singularKebab}.schema" (e.g., ${singularNamePascal}Search, ${singularNamePascal}CreateInput, ${singularNamePascal}UpdateInput types).
+3. Implement "${singularNamePascal}Repository" in "$repositories" (ensure it has .get(), .update(), .delete() methods).
+4. Review all generated files for any entity-specific adjustments (e.g., form fields, API calls, table columns, breadcrumbs, permissions).
+5. Ensure all custom Svelte components used in templates (like Guard, specific form fields if any beyond TextField/TextAreaField) are correctly imported and available.`);
 }
 
 // --- Main function to run prompts ---
