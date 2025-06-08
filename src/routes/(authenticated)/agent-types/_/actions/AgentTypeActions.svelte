@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { _AgentType } from "../AgentTypes";
+	import type { _AgentType } from "../../AgentTypes";
 	import AgentTypeActionView from "./AgentTypeActionView.svelte";
 	export let data: _AgentType;
 </script>
