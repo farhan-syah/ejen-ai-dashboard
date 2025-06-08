@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { KnowledgeBaseCreateInput } from "$api/routes/knowledge-base/knowledge-base.schema";
 	import { goto } from "$app/navigation";
-	import { getAppState } from "$applications";
+	import { getAppState, UserState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import {
 		Button,
@@ -36,14 +36,16 @@
 
 	async function handleSaveForm() {
 		try {
+			const organizationId = UserState.currentRole.get()?.organizationId;
+			if (!organizationId) throw "No organization ID";
 			appState.loading.set(true);
 
 			const data = form.value.get();
 
-			// Ensure the data matches the expected input type for the repository
 			const createData: KnowledgeBaseCreateInput = {
-				name: data.name!, // Name is required
-				description: data.description // Description is optional
+				name: data.name!,
+				description: data.description,
+				organizationId
 			};
 
 			const knowledgeBase = await KnowledgeBaseRepository.create({

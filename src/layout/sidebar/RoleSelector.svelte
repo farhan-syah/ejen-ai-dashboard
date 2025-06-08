@@ -9,12 +9,12 @@
 
 	const appState = getAppState();
 
-	type Role = PrismaRole & { organization: { name: string } };
+	type Role = PrismaRole & { organization: { name: string; id: string } };
 	type GroupedRole = { organizationId: string; organizationName: string; roles: Role[] };
 	const user = UserState.user;
 	const isSidebarOpen = appState.isSidebarOpen;
 	const userSetting = UserState.setting;
-	const currentRole = atom<Role | undefined>();
+	const currentRole = UserState.currentRole;
 	const roles = atom<Role[]>([]);
 	const groupedRoles = atom<GroupedRole[]>([]);
 	const isDialogOpen = atom(false);
@@ -48,6 +48,7 @@
 				additionalFields: {
 					organization: {
 						select: {
+							id: true,
 							name: true
 						}
 					}
