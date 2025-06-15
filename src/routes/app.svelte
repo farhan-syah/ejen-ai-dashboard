@@ -30,15 +30,20 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Ejen AI</title>
+	<meta name="robots" content="noindex nofollow" />
+</svelte:head>
+
 <svelte:window
 	on:resize={handleResize}
 	on:focus={() => {
 		AuthService.checkTokenExpiry();
 	}}
 	on:keydown={(e) => {
-		if (e.key === "F11") {
-			e.preventDefault();
-		}
+		// if (e.key === "F11") {
+		// 	e.preventDefault();
+		// }
 	}}
 	on:fullscreenchange={(e) => {
 		appState.fullScreenElement.set(document.fullscreenElement);

@@ -7,6 +7,8 @@
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;
+	export let resizable: boolean = true;
+	export let textareaClass: string = "";
 	export let onChange: (inputValue: string, input: HTMLTextAreaElement, e: any) => any = (
 		inputValue
 	) => {
@@ -73,7 +75,7 @@
 	}
 </script>
 
-<div class="text-gray-400 {componentClass}">
+<div class="text-gray-600 {componentClass}">
 	{#if label}
 		<div class="mb-1">
 			<label for={controller.id} class="flex {labelClass}">
@@ -97,7 +99,7 @@
 			name={controller.name}
 			value={controller.writableValue.get() ?? ""}
 			id={controller.id}
-			class="p-2 text-sm w-full outline-none"
+			class="p-2 text-sm w-full outline-none {resizable ? '' : 'resize-none'} {textareaClass}"
 			on:focus={() => {
 				isFocused.set(true);
 				if (!$touched) {
@@ -112,7 +114,7 @@
 				controller.validate();
 			}}
 			on:input={handleInput}
-		/>
+		></textarea>
 	</div>
 	<div class="text-red-500 text-xs">
 		{#each $errors as error, index}

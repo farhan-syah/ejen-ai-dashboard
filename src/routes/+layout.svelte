@@ -7,15 +7,17 @@
 	import { onMount } from "svelte";
 	import "../app.postcss";
 	import App from "./app.svelte";
-
+	import { PUBLIC_ENV } from "$env/static/public";
+	import { logger } from "$lib/utils/logger";
 	// Initialize browser stores
 	const userState = UserState;
 	const token = userState.accessToken;
+
 	if (token) {
 		AuthService;
 	}
 
-	const reserved: string[] = ["/auth"];
+	const reserved: string[] = ["/login", "/register", "/forgot-password", "/verify-email"];
 
 	onMount(() => {
 		token.subscribe(async (token) => {
@@ -33,14 +35,14 @@
 				if (reserved.includes($page.url.pathname)) {
 					return;
 				}
-				await goto("/auth/login", { replaceState: true });
+				await goto("/login", { replaceState: true });
 			} else {
 				if ($page.url.pathname == "/") {
 					await goto("/dashboard", { replaceState: true });
 				}
 			}
 		} catch (e) {
-			console.log(e);
+			logger.error(e);
 		}
 	}
 </script>

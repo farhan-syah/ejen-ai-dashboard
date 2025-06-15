@@ -10,7 +10,7 @@
 <thead class="cursor-pointer">
 	<tr class="bg-slate-100 border-b-2 border-slate-300">
 		{#if $selectable}
-			<td class="pl-2 pt-2">
+			<td class="p-2 w-min">
 				<input
 					type="checkbox"
 					on:click={() => {

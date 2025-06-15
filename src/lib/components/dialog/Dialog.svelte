@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { flyAndScale } from "$lib/utils";
 	import type { CallbackFunction } from "$types";
-	import Icon from "@iconify/svelte";
+
 	import { atom } from "nanostores";
 	import { onMount } from "svelte";
 	import { Card } from "../card";
@@ -48,7 +48,7 @@
 				tabindex="0"
 			>
 				<div class="hover:bg-black/10 rounded-full p-0.5">
-					<Icon icon="bx:x" class="text-lg" />
+					<iconify-icon icon="bx:x" class="text-lg"></iconify-icon>
 				</div>
 			</div>
 		</div>

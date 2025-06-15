@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import Icon from "@iconify/svelte";
+
 	import { writable } from "svelte/store";
 	import type { SidebarItem } from "./sidebar.config";
 
@@ -23,12 +23,12 @@
 		? 'font-semibold text-white'
 		: ' text-white/80'}"
 >
-	<Icon
+	<iconify-icon
 		icon="bx:radio-circle"
-		class="mb-0.25 text-3xs group-hover:text-white  {$isActive
+		class="mb-0.25 text-3xs group-hover:text-white {$isActive
 			? 'text-white/80'
 			: 'text-white/20 '} "
-	></Icon>
+	></iconify-icon>
 	<div class="">
 		{sidebarItem.title}
 	</div>

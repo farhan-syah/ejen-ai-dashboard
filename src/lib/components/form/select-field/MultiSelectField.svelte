@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Popper } from "$lib/components";
 	import type { FieldOption } from "$types";
-	import Icon from "@iconify/svelte";
+
 	import type { ModifierPhases } from "@popperjs/core";
 	import { atom } from "nanostores";
 	import type { PopperOptions } from "svelte-popperjs";
@@ -9,20 +9,20 @@
 
 	type T = $$Generic;
 
-	export let controller: FormControl<T> = new FormControl<T>();
+	export let controller: FormControl<FieldOption<T>[]> = new FormControl<FieldOption<T>[]>();
 	export let label: string | undefined = undefined;
 	export let options: readonly FieldOption<T>[] = [];
 	export let placeholder: string = "Select";
 
-	export let valueTransform: (value?: T) => string | undefined = (value) => {
-		return value?.toString() ?? undefined;
-	};
+	export let valueTransform: (value?: readonly FieldOption<T>[] | null) => string | undefined = (
+		value
+	) => undefined;
 
 	let required = controller.required;
 	let inputClass = "";
 	let labelClass = "";
 
-	$: value = controller.writableValue;
+	$: values = controller.writableValue;
 	$: isFocused = controller.isFocused;
 	$: hasError = controller.hasError;
 	$: touched = controller.touched;
@@ -64,13 +64,20 @@
 	}
 
 	function handleSelect(option: FieldOption<T>) {
-		controller.writableValue.set(option.value);
-		handleReset();
+		const currentValues: FieldOption<T>[] = controller.writableValue.get() ?? [];
+
+		const index = currentValues.findIndex(
+			(v) => v.value == option.value && v.label == option.label
+		);
+
+		currentValues[index].selected = !currentValues[index].selected;
+		controller.writableValue.set([...currentValues]);
 	}
 
-	function handleReset() {
-		isOpen.set(false);
-	}
+	$: isSelected = (index: number) => {
+		const selected = $values ? $values[index].selected : false;
+		return selected;
+	};
 
 	//  Popper
 
@@ -163,7 +170,7 @@
 		<Popper bind:isOpen={$isOpen} {popperOptions}>
 			<!-- Main Component -->
 			<div slot="main" class="flex rounded outline p-2 cursor-pointer {inputClass}">
-				<div>{valueTransform($value) ?? placeholder}</div>
+				<div>{valueTransform($values) ?? placeholder}</div>
 			</div>
 			<!-- Popper Component -->
 
@@ -181,15 +188,15 @@
 							on:focus={() => {}}
 							on:keydown={() => {}}
 							role="option"
-							aria-selected={$value == option.value}
+							aria-selected={$values == option.value}
 							tabindex="-1"
 						>
 							<div class="flex-grow">
 								{option.label ?? option.value}
 							</div>
-							{#if $value == option.value}
-								<div class="text-xl text-green-500">
-									<Icon icon="bx:check" />
+							{#if isSelected(i)}
+								<div class="text-lg -m-1 text-green-500">
+									<iconify-icon icon="bx:check"></iconify-icon>
 								</div>
 							{/if}
 						</div>

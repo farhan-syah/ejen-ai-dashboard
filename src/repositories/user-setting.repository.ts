@@ -68,11 +68,11 @@ class _UserSettingRepository {
 
   async count(input: UserSettingSearch) {
     const url = `${this.path}/count`;
-		return await HttpService.post<number>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+    return await HttpService.post<number>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken"
+    });
+  }
 }
 
 export const UserSettingRepository = new _UserSettingRepository();

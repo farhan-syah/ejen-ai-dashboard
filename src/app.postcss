@@ -19,6 +19,12 @@
 		@apply active:bg-blue-700;
 	}
 
+	.pointer-blue-light {
+		@apply cursor-pointer;
+		@apply hover:bg-blue-600/10;
+		@apply active:bg-blue-700/10;
+	}
+
 	.pointer-light {
 		@apply cursor-pointer;
 		@apply hover:bg-white/30;
@@ -37,6 +43,10 @@
 
 	.button:disabled {
 		@apply bg-slate-300 cursor-default hover:bg-slate-300;
+	}
+
+	.button-inverse {
+		@apply text-blue-500  bg-blue-50 hover:bg-blue-100 active:bg-blue-200;
 	}
 
 	.button-slate {
@@ -101,6 +111,11 @@
 	.dialog-body {
 		@apply min-w-64 sm:min-w-xl md:min-w-2xl lg:min-w-4xl xl:min-w-4xl  2xl:min-w-6xl max-w-full sm:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl;
 	}
+
+	h1,
+	h2 {
+		@apply text-gray-900 font-bold;
+	}
 }
 
 body {
@@ -122,10 +137,6 @@ input[type="number"] {
 	-moz-appearance: textfield;
 }
 
-input:disabled {
-	background-color: #f9f9f9;
-}
-
 .ProseMirror:focus {
 	outline: none;
 }
@@ -134,4 +145,16 @@ input:disabled {
 	@apply prose prose-headings:m-0 prose-headings:my-3 prose-p:m-0 prose-p:my-2 prose-pre:m-0 prose-pre:my-2 prose-ul:m-0 prose-ul:my-2 prose-ol:m-0 prose-ol:my-2;
 	@apply prose-blockquote:m-0 prose-blockquote:my-2 prose-hr:m-0 prose-hr:my-2 prose-hr:border-slate-300;
 	@apply max-w-full;
+}
+
+@media (prefers-reduced-motion) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
+
+:fullscreen::backdrop {
+	background: transparent; /* Or any other color you prefer */
 }

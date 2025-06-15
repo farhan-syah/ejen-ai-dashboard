@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
 	import { getTableContext } from ".";
 	import { FormControl, NumField } from "..";
 
@@ -61,7 +60,7 @@
 					context.goToFirstPage();
 				}}
 			>
-				<Icon icon="mdi:page-first" />
+				<iconify-icon icon="mdi:page-first"></iconify-icon>
 			</div>
 			<div
 				role="button"
@@ -74,7 +73,7 @@
 					context.goToPreviousPage();
 				}}
 			>
-				<Icon icon="mdi:chevron-left" />
+				<iconify-icon icon="mdi:chevron-left"></iconify-icon>
 			</div>
 			<div
 				role="button"
@@ -87,7 +86,7 @@
 					context.goToNextPage();
 				}}
 			>
-				<Icon icon="mdi:chevron-right" />
+				<iconify-icon icon="mdi:chevron-right"></iconify-icon>
 			</div>
 			<div
 				role="button"
@@ -100,7 +99,7 @@
 					context.goToLastPage();
 				}}
 			>
-				<Icon icon="mdi:page-last" />
+				<iconify-icon icon="mdi:page-last"></iconify-icon>
 			</div>
 		</div>
 	</div>

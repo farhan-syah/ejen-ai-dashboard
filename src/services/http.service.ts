@@ -26,16 +26,18 @@ class _HttpService {
 		if (auth === "refreshToken") {
 			_headers["authorization"] = `Bearer ${this.userState.refreshToken.get()}`;
 		}
+
 		const result = await fetch(url, { headers: _headers, credentials });
 
 		const responseBody = await result.json();
 		if (result.ok) return responseBody as T;
 
 		const error: ErrorResponse = {
-			status: responseBody.status ?? result.status,
-			code: responseBody.code ?? result.status,
-			message: responseBody.message ?? result.statusText
+			status: responseBody?.status ?? result.status,
+			code: responseBody?.code ?? result.status.toString(),
+			message: responseBody?.message ?? result.statusText
 		};
+
 		throw error;
 	}
 

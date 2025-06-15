@@ -1,8 +1,9 @@
 import adapter from "@sveltejs/adapter-node";
-import preprocess from "svelte-preprocess";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [preprocess({ postcss: true })],
+	// preprocess: sveltePreprocess({ postcss: true }),
+	preprocess: vitePreprocess({ postcss: true }),
 	kit: {
 		adapter: adapter({}),
 		alias: {
@@ -10,7 +11,8 @@ const config = {
 			$repositories: "src/repositories",
 			$applications: "src/applications",
 			$api: "imports/api",
-			$types: "src/types"
+			$types: "src/types",
+			$common: "src/common"
 		}
 	},
 	onwarn: (

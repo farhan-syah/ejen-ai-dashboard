@@ -1,9 +1,14 @@
 <script lang="ts">
+	import { PUBLIC_ENV } from "$env/static/public";
+
+	import { type FullAutoFill } from "svelte/elements";
+	import { twMerge } from "tailwind-merge";
 	import { FormControl } from "../controller/form-control";
 	export let controller: FormControl<number> = new FormControl<number>();
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
 	export let disabled: boolean = false;
+	export let autocomplete: FullAutoFill | null | undefined = "off";
 	export let onInput: (value: string, input: HTMLInputElement, event: any) => any;
 	export let onKeydown: ((e: KeyboardEvent, controller: FormControl) => any) | undefined =
 		undefined;
@@ -68,6 +73,25 @@
 			onKeydown(e, controller);
 		}
 	}
+
+	function handleGenerateFakeData() {
+		if (controller.faker != null) {
+			const el = controller.el as HTMLInputElement;
+			const fakeValue = controller.faker();
+			controller.writableValue.set(fakeValue);
+			if (controller.inputTransformer != null) {
+				el.value = controller.inputTransformer(fakeValue);
+			} else {
+				el.value = fakeValue.toString();
+			}
+		}
+	}
+
+	function getInput(): string {
+		if (controller.inputTransformer) {
+			return controller.inputTransformer(controller.writableValue.get());
+		} else return controller.writableValue.get()?.toString() ?? "";
+	}
 </script>
 
 <div class="text-gray-400 {componentClass}">
@@ -93,9 +117,10 @@
 			{disabled}
 			type="text"
 			name={controller.name}
-			value={controller.writableValue.get()?.toString() ?? ""}
+			{autocomplete}
+			value={getInput()}
 			id={controller.id}
-			class="p-2 text-sm w-full outline-none {inputClass}"
+			class={twMerge(["p-2 text-sm w-full outline-none text-gray-600"], inputClass)}
 			on:focus={() => {
 				isFocused.set(true);
 				if (!$touched) {
@@ -112,6 +137,15 @@
 			on:input={handleInput}
 			on:keydown={handleKeydown}
 		/>
+		{#if controller.faker != null && PUBLIC_ENV === "DEV"}
+			<button
+				aria-label="randomize"
+				class="button button-inverse p-2 mr-1"
+				on:click={handleGenerateFakeData}
+			>
+				<iconify-icon icon="fe:random"></iconify-icon>
+			</button>
+		{/if}
 	</div>
 	<div class="text-red-500 text-xs">
 		{#each $errors as error, index}

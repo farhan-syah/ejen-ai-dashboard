@@ -208,6 +208,7 @@ export type ImageDeleteMany = Static<typeof ImageDeleteManySchema>;
 export declare const ImageSetSchema: import("@sinclair/typebox").TObject<{
     images: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
     productId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    productItemId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     orderProductId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     serviceId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     orderServiceId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

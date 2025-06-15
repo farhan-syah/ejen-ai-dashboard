@@ -12,6 +12,7 @@ export * from "./overlay";
 export * from "./page-title";
 export * from "./popper";
 export * from "./profile-image";
+export * from "./stepper";
 export * from "./tab";
 export * from "./table";
 export * from "./tiptap";

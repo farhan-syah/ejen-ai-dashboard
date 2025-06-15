@@ -1,3 +1,4 @@
+import { getDuplicates } from "$lib/utils";
 import { atom, computed, type ReadableAtom, type WritableAtom } from "nanostores";
 import type { FormControl } from ".";
 
@@ -8,15 +9,26 @@ export class FormGroup<T extends Record<string, any> = Record<string, any>> {
 	constructor(controllers: FormControl[]) {
 		this.controllers = controllers;
 
-		const validReadables: ReadableAtom<boolean>[] = [];
+		const names = controllers.map((c) => c.name);
+		const duplicateNames = getDuplicates(names);
+		if (duplicateNames.length > 0) {
+			console.warn(`Duplicate names: [${duplicateNames}]`);
+		}
 
+		const validReadables: ReadableAtom<boolean>[] = [];
 		controllers.forEach((controller) => {
 			validReadables.push(controller.valid);
-
 			controller.writableValue.subscribe((v) => {
 				const newRecord: Record<string, any> = {};
-				newRecord[controller.name] = v;
+
+				if (controller.outputTransformer) {
+					newRecord[controller.name] = controller.outputTransformer(v);
+				} else {
+					newRecord[controller.name] = controller.allowNull && !v ? null : v;
+				}
+
 				const currentValue = this.value.get();
+
 				const newValue = { ...currentValue, ...newRecord };
 				this.value.set(newValue);
 			});

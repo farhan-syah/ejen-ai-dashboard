@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Popper } from "$lib/components";
 	import type { FieldOption } from "$types";
-	import Icon from "@iconify/svelte";
+
 	import type { ModifierPhases } from "@popperjs/core";
 	import { atom } from "nanostores";
 	import type { PopperOptions } from "svelte-popperjs";
@@ -16,8 +16,9 @@
 	export let options: readonly FieldOption<T>[] = [];
 	export let placeholder: string = "Select";
 	export let showSelectedIcon: boolean = false;
+	export let disabled: boolean = false;
 
-	export let valueTransform: (value?: T) => string | undefined = (value) => {
+	export let valueTransform: (value?: T | null) => string | undefined = (value) => {
 		return value?.toString() ?? undefined;
 	};
 
@@ -96,7 +97,7 @@
 	const focusIndex = atom<number | undefined>(undefined);
 </script>
 
-<div class=" text-gray-400 {$$props.class ?? ''}">
+<div class=" text-gray-600 {$$props.class ?? ''}">
 	{#if label}
 		<div class="mb-1">
 			<label class="flex {labelClass}">
@@ -119,9 +120,11 @@
 		tabindex="0"
 		class=" outline-none"
 		on:focus={() => {
-			isFocused.set(true);
-			if (!$touched) {
-				touched.set(true);
+			if (!disabled) {
+				isFocused.set(true);
+				if (!$touched) {
+					touched.set(true);
+				}
 			}
 		}}
 		on:blur={() => {
@@ -164,11 +167,13 @@
 			}
 		}}
 	>
-		<Popper bind:isOpen={$isOpen} {popperOptions}>
+		<Popper bind:isOpen={$isOpen} {popperOptions} {disabled}>
 			<!-- Main Component -->
 			<div
 				slot="main"
-				class="flex text-center rounded outline p-2 cursor-pointer {outlineClass} {optionClass}"
+				class="flex text-center rounded outline p-2 {!disabled
+					? 'cursor-pointer'
+					: ' bg-gray-50'} {outlineClass} {optionClass}"
 			>
 				<div class="w-full">{valueTransform($value) ?? placeholder}</div>
 			</div>
@@ -196,7 +201,7 @@
 							</div>
 							{#if showSelectedIcon && $value == option.value}
 								<div class="text-xl text-green-500">
-									<Icon icon="bx:check" />
+									<iconify-icon icon="bx:check"></iconify-icon>
 								</div>
 							{/if}
 						</div>

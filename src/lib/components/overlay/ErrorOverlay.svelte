@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getAppState } from "$applications";
-	import Icon from "@iconify/svelte";
+
 	import { Card } from "../card";
 	const appState = getAppState();
 	const error = appState.error;
@@ -46,7 +46,7 @@
 				on:keydown={handleDismiss}
 				tabindex="0"
 			>
-				<Icon icon="bx:x" class="text-lg" />
+				<iconify-icon icon="bx:x" class="text-lg"></iconify-icon>
 			</div>
 		</div>
 	</div>

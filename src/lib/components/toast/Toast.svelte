@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getToastState } from "$applications/toast.state";
 	import { flyAndScale } from "$lib/utils";
-	import Icon from "@iconify/svelte";
+
 	import { sineOut } from "svelte/easing";
 	import { tweened } from "svelte/motion";
 	import { type ToastItem } from ".";
@@ -24,19 +24,20 @@
 
 <div class="bg-white rounded w-72 shadow-md overflow-clip" transition:flyAndScale>
 	<div class="relative {toast.type}">
-		<div class="h-1 {toast.type} left-0" style="width:{$progress}%" />
+		<div class="h-1 {toast.type} left-0" style="width:{$progress}%"></div>
 		<div class="flex p-2 items-center">
 			<div class="flex-grow text-xs">
 				{toast.message}
 			</div>
 			<button
+				aria-label="Dismiss"
 				class="cursor-pointer rounded-full p-0.5 bg-blend-soft-light hover:bg-slate-500/20"
 				tabindex="-1"
 				on:click={() => {
 					handleDismiss();
 				}}
 			>
-				<Icon icon="bx:x" class="text-lg"></Icon>
+				<iconify-icon icon="bx:x" class="text-lg"></iconify-icon>
 			</button>
 		</div>
 	</div>

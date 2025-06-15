@@ -1,7 +1,7 @@
 import { mergeArray } from "$lib/utils";
 import type { CSV, FieldOption } from "$types";
 import { atom, computed, type WritableAtom } from "nanostores";
-import { getContext, setContext, type SvelteComponent } from "svelte";
+import { getContext, setContext, type Component } from "svelte";
 import Table from "./Table.svelte";
 import TableBody from "./TableBody.svelte";
 import TableFooter from "./TableFooter.svelte";
@@ -9,6 +9,7 @@ import TableHeader from "./TableHeader.svelte";
 import TableHeaderColumn from "./TableHeaderColumn.svelte";
 import TableOption from "./TableOption.svelte";
 import TableRow from "./TableRow.svelte";
+
 type OrderObject = Record<string, "asc" | "desc">;
 export { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableOption, TableRow };
 
@@ -20,7 +21,7 @@ export interface TableColumn<T = any> {
 	key: keyof T;
 	label: string;
 	transform?: (column?: any, row?: any) => any;
-	content?: typeof SvelteComponent | any;
+	content?: Component<{ data: T }>;
 	sortable?: boolean;
 	contentClass?: string;
 	headerClass?: string;

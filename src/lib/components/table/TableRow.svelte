@@ -23,7 +23,7 @@
 
 <tr class="{stripe} {hover} align-top">
 	{#if $selectable && selectKey != null}
-		<td class="pl-2 pt-2">
+		<td class="p-2">
 			<input
 				type="checkbox"
 				on:click={() => {
@@ -41,7 +41,8 @@
 		>
 			<div class="p-2">
 				{#if column.content}
-					<svelte:component this={column.content} {data} />
+					{@const Component = column.content}
+					<svelte:component this={Component} {data} />
 				{:else if column.transform}
 					{column.transform(data[column.key], data)}
 				{:else}

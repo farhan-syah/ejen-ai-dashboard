@@ -1,3 +1,4 @@
 import IconWithTooltip from "./IconWithTooltip.svelte";
+import Icon from "./Icon.svelte";
 
-export { IconWithTooltip };
+export { Icon, IconWithTooltip };

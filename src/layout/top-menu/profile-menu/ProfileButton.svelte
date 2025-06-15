@@ -32,7 +32,6 @@
 
 	const menu: ProfileMenuItem[] = [
 		{ label: "Profile", icon: "mingcute:user-4-line", link: "/profile" },
-		{ label: "Task", icon: "mingcute:task-line", link: "/tasks" },
 		{ label: "Settings", icon: "mingcute:settings-6-line", link: "/settings" },
 		{
 			label: "Log Out",

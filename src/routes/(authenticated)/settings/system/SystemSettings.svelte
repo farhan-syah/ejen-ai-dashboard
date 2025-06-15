@@ -10,6 +10,7 @@
 	} from "./SystemSettings";
 	import SystemSettingsCountry from "./SystemSettingsCountry.svelte";
 	import SystemSettingsGeneral from "./SystemSettingsGeneral.svelte";
+	import SystemSettingsColor from "./color/SystemSettingsColor.svelte";
 	import SystemSettingsCurrency from "./currency/SystemSettingsCurrency.svelte";
 
 	const initialPage = $page.url.searchParams.get("page");
@@ -51,6 +52,9 @@
 		{/if}
 		{#if tabs[$index].label === SystemSettingsTab.currency}
 			<SystemSettingsCurrency />
+		{/if}
+		{#if tabs[$index].label === SystemSettingsTab.color}
+			<SystemSettingsColor />
 		{/if}
 	</div>
 </Tab>

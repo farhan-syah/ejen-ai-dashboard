@@ -3,26 +3,27 @@
 	import { Dialog } from "$lib/components";
 	import { RoleRepository, UserSettingRepository } from "$repositories";
 	import { AuthService } from "$services";
-	import Icon from "@iconify/svelte";
 	import { type Role as PrismaRole } from "@prisma/client";
 	import { atom } from "nanostores";
 	import { onMount } from "svelte";
 
 	const appState = getAppState();
 
-	type Role = PrismaRole & { organization: { name: string } };
+	type Role = PrismaRole & { organization: { name: string; id: string } };
 	type GroupedRole = { organizationId: string; organizationName: string; roles: Role[] };
 	const user = UserState.user;
 	const isSidebarOpen = appState.isSidebarOpen;
 	const userSetting = UserState.setting;
-	const currentRole = atom<Role | undefined>();
+	const currentRole = UserState.currentRole;
 	const roles = atom<Role[]>([]);
 	const groupedRoles = atom<GroupedRole[]>([]);
 	const isDialogOpen = atom(false);
 
 	currentRole.listen(async (value) => {
-		if (value && $user && $userSetting && $userSetting?.defaultUserRole != value.id) {
-			await UserSettingRepository.update($userSetting.id, { data: { defaultUserRole: value.id } });
+		if (value && $user && $userSetting && $userSetting?.defaultUserRoleId != value.id) {
+			await UserSettingRepository.update($userSetting.id, {
+				data: { defaultUserRoleId: value.id }
+			});
 		}
 
 		AuthService.refreshUser();
@@ -47,6 +48,7 @@
 				additionalFields: {
 					organization: {
 						select: {
+							id: true,
 							name: true
 						}
 					}
@@ -71,10 +73,10 @@
 			groupedRoles.set(Object.values(groups));
 		}
 
-		const defaultUserRole = $userSetting?.defaultUserRole;
+		const defaultUserRoleId = $userSetting?.defaultUserRoleId;
 		const initialRole =
 			result.find((role) => {
-				return role.id === defaultUserRole;
+				return role.id === defaultUserRoleId;
 			}) ?? result.at(0);
 		currentRole.set(initialRole);
 	}
@@ -108,7 +110,7 @@
 			</div>
 			{#if $roles.length > 0}
 				<div class="p-2">
-					<Icon icon="icon-park-outline:switch" class="text-base"></Icon>
+					<iconify-icon icon="icon-park-outline:switch" class="text-base"></iconify-icon>
 				</div>
 			{/if}
 		</div>

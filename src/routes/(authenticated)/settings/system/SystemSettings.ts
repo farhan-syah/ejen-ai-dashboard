@@ -8,7 +8,8 @@ export const SystemSettingsTab = {
 	payments: "Payment",
 	country: "Country",
 	currency: "Currency",
-	tax: "Tax"
+	tax: "Tax",
+	color: "Color"
 };
 
 export type SystemSettingsTab = (typeof SystemSettingsTab)[keyof typeof SystemSettingsTab];

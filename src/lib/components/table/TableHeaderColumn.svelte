@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
 	import { getTableContext, type TableColumn } from ".";
 
 	let context = getTableContext();
@@ -38,10 +37,10 @@
 		</div>
 		{#if $orderBy && $orderBy[key]}
 			{#if $orderBy[key] === "asc"}
-				<Icon icon="uiw:caret-up" class=" text-green-500" />
+				<iconify-icon icon="uiw:caret-up" class=" text-green-500"></iconify-icon>
 			{/if}
 			{#if $orderBy[key] === "desc"}
-				<Icon icon="uiw:caret-down" class=" text-green-500" />
+				<iconify-icon icon="uiw:caret-down" class=" text-green-500"></iconify-icon>
 			{/if}
 		{/if}
 	</div>

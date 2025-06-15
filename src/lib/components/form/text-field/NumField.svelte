@@ -1,17 +1,52 @@
 <script lang="ts">
 	import { tryParseNum } from "$lib/utils";
 	import { FormControl } from "../controller/form-control";
+
 	export let controller: FormControl<number> = new FormControl<number>();
+
 	export let label: string | undefined = undefined;
 	export let showErrorCount: number = 1;
-	export let onInput: (value: string, input: HTMLInputElement, event: any) => any = (
+	export let disabled: boolean = false;
+	export let decimalPlaces: number = 0;
+	export let allowNegativeValue: boolean = false;
+	export let onChange: (value: string, input: HTMLInputElement, event: any) => any = (
 		inputValue
 	) => {
-		const value = tryParseNum(inputValue) ?? 0;
-		controller.writableValue.set(value);
+		const el = controller.el as HTMLInputElement;
+		if (inputValue != "") {
+			const regexPattern = allowNegativeValue
+				? `^-?\\d*(\\.\\d{0,${decimalPlaces}})?$`
+				: `^\\d*(\\.\\d{0,${decimalPlaces}})?$`;
+
+			const regex: RegExp = new RegExp(regexPattern);
+			const validInput = regex.test(inputValue);
+
+			if (validInput) {
+				controller.writableValue.set(tryParseNum(inputValue));
+			} else {
+				el.value = controller.value?.toString() ?? "";
+			}
+		} else {
+			controller.writableValue.set(undefined);
+		}
 	};
-	export let onKeydown: ((e: KeyboardEvent, controller: FormControl) => any) | undefined =
-		undefined;
+	export let onKeydown: ((e: KeyboardEvent, controller: FormControl) => any) | undefined = (e) => {
+		if (e.key === "e" || e.key === "+") e.preventDefault();
+		const el = controller.el as HTMLInputElement;
+		if (decimalPlaces < 1) {
+			if (e.key === ".") e.preventDefault();
+		}
+
+		if (e.key === "-") {
+			if (el.value.includes("-") || !allowNegativeValue) e.preventDefault();
+
+			if (controller.value != undefined) {
+				if (el.value == "") {
+					e.preventDefault();
+				}
+			}
+		}
+	};
 	let required = controller.required;
 
 	// Class
@@ -65,7 +100,7 @@
 
 	function handleInput(e: any) {
 		const el = controller.el as HTMLInputElement;
-		onInput(el.value, el, e);
+		onChange(el.value, el, e);
 	}
 
 	function handleKeydown(e: any) {
@@ -95,6 +130,7 @@
 	<div class="flex rounded outline {outlineClass}">
 		<input
 			bind:this={controller.el}
+			{disabled}
 			type="number"
 			name={controller.name}
 			value={controller.writableValue.get()?.toString() ?? ""}

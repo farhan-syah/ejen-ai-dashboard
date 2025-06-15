@@ -1,11 +1,13 @@
 <script lang="ts">
+	import MultiSelectField from "../form/select-field/MultiSelectField.svelte";
+
 	import { getAppState } from "$applications";
 
 	import SelectField from "../form/select-field/SelectField.svelte";
 
 	import { FileType, saveAsFile } from "$lib/utils/file-saver";
 	import { FieldOption } from "$types";
-	import Icon from "@iconify/svelte";
+
 	import { json2csv } from "json-2-csv";
 	import { getTableContext, type BulkActionCallback, type TableColumn } from ".";
 	import { Button, FormControl } from "..";
@@ -74,7 +76,7 @@
 	optionController.writableValue.listen((value) => {
 		if (value) context.onLimitChange(value);
 	});
-	let columnController = new FormControl<FieldOption[]>({
+	const columnController = new FormControl<FieldOption[]>({
 		name: "column",
 		value: columnOptions
 	});
@@ -153,7 +155,7 @@
 					}}
 				>
 					<div>Clear</div>
-					<Icon icon="bx:x" class="text-slate-500 text-sm"></Icon>
+					<iconify-icon icon="bx:x" class="text-slate-500 text-sm"></iconify-icon>
 				</button>
 			</div>
 			{#if bulkActionOptions.length > 0}
@@ -181,12 +183,11 @@
 
 		{#if context.showColumnFilter && columnOptions.length > 0}
 			<div class="w-fixed w-36">
-				<!-- <DropdownMultiSelectField
-					control={columnController}
-					input={columnOptions}
+				<MultiSelectField
+					options={columnOptions}
 					placeholder="Columns"
-					usePlaceholder={true}
-				/> -->
+					controller={columnController}
+				/>
 			</div>
 		{/if}
 		{#if toCSV}
@@ -197,7 +198,7 @@
 				valid={$selected.length > 0}
 			>
 				<div slot="prefix">
-					<Icon icon="mdi:download" class="text-2xs -mt-0.5" />
+					<iconify-icon icon="mdi:download" class="text-2xs -mt-0.5"></iconify-icon>
 				</div>
 			</Button>{/if}
 		{#if toCSV}
@@ -207,7 +208,7 @@
 				onClick={() => handleDownloadAll()}
 			>
 				<div slot="prefix">
-					<Icon icon="mdi:download" class="text-2xs -mt-0.5" />
+					<iconify-icon icon="mdi:download" class="text-2xs -mt-0.5"></iconify-icon>
 				</div>
 			</Button>{/if}
 	</div>

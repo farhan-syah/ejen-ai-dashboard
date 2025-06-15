@@ -1,7 +1,7 @@
 import { type Static } from "@sinclair/typebox";
 export declare const EmailSchema: import("@sinclair/typebox").TObject<{
     to: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;
-    recepientName: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    recepientName: import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TNull, import("@sinclair/typebox").TString]>;
     logoUrl: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     address: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { getToastState } from "$applications/toast.state";
-	import Icon from "@iconify/svelte";
+
 	import type { BreadcrumbItem } from ".";
-	import IconWithTooltip from "../icons/IconWithTooltip.svelte";
+	import { IconWithTooltip } from "../icons";
 	let componentClass = "";
 	export { componentClass as class };
 
@@ -12,6 +12,8 @@
 	export let title: string;
 	export let id: string | undefined = undefined;
 	export let breadcrumbs: BreadcrumbItem[] = [];
+	export let showMetadata: boolean = true;
+	export let showCopyLink: boolean = true;
 </script>
 
 <div class="flex flex-wrap items-center text-gray-800 mb-2 {componentClass}">
@@ -28,40 +30,44 @@
 					</div>
 				</div>
 			{/if}
-			<div class="flex items-center">
-				<div class="ml-1">|</div>
-				{#if id}
-					<IconWithTooltip
-						icon="bx:copy"
-						iconClass="text-cyan-600 p-1 text-2xl"
-						tooltip="Copy ID"
-						onClick={async () => {
-							if (id) {
-								await navigator.clipboard.writeText(id);
+			{#if showMetadata}
+				<div class="flex items-center">
+					<div class="ml-1">|</div>
+					{#if id}
+						<IconWithTooltip
+							icon="bx:copy"
+							iconClass="text-cyan-600 p-1 text-2xl"
+							tooltip="Copy ID"
+							onClick={async () => {
+								if (id) {
+									await navigator.clipboard.writeText(id);
+									toastState.add({
+										type: "info",
+										key: "id",
+										message: "ID has been copied"
+									});
+								}
+							}}
+						/>
+					{/if}
+					{#if showCopyLink}
+						<IconWithTooltip
+							icon="bx:link"
+							iconClass="text-blue-600 p-1 text-2xl"
+							tooltip="Copy URL"
+							onClick={async () => {
+								const url = $page.url.toString();
+								await navigator.clipboard.writeText(url);
 								toastState.add({
 									type: "info",
-									key: "id",
-									message: "ID has been copied"
+									// key: url,
+									message: "URL has been copied"
 								});
-							}
-						}}
-					/>
-				{/if}
-				<IconWithTooltip
-					icon="bx:link"
-					iconClass="text-blue-600 p-1 text-2xl"
-					tooltip="Copy URL"
-					onClick={async () => {
-						const url = $page.url.toString();
-						await navigator.clipboard.writeText(url);
-						toastState.add({
-							type: "info",
-							// key: url,
-							message: "URL has been copied"
-						});
-					}}
-				/>
-			</div>
+							}}
+						/>
+					{/if}
+				</div>
+			{/if}
 		</div>
 		<slot name="action" />
 	</div>
@@ -80,7 +86,7 @@
 				</div>
 
 				{#if i < breadcrumbs.length - 1}
-					<Icon icon="tabler:chevron-right" class="text-base mb-0.5 "></Icon>
+					<iconify-icon icon="tabler:chevron-right" class="text-base mb-0.5"></iconify-icon>
 				{/if}
 			{/each}
 		</div>

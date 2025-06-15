@@ -36,7 +36,7 @@
 			</div>
 		{/each}
 	</div>
-	<div class="relative {separatorClass}" />
+	<div class="relative {separatorClass}"></div>
 	<div class="w-full">
 		<slot />
 	</div>

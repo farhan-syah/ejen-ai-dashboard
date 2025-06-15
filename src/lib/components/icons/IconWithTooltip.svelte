@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
 	import type { PopperOptions } from "svelte-popperjs";
 	import { Popper } from "../popper";
 	export let icon: string;
@@ -31,7 +30,7 @@
 		<!-- Main Component -->
 		<div slot="main">
 			{#if link}
-				<a href={link} {target} tabindex="-1">
+				<a href={link} {target} tabindex="-1" aria-label="button">
 					<div
 						role="button"
 						tabindex="0"
@@ -43,7 +42,7 @@
 						}}
 						class={onClick ? `pointer ${buttonClass}` : ""}
 					>
-						<Icon {icon} class=" {$$props.iconClass ?? ''}" />
+						<iconify-icon {icon} class=" {$$props.iconClass ?? ''}"></iconify-icon>
 					</div>
 				</a>
 			{:else}
@@ -59,7 +58,7 @@
 					}}
 					class=" {onClick ? `pointer ${buttonClass}` : ''}"
 				>
-					<Icon {icon} class=" {$$props.iconClass ?? ''}" />
+					<iconify-icon {icon} class=" {$$props.iconClass ?? ''}"></iconify-icon>
 				</div>
 			{/if}
 		</div>

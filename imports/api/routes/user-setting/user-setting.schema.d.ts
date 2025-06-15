@@ -14,7 +14,7 @@ export type UserSettingId = Static<typeof UserSettingIdSchema>;
 export declare const UserSettingUncheckedCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
 export type UserSettingUncheckedCreateInput = Static<typeof UserSettingUncheckedCreateInputSchema>;
 export declare const UserSettingUncheckedUpdateInputSchema: import("@sinclair/typebox").TObject<{
-    defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    defaultUserRoleId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;
 export type UserSettingUncheckedUpdateInput = Static<typeof UserSettingUncheckedUpdateInputSchema>;
 export declare const UserSettingSearchWhereSchema: import("@sinclair/typebox").TObject<{
@@ -122,12 +122,12 @@ export declare const UserSettingCreateSchema: import("@sinclair/typebox").TObjec
 }>;
 export type UserSettingCreate = Static<typeof UserSettingCreateSchema>;
 export declare const UserSettingUpdateDataSchema: import("@sinclair/typebox").TObject<{
-    defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    defaultUserRoleId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;
 export type UserSettingUpdateData = Static<typeof UserSettingUpdateDataSchema>;
 export declare const UserSettingUpdateSchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{
-        defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        defaultUserRoleId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -140,7 +140,7 @@ export declare const UserSettingUpdateSchema: import("@sinclair/typebox").TObjec
 export type UserSettingUpdate = Static<typeof UserSettingUpdateSchema>;
 export declare const UserSettingUpdateManySchema: import("@sinclair/typebox").TObject<{
     data: import("@sinclair/typebox").TObject<{
-        defaultUserRole: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        defaultUserRoleId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     }>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TArray<import("@sinclair/typebox").TString>;

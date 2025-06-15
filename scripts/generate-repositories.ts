@@ -1,7 +1,15 @@
 import * as fs from "fs";
 import * as path from "path";
+import pino from "pino";
 
 const overrideFiles = true;
+
+const logger = pino({
+	transport: {
+		target: "pino-pretty"
+	},
+	base: null // Remove pid, hostname and name from output
+});
 
 const generateRepositoryFile = (modelName: string, kebabCaseName: string) => {
 	const template = `import type {
@@ -74,11 +82,11 @@ class _${modelName}Repository {
 
   async count(input: ${modelName}Search) {
     const url = \`\${this.path}/count\`;
-		return await HttpService.post<number>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+    return await HttpService.post<number>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken"
+    });
+  }
 }
 
 export const ${modelName}Repository = new _${modelName}Repository();
@@ -89,9 +97,9 @@ export const ${modelName}Repository = new _${modelName}Repository();
 	// Create the file if it doesn't exist or if override is true
 	if (!fs.existsSync(filePath) || overrideFiles) {
 		fs.writeFileSync(filePath, template);
-		console.log(`Generated repository file for model: ${modelName}`);
+		logger.info(`Generated repository file for model: ${modelName}`);
 	} else {
-		console.log(`Skipped generation for model: ${modelName}`);
+		logger.info(`Skipped generation for model: ${modelName}`);
 	}
 };
 
@@ -117,9 +125,9 @@ export {
 	// Update the file if it doesn't exist or if override is true
 	if (!fs.existsSync(filePath) || overrideFiles) {
 		fs.writeFileSync(filePath, template);
-		console.log(`Updated index file`);
+		logger.info(`Updated index file`);
 	} else {
-		console.log(`Skipped index file update`);
+		logger.info(`Skipped index file update`);
 	}
 };
 

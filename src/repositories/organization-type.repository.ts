@@ -68,11 +68,11 @@ class _OrganizationTypeRepository {
 
   async count(input: OrganizationTypeSearch) {
     const url = `${this.path}/count`;
-		return await HttpService.post<number>(url, {
-			body: JSON.stringify(input),
-			auth: "accessToken"
-		});
-	}
+    return await HttpService.post<number>(url, {
+      body: JSON.stringify(input),
+      auth: "accessToken"
+    });
+  }
 }
 
 export const OrganizationTypeRepository = new _OrganizationTypeRepository();

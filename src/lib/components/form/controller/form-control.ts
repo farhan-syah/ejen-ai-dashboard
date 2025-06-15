@@ -1,18 +1,15 @@
 import { nanoid } from "nanoid";
 import { atom, computed, type ReadableAtom, type WritableAtom } from "nanostores";
+import { type Validator } from "./form-validator";
 
-export type Validator<T = any> = {
-	validator: (value: T, options?: any) => boolean;
-	errorMessage: string;
-	options?: any;
-};
+type Nullable<T> = T | null | undefined;
 
 export class FormControl<T = any> {
 	el?: HTMLInputElement | HTMLTextAreaElement;
 	id: string;
 	name: string;
-	initialValue: T | undefined;
-	writableValue: WritableAtom<T | undefined>;
+	initialValue: T | null | undefined;
+	writableValue: WritableAtom<T | null | undefined>;
 	isFocused = atom(false);
 	errors = atom<string[]>([]);
 	hasError = atom(false);
@@ -21,21 +18,36 @@ export class FormControl<T = any> {
 	required: boolean;
 	touched = atom(false);
 	dirty = atom(false);
+	allowNull: boolean;
 	onReset?: (control: FormControl<T>) => any;
+	faker?: (() => T) | undefined;
+	generator?: (() => T) | undefined;
+	inputTransformer?: ((vvalue?: Nullable<T>) => string) | undefined;
+	outputTransformer?: (value?: Nullable<T>) => any;
 	constructor({
 		id,
 		name,
 		value,
 		validators,
 		required,
-		onReset
+		onReset,
+		allowNull,
+		faker,
+		generator,
+		inputTransformer: inputTransformer,
+		outputTransformer: outputTransformer
 	}: {
 		id?: string;
 		name?: string;
-		value?: T;
+		value?: T | null;
 		validators?: Validator<T>[];
 		required?: boolean;
 		onReset?: (control: FormControl<T>) => any;
+		allowNull?: boolean;
+		faker?: (() => T) | undefined;
+		generator?: (() => T) | undefined;
+		inputTransformer?: ((value?: Nullable<T>) => string) | undefined;
+		outputTransformer?: (value?: Nullable<T>) => any;
 	} = {}) {
 		this.id = id ?? nanoid(6);
 		this.name = name ?? nanoid(6);
@@ -43,6 +55,10 @@ export class FormControl<T = any> {
 		this.writableValue = atom(value);
 		this.validators = validators ?? [];
 		this.required = required ?? false;
+		this.allowNull = allowNull ?? false;
+		this.faker = faker;
+		(this.inputTransformer = inputTransformer), (this.generator = generator);
+		this.outputTransformer = outputTransformer;
 		this.writableValue.listen(() => {
 			this.validate();
 		});
@@ -50,7 +66,6 @@ export class FormControl<T = any> {
 		this.errors.listen((errors) => {
 			this.validateErrors([...errors]);
 		});
-
 		this.valid = computed([this.writableValue, this.hasError], (value, hasError) => {
 			if (!required) {
 				return !hasError;
@@ -60,8 +75,8 @@ export class FormControl<T = any> {
 		});
 	}
 
-	get value() {
-		return this.writableValue.get();
+	get value(): T | undefined {
+		return this.writableValue.get() ?? undefined;
 	}
 
 	validate() {
@@ -89,6 +104,10 @@ export class FormControl<T = any> {
 		} else {
 			this.hasError.set(false);
 		}
+	}
+
+	set value(value: T | null | undefined) {
+		this.writableValue.set(value);
 	}
 
 	resetValue() {

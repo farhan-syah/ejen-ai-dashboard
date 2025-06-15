@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getAppState } from "$applications";
-	import Icon from "@iconify/svelte";
+
 	const appState = getAppState();
 	const isSidebarOpen = appState.isSidebarOpen;
 	const layout = appState.layout;
@@ -25,5 +25,6 @@
 	role="button"
 	tabindex="0"
 >
-	<Icon icon={$isSidebarOpen ? "bx:x" : "bx:menu"} class="text-2xl text-black "></Icon>
+	<iconify-icon icon={$isSidebarOpen ? "bx:x" : "bx:menu"} class="text-2xl text-black"
+	></iconify-icon>
 </div>

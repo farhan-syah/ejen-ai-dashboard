@@ -2,7 +2,10 @@ export function isOdd(num: number): boolean {
 	return num % 2 === 0;
 }
 
-export function formatNumber(input: number | string, decimalPlaces: number): string {
+export function formatNumber(
+	input: number | string | null | undefined,
+	decimalPlaces: number
+): string {
 	try {
 		// Convert the input to a number
 		const number: number = typeof input === "string" ? parseFloat(input) : Number(input);

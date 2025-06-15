@@ -3,7 +3,7 @@
 	import { getToastState } from "$applications/toast.state";
 	import { Button, Dialog, FormControl, Image } from "$lib/components";
 	import { UploadService } from "$services";
-	import Icon from "@iconify/svelte";
+
 	import { fromEvent, type FileWithPath } from "file-selector";
 	import { atom } from "nanostores";
 	import { dndzone } from "svelte-dnd-action";
@@ -199,12 +199,13 @@
 							/>
 							{#if !disabled && $isEditing}
 								<button
+									aria-label="cancel"
 									on:click={(e) => {
 										handleImageDelete(e, i);
 									}}
 									class="absolute -top-2 -right-2 bg-red-500 rounded-full p-0.5 waves-effect shadow-md shadow-gray-500 hover:shadow-gray-600 text-white"
 								>
-									<Icon icon="bx:x" class=" text-xl" />
+									<iconify-icon icon="bx:x" class=" text-xl"></iconify-icon>
 								</button>
 							{/if}
 
@@ -225,7 +226,7 @@
 						<Button onClick={handleChooseFile}>
 							<div slot="label" class="w-full">
 								<div class=" flex gap-1 items-center justify-center">
-									<Icon icon="bx:image-add" class="text-lg " />
+									<iconify-icon icon="bx:image-add" class="text-lg"></iconify-icon>
 									<div>Add image</div>
 								</div>
 								<input
@@ -241,7 +242,7 @@
 						<Button class="button-green " onClick={handleSave}>
 							<div slot="label" class="w-full">
 								<div class=" w-full flex gap-1 items-center justify-center">
-									<Icon icon="bx:save" class="text-lg" />
+									<iconify-icon icon="bx:save" class="text-lg"></iconify-icon>
 									<div>Save</div>
 								</div>
 							</div>
@@ -249,7 +250,7 @@
 						<Button class=" button-red " onClick={handleCancel}>
 							<div slot="label" class="w-full">
 								<div class=" w-full flex gap-1 items-center justify-center">
-									<Icon icon="bx:undo" class="text-lg " />
+									<iconify-icon icon="bx:undo" class="text-lg"></iconify-icon>
 									<div>Cancel</div>
 								</div>
 							</div>
@@ -263,7 +264,7 @@
 						>
 							<div slot="label" class="w-full">
 								<div class=" w-full flex gap-1 items-center justify-center">
-									<Icon icon="bx:edit-alt" class="text-lg " />
+									<iconify-icon icon="bx:edit-alt" class="text-lg"></iconify-icon>
 									<div>Edit image</div>
 								</div>
 							</div></Button

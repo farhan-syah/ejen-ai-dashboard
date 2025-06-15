@@ -19,8 +19,15 @@
 			: ''}"
 	>
 		<TopMenu />
-		<div class="flex-grow overflow-auto main p-2 sm:p-4">
-			<slot />
+		<div class="flex-grow overflow-auto main relative w-full">
+			<div class="absolute p-2 sm:p-4 w-full">
+				<slot />
+			</div>
+			<!-- {#key $page.url.pathname}
+				<div class="absolute p-2 sm:p-4 w-full" in:fly={{ duration: 0, easing: quartIn }}>
+					<slot />
+				</div>
+			{/key} -->
 		</div>
 	</div>
 {/if}
