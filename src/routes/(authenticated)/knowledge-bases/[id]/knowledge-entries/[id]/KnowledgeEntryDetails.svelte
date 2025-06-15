@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { KnowledgeBaseUpdateInput } from "$api/routes/knowledge-base/knowledge-base.schema";
+	import type { KnowledgeEntryUpdateInput } from "$api/routes/knowledge-entry/knowledge-entry.schema";
 	import { getAppState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import {
@@ -12,16 +12,16 @@
 		TextField,
 		Tooltip
 	} from "$lib/components";
-	import { KnowledgeBaseRepository } from "$repositories";
+	import { KnowledgeEntryRepository } from "$repositories";
 
 	import { atom } from "nanostores";
-	import { getKnowledgeBaseContext } from "./KnowledgeBase";
-	import KnowledgeBaseDeleteButton from "./KnowledgeBaseDeleteButton.svelte";
+	import { getKnowledgeEntryContext } from "./KnowledgeEntry";
+	import KnowledgeEntryDeleteButton from "./KnowledgeEntryDeleteButton.svelte";
 
 	// Context
 
-	const context = getKnowledgeBaseContext();
-	const knowledgeBase = context.knowledgeBase;
+	const context = getKnowledgeEntryContext();
+	const knowledgeEntry = context.knowledgeEntry;
 	const hasEditPermission = context.hasEditPermission;
 
 	// States
@@ -34,21 +34,16 @@
 
 	const idController = new FormControl({
 		name: "id",
-		value: $knowledgeBase.id
+		value: $knowledgeEntry.id
 	});
 
-	const nameController = new FormControl({
-		name: "name",
-		value: $knowledgeBase.name,
+	const titleController = new FormControl({
+		name: "title",
+		value: $knowledgeEntry.title,
 		required: true
 	});
 
-	const descriptionController = new FormControl({
-		name: "description",
-		value: $knowledgeBase.description
-	});
-
-	const form = new FormGroup([nameController]);
+	const form = new FormGroup([titleController]);
 	const valid = form.valid;
 
 	// Functions
@@ -57,13 +52,13 @@
 		try {
 			appState.loading.set(true);
 
-			const data = form.value.get() as KnowledgeBaseUpdateInput;
+			const data = form.value.get() as KnowledgeEntryUpdateInput;
 
-			await KnowledgeBaseRepository.update($knowledgeBase.id, {
+			await KnowledgeEntryRepository.update($knowledgeEntry.id, {
 				data: data
 			});
 
-			await context.fetchKnowledgeBase();
+			await context.fetchKnowledgeEntry();
 
 			editable.set(false);
 
@@ -104,16 +99,8 @@
 			</TextField>
 
 			<TextField
-				controller={nameController}
+				controller={titleController}
 				label="Name"
-				class="col-span-2"
-				disabled={!$editable}
-			/>
-		</div>
-		<div class="col-span-5 lg:col-span-3 grid gap-4 auto-rows-min">
-			<TextField
-				controller={descriptionController}
-				label="Description"
 				class="col-span-2"
 				disabled={!$editable}
 			/>
@@ -137,8 +124,8 @@
 							form.resetValue();
 						}}
 					/>
-					<Guard requiredPermissions={["KnowledgeBase.manage", "KnowledgeBase.delete"]}>
-						<KnowledgeBaseDeleteButton product={$knowledgeBase} />
+					<Guard requiredPermissions={["KnowledgeEntry.manage", "KnowledgeEntry.delete"]}>
+						<KnowledgeEntryDeleteButton product={$knowledgeEntry} />
 					</Guard>
 				{:else}
 					<Button
