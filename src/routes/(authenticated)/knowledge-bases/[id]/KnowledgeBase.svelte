@@ -38,11 +38,11 @@
 
 {#if $knowledgeBase}
 	<PageTitle
-		title="Agent Type - {$knowledgeBase.name}"
+		title="Knowledge Base - {$knowledgeBase.name}"
 		id={$knowledgeBase.id}
 		breadcrumbs={[
-			{ label: "Agent Types", path: "/agent-types" },
-			{ label: "Edit Agent", path: "/agent-types/" + id, currentPage: true }
+			{ label: "Knowledge Bases", path: "/knowledge-bases" },
+			{ label: "Edit Knowledge Bases", path: "/knowledge-bases" + id, currentPage: true }
 		]}
 	/>
 	<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">

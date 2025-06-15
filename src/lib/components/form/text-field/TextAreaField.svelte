@@ -75,7 +75,7 @@
 	}
 </script>
 
-<div class="text-gray-400 {componentClass}">
+<div class="text-gray-600 {componentClass}">
 	{#if label}
 		<div class="mb-1">
 			<label for={controller.id} class="flex {labelClass}">

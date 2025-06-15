@@ -13,6 +13,7 @@
 	export let id: string | undefined = undefined;
 	export let breadcrumbs: BreadcrumbItem[] = [];
 	export let showMetadata: boolean = true;
+	export let showCopyLink: boolean = true;
 </script>
 
 <div class="flex flex-wrap items-center text-gray-800 mb-2 {componentClass}">
@@ -49,20 +50,22 @@
 							}}
 						/>
 					{/if}
-					<IconWithTooltip
-						icon="bx:link"
-						iconClass="text-blue-600 p-1 text-2xl"
-						tooltip="Copy URL"
-						onClick={async () => {
-							const url = $page.url.toString();
-							await navigator.clipboard.writeText(url);
-							toastState.add({
-								type: "info",
-								// key: url,
-								message: "URL has been copied"
-							});
-						}}
-					/>
+					{#if showCopyLink}
+						<IconWithTooltip
+							icon="bx:link"
+							iconClass="text-blue-600 p-1 text-2xl"
+							tooltip="Copy URL"
+							onClick={async () => {
+								const url = $page.url.toString();
+								await navigator.clipboard.writeText(url);
+								toastState.add({
+									type: "info",
+									// key: url,
+									message: "URL has been copied"
+								});
+							}}
+						/>
+					{/if}
 				</div>
 			{/if}
 		</div>

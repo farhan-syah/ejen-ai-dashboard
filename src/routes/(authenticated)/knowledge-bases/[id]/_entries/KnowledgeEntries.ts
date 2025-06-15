@@ -2,7 +2,7 @@ import type { TableColumn } from "$lib/components";
 import { formatLocalDate } from "$lib/utils/date";
 import { CSV } from "$types";
 import type { KnowledgeEntry } from "@prisma/client";
-import KnowledgeEntryActions from "./_/actions/KnowledgeEntryActions.svelte";
+import KnowledgeEntryActions from "./actions/KnowledgeEntryActions.svelte";
 
 export type _KnowledgeEntry = KnowledgeEntry & {};
 
@@ -11,9 +11,15 @@ export const knowledgeEntryColumns: TableColumn<KnowledgeEntry>[] = [
 		key: "id",
 		label: "ID",
 		visible: true,
-		sortable: true
+		sortable: true,
+		shrink: true
 	},
-
+	{
+		key: "title",
+		label: "Title",
+		visible: true,
+		content: KnowledgeEntryActions
+	},
 	{
 		key: "id",
 		label: "Action",

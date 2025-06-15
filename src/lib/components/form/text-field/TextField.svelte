@@ -3,7 +3,6 @@
 
 	import type { FullAutoFill, HTMLInputTypeAttribute } from "svelte/elements";
 	import { FormControl } from "../controller/form-control";
-	import { atom } from "nanostores";
 	export let type: HTMLInputTypeAttribute | undefined | null = "text";
 	export let controller: FormControl = new FormControl<string>();
 	export let label: string | undefined = undefined;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { _KnowledgeEntry } from "../../KnowledgeEntry";
+	import type { _KnowledgeEntry } from "../KnowledgeEntries";
 	import KnowledgeEntryActionView from "./KnowledgeEntryActionView.svelte";
 	export let data: _KnowledgeEntry;
 </script>

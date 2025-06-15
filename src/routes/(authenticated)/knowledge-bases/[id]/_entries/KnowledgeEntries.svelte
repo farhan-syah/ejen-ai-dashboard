@@ -1,21 +1,22 @@
 <script lang="ts">
 	import type { KnowledgeEntrySearch } from "$api/routes/knowledge-entry/knowledge-entry.schema";
-	import { goto } from "$app/navigation";
-	import { Button, PageTitle, Table, createTableContext } from "$lib/components";
+	import { Button, Dialog, PageTitle, Table, createTableContext } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
 	import { delay } from "$lib/utils";
 	import { KnowledgeEntryRepository } from "$repositories";
+	import { atom } from "nanostores";
 	import {
 		knowledgeEntryColumns,
 		toKnowledgeEntryCSV,
 		type _KnowledgeEntry
 	} from "./KnowledgeEntries";
+	import KnowledgeEntryAddForm from "./add/KnowledgeEntryAddForm.svelte";
 
 	const tableContext = createTableContext<_KnowledgeEntry, KnowledgeEntrySearch>({
 		filter: { where: {}, query: { limit: 20 } },
 		columns: knowledgeEntryColumns,
 		limit: 20,
-		selectable: true,
+		// selectable: true,
 		selectByKey: "id",
 		onSearch: async (f) => {
 			if (f) return KnowledgeEntryRepository.search(f);
@@ -41,18 +42,16 @@
 			}
 		}
 	});
+
+	const isDialogOpen = atom(false);
 </script>
 
-<PageTitle
-	title="Knowledge Entries"
-	breadcrumbs={[{ label: "Knowledge Entries", path: "/knowledge-entrys", currentPage: true }]}
->
+<PageTitle title="Knowledge Entries" showCopyLink={false} class="my-4">
 	<div slot="action" class="mt-0.5">
 		<Button
-			link="/knowledge-entrys/add"
 			label="Add Knowledge Entry"
 			onClick={() => {
-				goto("/knowledge-entrys/add");
+				isDialogOpen.set(true);
 			}}
 			class="button-xs"
 		/>
@@ -62,3 +61,7 @@
 <Card>
 	<Table context={tableContext} />
 </Card>
+
+<Dialog isOpen={isDialogOpen}>
+	<KnowledgeEntryAddForm />
+</Dialog>

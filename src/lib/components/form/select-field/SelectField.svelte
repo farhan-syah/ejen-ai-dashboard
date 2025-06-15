@@ -97,7 +97,7 @@
 	const focusIndex = atom<number | undefined>(undefined);
 </script>
 
-<div class=" text-gray-400 {$$props.class ?? ''}">
+<div class=" text-gray-600 {$$props.class ?? ''}">
 	{#if label}
 		<div class="mb-1">
 			<label class="flex {labelClass}">

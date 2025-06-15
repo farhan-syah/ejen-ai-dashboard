@@ -11,27 +11,29 @@
 		TextField,
 		TextAreaField
 	} from "$lib/components";
+	import SelectField from "$lib/components/form/select-field/SelectField.svelte";
 	import { KnowledgeEntryRepository } from "$repositories";
+	import type { FieldOption } from "$types";
 	import { faker } from "@faker-js/faker";
-
+	import { KnowledgeEntryContentType } from "@prisma/client";
 	// States
 	const appState = getAppState();
 	const toastState = getToastState();
 
 	//  Forms
-	const nameController = new FormControl<string>({
+	const titleController = new FormControl<string>({
 		name: "name",
 		required: true,
 		faker: faker.lorem.words
 	});
 
-	const descriptionController = new FormControl<string | null>({
-		name: "description",
-		required: false, // Adjust if description is mandatory
-		faker: faker.lorem.sentence
-	});
-
-	const form = new FormGroup<KnowledgeEntryCreateInput>([nameController, descriptionController]);
+	const entryTypeController = new FormControl<KnowledgeEntryContentType>({ required: true });
+	const entryTypeOptions: FieldOption[] = Object.values(KnowledgeEntryContentType)
+		.filter((e) => ["TEXT", "PDF"].includes(e))
+		.map((e) => {
+			return { value: e, label: e };
+		});
+	const form = new FormGroup<KnowledgeEntryCreateInput>([titleController]);
 	const valid = form.valid;
 
 	async function handleSaveForm() {
@@ -43,9 +45,8 @@
 			const data = form.value.get();
 
 			const createData: KnowledgeEntryCreateInput = {
-				name: data.name!,
-				description: data.description,
-				organizationId
+				title: data.title!,
+				knowledgeBaseId: ""
 			};
 
 			const knowledgeEntry = await KnowledgeEntryRepository.create({
@@ -66,19 +67,26 @@
 			appState.loading.set(false);
 		}
 	}
+
+	// Reactives
+
+	const entryTypeValue = entryTypeController.writableValue;
 </script>
 
-<div class="grid grid-cols-6 gap-4">
-	<TextField controller={nameController} label="Name" class="col-col-1" />
-	<TextAreaField
-		controller={descriptionController}
-		label="Description"
-		class="col-col-1"
-		textareaClass="h-32"
-		resizable={false}
+<div class="flex flex-wrap gap-4">
+	<h1 class="w-full items-center gap-1 font-bold">Add Knowledge Entry</h1>
+	<TextField controller={titleController} label="Title" class="col-col-1" />
+	<SelectField
+		controller={entryTypeController}
+		label="Content Type"
+		options={entryTypeOptions}
+		class="w-60"
 	/>
 
-	<div class="flex gap-2 col-start-1">
+	{#if $entryTypeValue === KnowledgeEntryContentType.TEXT}
+		<TextAreaField label="Content" class="w-full" />
+	{/if}
+	<div class="w-full flex gap-2 col-start-1">
 		<Button valid={$valid} onClick={handleSaveForm} />
 	</div>
 </div>

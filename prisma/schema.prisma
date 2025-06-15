@@ -13,7 +13,7 @@ generator client {
 datasource db {
   provider   = "postgresql"
   url        = env("DATABASE_URL")
-  extensions = [vector, postgis]
+  extensions = [vector, postgis, vectorscale]
 }
 
 enum UserStatus {
@@ -377,10 +377,12 @@ model Integration {
   updatedAt         DateTime               @updatedAt
   name              String // e.g., "WhatsApp", "Telegram", "Web Integration"
   key               String                 @unique // e.g., "whatsapp", "telegram", "web" - to identify in code
-  description       String? // Optional Description
+  description       String? // Optional Description'
+  icon              String?
   agentIntegrations AgentTypeIntegration[]
   usages            Usage[]
-  UsageEvent        UsageEvent[]
+  usageEvent        UsageEvent[]
+  priority          Int                    @default(0)
 }
 
 model AgentIntegration {
@@ -393,6 +395,8 @@ model AgentIntegration {
 
 model AgentTypeIntegration {
   id             String      @id @default(cuid())
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
   agentType      AgentType   @relation(fields: [agentTypeKey], references: [key])
   agentTypeKey   String
   integration    Integration @relation(fields: [integrationKey], references: [key])
@@ -405,6 +409,8 @@ model AgentTypeIntegration {
 
 model Usage {
   id            String      @id @default(cuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   agent         Agent       @relation(fields: [agentId], references: [id])
   agentId       String
   integration   Integration @relation(fields: [integrationId], references: [id])
@@ -427,6 +433,7 @@ model UsageEvent {
   units         Int         @default(0) // Number of "units" used (e.g., messages, API calls)
   cost          Int         @default(0) // Total cost for this usage, pre-calculated (in cents)
   createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
   @@index([agentId, integrationId, createdAt]) // For efficient querying
 }
@@ -461,17 +468,58 @@ model KnowledgeBase {
   name           String
   description    String?
   entries        KnowledgeEntry[]
+
+  @@index([organizationId])
 }
 
 model KnowledgeEntry {
-  id              String                      @id @default(cuid())
-  createdAt       DateTime                    @default(now())
-  updatedAt       DateTime                    @updatedAt
-  title           String
-  content         String // Store raw text or processed data
-  source          String? // URL, document, manual entry, etc.
-  transcript      String?
-  knowledgeBase   KnowledgeBase               @relation(fields: [knowledgeBaseId], references: [id], onDelete: Cascade)
-  knowledgeBaseId String
-  embedding       Unsupported("vector(1536)") // Replace 1536 with your dimension
+  id                  String                         @id @default(cuid())
+  createdAt           DateTime                       @default(now())
+  updatedAt           DateTime                       @updatedAt
+  title               String
+  content             String? // Stores the extracted textual content from the original source
+  contentSize         Int?
+  originalContentType KnowledgeEntryContentType      @default(TEXT)
+  status              KnowledgeEntryProcessingStatus @default(PENDING)
+  metadata            Json?
+  fileStorageUrl      String?
+  originalFileName    String?
+  originalFileType    String? // e.g., 'application/pdf',
+  originalFileSize    Int?
+  knowledgeBase       KnowledgeBase                  @relation(fields: [knowledgeBaseId], references: [id], onDelete: Cascade)
+  knowledgeBaseId     String
+  chunks              KnowledgeEntryChunk[]
+  errorMessage        String?
+
+  @@index([knowledgeBaseId])
+  @@index([status])
+}
+
+model KnowledgeEntryChunk {
+  id               BigInt                       @id @default(autoincrement())
+  metadata         Json?
+  contents         String
+  embedding        Unsupported("vector(1536)")?
+  knowledgeEntry   KnowledgeEntry               @relation(fields: [knowledgeEntryId], references: [id], onDelete: Cascade)
+  knowledgeEntryId String
+
+  @@index([knowledgeEntryId])
+}
+
+enum KnowledgeEntryContentType {
+  TEXT // For normal or markdown supported-text
+  PDF
+  DOC
+  AUDIO
+  IMAGE
+  PPT
+}
+
+enum KnowledgeEntryProcessingStatus {
+  PENDING
+  EXTRACTING
+  CHUNKING
+  EMBEDDING
+  READY
+  FAILED
 }
