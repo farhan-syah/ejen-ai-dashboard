@@ -9,7 +9,9 @@
 		FormDebugger,
 		FormGroup,
 		TextField,
-		TextAreaField
+		TextAreaField,
+		FileField,
+		type FileItem
 	} from "$lib/components";
 	import SelectField from "$lib/components/form/select-field/SelectField.svelte";
 	import { KnowledgeEntryRepository } from "$repositories";
@@ -33,7 +35,28 @@
 		.map((e) => {
 			return { value: e, label: e };
 		});
-	const form = new FormGroup<KnowledgeEntryCreateInput>([titleController]);
+
+	const attachedFilesController = new FormControl<FileItem[]>({
+		value: [
+			{
+				id: "16r51M17CRfzT-8U0f2aj",
+				path: "./Gmail - ADUAN FRANCAIS NO. RUJ ADUAN AF(A2025)0015_ AHMAD FARHAN SYAH BIN HASMUDDIN.pdf",
+				url: "blob:http://localhost:3051/ba51b72c-f5af-42ff-a29b-85bc517c46d6",
+				file: new File(
+					[""],
+					"Gmail - ADUAN FRANCAIS NO. RUJ ADUAN AF(A2025)0015_ AHMAD FARHAN SYAH BIN HASMUDDIN.pdf"
+				),
+				name: "Gmail - ADUAN FRANCAIS NO. RUJ ADUAN AF(A2025)0015_ AHMAD FARHAN SYAH BIN HASMUDDIN.pdf",
+				ext: "pdf",
+				icon: "material-icon-theme:pdf"
+			}
+		]
+	});
+	const form = new FormGroup<KnowledgeEntryCreateInput>([
+		titleController,
+		entryTypeController,
+		attachedFilesController
+	]);
 	const valid = form.valid;
 
 	async function handleSaveForm() {
@@ -86,6 +109,7 @@
 	{#if $entryTypeValue === KnowledgeEntryContentType.TEXT}
 		<TextAreaField label="Content" class="w-full" />
 	{/if}
+	<FileField controller={attachedFilesController} label="Attach File" class="w-72" />
 	<div class="w-full flex gap-2 col-start-1">
 		<Button valid={$valid} onClick={handleSaveForm} />
 	</div>
