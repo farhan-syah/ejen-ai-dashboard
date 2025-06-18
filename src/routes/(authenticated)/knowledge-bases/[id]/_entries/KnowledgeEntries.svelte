@@ -43,7 +43,7 @@
 		}
 	});
 
-	const isDialogOpen = atom(false);
+	const isDialogOpen = atom(true);
 </script>
 
 <PageTitle title="Knowledge Entries" showCopyLink={false} class="my-4">

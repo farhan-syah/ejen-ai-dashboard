@@ -16,6 +16,7 @@
 		labelPostfix?: Snippet;
 		accept?: string;
 		limit?: number;
+		onChange?: (files?: FileItem[]) => any;
 	}
 
 	const {
@@ -26,7 +27,8 @@
 		class: componentClass,
 		labelPostfix,
 		accept = "*",
-		limit = 1
+		limit = 1,
+		onChange
 	}: Props = $props();
 
 	const errors = controller.errors;
@@ -108,6 +110,10 @@
 		controller.writableValue.set([...items]);
 		if (inputRef) {
 			inputRef.value = "";
+		}
+
+		if (onChange) {
+			onChange(items);
 		}
 	}
 

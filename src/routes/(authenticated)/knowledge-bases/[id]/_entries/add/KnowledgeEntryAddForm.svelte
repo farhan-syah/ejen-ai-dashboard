@@ -11,52 +11,79 @@
 		TextField,
 		TextAreaField,
 		FileField,
-		type FileItem
+		type FileItem,
+		TableField
 	} from "$lib/components";
 	import SelectField from "$lib/components/form/select-field/SelectField.svelte";
 	import { KnowledgeEntryRepository } from "$repositories";
 	import type { FieldOption } from "$types";
 	import { faker } from "@faker-js/faker";
 	import { KnowledgeEntryContentType } from "@prisma/client";
+	import { getKnowledgeBaseContext } from "../../KnowledgeBase";
+	import { PDFDocument } from "@pdfme/pdf-lib";
+
 	// States
 	const appState = getAppState();
 	const toastState = getToastState();
 
+	// Context
+
+	const knowledgeBaseContext = getKnowledgeBaseContext();
+
 	//  Forms
 	const titleController = new FormControl<string>({
-		name: "name",
+		name: "title",
 		required: true,
 		faker: faker.lorem.words
 	});
 
-	const entryTypeController = new FormControl<KnowledgeEntryContentType>({ required: true });
-	const entryTypeOptions: FieldOption[] = Object.values(KnowledgeEntryContentType)
-		.filter((e) => ["TEXT", "PDF"].includes(e))
-		.map((e) => {
-			return { value: e, label: e };
-		});
+	const entryTypeController = new FormControl<KnowledgeEntryContentType>({
+		name: "content-type",
+		required: true,
+		value: KnowledgeEntryContentType.TEXT
+	});
+
+	const contentController = new FormControl<string>({
+		name: "content",
+
+		faker: faker.lorem.paragraph
+	});
+
+	const entryTypeOptions: FieldOption[] = Object.values(KnowledgeEntryContentType).map((e) => {
+		return { value: e, label: e };
+	});
 
 	const attachedFilesController = new FormControl<FileItem[]>({
-		value: [
-			{
-				id: "16r51M17CRfzT-8U0f2aj",
-				path: "./Gmail - ADUAN FRANCAIS NO. RUJ ADUAN AF(A2025)0015_ AHMAD FARHAN SYAH BIN HASMUDDIN.pdf",
-				url: "blob:http://localhost:3051/ba51b72c-f5af-42ff-a29b-85bc517c46d6",
-				file: new File(
-					[""],
-					"Gmail - ADUAN FRANCAIS NO. RUJ ADUAN AF(A2025)0015_ AHMAD FARHAN SYAH BIN HASMUDDIN.pdf"
-				),
-				name: "Gmail - ADUAN FRANCAIS NO. RUJ ADUAN AF(A2025)0015_ AHMAD FARHAN SYAH BIN HASMUDDIN.pdf",
-				ext: "pdf",
-				icon: "material-icon-theme:pdf"
-			}
-		]
+		name: "files",
+		value: []
+	});
+
+	const metadataController = new FormControl<Record<string, any>>({
+		name: "metadata",
+		value: {
+			fileName: undefined,
+			pageCount: undefined,
+			title: undefined,
+			authors: undefined,
+			subject: undefined,
+			keywords: undefined,
+			language: undefined,
+			summary: undefined,
+			journalName: undefined,
+			volume: undefined,
+			issue: undefined,
+			pages: undefined,
+			publicationDate: undefined,
+			publisher: undefined
+		}
 	});
 	const form = new FormGroup<KnowledgeEntryCreateInput>([
 		titleController,
 		entryTypeController,
-		attachedFilesController
+		attachedFilesController,
+		metadataController
 	]);
+
 	const valid = form.valid;
 
 	async function handleSaveForm() {
@@ -69,7 +96,7 @@
 
 			const createData: KnowledgeEntryCreateInput = {
 				title: data.title!,
-				knowledgeBaseId: ""
+				knowledgeBaseId: knowledgeBaseContext.knowledgeBase.get().id
 			};
 
 			const knowledgeEntry = await KnowledgeEntryRepository.create({
@@ -94,22 +121,64 @@
 	// Reactives
 
 	const entryTypeValue = entryTypeController.writableValue;
+
+	// Handlers
+
+	async function handleFileChange(files?: FileItem[]) {
+		if (files && files.at(0)) {
+			const file = files[0];
+
+			if (file.ext === "pdf" && file.url) {
+				const response = await fetch(file.url);
+				const arrayBuffer = await response.arrayBuffer();
+				const pdfDoc = await PDFDocument.load(arrayBuffer);
+				const metadata = {
+					fileName: file.name,
+					pageCount: pdfDoc.getPageCount(),
+					title: pdfDoc.getTitle(),
+					authors: pdfDoc.getAuthor()
+				};
+
+				metadataController.value = { ...metadataController.value, ...metadata };
+
+				if (!titleController.valid.get()) {
+					titleController.value = metadata.title;
+				}
+			}
+		}
+	}
 </script>
 
 <div class="flex flex-wrap gap-4">
 	<h1 class="w-full items-center gap-1 font-bold">Add Knowledge Entry</h1>
-	<TextField controller={titleController} label="Title" class="col-col-1" />
+	<TextField controller={titleController} label="Title" class="col-col-1 w-full" />
 	<SelectField
 		controller={entryTypeController}
 		label="Content Type"
 		options={entryTypeOptions}
-		class="w-60"
+		class="w-60 "
 	/>
 
 	{#if $entryTypeValue === KnowledgeEntryContentType.TEXT}
-		<TextAreaField label="Content" class="w-full" />
+		<TextAreaField
+			controller={contentController}
+			label="Content"
+			class="w-full"
+			textareaClass="h-40"
+		/>
 	{/if}
-	<FileField controller={attachedFilesController} label="Attach File" class="w-72" />
+	{#if $entryTypeValue === KnowledgeEntryContentType.FILE}
+		<FileField
+			controller={attachedFilesController}
+			label="Attach File"
+			accept=".pdf"
+			class="w-72"
+			onChange={handleFileChange}
+		/>
+	{/if}
+
+	<TableField label="Metadata" controller={metadataController} />
+
 	<div class="w-full flex gap-2 col-start-1">
 		<Button valid={$valid} onClick={handleSaveForm} />
 	</div>

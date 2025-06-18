@@ -16,6 +16,7 @@
 	"devDependencies": {
 		"@inquirer/prompts": "^7.5.3",
 		"@nanostores/persistent": "^0.10.2",
+		"@pdfme/pdf-lib": "^1.18.4",
 		"@popperjs/core": "^2.11.8",
 		"@prisma/client": "^6.9.0",
 		"@sinclair/typebox": "^0.34.11",
@@ -36,6 +37,7 @@
 		"@typescript-eslint/parser": "^8.17.0",
 		"autoprefixer": "^10.4.20",
 		"bits-ui": "^1.0.0-next.67",
+		"caniuse-lite": "^1.0.30001723",
 		"date-fns": "^4.1.0",
 		"eslint": "^9.16.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -46,6 +48,7 @@
 		"jwt-decode": "^4.0.0",
 		"nanoid": "^5.0.9",
 		"nanostores": "^0.11.3",
+		"pdf-lib": "^1.17.1",
 		"pino": "^9.6.0",
 		"pino-pretty": "^13.0.0",
 		"postcss": "^8.4.49",

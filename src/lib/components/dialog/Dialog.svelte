@@ -32,7 +32,7 @@
 {#if $isOpen}
 	<div
 		role="none"
-		class="fixed overlay top-0 left-0 h-full flex w-screen z-50 text-gray-600"
+		class="fixed overlay top-0 left-0 h-full flex w-screen z-50 text-gray-600 overflow-y-scroll"
 		on:click|self={handleDismiss}
 		on:keypress={() => {}}
 	>

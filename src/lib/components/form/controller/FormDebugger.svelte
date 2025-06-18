@@ -6,10 +6,25 @@
 	export { componentClass as class };
 	export let formGroup: FormGroup<T>;
 	const value = formGroup.value;
+
+	function safeStringify(obj: any, space = 4): string {
+		const seen = new WeakSet();
+		return JSON.stringify(
+			obj,
+			(key, value) => {
+				if (typeof value === "object" && value !== null) {
+					if (seen.has(value)) return "[Circular]";
+					seen.add(value);
+				}
+				return value;
+			},
+			space
+		);
+	}
 </script>
 
 {#if dev}
 	<div class="whitespace-pre-wrap p-2 {componentClass} ">
-		{JSON.stringify($value, null, 4)}
+		{safeStringify($value)}
 	</div>
 {/if}

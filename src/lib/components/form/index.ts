@@ -6,3 +6,4 @@ export * from "./select-field";
 export * from "./text-field";
 export * from "./checkbox-field";
 export * from "./file-field";
+export * from "./table-field";
