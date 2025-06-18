@@ -21,6 +21,7 @@
 	import { KnowledgeEntryContentType } from "@prisma/client";
 	import { getKnowledgeBaseContext } from "../../KnowledgeBase";
 	import { PDFDocument } from "@pdfme/pdf-lib";
+	import { logger } from "$lib/utils/logger";
 
 	// States
 	const appState = getAppState();
@@ -86,38 +87,6 @@
 
 	const valid = form.valid;
 
-	async function handleSaveForm() {
-		try {
-			const organizationId = UserState.currentRole.get()?.organizationId;
-			if (!organizationId) throw "No organization ID";
-			appState.loading.set(true);
-
-			const data = form.value.get();
-
-			const createData: KnowledgeEntryCreateInput = {
-				title: data.title!,
-				knowledgeBaseId: knowledgeBaseContext.knowledgeBase.get().id
-			};
-
-			const knowledgeEntry = await KnowledgeEntryRepository.create({
-				data: createData
-			});
-
-			await goto(`/knowledge-entries/${knowledgeEntry.id}`);
-
-			toastState.success({
-				message: "Knowledge Entry has been created successfully"
-			});
-		} catch (error) {
-			appState.error.set(error);
-			toastState.error({
-				message: "Failed to create Knowledge Entry"
-			});
-		} finally {
-			appState.loading.set(false);
-		}
-	}
-
 	// Reactives
 
 	const entryTypeValue = entryTypeController.writableValue;
@@ -147,6 +116,38 @@
 			}
 		}
 	}
+
+	async function handleSaveForm() {
+		try {
+			const organizationId = UserState.currentRole.get()?.organizationId;
+			if (!organizationId) throw "No organization ID";
+			appState.loading.set(true);
+
+			const data = form.value.get();
+			const createData: KnowledgeEntryCreateInput = {
+				title: data.title!,
+				knowledgeBaseId: knowledgeBaseContext.knowledgeBase.get().id,
+				file: attachedFilesController.value?.at(0)?.file,
+				metadata: metadataController.value,
+				content: contentController.value
+			};
+
+			const knowledgeEntry = await KnowledgeEntryRepository.create(createData);
+
+			// await goto(`/knowledge-entries/${knowledgeEntry.id}`);
+
+			toastState.success({
+				message: "Knowledge Entry has been created successfully"
+			});
+		} catch (error) {
+			appState.error.set(error);
+			toastState.error({
+				message: "Failed to create Knowledge Entry"
+			});
+		} finally {
+			appState.loading.set(false);
+		}
+	}
 </script>
 
 <div class="flex flex-wrap gap-4">
@@ -167,7 +168,7 @@
 			textareaClass="h-40"
 		/>
 	{/if}
-	{#if $entryTypeValue === KnowledgeEntryContentType.FILE}
+	{#if $entryTypeValue === KnowledgeEntryContentType.PDF}
 		<FileField
 			controller={attachedFilesController}
 			label="Attach File"

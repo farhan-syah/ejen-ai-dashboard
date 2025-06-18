@@ -508,7 +508,11 @@ model KnowledgeEntryChunk {
 
 enum KnowledgeEntryContentType {
   TEXT // For normal or markdown supported-text
-  FILE
+  PDF
+  DOC
+  AUDIO
+  IMAGE
+  PPT
 }
 
 enum KnowledgeEntryProcessingStatus {

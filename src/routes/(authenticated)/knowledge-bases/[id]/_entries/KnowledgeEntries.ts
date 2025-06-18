@@ -17,8 +17,25 @@ export const knowledgeEntryColumns: TableColumn<KnowledgeEntry>[] = [
 	{
 		key: "title",
 		label: "Title",
+		visible: true
+	},
+	{
+		key: "status",
+		label: "Status",
+		visible: true
+	},
+	{
+		key: "metadata",
+		label: "metadata",
 		visible: true,
-		content: KnowledgeEntryActions
+		transform: (data) => {
+			return JSON.stringify(data);
+		}
+	},
+	{
+		key: "errorMessage",
+		label: "Error ",
+		visible: true
 	},
 	{
 		key: "id",

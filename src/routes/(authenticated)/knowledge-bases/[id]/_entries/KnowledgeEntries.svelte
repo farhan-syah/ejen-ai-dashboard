@@ -11,6 +11,7 @@
 		type _KnowledgeEntry
 	} from "./KnowledgeEntries";
 	import KnowledgeEntryAddForm from "./add/KnowledgeEntryAddForm.svelte";
+	import { getKnowledgeBaseContext } from "../KnowledgeBase";
 
 	const tableContext = createTableContext<_KnowledgeEntry, KnowledgeEntrySearch>({
 		filter: { where: {}, query: { limit: 20 } },
@@ -43,7 +44,7 @@
 		}
 	});
 
-	const isDialogOpen = atom(true);
+	const isDialogOpen = atom(false);
 </script>
 
 <PageTitle title="Knowledge Entries" showCopyLink={false} class="my-4">

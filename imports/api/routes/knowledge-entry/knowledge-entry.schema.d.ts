@@ -11,14 +11,9 @@ export declare const KnowledgeEntryCreateInputSchema: import("@sinclair/typebox"
     title: import("@sinclair/typebox").TString;
     knowledgeBaseId: import("@sinclair/typebox").TString;
     content: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
     originalContentType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
         TEXT: "TEXT";
-        PDF: "PDF";
-        DOC: "DOC";
-        AUDIO: "AUDIO";
-        IMAGE: "IMAGE";
-        PPT: "PPT";
+        FILE: "FILE";
     }>>;
     status: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
         PENDING: "PENDING";
@@ -29,8 +24,21 @@ export declare const KnowledgeEntryCreateInputSchema: import("@sinclair/typebox"
         FAILED: "FAILED";
     }>>;
     metadata: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecord<import("@sinclair/typebox").TString, import("@sinclair/typebox").TAny>>;
+    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
 }>;
 export type KnowledgeEntryCreateInput = Static<typeof KnowledgeEntryCreateInputSchema>;
+export declare const KnowledgeEntryCreateFormInputSchema: import("elysia/dist/type-system/types").TForm<{
+    title: import("@sinclair/typebox").TString;
+    knowledgeBaseId: import("@sinclair/typebox").TString;
+    content: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    originalContentType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
+        TEXT: "TEXT";
+        FILE: "FILE";
+    }>>;
+    metadata: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecord<import("@sinclair/typebox").TString, import("@sinclair/typebox").TAny>>;
+    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
+}>;
+export type KnowledgeEntryCreateFormInput = Static<typeof KnowledgeEntryCreateFormInputSchema>;
 export declare const KnowledgeEntryUpdateInputSchema: import("@sinclair/typebox").TObject<{
     status: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TEnum<{
         PENDING: "PENDING";
@@ -50,16 +58,12 @@ export declare const KnowledgeEntryUpdateInputSchema: import("@sinclair/typebox"
     title: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     knowledgeBaseId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     content: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TString]>>;
-    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
     originalContentType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
         TEXT: "TEXT";
-        PDF: "PDF";
-        DOC: "DOC";
-        AUDIO: "AUDIO";
-        IMAGE: "IMAGE";
-        PPT: "PPT";
+        FILE: "FILE";
     }>>;
     metadata: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecord<import("@sinclair/typebox").TString, import("@sinclair/typebox").TAny>>;
+    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
     fileStorageUrl: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     originalFileName: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     originalFileType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -147,14 +151,9 @@ export declare const KnowledgeEntryCreateDataSchema: import("@sinclair/typebox")
     title: import("@sinclair/typebox").TString;
     knowledgeBaseId: import("@sinclair/typebox").TString;
     content: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
     originalContentType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
         TEXT: "TEXT";
-        PDF: "PDF";
-        DOC: "DOC";
-        AUDIO: "AUDIO";
-        IMAGE: "IMAGE";
-        PPT: "PPT";
+        FILE: "FILE";
     }>>;
     status: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
         PENDING: "PENDING";
@@ -165,6 +164,7 @@ export declare const KnowledgeEntryCreateDataSchema: import("@sinclair/typebox")
         FAILED: "FAILED";
     }>>;
     metadata: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecord<import("@sinclair/typebox").TString, import("@sinclair/typebox").TAny>>;
+    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
 }>;
 export type KnowledgeEntryCreateData = Static<typeof KnowledgeEntryCreateDataSchema>;
 export declare const KnowledgeEntryCreateSchema: import("@sinclair/typebox").TObject<{
@@ -172,14 +172,9 @@ export declare const KnowledgeEntryCreateSchema: import("@sinclair/typebox").TOb
         title: import("@sinclair/typebox").TString;
         knowledgeBaseId: import("@sinclair/typebox").TString;
         content: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
-        file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
         originalContentType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
             TEXT: "TEXT";
-            PDF: "PDF";
-            DOC: "DOC";
-            AUDIO: "AUDIO";
-            IMAGE: "IMAGE";
-            PPT: "PPT";
+            FILE: "FILE";
         }>>;
         status: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
             PENDING: "PENDING";
@@ -190,6 +185,7 @@ export declare const KnowledgeEntryCreateSchema: import("@sinclair/typebox").TOb
             FAILED: "FAILED";
         }>>;
         metadata: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecord<import("@sinclair/typebox").TString, import("@sinclair/typebox").TAny>>;
+        file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
     }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
@@ -216,16 +212,12 @@ export declare const KnowledgeEntryUpdateDataSchema: import("@sinclair/typebox")
     title: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     knowledgeBaseId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     content: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TString]>>;
-    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
     originalContentType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
         TEXT: "TEXT";
-        PDF: "PDF";
-        DOC: "DOC";
-        AUDIO: "AUDIO";
-        IMAGE: "IMAGE";
-        PPT: "PPT";
+        FILE: "FILE";
     }>>;
     metadata: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecord<import("@sinclair/typebox").TString, import("@sinclair/typebox").TAny>>;
+    file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
     fileStorageUrl: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     originalFileName: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
     originalFileType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -254,16 +246,12 @@ export declare const KnowledgeEntryUpdateSchema: import("@sinclair/typebox").TOb
         title: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         knowledgeBaseId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         content: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TString]>>;
-        file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
         originalContentType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
             TEXT: "TEXT";
-            PDF: "PDF";
-            DOC: "DOC";
-            AUDIO: "AUDIO";
-            IMAGE: "IMAGE";
-            PPT: "PPT";
+            FILE: "FILE";
         }>>;
         metadata: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecord<import("@sinclair/typebox").TString, import("@sinclair/typebox").TAny>>;
+        file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
         fileStorageUrl: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         originalFileName: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         originalFileType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
@@ -300,16 +288,12 @@ export declare const KnowledgeEntryUpdateManySchema: import("@sinclair/typebox")
         title: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         knowledgeBaseId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         content: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TString]>>;
-        file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
         originalContentType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TEnum<{
             TEXT: "TEXT";
-            PDF: "PDF";
-            DOC: "DOC";
-            AUDIO: "AUDIO";
-            IMAGE: "IMAGE";
-            PPT: "PPT";
+            FILE: "FILE";
         }>>;
         metadata: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecord<import("@sinclair/typebox").TString, import("@sinclair/typebox").TAny>>;
+        file: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TUnsafe<File>>;
         fileStorageUrl: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         originalFileName: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
         originalFileType: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

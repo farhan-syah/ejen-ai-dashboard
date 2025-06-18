@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Guard } from "$lib/components";
-	import KnowledgeEntries from "./_entries/KnowledgeEntries.svelte";
 	import KnowledgeBase from "./KnowledgeBase.svelte";
 </script>
 
@@ -12,8 +11,7 @@
 		"KnowledgeBase.delete"
 	]}
 	redirect
-	redirectPath="/agent-types"
+	redirectPath="/knowledge-bases"
 >
 	<KnowledgeBase />
-	<KnowledgeEntries />
 </Guard>
