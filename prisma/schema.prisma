@@ -223,6 +223,12 @@ model Organization {
   roles                Role[]
   agents               Agent[]
   knowledgeBases       KnowledgeBase[]
+
+  // --- STRIPE FIELDS ---
+  stripeCustomerId String?                    @unique // Stores the Stripe Customer ID (e.g., 'cus_xxxxxxxxxxxxxx')
+  subscriptions    OrganizationSubscription[] // Relation to track all subscriptions for this organization
+  invoices         Invoice[] // Relation to track all invoices for this organization
+  // -------------------------
 }
 
 // ** User Tag ** //
@@ -363,6 +369,12 @@ model AgentType {
   integrations AgentTypeIntegration[]
   agents       Agent[]
   priority     Int                    @default(0)
+
+  // --- STRIPE FIELDS ---
+  stripeProductId               String?                        @unique // Stores the Stripe Product ID (e.g., 'prod_xxxxxxxxxxxxxx')
+  stripePriceId                 String?                        @unique // Stores the Stripe Price ID for the 'price' (e.g., 'price_xxxxxxxxxxxxxx')
+  organizationSubscriptionItems OrganizationSubscriptionItem[]
+  // -------------------------
 }
 
 enum AgentTypeStatus {
@@ -404,6 +416,13 @@ model AgentTypeIntegration {
   price          Int         @default(0) // Price in cents - **Specific to the agent + integration combo**
   pricePerUsage  Int         @default(0)
 
+  // --- STRIPE FIELDS ---
+  stripeProductId               String?                        @unique // Stores the Stripe Product ID for THIS combo
+  stripeFixedPriceId            String?                        @unique // Stores the Stripe Price ID for the 'price' (fixed monthly)
+  stripeUsagePriceId            String?                        @unique // Stores the Stripe Price ID for the 'pricePerUsage' (usage-based)
+  organizationSubscriptionItems OrganizationSubscriptionItem[]
+
+  // ----------------------
   @@unique([agentTypeKey, integrationKey]) // Prevent duplicate agent/integration combos
 }
 
@@ -522,4 +541,95 @@ enum KnowledgeEntryProcessingStatus {
   EMBEDDING
   READY
   FAILED
+}
+
+// Enum for subscription status
+enum OrganizationSubscriptionStatus {
+  active // Subscription is active
+  past_due // Payment for the current period failed
+  canceled // Subscription has been canceled
+  trialing // Currently in a trial period
+  incomplete // The initial payment attempt failed, customer has 23 hours to pay.
+  incomplete_expired // The initial payment failed and the 23-hour window has passed.
+  unpaid // Subscription has an unpaid invoice
+  paused // Subscription completed is paused
+}
+
+// Enum for subscription item type (helps identify what the item represents)
+enum OrganizationSubscriptionItemType {
+  AgentTypeBaseFee
+  IntegrationFixedFee
+  IntegrationUsageFee
+}
+
+model OrganizationSubscription {
+  id                   String                         @id @default(cuid())
+  createdAt            DateTime                       @default(now())
+  updatedAt            DateTime                       @updatedAt
+  organization         Organization                   @relation(fields: [organizationId], references: [id])
+  organizationId       String
+  stripeSubscriptionId String                         @unique // The actual Stripe Subscription ID (sub_xxxxxxxxxxxxxx)
+  status               OrganizationSubscriptionStatus
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean                        @default(false) // True if scheduled for cancellation at period end
+  priceTotal           Int // Total fixed monthly recurring price (in cents, e.g., 24800 for RM 248.00)
+  currencyId           String
+  invoices             Invoice[] // Invoices generated for this subscription
+  items                OrganizationSubscriptionItem[] // Individual components (prices) within this subscription
+
+  @@index([organizationId])
+  @@index([stripeSubscriptionId])
+}
+
+model OrganizationSubscriptionItem {
+  id                         String                           @id @default(cuid())
+  createdAt                  DateTime                         @default(now())
+  updatedAt                  DateTime                         @updatedAt
+  subscription               OrganizationSubscription         @relation(fields: [organizationSubscriptionId], references: [id])
+  organizationSubscriptionId String
+  stripeSubscriptionItemId   String                           @unique // Stripe's ID for this specific line item within the subscription (si_xxxxxxxxxxxxxx)
+  stripePriceId              String // The Stripe Price ID (e.g., price_xxxxxxxxxxxxxx)
+  quantity                   Int                              @default(1) // Quantity of this price (for fixed items typically 1, for usage-based, it's the quantity reported)
+  type                       OrganizationSubscriptionItemType // Distinguishes between base agent, fixed integration, and usage integration
+  // Optional relations to original models for easier lookup
+  agentType                  AgentType?                       @relation(fields: [agentTypeId], references: [id])
+  agentTypeId                String?
+  agentTypeIntegration       AgentTypeIntegration?            @relation(fields: [agentTypeIntegrationId], references: [id])
+  agentTypeIntegrationId     String?
+
+  @@unique([organizationSubscriptionId, stripeSubscriptionItemId]) // Ensure uniqueness of items within a subscription
+  @@index([organizationSubscriptionId])
+  @@index([stripeSubscriptionItemId])
+}
+
+// Enum for invoice status
+enum InvoiceStatus {
+  draft
+  open
+  paid
+  void
+  uncollectible
+}
+
+model Invoice {
+  id                         String                    @id @default(cuid())
+  createdAt                  DateTime                  @default(now())
+  updatedAt                  DateTime                  @updatedAt
+  organization               Organization              @relation(fields: [organizationId], references: [id])
+  organizationId             String
+  subscription               OrganizationSubscription? @relation(fields: [organizationSubscriptionId], references: [id])
+  organizationSubscriptionId String? // Link to a subscription if this invoice is for a recurring payment
+  stripeInvoiceId            String                    @unique // Stripe's Invoice ID (in_xxxxxxxxxxxxxx)
+  invoiceNumber              String? // Human-readable invoice number from Stripe
+  amountDue                  Int // Total amount due for this invoice (in cents)
+  status                     InvoiceStatus
+  invoicePdfUrl              String? // Link to the hosted invoice PDF on Stripe
+  dueDate                    DateTime?
+  periodStart                DateTime // Start of the billing period for this invoice
+  periodEnd                  DateTime // End of the billing period for this invoice
+
+  @@index([organizationId])
+  @@index([stripeInvoiceId])
+  @@index([organizationSubscriptionId])
 }

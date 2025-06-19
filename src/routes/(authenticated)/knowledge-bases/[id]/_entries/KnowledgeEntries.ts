@@ -33,11 +33,10 @@ export const knowledgeEntryColumns: TableColumn<KnowledgeEntry>[] = [
 	},
 	{
 		key: "metadata",
-		label: "metadata",
+		label: "Metadata",
 		visible: true,
 		content: KnowledgeEntryMetadata
 	},
-
 	{
 		key: "id",
 		label: "Action",

@@ -14,8 +14,10 @@
 			label: "Integration",
 			icon: "material-symbols:integration-instructions-outline"
 		}),
-
-		new StepperComponent(Step3)
+		new StepperComponent(Step3, {
+			label: "Summary",
+			icon: "material-symbols:document-scanner-outline"
+		})
 	];
 
 	createAddAgentContext();

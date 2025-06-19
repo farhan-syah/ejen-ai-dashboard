@@ -17,7 +17,7 @@
 	const toast = getToastState();
 	const context = createAgentTypeContext({
 		fetchAgentTypeCallback: async (ctx) => {
-			const result = await AgentTypeRepository.get(id).catch(async (e) => {
+			const result = await AgentTypeRepository.get(id).catch(async (_e) => {
 				await goto("/agent-type");
 				toast.error({ message: "Agent Type not found" });
 			});
@@ -46,6 +46,8 @@
 		]}
 	/>
 	<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">
-		<AgentTypeDetails />
+		{#key $agentType}
+			<AgentTypeDetails />
+		{/key}
 	</div>
 {/if}

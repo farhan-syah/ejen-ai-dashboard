@@ -2,6 +2,7 @@
 	import { KnowledgeEntryRepository } from "$repositories";
 	import { onMount } from "svelte";
 	import type { _KnowledgeEntry } from "./KnowledgeEntries";
+	import { IconWithTooltip } from "$lib/components";
 	let { data }: { data: _KnowledgeEntry } = $props();
 
 	let knowledgeEntry = $state(data);
@@ -64,13 +65,22 @@
 </script>
 
 <div
-	class="flex gap-1.5 items-center justify-center rounded outline outline-1 drop-shadow-sm text-3xs {color()} bg-white font-semibold py-1.5 px-2.5 text-center"
+	class="flex gap-2 items-center justify-center rounded outline
+	outline-2 drop-shadow-sm text-3xs {color()} bg-white font-semibold
+	py-1.5 px-2.5 text-center h-7"
 >
 	<div>
 		{knowledgeEntry.status}
 	</div>
 	{#if !["READY", "FAILED"].includes(knowledgeEntry.status)}
 		<span class="line-md--loading-loop"></span>
+	{/if}
+	{#if knowledgeEntry.status === "FAILED" && knowledgeEntry.errorMessage}
+		<IconWithTooltip
+			icon="si:error-duotone"
+			iconClass="text-base "
+			tooltip={knowledgeEntry.errorMessage}
+		/>
 	{/if}
 </div>
 
