@@ -1,27 +1,27 @@
 <script lang="ts">
 	import type { KnowledgeEntryCreateInput } from "$api/routes/knowledge-entry/knowledge-entry.schema";
-	import { goto } from "$app/navigation";
 	import { getAppState, UserState } from "$applications";
 	import { getToastState } from "$applications/toast.state";
 	import {
 		Button,
+		FileField,
+		type FileItem,
 		FormControl,
 		FormDebugger,
 		FormGroup,
-		TextField,
+		getTableContext,
+		TableField,
 		TextAreaField,
-		FileField,
-		type FileItem,
-		TableField
+		TextField
 	} from "$lib/components";
 	import SelectField from "$lib/components/form/select-field/SelectField.svelte";
 	import { KnowledgeEntryRepository } from "$repositories";
 	import type { FieldOption } from "$types";
 	import { faker } from "@faker-js/faker";
+	import { PDFDocument } from "@pdfme/pdf-lib";
 	import { KnowledgeEntryContentType } from "@prisma/client";
 	import { getKnowledgeBaseContext } from "../../KnowledgeBase";
-	import { PDFDocument } from "@pdfme/pdf-lib";
-	import { logger } from "$lib/utils/logger";
+	import { getKnowledgeEntriesContext } from "../KnowledgeEntries";
 
 	// States
 	const appState = getAppState();
@@ -30,6 +30,8 @@
 	// Context
 
 	const knowledgeBaseContext = getKnowledgeBaseContext();
+	const knowledgeEntriesContext = getKnowledgeEntriesContext();
+	const tableContext = getTableContext();
 
 	//  Forms
 	const titleController = new FormControl<string>({
@@ -132,19 +134,19 @@
 				content: contentController.value
 			};
 
-			const knowledgeEntry = await KnowledgeEntryRepository.create(createData);
-
-			// await goto(`/knowledge-entries/${knowledgeEntry.id}`);
+			await KnowledgeEntryRepository.create(createData);
 
 			toastState.success({
 				message: "Knowledge Entry has been created successfully"
 			});
+			tableContext.apply();
 		} catch (error) {
 			appState.error.set(error);
 			toastState.error({
 				message: "Failed to create Knowledge Entry"
 			});
 		} finally {
+			knowledgeEntriesContext.isDialogOpen.set(false);
 			appState.loading.set(false);
 		}
 	}

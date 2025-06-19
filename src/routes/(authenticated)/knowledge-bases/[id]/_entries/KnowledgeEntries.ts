@@ -2,7 +2,11 @@ import type { TableColumn } from "$lib/components";
 import { formatLocalDate } from "$lib/utils/date";
 import { CSV } from "$types";
 import type { KnowledgeEntry } from "@prisma/client";
+import { atom } from "nanostores";
+import { getContext, setContext } from "svelte";
 import KnowledgeEntryActions from "./actions/KnowledgeEntryActions.svelte";
+import KnowledgeEntryMetadata from "./KnowledgeEntryMetadata.svelte";
+import KnowledgeEntryStatus from "./KnowledgeEntryStatus.svelte";
 
 export type _KnowledgeEntry = KnowledgeEntry & {};
 
@@ -17,26 +21,23 @@ export const knowledgeEntryColumns: TableColumn<KnowledgeEntry>[] = [
 	{
 		key: "title",
 		label: "Title",
-		visible: true
+		visible: true,
+		contentClass: "w-80"
 	},
 	{
 		key: "status",
 		label: "Status",
-		visible: true
+		visible: true,
+		content: KnowledgeEntryStatus,
+		contentClass: "w-20"
 	},
 	{
 		key: "metadata",
 		label: "metadata",
 		visible: true,
-		transform: (data) => {
-			return JSON.stringify(data);
-		}
+		content: KnowledgeEntryMetadata
 	},
-	{
-		key: "errorMessage",
-		label: "Error ",
-		visible: true
-	},
+
 	{
 		key: "id",
 		label: "Action",
@@ -73,4 +74,16 @@ export function toKnowledgeEntryCSV(knowledgeEntries: KnowledgeEntry[]) {
 	});
 
 	return new CSV<CSVRow>({ columnKeys: rowHeaders, data, fileName });
+}
+
+export class KnowledgeEntriesContext {
+	isDialogOpen = atom(false);
+}
+
+export function createKnowledgeEntriesContext() {
+	return setContext("knowledgeEntriesContext", new KnowledgeEntriesContext());
+}
+
+export function getKnowledgeEntriesContext() {
+	return getContext<KnowledgeEntriesContext>("knowledgeEntriesContext");
 }

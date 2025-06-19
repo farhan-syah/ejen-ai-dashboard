@@ -4,17 +4,16 @@
 	import Card from "$lib/components/card/Card.svelte";
 	import { delay } from "$lib/utils";
 	import { KnowledgeEntryRepository } from "$repositories";
-	import { atom } from "nanostores";
 	import {
+		createKnowledgeEntriesContext,
 		knowledgeEntryColumns,
 		toKnowledgeEntryCSV,
 		type _KnowledgeEntry
 	} from "./KnowledgeEntries";
 	import KnowledgeEntryAddForm from "./add/KnowledgeEntryAddForm.svelte";
-	import { getKnowledgeBaseContext } from "../KnowledgeBase";
 
 	const tableContext = createTableContext<_KnowledgeEntry, KnowledgeEntrySearch>({
-		filter: { where: {}, query: { limit: 20 } },
+		filter: { where: {}, query: { limit: 20, orderBy: { createdAt: "desc" } } },
 		columns: knowledgeEntryColumns,
 		limit: 20,
 		// selectable: true,
@@ -44,7 +43,8 @@
 		}
 	});
 
-	const isDialogOpen = atom(false);
+	const knowledgeEntriesContext = createKnowledgeEntriesContext();
+	const isDialogOpen = knowledgeEntriesContext.isDialogOpen;
 </script>
 
 <PageTitle title="Knowledge Entries" showCopyLink={false} class="my-4">
