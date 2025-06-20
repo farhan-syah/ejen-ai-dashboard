@@ -7,6 +7,8 @@
 	import { onMount } from "svelte";
 	import { createAgentTypeContext } from "./AgentType";
 	import AgentTypeDetails from "./AgentTypeDetails.svelte";
+	import { logger } from "$lib/utils/logger";
+	import AgentTypeIntegrations from "./_integrations/AgentTypeIntegrations.svelte";
 
 	// Constants
 
@@ -49,5 +51,7 @@
 		{#key $agentType}
 			<AgentTypeDetails />
 		{/key}
+
+		<AgentTypeIntegrations agentType={$agentType} />
 	</div>
 {/if}
