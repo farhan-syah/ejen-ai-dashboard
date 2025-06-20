@@ -120,7 +120,7 @@
 		id={controller.id}
 		role="listbox"
 		tabindex="0"
-		class=" outline-none"
+		class=" outline-hidden"
 		on:focus={() => {
 			isFocused.set(true);
 			if (!$touched) {

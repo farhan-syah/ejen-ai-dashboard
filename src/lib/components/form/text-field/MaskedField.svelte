@@ -120,7 +120,7 @@
 			{autocomplete}
 			value={getInput()}
 			id={controller.id}
-			class={twMerge(["p-2 text-sm w-full outline-none text-gray-600"], inputClass)}
+			class={twMerge(["p-2 text-sm w-full outline-hidden text-gray-600"], inputClass)}
 			on:focus={() => {
 				isFocused.set(true);
 				if (!$touched) {

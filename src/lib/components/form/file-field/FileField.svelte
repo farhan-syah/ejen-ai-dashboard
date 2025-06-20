@@ -143,7 +143,7 @@
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
 		id={controller.id}
-		class="w-full outline-none cursor-default"
+		class="w-full outline-hidden cursor-default"
 		onfocus={() => {
 			if (!disabled) {
 				isFocused.set(true);

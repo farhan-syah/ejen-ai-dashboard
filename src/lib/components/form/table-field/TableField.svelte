@@ -112,7 +112,7 @@
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
 		id={controller.id}
-		class="w-full outline-none cursor-default"
+		class="w-full outline-hidden cursor-default"
 		onfocus={() => {
 			if (!disabled) {
 				isFocused.set(true);
@@ -144,7 +144,7 @@
 								<td class="border">
 									<input
 										value={key}
-										class="w-full outline-none p-1 focus:bg-blue-100/70"
+										class="w-full outline-hidden p-1 focus:bg-blue-100/70"
 										onkeyup={(e) => {
 											updateKey(i, e.currentTarget.value);
 										}}
@@ -153,7 +153,7 @@
 								<td class="border">
 									<input
 										value={val}
-										class="w-full outline-none p-1 focus:bg-blue-100/70"
+										class="w-full outline-hidden p-1 focus:bg-blue-100/70"
 										onkeyup={(e) => {
 											updateValue(i, e.currentTarget.value);
 										}}
@@ -165,7 +165,7 @@
 							<tr>
 								<td class="border">
 									<input
-										class="w-full outline-none p-1 focus:bg-blue-100/70"
+										class="w-full outline-hidden p-1 focus:bg-blue-100/70"
 										onkeyup={(e) => {
 											newKey(e.currentTarget.value);
 										}}
@@ -173,7 +173,7 @@
 								</td>
 								<td class="border">
 									<input
-										class="w-full outline-none p-1 focus:bg-blue-100/70"
+										class="w-full outline-hidden p-1 focus:bg-blue-100/70"
 										onkeyup={(e) => {
 											newValue(e.currentTarget.value);
 										}}

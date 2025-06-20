@@ -45,27 +45,27 @@
 
 <style lang="postcss">
 	.info {
-		@apply bg-blue-50 text-blue-500 hover:bg-blue-200/40;
+		/* @apply bg-blue-50 text-blue-500 hover:bg-blue-200/40; */
 	}
 	.info > .info {
-		@apply bg-blue-500;
+		/* @apply bg-blue-500; */
 	}
 	.success {
-		@apply bg-green-50 text-green-500 hover:bg-green-200/40;
+		/* @apply bg-green-50 text-green-500 hover:bg-green-200/40; */
 	}
 	.success > .success {
-		@apply bg-green-500;
+		/* @apply bg-green-500; */
 	}
 	.warning {
-		@apply bg-amber-50 text-amber-500 hover:bg-amber-200/40;
+		/* @apply bg-amber-50 text-amber-500 hover:bg-amber-200/40; */
 	}
 	.warning > .warning {
-		@apply bg-amber-500;
+		/* @apply bg-amber-500; */
 	}
 	.error {
-		@apply bg-red-50 text-red-500 hover:bg-red-200/40;
+		/* @apply bg-red-50 text-red-500 hover:bg-red-200/40; */
 	}
 	.error > .error {
-		@apply bg-red-500;
+		/* @apply bg-red-500; */
 	}
 </style>

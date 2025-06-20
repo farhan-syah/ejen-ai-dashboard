@@ -99,7 +99,7 @@
 			name={controller.name}
 			value={controller.writableValue.get() ?? ""}
 			id={controller.id}
-			class="p-2 text-sm w-full outline-none {resizable ? '' : 'resize-none'} {textareaClass}"
+			class="p-2 text-sm w-full outline-hidden {resizable ? '' : 'resize-none'} {textareaClass}"
 			on:focus={() => {
 				isFocused.set(true);
 				if (!$touched) {

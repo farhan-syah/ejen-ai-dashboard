@@ -140,7 +140,7 @@
 		id={controller.id}
 		role="listbox"
 		tabindex="0"
-		class="outline-none"
+		class="outline-hidden"
 		on:focus={() => {
 			if (!disabled) {
 				isFocused.set(true);
@@ -206,7 +206,7 @@
 					<input
 						placeholder={searchPlaceholder}
 						bind:value={filterString}
-						class="text-blue-700/70 text-sm w-full px-1.5 py-1 rounded-t focus:outline-none border-b-2 border-blue-100 {inputClass}"
+						class="text-blue-700/70 text-sm w-full px-1.5 py-1 rounded-t focus:outline-hidden border-b-2 border-blue-100 {inputClass}"
 						on:input={handleInput}
 					/>
 					{#each $searchResults as result}
@@ -239,7 +239,7 @@
 
 <style lang="postcss">
 	::placeholder {
-		@apply text-blue-700/30;
+		/* @apply text-blue-700/30; */
 	}
 
 	::-ms-input-placeholder {

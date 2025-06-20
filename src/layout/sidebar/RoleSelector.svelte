@@ -160,6 +160,7 @@
 </Dialog>
 
 <style lang="postcss">
+	@reference "tailwindcss";
 	th,
 	td {
 		@apply border-x;

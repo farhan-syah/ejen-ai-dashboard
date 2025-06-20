@@ -84,7 +84,7 @@
 	table,
 	th,
 	td {
-		@apply border;
-		@apply p-1 px-2;
+		/* @apply border; */
+		/* @apply p-1 px-2; */
 	}
 </style>
