@@ -1,16 +1,16 @@
 <script lang="ts">
 	import type { LoginInput } from "$api/routes/auth/auth.schema";
 	import { getAppState } from "$applications";
+	import { getToastState } from "$applications/toast.state";
+	import { Logo } from "$common";
+	import { PUBLIC_DEFAULT_PASSWORD, PUBLIC_DEFAULT_USERNAME } from "$env/static/public";
 	import { Button, CheckboxField, FormControl, Link, TextField } from "$lib/components";
 	import Card from "$lib/components/card/Card.svelte";
+	import PasswordField from "$lib/components/form/text-field/PasswordField.svelte";
+	import { logger } from "$lib/utils/logger";
 	import { AuthService } from "$services/auth.service";
 	import { computed } from "nanostores";
 	import validator from "validator";
-	import { Logo } from "$common";
-	import { env } from "$env/dynamic/public";
-	import { PUBLIC_DEFAULT_PASSWORD, PUBLIC_DEFAULT_USERNAME } from "$env/static/public";
-	import PasswordField from "$lib/components/form/text-field/PasswordField.svelte";
-	import { logger } from "$lib/utils/logger";
 	const appState = getAppState();
 
 	const emailController = new FormControl({
@@ -51,6 +51,7 @@
 			};
 			await AuthService.login(loginInput);
 		} catch (e) {
+			console.log(e);
 			appState.error.set(e);
 		} finally {
 			appState.loading.set(false);
