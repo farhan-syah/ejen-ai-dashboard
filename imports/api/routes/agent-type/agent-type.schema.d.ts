@@ -7,9 +7,21 @@ export declare const AgentTypeQuerySchema: import("@sinclair/typebox").TObject<{
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type AgentTypeQuery = Static<typeof AgentTypeQuerySchema>;
-export declare const AgentTypeCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const AgentTypeCreateInputSchema: import("@sinclair/typebox").TObject<{
+    key: import("@sinclair/typebox").TString;
+    name: import("@sinclair/typebox").TString;
+    description: import("@sinclair/typebox").TString;
+    price: import("@sinclair/typebox").TInteger;
+    icon: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type AgentTypeCreateInput = Static<typeof AgentTypeCreateInputSchema>;
-export declare const AgentTypeUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const AgentTypeUpdateInputSchema: import("@sinclair/typebox").TObject<{
+    key: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+    icon: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type AgentTypeUpdateInput = Static<typeof AgentTypeUpdateInputSchema>;
 export declare const AgentTypeSearchWhereSchema: import("@sinclair/typebox").TObject<{
     id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
@@ -86,20 +98,44 @@ export declare const AgentTypeSearchSchema: import("@sinclair/typebox").TObject<
     }>>;
 }>;
 export type AgentTypeSearch = Static<typeof AgentTypeSearchSchema>;
-export declare const AgentTypeCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const AgentTypeCreateDataSchema: import("@sinclair/typebox").TObject<{
+    key: import("@sinclair/typebox").TString;
+    name: import("@sinclair/typebox").TString;
+    description: import("@sinclair/typebox").TString;
+    price: import("@sinclair/typebox").TInteger;
+    icon: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type AgentTypeCreateData = Static<typeof AgentTypeCreateDataSchema>;
 export declare const AgentTypeCreateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        key: import("@sinclair/typebox").TString;
+        name: import("@sinclair/typebox").TString;
+        description: import("@sinclair/typebox").TString;
+        price: import("@sinclair/typebox").TInteger;
+        icon: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type AgentTypeCreate = Static<typeof AgentTypeCreateSchema>;
-export declare const AgentTypeUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const AgentTypeUpdateDataSchema: import("@sinclair/typebox").TObject<{
+    key: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+    icon: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type AgentTypeUpdateData = Static<typeof AgentTypeUpdateDataSchema>;
 export declare const AgentTypeUpdateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        key: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        icon: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -110,7 +146,13 @@ export declare const AgentTypeUpdateSchema: import("@sinclair/typebox").TObject<
 }>;
 export type AgentTypeUpdate = Static<typeof AgentTypeUpdateSchema>;
 export declare const AgentTypeUpdateManySchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        key: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        description: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        price: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
+        icon: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

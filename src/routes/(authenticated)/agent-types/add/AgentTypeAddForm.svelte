@@ -22,7 +22,19 @@
 	const nameController = new FormControl({
 		name: "name",
 		required: true,
-		faker: faker.person.firstName
+		faker: faker.commerce.productName
+	});
+
+	const keyController = new FormControl({
+		name: "key",
+		required: true,
+		faker: faker.string.nanoid
+	});
+
+	const descriptionController = new FormControl({
+		name: "description",
+		required: true,
+		faker: faker.lorem.text
 	});
 
 	const retailPriceController = new FormControl<number>({
@@ -44,6 +56,8 @@
 
 	const form = new FormGroup<AgentTypeCreateInput>([
 		nameController,
+		keyController,
+		descriptionController,
 		retailPriceController,
 		statusController
 	]);
@@ -74,6 +88,8 @@
 
 <div class="grid grid-cols-6 gap-4">
 	<TextField controller={nameController} label="AgentType Name" class="col-col-1" />
+	<TextField controller={keyController} label="AgentType Key" class="col-col-1" />
+	<TextField controller={descriptionController} label="AgentType Description" class="col-col-1" />
 	<PriceField
 		controller={retailPriceController}
 		label="Recommended Retail Price"

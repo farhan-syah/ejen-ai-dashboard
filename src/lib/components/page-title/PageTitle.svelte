@@ -32,7 +32,9 @@
 			{/if}
 			{#if showMetadata}
 				<div class="flex items-center">
-					<div class="ml-1">|</div>
+					{#if id || showCopyLink}
+						<div class="ml-1">|</div>
+					{/if}
 					{#if id}
 						<IconWithTooltip
 							icon="bx:copy"

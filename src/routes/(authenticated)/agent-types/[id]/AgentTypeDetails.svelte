@@ -56,6 +56,16 @@
 		required: true
 	});
 
+	const stripeProductIdController = new FormControl({
+		name: "stripeProductId",
+		value: $agentType.stripeProductId
+	});
+
+	const stripePriceIdController = new FormControl({
+		name: "stripePriceId",
+		value: $agentType.stripePriceId
+	});
+
 	const iconController = new FormControl({
 		name: "icon",
 		value: $agentType.icon,
@@ -153,6 +163,18 @@
 				</div>
 			{/key}
 		</div>
+		<TextField
+			controller={stripeProductIdController}
+			label="Stripe Product ID"
+			class="col-span-2"
+			disabled={true}
+		/>
+		<TextField
+			controller={stripePriceIdController}
+			label="Stripe Price ID"
+			class="col-span-2"
+			disabled={true}
+		/>
 	</div>
 
 	<div class="col-span-2">

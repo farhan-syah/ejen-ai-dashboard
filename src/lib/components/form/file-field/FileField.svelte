@@ -16,6 +16,7 @@
 		labelPostfix?: Snippet;
 		accept?: string;
 		limit?: number;
+		onChange?: (files?: FileItem[]) => any;
 	}
 
 	const {
@@ -26,7 +27,8 @@
 		class: componentClass,
 		labelPostfix,
 		accept = "*",
-		limit = 1
+		limit = 1,
+		onChange
 	}: Props = $props();
 
 	const errors = controller.errors;
@@ -109,6 +111,10 @@
 		if (inputRef) {
 			inputRef.value = "";
 		}
+
+		if (onChange) {
+			onChange(items);
+		}
 	}
 
 	function handleFileDelete(i: number) {
@@ -137,7 +143,7 @@
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
 		id={controller.id}
-		class="w-full outline-none cursor-default"
+		class="w-full outline-hidden cursor-default"
 		onfocus={() => {
 			if (!disabled) {
 				isFocused.set(true);

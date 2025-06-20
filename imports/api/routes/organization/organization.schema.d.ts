@@ -7,9 +7,15 @@ export declare const OrganizationQuerySchema: import("@sinclair/typebox").TObjec
     orderBy: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
 }>;
 export type OrganizationQuery = Static<typeof OrganizationQuerySchema>;
-export declare const OrganizationCreateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const OrganizationCreateInputSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TString;
+    organizationTypeId: import("@sinclair/typebox").TString;
+}>;
 export type OrganizationCreateInput = Static<typeof OrganizationCreateInputSchema>;
-export declare const OrganizationUpdateInputSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const OrganizationUpdateInputSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    organizationTypeId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type OrganizationUpdateInput = Static<typeof OrganizationUpdateInputSchema>;
 export declare const OrganizationSearchWhereSchema: import("@sinclair/typebox").TObject<{
     id: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
@@ -86,20 +92,32 @@ export declare const OrganizationSearchSchema: import("@sinclair/typebox").TObje
     }>>;
 }>;
 export type OrganizationSearch = Static<typeof OrganizationSearchSchema>;
-export declare const OrganizationCreateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const OrganizationCreateDataSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TString;
+    organizationTypeId: import("@sinclair/typebox").TString;
+}>;
 export type OrganizationCreateData = Static<typeof OrganizationCreateDataSchema>;
 export declare const OrganizationCreateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TString;
+        organizationTypeId: import("@sinclair/typebox").TString;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         select: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
         additionalFields: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TAny>;
     }>>;
 }>;
 export type OrganizationCreate = Static<typeof OrganizationCreateSchema>;
-export declare const OrganizationUpdateDataSchema: import("@sinclair/typebox").TObject<{}>;
+export declare const OrganizationUpdateDataSchema: import("@sinclair/typebox").TObject<{
+    name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    organizationTypeId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+}>;
 export type OrganizationUpdateData = Static<typeof OrganizationUpdateDataSchema>;
 export declare const OrganizationUpdateSchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        organizationTypeId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     query: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TObject<{
         limit: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
         skip: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TInteger>;
@@ -110,7 +128,10 @@ export declare const OrganizationUpdateSchema: import("@sinclair/typebox").TObje
 }>;
 export type OrganizationUpdate = Static<typeof OrganizationUpdateSchema>;
 export declare const OrganizationUpdateManySchema: import("@sinclair/typebox").TObject<{
-    data: import("@sinclair/typebox").TObject<{}>;
+    data: import("@sinclair/typebox").TObject<{
+        name: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+        organizationTypeId: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
+    }>;
     where: import("@sinclair/typebox").TObject<{
         id: import("@sinclair/typebox").TIntersect<[import("@sinclair/typebox").TRecursive<import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TObject<{
             equals: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;

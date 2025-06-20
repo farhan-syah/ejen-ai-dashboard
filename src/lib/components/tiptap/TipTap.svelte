@@ -258,6 +258,7 @@
 </div>
 
 <style lang="postcss">
+	@reference "../../../app.postcss";
 	.editor {
 		button {
 			@apply text-black px-1.5 py-1 text-xs border border-gray-300 rounded;
@@ -278,6 +279,6 @@
 	}
 
 	.separator {
-		@apply w-2;
+		/* @apply w-2; */
 	}
 </style>

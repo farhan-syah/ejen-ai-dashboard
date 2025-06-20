@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { _KnowledgeEntry } from "../KnowledgeEntries";
-	import KnowledgeEntryActionView from "./KnowledgeEntryActionView.svelte";
 	export let data: _KnowledgeEntry;
 </script>
 
 <div class="flex flex-wrap gap-1">
-	<KnowledgeEntryActionView knowledgeEntry={data} />
+	<!-- <KnowledgeEntryActionView knowledgeEntry={data} /> -->
 </div>

@@ -7,6 +7,8 @@
 	import { onMount } from "svelte";
 	import { createAgentTypeContext } from "./AgentType";
 	import AgentTypeDetails from "./AgentTypeDetails.svelte";
+	import { logger } from "$lib/utils/logger";
+	import AgentTypeIntegrations from "./_integrations/AgentTypeIntegrations.svelte";
 
 	// Constants
 
@@ -17,7 +19,7 @@
 	const toast = getToastState();
 	const context = createAgentTypeContext({
 		fetchAgentTypeCallback: async (ctx) => {
-			const result = await AgentTypeRepository.get(id).catch(async (e) => {
+			const result = await AgentTypeRepository.get(id).catch(async (_e) => {
 				await goto("/agent-type");
 				toast.error({ message: "Agent Type not found" });
 			});
@@ -46,6 +48,10 @@
 		]}
 	/>
 	<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">
-		<AgentTypeDetails />
+		{#key $agentType}
+			<AgentTypeDetails />
+		{/key}
+
+		<AgentTypeIntegrations agentType={$agentType} />
 	</div>
 {/if}

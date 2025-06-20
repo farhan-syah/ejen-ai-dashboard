@@ -135,7 +135,7 @@
 			name={controller.name}
 			value={controller.writableValue.get()?.toString() ?? ""}
 			id={controller.id}
-			class="p-2 text-sm w-full outline-none {inputClass}"
+			class="p-2 text-sm w-full outline-hidden {inputClass}"
 			on:focus={() => {
 				isFocused.set(true);
 				if (!$touched) {

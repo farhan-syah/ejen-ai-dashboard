@@ -66,5 +66,14 @@ export const sidebarItems: SidebarItem[] = [
 		isParent: true,
 		isOpen: atom(false),
 		items: []
+	},
+	{
+		title: "Organizations",
+		icon: "mdi:company",
+		requiredPermissions: ["Organization.manage, Organization.view"],
+		link: "/organizations",
+		isParent: true,
+		isOpen: atom(false),
+		items: []
 	}
 ];

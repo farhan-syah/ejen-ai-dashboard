@@ -3,12 +3,11 @@
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
 	import { UserState } from "$applications";
+	import { logger } from "$lib/utils/logger";
 	import { AuthService } from "$services";
 	import { onMount } from "svelte";
 	import "../app.postcss";
 	import App from "./app.svelte";
-	import { PUBLIC_ENV } from "$env/static/public";
-	import { logger } from "$lib/utils/logger";
 	// Initialize browser stores
 	const userState = UserState;
 	const token = userState.accessToken;

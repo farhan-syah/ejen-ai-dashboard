@@ -7,6 +7,7 @@
 	import { onMount } from "svelte";
 	import { createKnowledgeBaseContext } from "./KnowledgeBase";
 	import KnowledgeBaseDetails from "./KnowledgeBaseDetails.svelte";
+	import KnowledgeEntries from "./_entries/KnowledgeEntries.svelte";
 
 	// Constants
 
@@ -18,8 +19,8 @@
 	const context = createKnowledgeBaseContext({
 		fetchKnowledgeBaseCallback: async (ctx) => {
 			const result = await KnowledgeBaseRepository.get(id).catch(async (e) => {
-				await goto("/agent-type");
-				toast.error({ message: "Agent Type not found" });
+				await goto("/knowldge-bases");
+				toast.error({ message: "Knowledge base not found" });
 			});
 			if (result) {
 				ctx.knowledgeBase.set(result);
@@ -48,4 +49,5 @@
 	<div class="p-5 border-slate-200 border-t-0 bg-white rounded-b-md shadow-md">
 		<KnowledgeBaseDetails />
 	</div>
+	<KnowledgeEntries />
 {/if}
